@@ -14,6 +14,7 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
+gem 'omniauth-facebook'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets
@@ -41,6 +42,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13.0'
   gem 'selenium-webdriver'
+  gem 'pry'
 end
 
 group :development do
