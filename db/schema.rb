@@ -15,6 +15,17 @@ ActiveRecord::Schema.define(version: 20170509130049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "passages", force: :cascade do |t|
+    t.string "title"
+    t.string "text"
+    t.datetime "start_time"
+    t.datetime "close_time"
+    t.integer "duration"
+    t.string "status", default: "DRAFT"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.boolean "admin", default: false
