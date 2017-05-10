@@ -22,3 +22,5 @@
 /yarn-error.log
 
 .byebug_history
+.DS_Store
+dev_secret

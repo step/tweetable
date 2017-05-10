@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :users
+  resources :users, only: [:index, :show]
   get '', to: redirect('/login')
   get 'login', to: 'sessions#new', as: :login
   get '/auth/:provider/callback', to: 'sessions#create'

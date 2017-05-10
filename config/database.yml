@@ -21,6 +21,7 @@ development:
 test:
   <<: *default
   database: tweetable_test
+  username: <% ENV['USER'] %>
 
 production:
   <<: *default
