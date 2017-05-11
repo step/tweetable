@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Tweetable</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Tweetable</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<div class="container-fluid">
+  <%= render :partial => "shared/nav_bar" if signed_in? %>
+  <%= yield %>
+</div>
+
+</body>
 </html>
