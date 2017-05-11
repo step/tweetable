@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :taggings
+  resources :tags
+  resources :responses
   resources :users, only: [:index, :show]
   get '', to: redirect('/login')
   get 'login', to: 'sessions#new', as: :login

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Response:</strong>
+  <%= @tagging.response_id %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @tagging.tag_id %>
+</p>
+
+<%= link_to 'Edit', edit_tagging_path(@tagging) %> |
+<%= link_to 'Back', taggings_path %>
