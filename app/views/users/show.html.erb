@@ -1,18 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
-
-<p>
-  <strong>Auth:</strong>
-  <%= @user.auth_id %>
-</p>
-
-<%= link_to 'Back', users_path %>
+<% if @user.admin && @is_valid %>
+    <%= render partial: 'users/admin_page' %>
+<% elsif @is_valid %>
+    <%= render partial: 'users/candidate_page' %>
+<% else %>
+    <%= 'User Not Valid' %>
+<% end %>

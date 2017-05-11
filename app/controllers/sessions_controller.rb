@@ -3,7 +3,8 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
   def new
-    render plain: 'profile page' if helpers.signed_in?
+    user = User.find_by(auth_id:session[:user_id])
+    redirect_to user_path(user[:id]) and return
   end
 
   def create
