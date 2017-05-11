@@ -13,11 +13,13 @@ class PassagesController < ApplicationController
   def create
     @passage = Passage.new(permit_params)
       if @passage.save
-         redirect_to passages_path, notice: 'Passage was successfully created.'
+          binding.pry
+         redirect_to new_passage_path, notice: 'Passage was successfully created.'
       else
         render :new
       end
   end
+
 
   # # PATCH/PUT /passages/1
   # # PATCH/PUT /passages/1.json
