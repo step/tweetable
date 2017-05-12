@@ -46,6 +46,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'pry'
+  gem 'pry-nav'
 end
 
 group :development do
