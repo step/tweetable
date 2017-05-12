@@ -24,19 +24,19 @@ RSpec.describe PassagesController, type: :controller do
     context "with valid params" do
       it "creates a new Passage" do
         expect {
-          post :create, params: {passage: valid_attributes}, session: valid_session
+          post :create, params: {passage: valid_attributes}
         }.to change(Passage, :count).by(1)
       end
 
       it "redirects to the created passage" do
-        post :create, params: {passage: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Passage)
+        post :create, params: {passage: valid_attributes}
+        expect(response).to redirect_to(new_passage_url)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {passage: invalid_attributes}, session: valid_session
+        post :create, params: {passage: invalid_attributes}
         expect(response).to be_success
       end
     end

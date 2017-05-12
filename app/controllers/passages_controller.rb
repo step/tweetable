@@ -1,4 +1,6 @@
 class PassagesController < ApplicationController
+  layout false, only: [:new, :get_passages_by_status,:roll_out]
+
   # GET /passages/new
   def new
     @passage = Passage.new
@@ -13,8 +15,7 @@ class PassagesController < ApplicationController
   def create
     @passage = Passage.new(permit_params)
       if @passage.save
-          binding.pry
-         redirect_to new_passage_path, notice: 'Passage was successfully created.'
+         redirect_to new_passage_url, notice: 'Passage was successfully created.'
       else
         render :new
       end
@@ -45,6 +46,17 @@ class PassagesController < ApplicationController
   #   end
   # end
 
+  def roll_out
+    Passage.find(params[:passage_id]).roll_out
+    redirect_to :passages
+  end
+
+  def get_passages_by_status
+    @status = params[:status]
+    @filtered_passages = Passage.where(status: @status)
+  end
+
+  private
   def permit_params
     params.require("passage").permit(:title, :text, :duration, :start_time, :close_time)
   end

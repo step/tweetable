@@ -1,0 +1,16 @@
+<div class="col-md-3">
+  <span>Duration: <%= duration_of_interval_in_words(passage.duration.seconds) %></span>
+</div>
+<div class="col-md-3">
+  <span>Start Time: <%= passage.start_time %></span>
+</div>
+<div class="col-md-3">
+  <span>Close Time: <%= passage.close_time %></span>
+</div>
+<div class="col-md-3 roll_out_buttons">
+  <i data-url=<%= passage_roll_out_path(passage.id) %> >
+    <button type="button" class="btn btn-success pull-right">
+      Roll out
+    </button>
+  </i>
+</div>

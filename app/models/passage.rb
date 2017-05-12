@@ -8,4 +8,8 @@ class Passage < ApplicationRecord
     self.status.eql? "OPEN"
   end
 
+  def roll_out
+    self.status = "OPEN"
+    self.save()
+  end
 end
