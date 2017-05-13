@@ -2,10 +2,10 @@
   <span>Duration: <%= duration_of_interval_in_words(passage.duration.seconds) %></span>
 </div>
 <div class="col-md-3">
-  <span>Start Time: <%= passage.start_time %></span>
+  <span>Start Time: <%= to_preffered_time_format(passage.start_time) %></span>
 </div>
 <div class="col-md-3">
-  <span>Close Time: <%= passage.close_time %></span>
+  <span>Close Time: <%= to_preffered_time_format(passage.close_time) %></span>
 </div>
 <div class="col-md-3 passage_action_buttons">
   <i data-url=<%= passage_roll_out_path(passage.id) %> >

@@ -15,4 +15,7 @@ module PassagesHelper
     end
   end
 
+  def to_preffered_time_format(time)
+    time.strftime("%d-%m-%Y %H:%M%p")
+  end
 end
