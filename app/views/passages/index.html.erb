@@ -1,5 +1,5 @@
 <% if User.isAdmin?(session[:user_id])%>
-    <%= render partial: 'passages/admin_page' %>
+    <%= render 'passages/admin/index' %>
 <% else %>
-    <%= render partial: 'passages/candidate_page' %>
+    <%= render 'passages/candidate_page' %>
 <% end %>

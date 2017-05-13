@@ -51,6 +51,11 @@ class PassagesController < ApplicationController
     redirect_to :passages
   end
 
+  def close
+    Passage.find(params[:passage_id]).close
+    redirect_to :passages
+  end
+
   def get_passages_by_status
     @status = params[:status]
     @filtered_passages = helpers.query_passages_by_status(@status)

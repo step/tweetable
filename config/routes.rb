@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/passages/get_passage_by_status/:status', to: 'passages#get_passages_by_status'
   resources :passages do
     get 'roll_out', to: 'passages#roll_out'
+    get 'close', to: 'passages#close'
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

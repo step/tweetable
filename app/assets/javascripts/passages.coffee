@@ -2,7 +2,7 @@ click_active_tab = ->
   $("#prodTabs .active a").click()
 
 assign_roll_out = ->
-  $('.roll_out_buttons i').on 'click', (e) ->
+  $('.passage_action_buttons i').on 'click', (e) ->
     e.preventDefault()
     url = $(this).attr('data-url')
     return $.getJSON(url, (result) ->

@@ -39,5 +39,13 @@ RSpec.describe PassagesController, type: :routing do
       expect(:get => "/passages/get_passage_by_status/DRAFT").to route_to("passages#get_passages_by_status", :status => "DRAFT")
     end
 
+    it "routes to #roll_out" do
+      expect(:get => "/passages/1/roll_out").to route_to("passages#roll_out", :passage_id => "1")
+    end
+
+    it "routes to #close" do
+      expect(:get => "/passages/1/close").to route_to("passages#close", :passage_id => "1")
+    end
+
   end
 end

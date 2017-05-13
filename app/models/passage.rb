@@ -3,13 +3,15 @@ class Passage < ApplicationRecord
   validates :text, presence: true
   validates :duration, presence: true
 
-  has_many :response
-  def open?
-    self.status.eql? "OPEN"
-  end
+  has_many :responses
 
   def roll_out
-    self.status = "OPEN"
+    self.start_time = DateTime.now
+    self.save()
+  end
+
+  def close
+    self.close_time = DateTime.now
     self.save()
   end
 end
