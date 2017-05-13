@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the PassagesHelper. For example:
-#
-# describe PassagesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe PassagesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "to_preffered_time_format" do
+    it "converts the time into preffered format" do
+      expect(helper.to_preffered_time_format(DateTime.new(2017,05,3,4,5,6))).to eq("03-05-2017 04:05AM")
+    end
+  end
+
+  describe "get_passage_by_status_path" do
+    it "appends the status with the get_passage_by_status_path" do
+      expect(helper.get_passage_by_status_path("DRAFT")).to eq("/passages/get_passage_by_status/DRAFT")
+    end
+  end
 end

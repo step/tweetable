@@ -58,7 +58,7 @@ class PassagesController < ApplicationController
 
   def get_passages_by_status
     @status = params[:status]
-    @filtered_passages = helpers.query_passages_by_status(@status)
+    @filtered_passages = Passage.query_passages_by_status(@status)
   end
 
   private
