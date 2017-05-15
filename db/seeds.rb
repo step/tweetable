@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 User.create!(
     [
         {
@@ -24,21 +16,21 @@ Passage.create!(
     [
         {
             title: 'Climate Changed', text: 'Climate change will have serious implications as numerous adverse impacts are expected in terms of access to clean water,
-food and ecosystem resources. By 2020, it is feared that in some African countries yields from rain fed agriculture could be reduced by up to 50%.', start_time: '02 May 2017', close_time: '02 May 2017', duration: '1', status: 'OPEN'
+food and ecosystem resources. By 2020, it is feared that in some African countries yields from rain fed agriculture could be reduced by up to 50%.', start_time: '02 May 2017', close_time: '02 May 2017', duration: '1'
         },
 
         {
-            title: 'Person', text: 'hello world', start_time: '02 May 2017', close_time: '02 May 2017', duration: '2', status: 'OPEN'
+            title: 'Person', text: 'Person', start_time: DateTime.now, close_time: (DateTime.now +1), duration: '1000'
         },
 
         {
-            title: 'Missed person', text: 'hello world', start_time: '02 May 2017', close_time: '02 May 2017', duration: '2', status: 'CLOSED'
+            title: 'Missed person', text: 'Missed person', start_time: (DateTime.now -2), close_time: (DateTime.now -1), duration: '2000'
         },
         {
-            title: 'OPEN without responses', text: 'hello world', start_time: '02 May 2017', close_time: '02 May 2017', duration: '2', status: 'OPEN'
+            title: 'OPEN without responses', text: 'OPEN without responses', start_time: (DateTime.now -3), close_time: (DateTime.now +1), duration: '3000'
         },
         {
-            title: 'CLOSED without responses', text: 'hello world', start_time: '02 May 2017', close_time: '02 May 2017', duration: '2', status: 'CLOSED'
+            title: 'CLOSED without responses', text: 'CLOSED without responses', start_time: (DateTime.now -3), close_time: (DateTime.now -1), duration: '4000'
         }
     ]
 )
@@ -81,13 +73,13 @@ Tag.create!(
 )
 
 Tagging.create!(
-           [
-               {
-                   response_id:Response.find_by(text:'First respose for Climate Changed').id, tag_id:Tag.find_by(name:'Grammatical Error').id
-               },
-               {
-                   response_id:Response.find_by(text:'Second respose for Climate Changed').id, tag_id:Tag.find_by(name:'Grammatical Excellence').id
-               }
-           ]
+    [
+        {
+            response_id: Response.find_by(text: 'First respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Grammatical Error').id
+        },
+        {
+            response_id: Response.find_by(text: 'Second respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Grammatical Excellence').id
+        }
+    ]
 )
 
