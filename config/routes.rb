@@ -1,19 +1,30 @@
 Rails.application.routes.draw do
 
-  resources :passages
-  resources :taggings
-  resources :tags
-  resources :responses
-  resources :users, only: [:index, :show]
   get '', to: redirect('/login')
   get 'login', to: 'sessions#new', as: :login
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/passages/get_passage_by_status/:status', to: 'passages#get_passages_by_status'
+
+  resources :users, only: [:index, :show]
+
   resources :passages do
-    get 'roll_out', to: 'passages#roll_out'
-    get 'close', to: 'passages#close'
+    collection do
+      get 'drafts', to: 'passages#drafts'
+      get 'opened', to: 'passages#opened'
+      get 'closed', to: 'passages#closed'
+    end
+
+    member do
+      get 'roll_out', to: 'passages#roll_out'
+      get 'close', to: 'passages#close'
+    end
   end
+
+  resources :taggings
+  resources :tags
+  resources :responses
+
+  # get '/passages/drafts', to: 'passages#drafts'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

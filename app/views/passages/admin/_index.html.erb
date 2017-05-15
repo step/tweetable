@@ -2,10 +2,13 @@
   <div class="tabbable col-lg-12 col-md-12" id="tabs">
     <ul class="nav nav-tabs" id="prodTabs">
       <li class="active">
-        <a href="#panel-body" data-toggle="tab" data-url="<%= get_passage_by_status_path("DRAFT") %>">Saved</a>
+        <a href="#panel-body" data-toggle="tab" data-url="<%= drafts_passages_url %>">Saved</a>
       </li>
       <li>
-        <a href="#panel-body" data-toggle="tab" data-url="<%= get_passage_by_status_path("OPENED") %>">Opened</a>
+        <a href="#panel-body" data-toggle="tab" data-url="<%= opened_passages_url %>">Opened</a>
+      </li>
+      <li>
+        <a href="#panel-body" data-toggle="tab" data-url="<%= closed_passages_url %>">Closed</a>
       </li>
       <li>
         <a href="#panel-body" data-toggle="tab" data-url=<%= new_passage_url %>>New</a>

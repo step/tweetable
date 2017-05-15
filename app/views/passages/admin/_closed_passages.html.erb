@@ -1,0 +1,24 @@
+<div class="col-md-3">
+  <span>Completed by: <%= passage.responses.count %></span>
+</div>
+<div class="col-md-3">
+  <span>Evaluated: 0</span>
+  <!--#TODO Show the Evaluated Responses Count-->
+</div>
+<div class="col-md-3">
+  <span>Closed at: <%= to_preffered_time_format(passage.close_time) %></span>
+</div>
+<div class="col-md-2">
+  <a href="response_evaluation.html">
+    <button type="button" class="btn btn-info pull-right">
+      View all responses
+    </button>
+  </a>
+</div>
+<div class="col-md-1">
+  <a href="response_evaluation.html">
+    <button type="button" class="btn btn-warning pull-right">
+      Re-open
+    </button>
+  </a>
+</div>

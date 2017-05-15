@@ -1,5 +1,5 @@
 class PassagesController < ApplicationController
-  layout false, only: [:new, :get_passages_by_status,:roll_out]
+  layout false, only: [:new, :drafts, :closed, :opened, :roll_out]
 
   # GET /passages/new
   def new
@@ -14,11 +14,11 @@ class PassagesController < ApplicationController
   # POST /passages.json
   def create
     @passage = Passage.new(permit_params)
-      if @passage.save
-         redirect_to new_passage_url, notice: 'Passage was successfully created.'
-      else
-        render :new
-      end
+    if @passage.save
+      redirect_to new_passage_url, notice: 'Passage was successfully created.'
+    else
+      render :new
+    end
   end
 
 
@@ -47,18 +47,28 @@ class PassagesController < ApplicationController
   # end
 
   def roll_out
-    Passage.find(params[:passage_id]).roll_out
+    Passage.find(params[:id]).roll_out
     redirect_to :passages
   end
 
   def close
-    Passage.find(params[:passage_id]).close
+    Passage.find(params[:id]).close
     redirect_to :passages
   end
 
-  def get_passages_by_status
-    @status = params[:status]
-    @filtered_passages = Passage.query_passages_by_status(@status)
+  def drafts
+    filtered_passages = Passage.draft_passages
+    render "passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "drafts_passages"}
+  end
+
+  def opened
+    filtered_passages = Passage.open_passages
+    render "passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "opened_passages"}
+  end
+
+  def closed
+    filtered_passages = Passage.closed_passages
+    render "passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "closed_passages"}
   end
 
   private

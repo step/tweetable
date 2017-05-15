@@ -38,17 +38,4 @@ RSpec.describe PassagesHelper, type: :helper do
     end
   end
 
-  describe "get_passage_by_status_path" do
-    it "appends the status with the get_passage_by_status_path" do
-      expect(helper.get_passage_by_status_path("DRAFT")).to eq("/passages/get_passage_by_status/DRAFT")
-    end
-  end
-
-  it 'should get all open passage' do
-    expect(open_passages.count).to be(3)
-  end
-  it 'should get all closed passage' do
-    expect(closed_passages.count).to be(2)
-  end
-
 end

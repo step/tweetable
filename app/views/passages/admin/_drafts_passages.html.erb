@@ -8,7 +8,7 @@
   <span>Close Time: <%= to_preffered_time_format(passage.close_time) %></span>
 </div>
 <div class="col-md-3 passage_action_buttons">
-  <i data-url=<%= passage_roll_out_path(passage.id) %> >
+  <i data-url=<%= roll_out_passage_path(passage.id) %> >
     <button type="button" class="btn btn-success pull-right">
       Roll out
     </button>

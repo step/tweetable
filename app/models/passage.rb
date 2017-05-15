@@ -7,22 +7,24 @@ class Passage < ApplicationRecord
 
   def roll_out
     self.start_time = DateTime.now
-    self.save()
+    self.save
   end
 
   def close
     self.close_time = DateTime.now
-    self.save()
+    self.save
   end
 
-  def self.query_passages_by_status(state)
-    case state
-      when 'DRAFT'
-        Passage.where(['start_time > ?',DateTime.now]).or(Passage.where(start_time: nil))
-      when 'OPENED'
-        Passage.where(['start_time <= ? and close_time > ?',DateTime.now,DateTime.now])
-      else
-        []
-    end
+  def self.draft_passages
+    Passage.where(['start_time > ?', DateTime.now]).or(Passage.where(start_time: nil))
   end
+
+  def self.open_passages
+    Passage.where(['start_time <= ? and close_time > ?', DateTime.now, DateTime.now])
+  end
+
+  def self.closed_passages
+    Passage.where(['close_time < ?', DateTime.now])
+  end
+
 end

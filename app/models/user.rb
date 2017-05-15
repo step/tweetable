@@ -5,6 +5,6 @@ class User < ApplicationRecord
   has_many :tag, through: :responses
 
   def self.is_admin?(id)
-      User.find_by(auth_id: id).admin
+    User.find_by(auth_id: id).admin
   end
 end

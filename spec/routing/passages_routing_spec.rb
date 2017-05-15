@@ -35,16 +35,32 @@ RSpec.describe PassagesController, type: :routing do
       expect(:delete => "/passages/1").to route_to("passages#destroy", :id => "1")
     end
 
-    it "routes to #get_passages_by_status" do
-      expect(:get => "/passages/get_passage_by_status/DRAFT").to route_to("passages#get_passages_by_status", :status => "DRAFT")
-    end
-
     it "routes to #roll_out" do
-      expect(:get => "/passages/1/roll_out").to route_to("passages#roll_out", :passage_id => "1")
+      expect(:get => "/passages/1/roll_out").to route_to("passages#roll_out", :id => "1")
     end
 
     it "routes to #close" do
-      expect(:get => "/passages/1/close").to route_to("passages#close", :passage_id => "1")
+      expect(:get => "/passages/1/close").to route_to("passages#close", :id => "1")
+    end
+
+    it "routes to #passasges/drafts" do
+      expect(:get => "/passages/drafts").to route_to("passages#drafts")
+    end
+
+    it "routes to #passasges/opened" do
+      expect(:get => "/passages/opened/").to route_to("passages#opened")
+    end
+
+    it "routes to #passasges/opened with params" do
+      expect(:get => "/passages/opened?query=something").to route_to("passages#opened", :query => "something")
+    end
+
+    it "routes to #passasges/closed" do
+      expect(:get => "/passages/closed/").to route_to("passages#closed")
+    end
+
+    it "routes to #passasges/closed with params" do
+      expect(:get => "/passages/closed?query=something").to route_to("passages#closed", :query => "something")
     end
 
   end
