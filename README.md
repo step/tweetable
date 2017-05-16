@@ -8,19 +8,23 @@ Things you need to run or develop this Rails application:
 * [Postgres > 9.5.0](https://www.postgresql.org/download/)          
 
         
-Once you have installed every thing. Run following command inside your project directory
+Once you have installed every thing.
+Do a bundle install to install all the gems.
+Create a test and dev databases. 
          
          bundle install
          createdb tweetable_development
          createdb tweetable_test
          
-How to running test
+How to run a test(using rspec framework)
 
-        rspec => this will run all of your project test
-        rspec path_to_specific_test_file
+        `rspec` => will run all of your project test
+        `rspec path_to_specific_test_file:[line_number]`
         
-        
-How to start server
+Facebook auth
+
+Set those params in config/facebook_config.yml
+           
+How to start the app server
         
         rails server
-        ./scripts/server
