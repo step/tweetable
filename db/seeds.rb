@@ -15,47 +15,49 @@ User.create!(
 Passage.create!(
     [
         {
-            title: 'Climate Changed', text: 'Climate change will have serious implications as numerous adverse impacts are expected in terms of access to clean water,
-food and ecosystem resources. By 2020, it is feared that in some African countries yields from rain fed agriculture could be reduced by up to 50%.', start_time: '02 May 2017', close_time: '02 May 2017', duration: '1'
+            title: 'Climate Change', text: 'climate change passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '1'
         },
 
         {
-            title: 'Person', text: 'Person', start_time: DateTime.now, close_time: (DateTime.now +1), duration: '1000'
+            title: 'Person', text: 'person passage', start_time: DateTime.now, close_time: (DateTime.now+1), duration: '2'
         },
 
         {
-            title: 'Missed person', text: 'Missed person', start_time: (DateTime.now -2), close_time: (DateTime.now -1), duration: '2000'
+            title: 'News', text: 'news passage', start_time: (DateTime.now-2), close_time: (DateTime.now-1), duration: '2'
         },
         {
-            title: 'OPEN without responses', text: 'OPEN without responses', start_time: (DateTime.now -3), close_time: (DateTime.now +1), duration: '3000'
+            title: 'Program', text: 'program passage', start_time: (DateTime.now-3), close_time: (DateTime.now+1), duration: '2'
         },
         {
-            title: 'CLOSED without responses', text: 'CLOSED without responses', start_time: (DateTime.now -3), close_time: (DateTime.now -1), duration: '4000'
+            title: 'Class', text: 'class passage', start_time: (DateTime.now-3), close_time: (DateTime.now-1), duration: '2'
+        },
+        {
+            title: 'Computer', text: 'computer passage', start_time: (DateTime.now+3), close_time: (DateTime.now+7), duration: '2'
+        },
+        {
+            title: 'Human', text: 'human passage', start_time: nil, close_time: nil, duration: '2'
         }
     ]
 )
 
 Response.create!(
     [
-        {
-            text: "First respose for Climate Changed", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Climate Changed').id
-        },
-        {
-            text: "Second respose for Climate Changed", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Climate Changed').id
-        },
-        {
-            text: "First respose for Person", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Person').id
-        },
-        {
-            text: "Second respose for Person", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Person').id
-        },
-        {
-            text: "First respose for Missed person", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Missed person').id
-        },
-        {
-            text: "Second respose for Missed person", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Missed person').id
-        }
-    ]
+      {
+          text: "respose for Climate Changed", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Climate Change').id
+      },
+      {
+          text: "respose for Climate Changed", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Climate Change').id
+      },
+      {
+          text: "respose for Person", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Person').id
+      },
+      {
+          text: "respose for Person", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Person').id
+      },
+      {
+          text: "News Response", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'News').id
+      }
+  ]
 )
 
 Tag.create!(
@@ -75,10 +77,10 @@ Tag.create!(
 Tagging.create!(
     [
         {
-            response_id: Response.find_by(text: 'First respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Grammatical Error').id
+            response_id: Response.find_by(text: 'respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Grammatical Error').id
         },
         {
-            response_id: Response.find_by(text: 'Second respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Grammatical Excellence').id
+            response_id: Response.find_by(text: 'respose for Person').id, tag_id: Tag.find_by(name: 'Grammatical Excellence').id
         }
     ]
 )
