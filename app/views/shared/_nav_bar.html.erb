@@ -1,10 +1,11 @@
 <nav class="navbar navbar-default row">
     <div class="navbar-header col-xs-10 col-sm-10 col-md-10 col-lg-10">
+    
       <h3 class="navbar-brand">Tweetable</h3>
     </div>
     <div class="nav navbar-nav  user-emoji col-xs-2 col-sm-2 col-md-2 col-lg-2">
       <a href="#" data-toggle="dropdown" class="dropdown-toggle pull-right">
-        <i class="fa fa-user-circle-o" style="font-size: 25px;color: black;"></i>
+        <img src="<%= User.first.image_url%>" class="user-circle-icon"></img>
       </a>
       <ul class="dropdown-menu dropdown-menu-right pull-right" dropdown-toggle="focus">
         <%= content_tag(:li, link_to(session[:user_name], "#")) %>
