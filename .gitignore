@@ -26,3 +26,5 @@
 dev_secret
 config/facebook_config.yml
 coverage
+dev_setup/.vagrant
+dev_setup/*.retry
