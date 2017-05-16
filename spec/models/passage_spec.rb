@@ -31,12 +31,50 @@ RSpec.describe Passage, type: :model do
 
   }
 
+  let(:users) {
+
+    [
+        {
+            name: 'Kamal Hasan', admin: false, auth_id: '132271', image_url: 'http://graph.facebook.com/demo1'
+        },
+        {
+            name: 'Vimal Hasan', admin: false, auth_id: '132273', image_url: 'http://graph.facebook.com/demo1'
+        },
+        {
+            name: 'Rajanikanth', admin: false, auth_id: '132272', image_url: 'http://graph.facebook.com/demo2'
+        }
+    ]
+  }
+
+  let(:responses) { [
+      {
+          text: "respose for Climate Changed", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Climate Change').id
+      },
+      {
+          text: "respose for Climate Changed", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Climate Change').id
+      },
+      {
+          text: "respose for Person", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Person').id
+      },
+      {
+          text: "respose for Person", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Person').id
+      },
+      {
+          text: "News Response", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'News').id
+      }
+  ]
+  }
+
   before(:each) do
+    @users = User.create(users)
     @passages = Passage.create(passages)
+    @responses = Response.create(responses)
   end
 
   after(:each) do
+    @users.each(&:delete)
     @passages.each(&:delete)
+    @responses.each(&:delete)
   end
 
   describe "validations " do
@@ -75,6 +113,21 @@ RSpec.describe Passage, type: :model do
     it 'should get all open passages titles' do
       opened_titles = Passage.closed_passages.map(&:title)
       expect(opened_titles).to contain_exactly('News', 'Class')
+    end
+  end
+
+  describe "open_for_candidate_passages" do
+    it 'should get all open passages for the candidate which are not attempted by user count to be one' do
+      user = User.find_by(auth_id: '132271')
+      passage_open_for_candidate = Passage.open_for_candidate(user)
+      expect(passage_open_for_candidate.count).to be(1)
+      passage_titles = Passage.open_for_candidate(user).map(&:title)
+      expect(passage_titles).to contain_exactly('Program')
+    end
+    it 'should get all open passages titles when the user has not attempted any open passages' do
+      user = User.find_by(auth_id: '132272')
+      passage_titles = Passage.open_for_candidate(user).map(&:title)
+      expect(passage_titles).to contain_exactly('Climate Change','Person', 'Program')
     end
   end
 end

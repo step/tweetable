@@ -25,3 +25,4 @@
 .DS_Store
 dev_secret
 config/facebook_config.yml
+coverage
