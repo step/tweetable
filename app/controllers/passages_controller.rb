@@ -1,5 +1,5 @@
 class PassagesController < ApplicationController
-  layout false, only: [:new, :drafts, :closed, :opened, :roll_out]
+  layout false, only: [:new, :drafts, :closed, :opened, :roll_out, :open_for_candidate]
 
   # GET /passages/new
   def new
@@ -58,17 +58,23 @@ class PassagesController < ApplicationController
 
   def drafts
     filtered_passages = Passage.draft_passages
-    render "passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "drafts_passages"}
+    render "admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "drafts_passages"}
   end
 
   def opened
     filtered_passages = Passage.open_passages
-    render "passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "opened_passages"}
+    render "admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "opened_passages"}
   end
 
   def closed
     filtered_passages = Passage.closed_passages
-    render "passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "closed_passages"}
+    render "admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "closed_passages"}
+  end
+
+  def open_for_candidate
+    user = User.find_by(auth_id: session[:user_id])
+    filtered_passages = Passage.open_for_candidate(user)
+    render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "opened_passages"}
   end
 
   private

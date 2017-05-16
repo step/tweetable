@@ -27,4 +27,7 @@ class Passage < ApplicationRecord
     Passage.where(['close_time < ?', DateTime.now])
   end
 
+  def self.open_for_candidate(user)
+    self.open_passages - user.passages
+  end
 end
