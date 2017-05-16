@@ -24,3 +24,4 @@
 .byebug_history
 .DS_Store
 dev_secret
+config/facebook_config.yml
