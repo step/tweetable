@@ -24,10 +24,15 @@ module Tweetable
     # -- all .rb files in that directory are automatically loaded.
 
     config.before_configuration do
-      env_file = File.join(Rails.root, 'config', 'facebook_config.yml.template')
-      YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
-      end if File.exists?(env_file)
+      env_file = File.join(Rails.root, 'config', 'facebook_config.yml')
+      if File.exists?(env_file)
+        YAML.load(File.open(env_file)).each do |key, value|
+          ENV[key.to_s] = value
+        end
+      else
+        print("<======== Follow the instructions given in facebook_config.yml.template ========> ")
+        exit 1
+      end
     end
   end
 end

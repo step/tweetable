@@ -1,5 +1,5 @@
-# Rename this file to local_env.yml
-# Add account settings and API keys here.
+# Copy this file contents to facebook_config.yml file
+# Replace your AP_ID and APP_SECRET.
 # This file should be listed in .gitignore to keep your settings secret!
 # Each entry gets set as a local environment variable.
 # This file overrides ENV variables in the Unix shell.
