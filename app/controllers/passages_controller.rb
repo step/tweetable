@@ -9,7 +9,7 @@ class PassagesController < ApplicationController
   def create
     @passage = Passage.new(permit_params)
     if @passage.save
-      redirect_to new_passage_url, notice: 'Passage was successfully created.'
+      redirect_to passages_url, notice: 'Passage was successfully created.'
     else
       render :new
     end
