@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     user = User.find_or_create_by(user_params)
     session[:user_id]=user.auth_id
     session[:user_name]=user.name
+    session[:image_url]=user.image_url
     redirect_to passages_path
   end
 
