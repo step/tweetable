@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe PassagesHelper, type: :helper do
   let(:passages) {
 

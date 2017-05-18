@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'rails_helper'
 
 SimpleCov.start
 
