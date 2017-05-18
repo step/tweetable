@@ -46,19 +46,19 @@ RSpec.describe Passage, type: :model do
 
   let(:responses) { [
       {
-          text: "respose for Climate Changed", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Climate Change').id
+          text: 'respose for Climate Changed', user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Climate Change').id
       },
       {
-          text: "respose for Climate Changed", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Climate Change').id
+          text: 'respose for Climate Changed', user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Climate Change').id
       },
       {
-          text: "respose for Person", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Person').id
+          text: 'respose for Person', user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Person').id
       },
       {
-          text: "respose for Person", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Person').id
+          text: 'respose for Person', user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Person').id
       },
       {
-          text: "News Response", user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'News').id
+          text: 'News Response', user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'News').id
       }
   ]
   }
@@ -75,7 +75,7 @@ RSpec.describe Passage, type: :model do
     @responses.each(&:delete)
   end
 
-  describe "validations " do
+  describe 'validations ' do
     it {should validate_presence_of(:title)}
 
     it {should validate_presence_of(:text)}
@@ -84,7 +84,7 @@ RSpec.describe Passage, type: :model do
   end
 
 
-  describe "open_passages" do
+  describe 'open_passages' do
     it 'should get all open passages count to be three' do
       expect(Passage.open_passages.count).to be(3)
     end
@@ -94,7 +94,7 @@ RSpec.describe Passage, type: :model do
     end
   end
 
-  describe "draft_passages" do
+  describe 'draft_passages' do
     it 'should get all draft passages count to be three' do
       expect(Passage.draft_passages.count).to be(2)
     end
@@ -104,7 +104,7 @@ RSpec.describe Passage, type: :model do
     end
   end
 
-  describe "closed_passages" do
+  describe 'closed_passages' do
     it 'should get all closed passages count to be three' do
       expect(Passage.closed_passages.count).to be(2)
     end
@@ -114,7 +114,7 @@ RSpec.describe Passage, type: :model do
     end
   end
 
-  describe "open_for_candidate_passages" do
+  describe 'open_for_candidate_passages' do
     it 'should get all open passages for the candidate which are not attempted by user count to be one' do
       user = User.find_by(auth_id: '132271')
       passage_open_for_candidate = Passage.open_for_candidate(user)
@@ -126,6 +126,16 @@ RSpec.describe Passage, type: :model do
       user = User.find_by(auth_id: '132272')
       passage_titles = Passage.open_for_candidate(user).map(&:title)
       expect(passage_titles).to contain_exactly('Climate Change','Person', 'Program')
+    end
+  end
+
+  describe '#missed_by_candidate_passages' do
+    it 'should get all missed passages for the candidate which are not attempted by user count to be one' do
+      user = User.find_by(auth_id: '132273')
+      passage_missed_by_candidate = Passage.missed_by_candidate(user)
+      expect(passage_missed_by_candidate.count).to be(1)
+      passage_titles = passage_missed_by_candidate.map(&:title)
+      expect(passage_titles).to contain_exactly('Class')
     end
   end
 end

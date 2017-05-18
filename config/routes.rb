@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get 'opened', to: 'passages#opened'
       get 'closed', to: 'passages#closed'
       get 'open_for_candidate', to: 'passages#open_for_candidate'
+      get 'missed_by_candidate', to: 'passages#missed_by_candidate'
     end
 
     member do

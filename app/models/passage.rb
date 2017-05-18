@@ -30,4 +30,8 @@ class Passage < ApplicationRecord
   def self.open_for_candidate(user)
     self.open_passages - user.passages
   end
+
+  def self.missed_by_candidate(user)
+    self.closed_passages - user.passages
+  end
 end
