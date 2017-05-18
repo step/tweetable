@@ -88,7 +88,7 @@ RSpec.describe PassagesController, type: :controller do
 
       it "redirects to the created passage" do
         post :create, params: {passage: valid_attributes}
-        expect(response).to redirect_to(new_passage_url)
+        expect(response).to redirect_to(passages_url)
       end
     end
 
