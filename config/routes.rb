@@ -27,11 +27,4 @@ Rails.application.routes.draw do
   end
   resources :taggings
   resources :tags
-<<<<<<< HEAD
-=======
-
-  # get '/passages/drafts', to: 'passages#drafts'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
->>>>>>> [Vathsala/Dharmenn] [tweetable/#18] Tweets :
 end
