@@ -1,4 +1,4 @@
-<% if User.is_admin?(session[:user_id])%>
+<% if User.is_admin?(session[:auth_id])%>
     <%= render 'passages/admin/index' %>
 <% else %>
     <%= render 'passages/candidate/index' %>

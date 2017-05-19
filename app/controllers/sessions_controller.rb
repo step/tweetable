@@ -3,20 +3,19 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
   def new
-    user = User.find_by(auth_id:session[:user_id])
-    redirect_to passages_path and return if helpers.signed_in?
+    redirect_to passages_path and return if signed_in?
   end
 
   def create
     user = User.find_or_create_by(user_params)
-    session[:user_id]=user.auth_id
+    session[:auth_id]=user.auth_id
     session[:user_name]=user.name
     session[:image_url]=user.image_url
     redirect_to passages_path
   end
 
   def destroy
-    session.delete(:user_id)
+    session.delete(:auth_id)
     redirect_to login_path
   end
 

@@ -42,8 +42,7 @@ class PassagesController < ApplicationController
   end
 
   def open_for_candidate
-    user = User.find_by(auth_id: session[:user_id])
-    filtered_passages = Passage.open_for_candidate(user)
+    filtered_passages = Passage.open_for_candidate(current_user)
     render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "opened_passages"}
   end
 
