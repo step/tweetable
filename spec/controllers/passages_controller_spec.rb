@@ -69,12 +69,7 @@ RSpec.describe PassagesController, type: :controller do
   ]
   }
   before(:each) do
-    @user = User.create! auth_id: "auth_id"
-    controller.session[:user_id] = @user.auth_id
-  end
-
-  after(:each) do
-    @user.delete
+    stub_logged_in(true)
   end
 
   describe "POST #create" do
@@ -84,6 +79,7 @@ RSpec.describe PassagesController, type: :controller do
         expect {
           post :create, params: {passage: valid_attributes}
         }.to change(Passage, :count).by(1)
+
       end
 
       it "redirects to the created passage" do
@@ -150,6 +146,7 @@ RSpec.describe PassagesController, type: :controller do
 
     describe "GET #open_for_candidate" do
       it 'should give all the yet to open passages' do
+        stub_current_user(double('User', passages: []))
         get :open_for_candidate
         expect(response).to be_success
         should render_template('passages/candidate/passages_pane',)

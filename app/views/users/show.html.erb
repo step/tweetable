@@ -1,7 +1,0 @@
-<% if @user.admin && @is_valid %>
-    <%= render partial: 'users/admin_page' %>
-<% elsif @is_valid %>
-    <%= render partial: 'users/candidate_page' %>
-<% else %>
-    <%= 'User Not Valid' %>
-<% end %>

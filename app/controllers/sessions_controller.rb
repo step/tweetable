@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
   def new
-    redirect_to passages_path and return if signed_in?
+    redirect_to passages_path and return if helpers.signed_in?
   end
 
   def create
