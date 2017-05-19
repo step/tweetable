@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   resources :passages do
+    resources :responses
+
     collection do
       get 'drafts', to: 'passages#drafts'
       get 'opened', to: 'passages#opened'
@@ -24,9 +26,4 @@ Rails.application.routes.draw do
 
   resources :taggings
   resources :tags
-  resources :responses
-
-  # get '/passages/drafts', to: 'passages#drafts'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

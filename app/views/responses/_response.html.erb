@@ -1,0 +1,12 @@
+<div class="media">
+  <p class="pull-right">
+    <small><%= time_ago_in_words(response.created_at) %></small>
+  </p>
+  <a class="media-left" href="#">
+    <h4 class="fa fa-user-circle-o" style="font-size: 35px;color: black;"></h4>
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading user_name"><%= response.user.name %></h4>
+    <%= response.text %>
+  </div>
+</div>

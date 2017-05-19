@@ -2,9 +2,5 @@
   <span>Completed by: <%= passage.responses.count %></span>
 </div>
 <div class="col-md-4">
-  <a href="responses.html">
-    <button type="button" class="btn btn-info pull-right">
-      View other responses
-    </button>
-  </a>
+  <%= button_to 'View all responses', passage_responses_path(passage.id), class: 'btn btn-info pull-right', method: :get %>
 </div>

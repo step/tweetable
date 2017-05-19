@@ -8,11 +8,8 @@
   <span>Closing on: <%= to_preffered_time_format(passage.close_time) %></span>
 </div>
 <div class="col-md-3 passage_action_buttons">
-  <a href="response_evaluation.html">
-    <button type="button" class="btn btn-info">
-      View all responses
-    </button>
-  </a>
+  <%= button_to 'View all responses', passage_responses_path(passage.id), class: 'btn btn-info pull-left', method: :get %>
+
   <i data-url=<%= close_passage_path(passage.id) %>>
     <button type="button" class="btn btn-danger pull-right">
       Close

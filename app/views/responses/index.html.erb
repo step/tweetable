@@ -1,31 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid container">
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 50px; ">
+      <h3 class="text-center">
+        <%= passage.title %>
+      </h3>
+      <p style="border-style: ridge; border-radius: 10px; padding: 10px;">
+        <%= passage.text %>
+      </p>
+    </div>
 
-<h1>Responses</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h2><%= content_tag('small', responses.count.to_s + ' tweets', class: 'pull-right') %> Tweets </h2>
+      </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Passage</th>
-      <th>Text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="comments-list">
+        <% responses.each do |response| %>
+        <%= render 'response', response: response %>
+        <% end %>
 
-  <tbody>
-    <% @responses.each do |response| %>
-      <tr>
-        <td><%= response.user_id %></td>
-        <td><%= response.passage_id %></td>
-        <td><%= response.text %></td>
-        <td><%= link_to 'Show', response %></td>
-        <td><%= link_to 'Edit', edit_response_path(response) %></td>
-        <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </div>
+    </div>
+  </div>
 
-<br>
-
-<%= link_to 'New Response', new_response_path %>
+</div>
