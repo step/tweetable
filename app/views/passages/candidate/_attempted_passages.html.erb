@@ -1,20 +1,15 @@
 <div class="col-md-4">
-  <% if passage_with_response[:response].tagging.empty? %>
+  <% if passage_with_response[:response].tag.empty? %>
       <%= render :partial => "passages/candidate/response_status" %>
   <% else %>
-      <% binding.pry %>
-      <%= render :partial => "passages/candidate/tagging_status" %>
+      <%= render :partial => "passages/candidate/tagging_status" , locals: {tags: passage_with_response[:response].tag} %>
   <% end %>
 </div>
 <div class="col-md-4">
   <span>Completed by: <%= passage_with_response[:passage].responses.count %></span>
 </div>
 <div class="col-md-4">
-  <a href="">
-    <button type="button" class="btn btn-info pull-right">
-      View all responses
-    </button>
-  </a>
+  <%= button_to 'View all responses', passage_responses_path(passage_with_response[:passage].id), class: 'btn btn-info pull-right', method: :get %>
 </div>
 
 <div class="col-md-8" style="color: gray">
