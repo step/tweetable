@@ -5,9 +5,5 @@
   <span>Completed by: <%= passage.responses.count %></span>
 </div>
 <div class="col-md-4">
-  <a href="quiz.html">
-    <button type="button" class="btn btn-success pull-right">
-      Start Quiz
-    </button>
-  </a>
+  <%=   link_to(content_tag(:button, 'Start Quiz', class: 'btn btn-success pull-right'), "passages/#{passage.id}/responses/new" ) %>
 </div>

@@ -23,8 +23,15 @@ Rails.application.routes.draw do
       get 'roll_out', to: 'passages#roll_out'
       get 'close', to: 'passages#close'
     end
+    resources :responses
   end
-
   resources :taggings
   resources :tags
+<<<<<<< HEAD
+=======
+
+  # get '/passages/drafts', to: 'passages#drafts'
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+>>>>>>> [Vathsala/Dharmenn] [tweetable/#18] Tweets :
 end
