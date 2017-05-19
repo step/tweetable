@@ -138,4 +138,31 @@ RSpec.describe Passage, type: :model do
       expect(passage_titles).to contain_exactly('Class')
     end
   end
+
+  describe '#attended_passage_by_candidate' do
+    context 'get all attended passges with response' do
+      it 'should belongs to the logged candidate ' do
+
+        passage1 = double('Passage',id:11)
+
+        response1 = double('Response',id:1,passage_id:11)
+
+        user = double('User', passages: [passage1], responses: [response1])
+
+        attempted_by_candidate = Passage.attempted_by_candidate(user)
+
+        expect(attempted_by_candidate).to eq([{passage:passage1,response:response1}])
+      end
+
+      it 'should get empty if attemted passage is zero ' do
+
+
+        user = double('User', passages: [], responses: [])
+
+        attempted_by_candidate = Passage.attempted_by_candidate(user)
+
+        expect(attempted_by_candidate).to be_empty
+      end
+    end
+  end
 end

@@ -1,0 +1,22 @@
+<div class="col-md-4">
+  <% if passage_with_response[:response].tagging.empty? %>
+      <%= render :partial => "passages/candidate/response_status" %>
+  <% else %>
+      <% binding.pry %>
+      <%= render :partial => "passages/candidate/tagging_status" %>
+  <% end %>
+</div>
+<div class="col-md-4">
+  <span>Completed by: <%= passage_with_response[:passage].responses.count %></span>
+</div>
+<div class="col-md-4">
+  <a href="">
+    <button type="button" class="btn btn-info pull-right">
+      View all responses
+    </button>
+  </a>
+</div>
+
+<div class="col-md-8" style="color: gray">
+  <span>My tweet :   <%= passage_with_response[:response].text %></span>
+</div>

@@ -34,4 +34,16 @@ class Passage < ApplicationRecord
   def self.missed_by_candidate(user)
     self.closed_passages - user.passages
   end
+
+  def self.attempted_by_candidate(user)
+    passages = user.passages
+    responses = user.responses
+    passages.map { |passage| {passage: passage, response: get_passages_with_corresponding_response(responses, passage.id)} }
+  end
+
+  private
+  def self.get_passages_with_corresponding_response(responses, passage_id)
+    responses.select { |response| response.passage_id.equal?(passage_id) }.first
+  end
+
 end

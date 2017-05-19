@@ -1,8 +1,6 @@
 class PassagesController < ApplicationController
   layout false, except: [:index]
-  # layout false, only: [:new, :drafts, :closed, :opened, :roll_out, :open_for_candidate, :missed_by_candidate]
 
-  # GET /passages/new
   def new
     @passage = Passage.new
   end
@@ -26,7 +24,7 @@ class PassagesController < ApplicationController
     redirect_to :passages
   end
 
-#TODO all the passage getter methods should give out json if asked for
+  #TODO all the passage getter methods should give out json if asked for
 
   def drafts
     filtered_passages = Passage.draft_passages
@@ -53,6 +51,12 @@ class PassagesController < ApplicationController
     user = User.find_by(auth_id: session[:user_id])
     filtered_passages = Passage.missed_by_candidate(user)
     render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "missed_passages"}
+  end
+
+  def attempted_by_candidate
+    user = User.find_by(auth_id: session[:user_id])
+    passages = Passage.attempted_by_candidate(user)
+    render "passages/candidate/attempted_passages_pane", locals: {filtered_passages: passages}
   end
 
   private
