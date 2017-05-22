@@ -12,7 +12,7 @@
 
 <body>
 <div class="container-fluid">
-  <%= render :partial => "shared/nav_bar" if signed_in? %>
+  <%= render :partial => "shared/nav_bar" if logged_in? %>
   <%= yield %>
 </div>
 
