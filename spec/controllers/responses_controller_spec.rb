@@ -47,7 +47,7 @@ describe ResponsesController, type: :controller do
         stub_logged_in(true)
         post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'This is an invalid response because its contains more that 140 characters. This is an invalid response because its contains more that 140 chars.'}
         expect(response).to redirect_to(new_passage_response_path(passage))
-        expect(flash[:error]).to match('Response was invalid!')
+        expect(flash[:danger]).to match('Response was invalid!')
       end
     end
   end
