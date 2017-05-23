@@ -25,7 +25,7 @@ class ResponsesController < ApplicationController
         flash[:success] = 'Response was successfully created.'
         format.html {redirect_to passages_path}
       else
-        flash[:error] = 'Response was invalid!'
+        flash[:danger] = 'Response was invalid!'
         format.html {redirect_to new_passage_response_path(Passage.find(params[:passage_id]))}
       end
     end
