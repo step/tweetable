@@ -1,9 +1,10 @@
 class Passage < ApplicationRecord
+
   validates :title, presence: true
   validates :text, presence: true
-  validates :duration, presence: true
+  validates_numericality_of :duration, greater_than: 0
 
-  has_many :responses
+  has_many :responses, dependent: :destroy
 
   def roll_out
     self.start_time = DateTime.now
@@ -20,7 +21,8 @@ class Passage < ApplicationRecord
   end
 
   def self.open_passages
-    Passage.where(['start_time <= ? and close_time > ?', DateTime.now, DateTime.now])
+    now = DateTime.now
+    Passage.where(['start_time <= ? and close_time > ?', now, now])
   end
 
   def self.closed_passages
@@ -43,7 +45,7 @@ class Passage < ApplicationRecord
 
   private
   def self.get_passages_with_corresponding_response(responses, passage_id)
-    responses.select { |response| response.passage_id.equal?(passage_id) }.first
+    responses.find { |response| response.passage_id.equal?(passage_id) }
   end
 
 end

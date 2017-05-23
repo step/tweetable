@@ -69,18 +69,22 @@ RSpec.describe Passage, type: :model do
     @responses = Response.create(responses)
   end
 
-  after(:each) do
-    @users.each(&:delete)
-    @passages.each(&:delete)
-    @responses.each(&:delete)
-  end
+
 
   describe 'validations ' do
+
     it {should validate_presence_of(:title)}
 
     it {should validate_presence_of(:text)}
 
-    it {should validate_presence_of(:duration)}
+    it { should validate_numericality_of(:duration).is_greater_than(0) }
+
+  end
+
+  describe 'associations' do
+
+    it{ should have_many(:responses).dependent(:destroy)}
+
   end
 
 
