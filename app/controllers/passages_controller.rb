@@ -53,8 +53,7 @@ class PassagesController < ApplicationController
   end
 
   def attempted_by_candidate
-    user = User.find_by(auth_id: session[:user_id])
-    passages = Passage.attempted_by_candidate(user)
+    passages = Passage.attempted_by_candidate(current_user)
     render "passages/candidate/attempted_passages_pane", locals: {filtered_passages: passages}
   end
 
