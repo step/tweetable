@@ -22,7 +22,6 @@ Rails.application.routes.draw do
       get 'roll_out', to: 'passages#roll_out'
       get 'close', to: 'passages#close'
     end
-    resources :responses
   end
   resources :taggings
   resources :tags

@@ -12,7 +12,7 @@ class ResponsesController < ApplicationController
 
   def new
     passage = Passage.find(params[:passage_id])
-    render :new, locals: {passage: passage, response: passage.responses.new}
+    render :new, locals: {passage: passage, response: passage.responses.new, user: current_user}
   rescue
     redirect_to passages_path
   end
@@ -22,11 +22,11 @@ class ResponsesController < ApplicationController
 
     respond_to do |format|
       if @response.save
-        format.html {redirect_to @response, notice: 'Response was successfully created.'}
-        format.json {render :show, status: :created, location: @response}
+        flash[:success] = 'Response was successfully created.'
+        format.html {redirect_to passages_path}
       else
-        format.html {render :new}
-        format.json {render json: @response.errors, status: :unprocessable_entity}
+        flash[:error] = 'Response was invalid!'
+        format.html {redirect_to new_passage_response_path(Passage.find(params[:passage_id]))}
       end
     end
   end
@@ -37,7 +37,7 @@ class ResponsesController < ApplicationController
   end
 
   def response_params
-    params.require(:response).permit(:user_id, :passage_id, :text)
+    params.permit(:user_id, :passage_id, :text)
   end
 
 end

@@ -1,32 +1,24 @@
-<%= form_with(model: response, local: true) do |form| %>
-  <% if response.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(response.errors.count, "error") %> prohibited this response from being saved:</h2>
+<%= form_for([ passage , response], method: 'post', html: {class: 'form-inline text-center'} ) do %>
+    <div class="form-group mx-sm-3" style="margin-right: 50px">
+      <%= hidden_field_tag 'user_id', user.id %>
 
-      <ul>
-      <% response.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+      <%= text_field_tag 'text', nil, placeholder: 'Your tweet here', maxlength: 140, class: 'form-control', style: 'width: 1000px' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :response_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :passage_id %>
-    <%= form.number_field :passage_id, id: :response_passage_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :text %>
-    <%= form.text_field :text, id: :response_text %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmation-dialog">Submit</button>
+    <div class="modal fade bd-example-modal-sm" id="confirmation-dialog" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <p>Your tweet cannot be edited once submitted. Do you confirm...?</p>
+          </div>
+          <div class="modal-footer">
+            <%= submit_tag('Ok', class: 'btn btn-primary') %>
+          </div>
+        </div>
+      </div>
+    </div>
 <% end %>

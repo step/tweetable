@@ -1,5 +1,17 @@
-<h1>New Response</h1>
+<div class="container-fluid container">
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 50px; ">
+      <%= content_tag :h3, :class => 'text-left' do %>
+          <%= passage.title %>
+          <%= content_tag(:span, 'pull-right') do %>
+              <%= content_tag(:h4, "Remaining Time: #{passage.duration}", class: 'pull-right') %>
+          <% end %>
+      <% end %>
 
-<%= render 'form', response: @response %>
-
-<%= link_to 'Back', responses_path %>
+      <p class='passage-content' style="border-style: ridge; border-radius: 10px; padding: 10px;">
+        <%= passage.text %>
+      </p>
+    </div>
+    <%= render 'form', response: response, passage: passage, user: user %>
+  </div>
+</div>
