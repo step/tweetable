@@ -4,7 +4,7 @@
       <%= content_tag :h3, :class => 'text-left' do %>
           <%= passage.title %>
           <%= content_tag(:span, 'pull-right') do %>
-              <%= content_tag(:h4, "Remaining Time: #{passage.duration}", class: 'pull-right') %>
+              <h4 class="pull-right remaining_time" >Remaining Time: <span class="count" id="remaining_time">00:00:00</span></h4>
           <% end %>
       <% end %>
 

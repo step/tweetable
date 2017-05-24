@@ -1,8 +1,8 @@
-<%= form_for([ passage , response], method: 'post', html: {class: 'form-inline text-center'} ) do %>
+<%= form_for([passage, response], method: 'post', html: {class: 'form-inline text-center'}) do %>
+    <div class="pull-left totalChars" >Remaining characters: <span class="count" id="totalChars">140</span></div>
     <div class="form-group mx-sm-3" style="margin-right: 50px">
       <%= hidden_field_tag 'user_id', user.id %>
-
-      <%= text_field_tag 'text', nil, placeholder: 'Your tweet here', maxlength: 140, class: 'form-control', style: 'width: 1000px' %>
+      <%= text_field_tag 'text', nil, placeholder: 'Your tweet here', maxlength: 140, class: 'form-control', style: 'width: 1000px', id: 'text' %>
     </div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmation-dialog">Submit</button>
     <div class="modal fade bd-example-modal-sm" id="confirmation-dialog" role="dialog">
