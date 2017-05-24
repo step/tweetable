@@ -3,7 +3,7 @@ class PassagesController < ApplicationController
 
   layout false, except: [:index]
 
-  before_action :verify_privileges, only: [:drafts]
+  before_action :verify_privileges, only: [:drafts, :opened, :closed]
   before_action :set_active_tab_and_redirect, only: [:new, :drafts, :closed, :opened, :open_for_candidate, :missed_by_candidate, :attempted_by_candidate]
 
   NEW = 'new'
@@ -12,6 +12,8 @@ class PassagesController < ApplicationController
   MISSED = 'missed'
   ATTEMPTED = 'attempted'
   CLOSED = 'closed'
+
+  DEFAULT_TAB = OPENED
 
   ALL_TABS = {
       new: NEW,
@@ -101,10 +103,12 @@ class PassagesController < ApplicationController
     redirect_to passages_path unless from_tab?
   end
 
+
   def verify_privileges
     unless current_user.admin
+      set_current_tab DEFAULT_TAB
       flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
-      redirect_to passages_path unless current_user.admin
+      redirect_to passages_path
     end
   end
 

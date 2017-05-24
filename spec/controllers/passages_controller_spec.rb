@@ -142,42 +142,84 @@ RSpec.describe PassagesController, type: :controller do
     end
 
     describe 'GET #opened' do
-      it 'should give all the yet to open passages' do
-        get :opened
-        expect(response).to be_success
-        should render_template('passages/admin/passages_pane',)
+      context 'Admin' do
+        before(:each) do
+          user = double('User', admin: true)
+          stub_current_user(user)
+        end
+        context 'When the request is generated withing the tabs' do
+          it 'should give all the yet to open passages' do
+            get :opened, params: {from_tab: true}
+            expect(response).to be_success
+            expect(flash[:danger]).to be_nil
+            should render_template('passages/admin/passages_pane',)
+          end
+        end
+        context 'When the request is generated out side of the tabs' do
+          it 'redirects to the created passage' do
+            get :opened
+            should redirect_to(passages_path)
+          end
+        end
       end
-
-      it 'redirects to the created passage' do
-        expect(Passage).to receive(:open_passages)
-        get :opened
+      context 'Candidate' do
+        before(:each) do
+          user = double('User', admin: false)
+          stub_current_user(user)
+        end
+        it 'should not have access to opened passages' do
+          get :opened
+          expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+          should redirect_to(passages_path)
+        end
       end
     end
 
     describe "GET #closed" do
-      it 'should give all the yet to open passages' do
-        get :closed
-        expect(response).to be_success
-        should render_template('passages/admin/passages_pane',)
-      end
 
-      it 'redirects to the created passage' do
-        expect(Passage).to receive(:closed_passages)
-        get :closed
+      context 'Admin' do
+        before(:each) do
+          user = double('User', admin: true)
+          stub_current_user(user)
+        end
+        context 'When the request is generated withing the tabs' do
+          it 'should give all the yet to closed passages' do
+            get :closed, params:{from_tab: true}
+
+            expect(flash[:danger]).to be_nil
+            expect(response).to be_success
+            should render_template('passages/admin/passages_pane',)
+          end
+        end
+        context 'When the request is generated out side of the tabs' do
+          it 'redirects to the passages page with respective tab open' do
+
+            get :closed
+            expect(flash[:danger]).to be_nil
+            should redirect_to(passages_path)
+
+          end
+        end
+      end
+      context 'Candidate' do
+        before(:each) do
+          user = double('User', admin: false)
+          stub_current_user(user)
+        end
+        it 'should not have access to closed passages' do
+          get :closed
+          expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+          should redirect_to(passages_path)
+        end
       end
     end
 
     describe "GET #open_for_candidate" do
       it 'should give all the yet to open passages' do
         stub_current_user(double('User', passages: []))
-        get :open_for_candidate
+        get :open_for_candidate, params: {from_tab:true}
         expect(response).to be_success
         should render_template('passages/candidate/passages_pane',)
-      end
-
-      it 'redirects to the created passage' do
-        expect(Passage).to receive(:open_for_candidate).with(@user)
-        get :open_for_candidate
       end
     end
 
