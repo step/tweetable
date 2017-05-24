@@ -11,7 +11,17 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
+  def set_current_tab(tab)
+    session[:current_tab] = tab
+  end
+
+
   private
+
+  def current_tab
+    session[:current_tab] || (current_user.admin ? 'saved' : 'opened')
+  end
+
   def require_login
     unless logged_in?
       redirect_to login_url

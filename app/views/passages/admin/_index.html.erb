@@ -1,18 +1,13 @@
 <div class="container">
   <div class="tabbable col-lg-12 col-md-12" id="tabs">
     <ul class="nav nav-tabs" id="prodTabs">
-      <li class="active">
-        <a href="#panel-body" data-toggle="tab" data-url="<%= drafts_passages_url %>">Saved</a>
-      </li>
-      <li>
-        <a href="#panel-body" data-toggle="tab" data-url="<%= opened_passages_url %>">Opened</a>
-      </li>
-      <li>
-        <a href="#panel-body" data-toggle="tab" data-url="<%= closed_passages_url %>">Closed</a>
-      </li>
-      <li>
-        <a href="#panel-body" data-toggle="tab" data-url=<%= new_passage_url %>>New</a>
-      </li>
+      <% admin_tabs.each do |method_name, tab_name| %>
+          <% class_name = (tab_name.to_s.eql? active_tab) ? 'active' : '' %>
+          <%= content_tag(:li, class: class_name) do %>
+              <%= link_to(tab_name.to_s.humanize , '#panel-body', data: {url: "#{url_for(action: method_name )}?from_tab=#{true}" , toggle: 'tab'}) %>
+          <% end %>
+      <% end %>
+
     </ul>
   </div>
 </div>

@@ -1,16 +1,50 @@
 class PassagesController < ApplicationController
+  helper PassagesHelper
+
   layout false, except: [:index]
+
+  before_action :verify_privileges, only: [:drafts]
+  before_action :set_active_tab_and_redirect, only: [:new, :drafts, :closed, :opened, :open_for_candidate, :missed_by_candidate, :attempted_by_candidate]
+
+  NEW = 'new'
+  SAVED = 'saved'
+  OPENED = 'opened'
+  MISSED = 'missed'
+  ATTEMPTED = 'attempted'
+  CLOSED = 'closed'
+
+  ALL_TABS = {
+      new: NEW,
+      drafts: SAVED,
+      opened: OPENED,
+      closed: CLOSED,
+      open_for_candidate: OPENED,
+      missed_by_candidate: MISSED,
+      attempted_by_candidate: ATTEMPTED
+  }
 
   def new
     @passage = Passage.new
   end
 
+  def index
+    @passages = Passage.all
+    render :index, locals: {active_tab: current_tab}
+  end
+
   def create
     @passage = Passage.new(permit_params)
-    if @passage.save
-      redirect_to passages_url, notice: 'Passage was successfully created.'
-    else
-      render :new
+
+    respond_to do |format|
+      if @passage.save
+        flash[:success] = 'Passage was successfully created.'
+        format.html {redirect_to passages_path}
+      else
+        flash[:danger] = @passage.errors.messages.map do |m|
+          m.join(' ').humanize
+        end.join("\n")
+        format.html {redirect_to new_passage_path}
+      end
     end
   end
 
@@ -58,7 +92,25 @@ class PassagesController < ApplicationController
   end
 
   private
+
+  def from_tab?
+    params[:from_tab].eql? 'true'
+  end
+
+  def set_active_tab_and_redirect
+    set_current_tab ALL_TABS[params[:action].to_sym]
+    redirect_to passages_path unless from_tab?
+  end
+
+  def verify_privileges
+    unless current_user.admin
+      flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
+      redirect_to passages_path unless current_user.admin
+    end
+  end
+
   def permit_params
     params.require("passage").permit(:title, :text, :duration, :start_time, :close_time)
   end
+
 end

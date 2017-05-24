@@ -1,5 +1,5 @@
 <% if User.is_admin?(session[:auth_id])%>
-    <%= render 'passages/admin/index' %>
+    <%= render 'passages/admin/index', active_tab: active_tab %>
 <% else %>
-    <%= render 'passages/candidate/index' %>
+    <%= render 'passages/candidate/index' , active_tab: active_tab %>
 <% end %>
