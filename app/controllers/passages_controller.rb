@@ -81,8 +81,7 @@ class PassagesController < ApplicationController
   end
 
   def missed_by_candidate
-    user = User.find_by(auth_id: session[:user_id])
-    filtered_passages = Passage.missed_by_candidate(user)
+    filtered_passages = Passage.missed_by_candidate(current_user)
     render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "missed_passages"}
   end
 
