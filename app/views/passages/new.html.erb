@@ -7,7 +7,8 @@
       <%= form.text_field :duration, :class => "form-control", :id => "duration", :value => "3600" %>
       <%= form.datetime_local_field :start_time, :class => "col-10 form-control" %>
       <%= form.datetime_local_field :close_time, :class => "col-10 form-control" %>
-      <%= form.submit "Save", :class => "btn btn-primary pull-right padding-bottom" %>
+      <%= form.submit "Save", :class => "btn btn-success pull-right padding-bottom" %>
+      <%= link_to "Cancel", passages_path, {:class=>"btn btn-danger pull-right cancel_edit"} %>
   <% end %>
   <%= javascript_tag "$('#duration').durationPicker({showDays: false});" %>
 </div>

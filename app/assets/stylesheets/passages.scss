@@ -16,12 +16,17 @@
 
 .fa.fa-pencil{
   padding-right: 20px;
+  color: black;
   cursor: pointer;
 }
 
 .fa.fa-trash{
   color: black;
   cursor: pointer;
+}
+
+.cancel_edit{
+  margin-right: 1em;
 }
 
 #passage_text{
