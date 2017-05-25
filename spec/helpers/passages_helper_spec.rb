@@ -42,6 +42,16 @@ RSpec.describe PassagesHelper, type: :helper do
     end
   end
 
+  describe 'drafts_passage_partial?' do
+    it 'should return true when its a drafts passage pertial' do
+      expect(helper.drafts_passage_partial?('drafts_passages')).to eq(true)
+    end
+
+    it 'should return false when its not a drafts passage pertial' do
+      expect(helper.drafts_passage_partial?('closed_passages')).to eq(false)
+    end
+  end
+
   describe "duration_of_interval_in_words" do
     it "converts the seconds 3600 into 1 hour" do
       expect(helper.duration_of_interval_in_words(3600)).to eq("1 hour")

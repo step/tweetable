@@ -1,5 +1,7 @@
 module PassagesHelper
 
+  DRAFT_PASSAGES = 'drafts_passages'
+
   def admin_tabs
     {drafts: :saved, opened: :opened, closed: :closed, new: :new}
   end
@@ -12,8 +14,8 @@ module PassagesHelper
     time.strftime("%d-%m-%Y %H:%M%p") unless time.nil?
   end
 
-  def saved_passage_partial?(partial)
-    partial.eql?('drafts_passages')
+  def drafts_passage_partial?(partial)
+    partial.eql?(DRAFT_PASSAGES)
   end
 
   def to_display_time_format(time)
