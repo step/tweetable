@@ -3,7 +3,7 @@
 <div class="container" style="margin-top: 25px">
   <%= bootstrap_form_for(@passage) do |form| %>
       <%= form.text_field :title, :class => "col-10 form-control", :required => true %>
-      <%= form.text_field :text, :class => "col-10 form-control", :required => true %>
+      <%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true %>
       <%= form.text_field :duration, :class => "form-control", :id => "duration", :value => "3600" %>
       <%= form.datetime_local_field :start_time, :class => "col-10 form-control" %>
       <%= form.datetime_local_field :close_time, :class => "col-10 form-control" %>
