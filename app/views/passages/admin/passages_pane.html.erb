@@ -11,11 +11,13 @@
                     <div class="col-md-8">
                       <span><%= passage.title %></span>
                     </div>
-                    <div class="col-md-1 pull-right">
-                      <!--<a class="fa fa-eye" style="padding-right: 20px" aria-hidden="true"></a>-->
-                      <a class="fa fa-pencil" style="padding-right: 20px" aria-hidden="true"></a>
-                      <a class="fa fa-trash" aria-hidden="true"></a>
-                    </div>
+                    <% if saved_passage_partial?(partial_name) %>
+                        <div class="col-md-1 pull-right">
+                          <a class="fa fa-pencil"></a>
+                          <a class="fa fa-trash" data-toggle="modal" data-target="#delete_modal"></a>
+                          <%= render 'passages/admin/delete_passage', :passage => passage %>
+                        </div>
+                    <% end %>
                   </div>
                 </a>
               </div>

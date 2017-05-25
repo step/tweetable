@@ -52,7 +52,7 @@ RSpec.describe PassagesController, type: :controller do
     ]
 
   }
-  let(:responses) {[
+  let(:responses) { [
       {
           text: "respose for Climate Changed", user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Climate Change').id
       },
@@ -89,6 +89,26 @@ RSpec.describe PassagesController, type: :controller do
         post :create, params: {passage: invalid_attributes}
         expect(response).to redirect_to(new_passage_path)
         expect(flash[:danger]).to match("Text can't be blank")
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    before(:each) do
+      @passages = Passage.create!(passages)
+    end
+
+    after(:each) do
+      @passages.each(&:delete)
+    end
+
+    context 'with passage id' do
+      it 'should delete the passage' do
+        passage_find_by = Passage.find_by(title: 'Climate Change')
+        delete :destroy, params: {id: passage_find_by.id}
+
+        expect(Passage.find_by(title: 'Climate Change')).to eq(nil)
+        expect(response).to redirect_to(passages_path)
       end
     end
   end
@@ -223,6 +243,6 @@ RSpec.describe PassagesController, type: :controller do
       end
     end
 
-  end
 
+  end
 end

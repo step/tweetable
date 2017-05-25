@@ -50,6 +50,11 @@ class PassagesController < ApplicationController
     end
   end
 
+  def destroy
+    Passage.find(params[:id]).destroy
+    redirect_to :passages
+  end
+
   def roll_out
     Passage.find(params[:id]).roll_out
     redirect_to :passages
