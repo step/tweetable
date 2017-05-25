@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
 
     member do
-      get 'roll_out', to: 'passages#roll_out'
+      put 'roll_out', to: 'passages#roll_out'
       get 'close', to: 'passages#close'
     end
   end

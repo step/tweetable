@@ -56,7 +56,8 @@ class PassagesController < ApplicationController
   end
 
   def roll_out
-    Passage.find(params[:id]).roll_out
+    close_time = params[:passage][:close_time]
+    Passage.find(params[:id]).roll_out(close_time)
     redirect_to :passages
   end
 

@@ -2,15 +2,34 @@
   <span>Duration: <%= duration_of_interval_in_words(passage.duration.seconds) %></span>
 </div>
 <div class="col-md-3">
-  <span>Start Time: <%= to_preffered_time_format(passage.start_time) %></span>
+  <span>Start Time: <%= to_preferred_time_format(passage.start_time) %></span>
 </div>
 <div class="col-md-3">
-  <span>Close Time: <%= to_preffered_time_format(passage.close_time) %></span>
+  <span>Close Time: <%= to_preferred_time_format(passage.close_time) %></span>
 </div>
-<div class="col-md-3 passage_action_buttons">
-  <i data-url=<%= roll_out_passage_path(passage.id) %> >
-    <button type="button" class="btn btn-success pull-right">
-      Roll out
-    </button>
-  </i>
+<div class="col-md-3">
+  <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#confirmation-dialog">Roll
+    out
+  </button>
+  <div class="modal fade bd-example-modal-sm" id="confirmation-dialog" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <%= bootstrap_form_for(passage, :url => roll_out_passage_path(passage.id), method: :put)  do |form| %>
+            <div class="modal-body">
+              <%= form.datetime_field :close_time, min: DateTime.now, :class => "col-10 form-control", :value => (DateTime.now+2.days).strftime("%Y-%m-%dT%H:%M") %>
+              <p>The passage will be open for candidates right now. Check the closing date and click on OK to
+                continue...</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+              <%= submit_tag('Ok', class: 'btn btn-success passage_action_buttons') %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

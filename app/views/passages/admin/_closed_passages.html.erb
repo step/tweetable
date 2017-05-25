@@ -6,7 +6,7 @@
   <!--#TODO Show the Evaluated Responses Count-->
 </div>
 <div class="col-md-3">
-  <span>Closed at: <%= to_preffered_time_format(passage.close_time) %></span>
+  <span>Closed at: <%= to_preferred_time_format(passage.close_time) %></span>
 </div>
 <div class="col-md-2">
   <%= button_to 'View all responses', passage_responses_path(passage.id), class: 'btn btn-info pull-right', method: :get %>
