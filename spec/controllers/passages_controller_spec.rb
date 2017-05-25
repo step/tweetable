@@ -47,24 +47,20 @@ RSpec.describe PassagesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-
-    before(:each) do
-      @passages = Passage.create!(passages)
-    end
-
-    after(:each) do
-      @passages.each(&:delete)
-    end
-
     context 'with passage id' do
       it 'should delete the passage' do
+        @passages = Passage.create!(passages)
+
         passage_find_by = Passage.find_by(title: 'Climate Change')
         delete :destroy, params: {id: passage_find_by.id}
 
         expect(Passage.find_by(title: 'Climate Change')).to eq(nil)
         expect(response).to redirect_to(passages_path)
+
+        @passages.each(&:delete)
       end
     end
+
   end
 
   describe 'filter methods' do
