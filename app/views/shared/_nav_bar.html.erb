@@ -1,12 +1,11 @@
 <nav class="navbar navbar-default row">
     <div class="navbar-header col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    
-      <h3 class="navbar-brand">Tweetable</h3>
+      <%= link_to content_tag(:h3, "Tweetable", class: "navbar-brand"), passages_path %>
     </div>
     <div class="nav navbar-nav  user-emoji col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle pull-right">
-        <img src="<%=session[:image_url]%>" class="user-circle-icon"></img>
-      </a>
+
+      <%= link_to image_tag(session[:image_url],:class => 'user-circle-icon'), '#', class: 'dropdown-toggle pull-right', 'data-toggle' =>'dropdown' %>
+
       <ul class="dropdown-menu dropdown-menu-right pull-right" dropdown-toggle="focus">
         <%= content_tag(:li, link_to(session[:user_name], "#")) %>
         <%= content_tag(:li, "", class: "divider") %>
