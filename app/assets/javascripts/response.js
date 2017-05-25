@@ -1,12 +1,14 @@
-counter = function () {
-    var value = $('#text').val();
-
-    var totalChars = 140 - value.length;
-
+var calculateRemainingChars = function (charLimit) {
+    var value = $('#text').val() || '';
+    var totalChars = charLimit - value.length;
     $('#totalChars').html(totalChars);
 };
 
-$(document).ready(function () {
-    $('#text').keydown(counter);
-    $('#text').keypress(counter);
+document.addEventListener("turbolinks:load", function () {
+    var responseCharLimit = $('#text').attr('maxlength');
+    var countCharacters = function () {
+        calculateRemainingChars(responseCharLimit);
+    };
+    $('#totalChars').html(responseCharLimit);
+    $('#text').on('input', countCharacters);
 });
