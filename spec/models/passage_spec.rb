@@ -1,76 +1,4 @@
-RSpec.describe Passage, type: :model do
-
-  let(:passages) {
-    [
-        {
-            title: 'Climate Change', text: 'climate change passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '1'
-        },
-
-        {
-            title: 'Person', text: 'person passage', start_time: DateTime.now, close_time: (DateTime.now+1), duration: '2'
-        },
-
-        {
-            title: 'News', text: 'news passage', start_time: (DateTime.now-2), close_time: (DateTime.now-1), duration: '2'
-        },
-        {
-            title: 'Program', text: 'program passage', start_time: (DateTime.now-3), close_time: (DateTime.now+1), duration: '2'
-        },
-        {
-            title: 'Class', text: 'class passage', start_time: (DateTime.now-3), close_time: (DateTime.now-1), duration: '2'
-        },
-        {
-            title: 'Computer', text: 'computer passage', start_time: (DateTime.now+3), close_time: (DateTime.now+7), duration: '2'
-        },
-        {
-            title: 'Human', text: 'human passage', start_time: nil, close_time: nil, duration: '2'
-        }
-    ]
-
-  }
-
-  let(:users) {
-
-    [
-        {
-            name: 'Kamal Hasan', admin: false, auth_id: '132271', image_url: 'http://graph.facebook.com/demo1'
-        },
-        {
-            name: 'Vimal Hasan', admin: false, auth_id: '132273', image_url: 'http://graph.facebook.com/demo1'
-        },
-        {
-            name: 'Rajanikanth', admin: false, auth_id: '132272', image_url: 'http://graph.facebook.com/demo2'
-        }
-    ]
-  }
-
-  let(:responses) { [
-      {
-          text: 'respose for Climate Changed', user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Climate Change').id
-      },
-      {
-          text: 'respose for Climate Changed', user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Climate Change').id
-      },
-      {
-          text: 'respose for Person', user_id: User.find_by(auth_id: '132271').id, passage_id: Passage.find_by(title: 'Person').id
-      },
-      {
-          text: 'respose for Person', user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'Person').id
-      },
-      {
-          text: 'News Response', user_id: User.find_by(auth_id: '132273').id, passage_id: Passage.find_by(title: 'News').id
-      }
-  ]
-  }
-
-  before(:each) do
-    @users = User.create(users)
-    @passages = Passage.create(passages)
-    @responses = Response.create(responses)
-  end
-
-
-
+describe Passage, type: :model do
   describe 'validations ' do
 
     it {should validate_presence_of(:title)}
@@ -78,6 +6,8 @@ RSpec.describe Passage, type: :model do
     it {should validate_presence_of(:text)}
 
     it { should validate_numericality_of(:duration).is_greater_than(0) }
+
+  #TODO: write test for custom validation
 
   end
 
@@ -89,57 +19,59 @@ RSpec.describe Passage, type: :model do
 
 
   describe 'open_passages' do
-    it 'should get all open passages count to be three' do
-      expect(Passage.open_passages.count).to be(3)
-    end
-    it 'should get all open passages titles' do
-      opened_titles = Passage.open_passages.map(&:title)
-      expect(opened_titles).to contain_exactly('Climate Change', 'Person', 'Program')
+    it 'should get all open passages' do
+      now = DateTime.now
+      expect(Passage).to receive(:where).with(['start_time <= ? and close_time > ?', now, now])
+      Passage.open_passages
     end
   end
 
   describe 'draft_passages' do
-    it 'should get all draft passages count to be three' do
-      expect(Passage.draft_passages.count).to be(2)
-    end
-    it 'should get all open passages titles' do
-      opened_titles = Passage.draft_passages.map(&:title)
-      expect(opened_titles).to contain_exactly('Computer', 'Human')
+    it 'should get all draft passages' do
+      now = DateTime.now
+      passage_or = double('OR')
+      expect(Passage).to receive(:where).with(start_time: nil)
+      expect(passage_or).to receive(:or)
+      expect(Passage).to receive(:where).with(['start_time > ?', now]).and_return(passage_or)
+      Passage.draft_passages
     end
   end
 
   describe 'closed_passages' do
-    it 'should get all closed passages count to be three' do
-      expect(Passage.closed_passages.count).to be(2)
-    end
-    it 'should get all open passages titles' do
-      opened_titles = Passage.closed_passages.map(&:title)
-      expect(opened_titles).to contain_exactly('News', 'Class')
+    it 'should get all closed passages' do
+      now = DateTime.now
+      expect(Passage).to receive(:where).with(['close_time < ?', now])
+      Passage.closed_passages
     end
   end
 
   describe 'open_for_candidate_passages' do
     it 'should get all open passages for the candidate which are not attempted by user count to be one' do
-      user = User.find_by(auth_id: '132271')
+      passage1 = double('Passage 1',id:11)
+      passage2 = double('Passage 2',id:12)
+      user = double('User',id:1)
+
+      expect(Passage).to receive(:open_passages).and_return([passage1,passage2])
+      expect(user).to receive(:passages).and_return([passage1])
       passage_open_for_candidate = Passage.open_for_candidate(user)
+
       expect(passage_open_for_candidate.count).to be(1)
-      passage_titles = Passage.open_for_candidate(user).map(&:title)
-      expect(passage_titles).to contain_exactly('Program')
-    end
-    it 'should get all open passages titles when the user has not attempted any open passages' do
-      user = User.find_by(auth_id: '132272')
-      passage_titles = Passage.open_for_candidate(user).map(&:title)
-      expect(passage_titles).to contain_exactly('Climate Change','Person', 'Program')
+      expect(passage_open_for_candidate).to contain_exactly(passage2)
     end
   end
 
   describe '#missed_by_candidate_passages' do
     it 'should get all missed passages for the candidate which are not attempted by user count to be one' do
-      user = User.find_by(auth_id: '132273')
-      passage_missed_by_candidate = Passage.missed_by_candidate(user)
-      expect(passage_missed_by_candidate.count).to be(1)
-      passage_titles = passage_missed_by_candidate.map(&:title)
-      expect(passage_titles).to contain_exactly('Class')
+      passage1 = double('Passage 1',id:11)
+      passage2 = double('Passage 2',id:12)
+      user = double('User',id:1)
+
+      expect(Passage).to receive(:closed_passages).and_return([passage1,passage2])
+      expect(user).to receive(:passages).and_return([passage1])
+      passage_missed_for_candidate = Passage.missed_by_candidate(user)
+
+      expect(passage_missed_for_candidate.count).to be(1)
+      expect(passage_missed_for_candidate).to contain_exactly(passage2)
     end
   end
 
