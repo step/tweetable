@@ -1,7 +1,7 @@
 class PassagesController < ApplicationController
   helper PassagesHelper
 
-  layout false, except: [:index]
+  layout false, except: [:index, :edit]
 
   before_action :verify_privileges, only: [:drafts, :opened, :closed]
   before_action :set_active_tab_and_redirect, only: [:new, :drafts, :closed, :opened, :open_for_candidate, :missed_by_candidate, :attempted_by_candidate]
@@ -29,23 +29,40 @@ class PassagesController < ApplicationController
     @passage = Passage.new
   end
 
+  def edit
+    @passage = Passage.find(params[:id])
+    render :new
+  end
+
   def index
     @passages = Passage.all
     render :index, locals: {active_tab: current_tab}
   end
 
-  def create
-    @passage = Passage.new(permit_params)
+  def update
+    passage = Passage.find(params[:id])
 
     respond_to do |format|
-      if @passage.save
-        flash[:success] = 'Passage was successfully created.'
-        format.html {redirect_to passages_path}
+      if passage.update_attributes(permit_params)
+        flash[:success] = 'Passage was successfully updated...'
+        format.html { redirect_to passages_path }
       else
-        flash[:danger] = @passage.errors.messages.map do |m|
-          m.join(' ').humanize
-        end.join("\n")
-        format.html {redirect_to new_passage_path}
+        flash_error(passage)
+        format.html { redirect_to edit_passage_path }
+      end
+    end
+  end
+
+  def create
+    passage = Passage.new(permit_params)
+
+    respond_to do |format|
+      if passage.save
+        flash[:success] = 'Passage was successfully created.'
+        format.html { redirect_to passages_path }
+      else
+        flash_error(passage)
+        format.html { redirect_to new_passage_path }
       end
     end
   end
@@ -109,7 +126,6 @@ class PassagesController < ApplicationController
     redirect_to passages_path unless from_tab?
   end
 
-
   def verify_privileges
     unless current_user.admin
       set_current_tab DEFAULT_TAB
@@ -120,6 +136,12 @@ class PassagesController < ApplicationController
 
   def permit_params
     params.require("passage").permit(:title, :text, :duration, :start_time, :close_time)
+  end
+
+  def flash_error(passage)
+    flash[:danger] = passage.errors.messages.map do |m|
+      m.join(' ').humanize
+    end.join("\n")
   end
 
 end
