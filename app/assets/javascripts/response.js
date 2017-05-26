@@ -11,7 +11,7 @@ var showRemainingTime = function () {
     var time = remainingTimeElement.html();
     date.setSeconds(time);
     remainingTimeElement
-        .countdown(time, function (event) {
+        .countdown(date.toLocaleString(), function (event) {
             $(this).text(
                 event.strftime('%H:%M:%S')
             );
