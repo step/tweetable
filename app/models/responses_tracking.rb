@@ -23,7 +23,6 @@ class ResponsesTracking < ApplicationRecord
 
   def self.update_end_time(passage_id, user_id)
     tracking_detail = ResponsesTracking.find_by({passage_id: passage_id, user_id: user_id})
-    tracking_detail.end_time = DateTime.now
-    tracking_detail.save
+    tracking_detail.update_attributes(end_time:DateTime.now)
   end
 end
