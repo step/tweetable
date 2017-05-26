@@ -8,8 +8,11 @@ describe ResponsesController, type: :controller do
 
       it 'renders the new template' do
         stub_logged_in(true)
+        user = double('User', admin: false,id:1)
+        stub_current_user(user)
 
         expect(Passage).to receive(:find).and_return(passage)
+        expect(ResponsesTracking).to receive(:remaining_time).and_return(6000)
 
         get :new, params: {passage_id: passage.id}
 
@@ -36,6 +39,10 @@ describe ResponsesController, type: :controller do
       context 'Response length is valid' do
         it 'should create  response' do
           stub_logged_in(true)
+          user = double('User', admin: false,id:1)
+          stub_current_user(user)
+          expect(ResponsesTracking).to receive(:update_end_time)
+
           post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'Response to test passage'}
           expect(response).to redirect_to(passages_path)
           expect(flash[:success]).to match('Response was successfully created.')
@@ -45,6 +52,10 @@ describe ResponsesController, type: :controller do
     context 'Response length is invalid' do
       it 'should not create  response' do
         stub_logged_in(true)
+        user = double('User', admin: false,id:1)
+        stub_current_user(user)
+        expect(ResponsesTracking).to receive(:update_end_time)
+
         post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'This is an invalid response because its contains more that 140 characters. This is an invalid response because its contains more that 140 chars.'}
         expect(response).to redirect_to(new_passage_response_path(passage))
         expect(flash[:danger]).to match('Response was invalid!')

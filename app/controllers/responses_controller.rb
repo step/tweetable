@@ -12,13 +12,16 @@ class ResponsesController < ApplicationController
 
   def new
     passage = Passage.find(params[:passage_id])
-    render :new, locals: {passage: passage, response: passage.responses.new, user: current_user}
+    user = current_user
+    duration = ResponsesTracking.remaining_time(passage.id, user.id)
+    render :new, locals: {passage: passage, response: passage.responses.new, user: user, remaining_time: duration}
   rescue
     redirect_to passages_path
   end
 
   def create
     @response = Response.new(response_params)
+    ResponsesTracking.update_end_time(params[:passage_id],current_user.id)
 
     respond_to do |format|
       if @response.save

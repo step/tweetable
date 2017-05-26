@@ -76,7 +76,7 @@ describe Passage, type: :model do
   end
 
   describe '#attended_passage_by_candidate' do
-    context 'get all attended passges with response' do
+    context 'get all attended passages with response' do
       it 'should belongs to the logged candidate ' do
 
         passage1 = double('Passage',id:11)
@@ -90,7 +90,7 @@ describe Passage, type: :model do
         expect(attempted_by_candidate).to eq([{passage:passage1,response:response1}])
       end
 
-      it 'should get empty if attemted passage is zero ' do
+      it 'should get empty if attempted passage is zero ' do
 
 
         user = double('User', passages: [], responses: [])
