@@ -9,12 +9,5 @@
   <span>Closed at: <%= to_preferred_time_format(passage.close_time) %></span>
 </div>
 <div class="col-md-2">
-  <%= button_to 'View all responses', passage_responses_path(passage.id), class: 'btn btn-info pull-right', method: :get %>
-</div>
-<div class="col-md-1">
-  <a href="response_evaluation.html">
-    <button type="button" class="btn btn-warning pull-right">
-      Re-open
-    </button>
-  </a>
+  <%= button_to 'Review', passage_responses_path(passage.id), class: 'btn btn-info pull-right', method: :get %>
 </div>

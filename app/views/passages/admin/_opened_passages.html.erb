@@ -2,17 +2,16 @@
   <span>Completed by: <%= passage.responses.count %></span>
 </div>
 <div class="col-md-3">
-  <span>Starting on: <%= to_preferred_time_format(passage.start_time) %></span>
+  <span>Commencing on: <%= to_preferred_time_format(passage.start_time) %></span>
 </div>
 <div class="col-md-3">
-  <span>Closing on: <%= to_preferred_time_format(passage.close_time) %></span>
+  <span>Concluding on: <%= to_preferred_time_format(passage.close_time) %></span>
 </div>
 <div class="col-md-3 passage_action_buttons">
-  <%= button_to 'View all responses', passage_responses_path(passage.id), class: 'btn btn-info pull-left', method: :get %>
-
+  <%= button_to 'Review', passage_responses_path(passage.id), class: 'btn btn-info pull-left', method: :get %>
   <i data-url=<%= close_passage_path(passage.id) %>>
     <button type="button" class="btn btn-danger pull-right">
-      Close
+      Conclude
     </button>
   </i>
 </div>

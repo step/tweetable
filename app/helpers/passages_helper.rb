@@ -3,11 +3,11 @@ module PassagesHelper
   DRAFT_PASSAGES = 'drafts_passages'
 
   def admin_tabs
-    {drafts: :saved, opened: :opened, closed: :closed, new: :new}
+    {drafts: :drafts, opened: :ongoing, closed: :finished, new: :new}
   end
 
   def candidate_tabs
-    {open_for_candidate: :opened, attempted_by_candidate: :attempted, missed_by_candidate: :missed}
+    {open_for_candidate: :commenced, attempted_by_candidate: :attempted, missed_by_candidate: :missed}
   end
 
   def to_preferred_time_format(time)
