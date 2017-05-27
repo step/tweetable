@@ -49,11 +49,16 @@ class Passage < ApplicationRecord
   end
 
   def is_valid_close_date?
-    if self.close_time.nil?  or self.close_time > DateTime.now.utc
+    #TODO: write test for custom validation
+    if self.close_time.nil?  or greater_equal_now?
       true
     else
       errors.add(:close_time, 'must be a future time...')
     end
+  end
+
+  def greater_equal_now?
+    DateTime.parse(self.close_time.to_s) >= DateTime.parse(DateTime.now.utc.to_s)
   end
 
 end
