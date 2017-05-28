@@ -45,20 +45,20 @@ describe PassagesController, type: :routing do
       expect(:get => '/passages/drafts').to route_to('passages#drafts')
     end
 
-    it 'routes to #passasges/opened' do
-      expect(:get => '/passages/opened/').to route_to('passages#opened')
+    it 'routes to #passasges/ongoing' do
+      expect(:get => '/passages/ongoing/').to route_to('passages#ongoing')
     end
 
-    it 'routes to #passasges/opened with params' do
-      expect(:get => '/passages/opened?query=something').to route_to('passages#opened', :query => 'something')
+    it 'routes to #passasges/ongoing with params' do
+      expect(:get => '/passages/ongoing?query=something').to route_to('passages#ongoing', :query => 'something')
     end
 
-    it 'routes to #passasges/closed' do
-      expect(:get => '/passages/closed/').to route_to('passages#closed')
+    it 'routes to #passasges/finished' do
+      expect(:get => '/passages/finished/').to route_to('passages#finished')
     end
 
-    it 'routes to #passasges/closed with params' do
-      expect(:get => '/passages/closed?query=something').to route_to('passages#closed', :query => 'something')
+    it 'routes to #passasges/finished with params' do
+      expect(:get => '/passages/finished?query=something').to route_to('passages#finished', :query => 'something')
     end
 
   end

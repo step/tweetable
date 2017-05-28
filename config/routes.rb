@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
     collection do
       get 'drafts', to: 'passages#drafts'
-      get 'opened', to: 'passages#opened'
-      get 'closed', to: 'passages#closed'
-      get 'open_for_candidate', to: 'passages#open_for_candidate'
+      get 'ongoing', to: 'passages#ongoing'
+      get 'finished', to: 'passages#finished'
+      get 'commence_for_candidate', to: 'passages#commence_for_candidate'
       get 'missed_by_candidate', to: 'passages#missed_by_candidate'
       get 'attempted_by_candidate', to: 'passages#attempted_by_candidate'
     end

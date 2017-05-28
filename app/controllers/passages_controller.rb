@@ -3,13 +3,13 @@ class PassagesController < ApplicationController
 
   layout false, except: [:index, :edit]
 
-  before_action :verify_privileges, only: [:drafts, :opened, :closed]
-  before_action :set_active_tab_and_redirect, only: [:new, :drafts, :closed, :opened, :open_for_candidate, :missed_by_candidate, :attempted_by_candidate]
+  before_action :verify_privileges, only: [:drafts, :ongoing, :finished]
+  before_action :set_active_tab_and_redirect, only: [:new, :drafts, :finished, :ongoing, :commence_for_candidate, :missed_by_candidate, :attempted_by_candidate]
 
   NEW = 'new'
   SAVED = 'drafts'
-  OPENED = 'ongoing'
-  COMMENCED = 'commenced'
+  ONGOING = 'ongoing'
+  COMMENCE = 'commence'
   MISSED = 'missed'
   ATTEMPTED = 'attempted'
   CLOSED = 'finished'
@@ -18,15 +18,15 @@ class PassagesController < ApplicationController
   ALL_TABS = {
       new: NEW,
       drafts: SAVED,
-      opened: OPENED,
-      closed: CLOSED,
-      open_for_candidate: COMMENCED,
+      ongoing: ONGOING,
+      finished: CLOSED,
+      commence_for_candidate: COMMENCE,
       missed_by_candidate: MISSED,
       attempted_by_candidate: ATTEMPTED
   }
 
   def default_tab
-    current_user.admin ? OPENED : COMMENCED
+    current_user.admin ? ONGOING : COMMENCE
   end
 
   def new
@@ -94,19 +94,19 @@ class PassagesController < ApplicationController
     render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "drafts_passages"}
   end
 
-  def opened
+  def ongoing
     filtered_passages = Passage.open_passages
-    render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "opened_passages"}
+    render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "ongoing_passages"}
   end
 
-  def closed
+  def finished
     filtered_passages = Passage.closed_passages
-    render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "closed_passages"}
+    render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "finished_passages"}
   end
 
-  def open_for_candidate
+  def commence_for_candidate
     filtered_passages = Passage.open_for_candidate(current_user)
-    render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "opened_passages"}
+    render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "commence_passages"}
   end
 
   def missed_by_candidate
