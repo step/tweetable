@@ -2,7 +2,6 @@ describe ResponsesTracking do
   describe 'validations ' do
     it {should validate_presence_of(:user_id)}
     it {should validate_presence_of(:passage_id)}
-    it {should validate_presence_of(:start_time)}
 
   end
 
@@ -20,7 +19,16 @@ describe ResponsesTracking do
         },
 
         {
-            title: 'Person', text: 'person passage', start_time: DateTime.now, close_time: (DateTime.now+1), duration: '2'
+            title: 'Person', text: 'person passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+        },
+        {
+            title: 'Program', text: 'program passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+        },
+        {
+            title: 'Computer', text: 'computer passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+        },
+        {
+            title: 'Human', text: 'human passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
         }
     ]
   }
@@ -56,6 +64,7 @@ describe ResponsesTracking do
   describe 'remaining_time' do
     context 'when the candidate has not taken the passage yet' do
       it 'should save the start time of the ongoing response session for the passage' do
+        # binding.pry
 
         remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
@@ -65,16 +74,16 @@ describe ResponsesTracking do
     end
     context 'when the candidate has started the test and not yet completed' do
       it 'should give remaining time from the time the test started' do
-
-        ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, start_time: (DateTime.now - 0.5)})
+        time = (DateTime.now - 0.5)
+        ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, created_at: time, updated_at: time})
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
         expect(expected_remaining_time.round).to be(43200)
 
       end
       it 'should give remaining time 0 if the duration has ended' do
-
-        ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, start_time: (DateTime.now - 1)})
+        time = (DateTime.now - 1)
+        ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, created_at: time, updated_at: time})
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
         expect(expected_remaining_time.round).to be(0)
@@ -82,10 +91,20 @@ describe ResponsesTracking do
       end
       it 'should give remaining time 0 if the passage closing time is less than current date time' do
 
-        ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, start_time: (DateTime.now + 1.98)})
+        time = (DateTime.now + 1.98)
+        ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, created_at: time, updated_at: time})
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
         expect(expected_remaining_time.round).to be(172800)
+
+      end
+      it 'should give remaining time 0 if the response has been submitted' do
+
+        ResponsesTracking.create({passage_id: @passages.fifth.id, user_id: @users.first.id, created_at: (DateTime.now + 1.98)})
+        ResponsesTracking.update_end_time(@passages.fifth.id, @users.first.id)
+        expected_remaining_time = ResponsesTracking.remaining_time(@passages.fifth.id, @users.first.id)
+
+        expect(expected_remaining_time.round).to be(0)
 
       end
     end
