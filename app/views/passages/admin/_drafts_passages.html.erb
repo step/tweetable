@@ -8,15 +8,15 @@
   <span>Concludes on: <%= to_preferred_time_format(passage.close_time) %></span>
 </div>
 <div class="col-md-3">
-  <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#confirmation-dialog">Commence</button>
-  <div class="modal fade bd-example-modal-sm" id="confirmation-dialog" role="dialog">
+  <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#confirmation-dialog_<%= passage.id %>">Commence</button>
+  <div class="modal fade bd-example-modal-sm" id="confirmation-dialog_<%= passage.id %>" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Confirmation</h4>
         </div>
-        <%= bootstrap_form_for(passage, :url => roll_out_passage_path(passage.id), method: :put)  do |form| %>
+        <%= bootstrap_form_for(passage, :url => commence_passage_path(passage.id), method: :put)  do |form| %>
             <div class="modal-body">
               <%= form.datetime_field :close_time, min: DateTime.now, :class => "col-10 form-control", :value => (DateTime.now+2.days).strftime("%Y-%m-%dT%H:%M") %>
               <p>The passage will be open for candidates right now. Check the closing date and click on OK to
