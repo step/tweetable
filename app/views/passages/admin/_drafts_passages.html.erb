@@ -18,7 +18,7 @@
         </div>
         <%= bootstrap_form_for(passage, :url => commence_passage_path(passage.id), method: :put)  do |form| %>
             <div class="modal-body">
-              <%= form.datetime_field :close_time, min: DateTime.now, :class => "col-10 form-control", :value => (DateTime.now+2.days).strftime("%Y-%m-%dT%H:%M") %>
+              <%= form.datetime_field :close_time, :class => "col-10 form-control", :value => (DateTime.now+2.days).strftime("%Y-%m-%dT%H:%M") %>
               <p>The passage will be open for candidates right now. Check the closing date and click on OK to
                 continue...</p>
             </div>

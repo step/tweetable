@@ -11,7 +11,7 @@ module PassagesHelper
   end
 
   def to_preferred_time_format(time)
-    time.strftime("%d-%m-%Y %H:%M%p") unless time.nil?
+    time.strftime("%d-%m-%Y %I:%M%p") unless time.nil?
   end
 
   def drafts_passage_partial?(partial)
