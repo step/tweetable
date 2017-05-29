@@ -9,8 +9,6 @@
       <ul class="dropdown-menu dropdown-menu-right pull-right" dropdown-toggle="focus">
         <%= content_tag(:li, link_to(session[:user_name], "#")) %>
         <%= content_tag(:li, "", class: "divider") %>
-        <%= content_tag(:li, link_to("profile", "/login")) %>
-        <%= content_tag(:li, "", class: "divider") %>
         <%= content_tag(:li, link_to("Logout", logout_url)) %>
       </ul>
     </div>
