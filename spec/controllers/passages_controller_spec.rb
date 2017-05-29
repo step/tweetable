@@ -228,21 +228,21 @@ describe PassagesController do
       end
     end
 
-    describe 'PUT #roll_out' do
-      it 'should roll out the passage' do
+    describe 'PUT #commence' do
+      it 'should commence the passage' do
         past_time = DateTime.now+2.days
         passage = double('Passage')
-        expect(passage).to receive(:roll_out)
+        expect(passage).to receive(:commence)
         expect(Passage).to receive(:find).and_return(passage)
-        put :roll_out, params: {id: 12, passage: {close_time: past_time}}
+        put :commence, params: {id: 12, passage: {close_time: past_time}}
         expect(response).to redirect_to(passages_path)
       end
     end
 
-    describe 'GET #open_for_candidate' do
+    describe 'GET #commenced_for_candidate' do
       it 'should give all the yet to open passages' do
         stub_current_user(double('User', passages: []))
-        get :commence_for_candidate, params: {from_tab: true}
+        get :commenced_for_candidate, params: {from_tab: true}
         expect(response).to be_success
         should render_template('passages/candidate/passages_pane',)
       end

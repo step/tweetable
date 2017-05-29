@@ -7,7 +7,7 @@ class Passage < ApplicationRecord
 
   has_many :responses, dependent: :destroy
 
-  def roll_out(close_time)
+  def commence(close_time)
     self.update_attributes(start_time: DateTime.now,close_time:close_time)
   end
 
@@ -16,25 +16,25 @@ class Passage < ApplicationRecord
     self.save
   end
 
-  def self.draft_passages
+  def self.drafts
     Passage.where(['start_time > ?', DateTime.now]).or(Passage.where(start_time: nil))
   end
 
-  def self.open_passages
+  def self.ongoing
     now = DateTime.now
     Passage.where(['start_time <= ? and close_time > ?', now, now])
   end
 
-  def self.closed_passages
+  def self.finished
     Passage.where(['close_time < ?', DateTime.now])
   end
 
-  def self.open_for_candidate(user)
-    self.open_passages - user.passages
+  def self.commence_for_candidate(user)
+    self.ongoing - user.passages
   end
 
   def self.missed_by_candidate(user)
-    self.closed_passages - user.passages
+    self.finished - user.passages
   end
 
   def self.attempted_by_candidate(user)

@@ -22,7 +22,7 @@ describe Passage, type: :model do
     it 'should get all open passages' do
       now = DateTime.now
       expect(Passage).to receive(:where).with(['start_time <= ? and close_time > ?', now, now])
-      Passage.open_passages
+      Passage.ongoing
     end
   end
 
@@ -33,7 +33,7 @@ describe Passage, type: :model do
       expect(Passage).to receive(:where).with(start_time: nil)
       expect(passage_or).to receive(:or)
       expect(Passage).to receive(:where).with(['start_time > ?', now]).and_return(passage_or)
-      Passage.draft_passages
+      Passage.drafts
     end
   end
 
@@ -41,7 +41,7 @@ describe Passage, type: :model do
     it 'should get all closed passages' do
       now = DateTime.now
       expect(Passage).to receive(:where).with(['close_time < ?', now])
-      Passage.closed_passages
+      Passage.finished
     end
   end
 
@@ -51,9 +51,9 @@ describe Passage, type: :model do
       passage2 = double('Passage 2',id:12)
       user = double('User',id:1)
 
-      expect(Passage).to receive(:open_passages).and_return([passage1,passage2])
+      expect(Passage).to receive(:ongoing).and_return([passage1, passage2])
       expect(user).to receive(:passages).and_return([passage1])
-      passage_open_for_candidate = Passage.open_for_candidate(user)
+      passage_open_for_candidate = Passage.commence_for_candidate(user)
 
       expect(passage_open_for_candidate.count).to be(1)
       expect(passage_open_for_candidate).to contain_exactly(passage2)
@@ -66,7 +66,7 @@ describe Passage, type: :model do
       passage2 = double('Passage 2',id:12)
       user = double('User',id:1)
 
-      expect(Passage).to receive(:closed_passages).and_return([passage1,passage2])
+      expect(Passage).to receive(:finished).and_return([passage1, passage2])
       expect(user).to receive(:passages).and_return([passage1])
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 

@@ -4,30 +4,26 @@ class PassagesController < ApplicationController
   layout false, except: [:index, :edit]
 
   before_action :verify_privileges, only: [:drafts, :ongoing, :finished]
-  before_action :set_active_tab_and_redirect, only: [:new, :drafts, :finished, :ongoing, :commence_for_candidate, :missed_by_candidate, :attempted_by_candidate]
+  before_action :set_active_tab_and_redirect, only: [:new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
 
   NEW = 'new'
-  SAVED = 'drafts'
+  DRAFTS = 'drafts'
   ONGOING = 'ongoing'
-  COMMENCE = 'commence'
+  COMMENCED = 'commenced'
   MISSED = 'missed'
   ATTEMPTED = 'attempted'
-  CLOSED = 'finished'
+  FINISHED = 'finished'
 
 
   ALL_TABS = {
       new: NEW,
-      drafts: SAVED,
+      drafts: DRAFTS,
       ongoing: ONGOING,
-      finished: CLOSED,
-      commence_for_candidate: COMMENCE,
+      finished: FINISHED,
+      commenced_for_candidate: COMMENCED,
       missed_by_candidate: MISSED,
       attempted_by_candidate: ATTEMPTED
   }
-
-  def default_tab
-    current_user.admin ? ONGOING : COMMENCE
-  end
 
   def new
     @passage = Passage.new
@@ -76,9 +72,9 @@ class PassagesController < ApplicationController
     redirect_to :passages
   end
 
-  def roll_out
+  def commence
     close_time = params[:passage][:close_time]
-    Passage.find(params[:id]).roll_out(close_time)
+    Passage.find(params[:id]).commence(close_time)
     redirect_to :passages
   end
 
@@ -90,23 +86,23 @@ class PassagesController < ApplicationController
   #TODO all the passage getter methods should give out json if asked for
 
   def drafts
-    filtered_passages = Passage.draft_passages
+    filtered_passages = Passage.drafts
     render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "drafts_passages"}
   end
 
   def ongoing
-    filtered_passages = Passage.open_passages
+    filtered_passages = Passage.ongoing
     render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "ongoing_passages"}
   end
 
   def finished
-    filtered_passages = Passage.closed_passages
+    filtered_passages = Passage.finished
     render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "finished_passages"}
   end
 
-  def commence_for_candidate
-    filtered_passages = Passage.open_for_candidate(current_user)
-    render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "commence_passages"}
+  def commenced_for_candidate
+    filtered_passages = Passage.commence_for_candidate(current_user)
+    render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "commenced_passages"}
   end
 
   def missed_by_candidate
@@ -132,7 +128,7 @@ class PassagesController < ApplicationController
 
   def verify_privileges
     unless current_user.admin
-      set_current_tab default_tab
+      set_current_tab COMMENCED
       flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
       redirect_to passages_path
     end

@@ -13,13 +13,13 @@ Rails.application.routes.draw do
       get 'drafts', to: 'passages#drafts'
       get 'ongoing', to: 'passages#ongoing'
       get 'finished', to: 'passages#finished'
-      get 'commence_for_candidate', to: 'passages#commence_for_candidate'
+      get 'commenced_for_candidate', to: 'passages#commenced_for_candidate'
       get 'missed_by_candidate', to: 'passages#missed_by_candidate'
       get 'attempted_by_candidate', to: 'passages#attempted_by_candidate'
     end
 
     member do
-      put 'roll_out', to: 'passages#roll_out'
+      put 'commence', to: 'passages#commence'
       get 'close', to: 'passages#close'
     end
   end

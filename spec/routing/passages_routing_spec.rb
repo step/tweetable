@@ -33,8 +33,8 @@ describe PassagesController, type: :routing do
       expect(:delete => '/passages/1').to route_to('passages#destroy', :id => '1')
     end
 
-    it 'routes to #roll_out' do
-      expect(:put => '/passages/1/roll_out').to route_to('passages#roll_out', :id => '1')
+    it 'routes to #commence' do
+      expect(:put => '/passages/1/commence').to route_to('passages#commence', :id => '1')
     end
 
     it 'routes to #close' do

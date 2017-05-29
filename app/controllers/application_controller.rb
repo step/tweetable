@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_tab
-    session[:current_tab] || (current_user.admin ? 'drafts' : 'commence')
+    session[:current_tab] || (current_user.admin ? :drafts : :commenced).to_s
   end
 
   def require_login
