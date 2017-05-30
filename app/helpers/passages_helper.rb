@@ -3,7 +3,7 @@ module PassagesHelper
   DRAFT_PASSAGES = 'drafts_passages'
 
   def admin_tabs
-    {drafts: :drafts, ongoing: :ongoing, finished: :finished, new: :new}
+    {drafts: :drafts, ongoing: :ongoing, finished: :concluded, new: :new}
   end
 
   def candidate_tabs
