@@ -157,7 +157,7 @@ describe PassagesController do
     describe 'GET #opened' do
       context 'Admin' do
         before(:each) do
-          user = double('User', admin: true)
+          user = double('User', admin: true,id: 1)
           stub_current_user(user)
         end
         context 'When the request is generated withing the tabs' do
@@ -241,7 +241,7 @@ describe PassagesController do
 
     describe 'GET #commenced_for_candidate' do
       it 'should give all the yet to open passages' do
-        stub_current_user(double('User', passages: []))
+        stub_current_user(double('User', passages: [],id:2))
         get :commenced_for_candidate, params: {from_tab: true}
         expect(response).to be_success
         should render_template('passages/candidate/passages_pane',)

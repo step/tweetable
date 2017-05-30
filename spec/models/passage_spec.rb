@@ -20,9 +20,10 @@ describe Passage, type: :model do
 
   describe 'open_passages' do
     it 'should get all open passages' do
+      user = double('User', passages: [],id:2)
       now = DateTime.now
-      expect(Passage).to receive(:where).with(['start_time <= ? and close_time > ?', now, now])
-      Passage.ongoing
+      expect(Passage).to receive(:where).with(['start_time <= ? and close_time > ?', now, now]).and_return([])
+      Passage.ongoing(user)
     end
   end
 
@@ -62,7 +63,7 @@ describe Passage, type: :model do
 
   describe '#missed_by_candidate_passages' do
     it 'should get all missed passages for the candidate which are not attempted by user count to be one' do
-      passage1 = double('Passage 1',id:11)
+      passage1 = double('Passage 1',id:11,duration:4600)
       passage2 = double('Passage 2',id:12)
       user = double('User',id:1)
 
