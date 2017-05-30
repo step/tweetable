@@ -4,7 +4,17 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: :login
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  post '/responses/:response_id/taggings/create_tagging_by_tag_name', to: 'taggings#create_tagging_by_tag_name'
+  delete '/responses/:response_id/taggings/delete_tagging_by_tag_name', to: 'taggings#delete_tagging_by_tag_name'
 
+  # resources :responses do
+  #   resources :taggings do
+  #     collection do
+  #       post 'create_tagging_by_tag_name', to: 'taggings#create_tagging_by_tag_name'
+  #       delete 'delete_tagging_by_tag_name', to: 'taggings#delete_tagging_by_tag_name'
+  #     end
+  #   end
+  # end
 
   resources :passages do
     resources :responses
@@ -23,6 +33,6 @@ Rails.application.routes.draw do
       get 'conclude', to: 'passages#conclude'
     end
   end
-  resources :taggings
+
   resources :tags
 end

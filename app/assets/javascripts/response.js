@@ -1,3 +1,5 @@
+//=require jquery.tagsinput.min
+
 var updateRemainingCharacters = function (event) {
     var charLimit = event.target.maxLength;
     var presentCount = event.target.value.length;
@@ -41,4 +43,57 @@ document.addEventListener("turbolinks:load", function () {
     showRemainingCharacters();
     showRemainingTime();
     remove_flash_messages();
+    initializeTaggings();
 });
+
+var initializeTaggings = function () {
+    $('.tags').tagsInput({
+        'height': '50px',
+        'width': '100%',
+        'interactive': true,
+        'onAddTag': onTagAddition,
+        'onRemoveTag': onTagRemoval
+    });
+};
+
+var requester = function (url, method, data, onSuccess) {
+    return $.ajax({
+        url: url,
+        type: method,
+        data: data,
+        success: onSuccess
+    });
+};
+
+var onTagAddition = function (tagName) {
+    var uri = 'create_tagging_by_tag_name';
+    var method = 'POST';
+    var onSuccess = function (res, status) {
+        if (status !== 'success')
+            deleteTag(self, tagName)
+    };
+    var self = $(this);
+    var response_id = self.attr('data-response-id');
+    var url = '/responses/' + response_id + '/taggings/'+uri;
+    var data = {tag_name: tagName};
+    requester(url, method, data, onSuccess).fail(function () {
+        deleteTag(self, tagName)
+    });
+};
+
+var onTagRemoval = function (tagName) {
+    var uri = 'delete_tagging_by_tag_name';
+    var method = 'DELETE';
+    var onSuccess = function () {
+    };
+    var self = $(this);
+    var response_id = self.attr('data-response-id');
+    var url = '/responses/' + response_id + '/taggings/'+uri;
+    var data = {tag_name: tagName};
+    requester(url, method, data, onSuccess);
+
+};
+
+var deleteTag = function (tags, tag) {
+    return tags.removeTag(tag);
+};

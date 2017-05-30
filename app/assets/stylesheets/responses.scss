@@ -1,6 +1,11 @@
 // Place all the styles related to the Responses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+*= require jquery.tagsinput.min
+ */
+
+//@import "jquery.tagsinput.min"
 
 .totalChars {
   margin-bottom: 15px;
@@ -22,4 +27,18 @@
   border-radius: 33px;
   border: 1px solid grey;
   margin: 5px 4px 6px 0;
+}
+div.tagsinput {
+  border-radius: 5px;
+  padding: 8px;
+  margin: 5px;
+}
+
+.response-holder {
+  padding: 5px;
+  background-color: rgba(211, 211, 211, 0.25);
+  margin: auto;
+  margin-bottom: 8px;
+  border-radius: 5px;
+
 }
