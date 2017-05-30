@@ -47,7 +47,7 @@ class PassagesController < ApplicationController
         flash[:success] = 'Passage was successfully updated...'
         format.html { redirect_to passages_path }
       else
-        flash_error(passage)
+        display_flash_error(passage)
         format.html { redirect_to edit_passage_path }
       end
     end
@@ -61,7 +61,7 @@ class PassagesController < ApplicationController
         flash[:success] = 'Passage was successfully created.'
         format.html { redirect_to passages_path }
       else
-        flash_error(passage)
+        display_flash_error(passage)
         format.html { redirect_to new_passage_path }
       end
     end
@@ -74,7 +74,8 @@ class PassagesController < ApplicationController
 
   def commence
     close_time = params[:passage][:close_time]
-    Passage.find(params[:id]).commence(close_time)
+    passage = Passage.find(params[:id])
+    display_flash_error(passage) unless passage.commence(close_time)
     redirect_to :passages
   end
 
@@ -138,7 +139,7 @@ class PassagesController < ApplicationController
     params.require("passage").permit(:title, :text, :duration, :start_time, :close_time)
   end
 
-  def flash_error(passage)
+  def display_flash_error(passage)
     flash[:danger] = passage.errors.messages.map do |m|
       m.join(' ').humanize
     end.join("\n")

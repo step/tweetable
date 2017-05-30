@@ -45,7 +45,7 @@ describe PassagesController do
         passage = double('passage')
         expect(Passage).to receive(:new).and_return(passage)
         expect(passage).to receive(:save).and_return(false)
-        allow_any_instance_of(PassagesController).to receive(:flash_error)
+        allow_any_instance_of(PassagesController).to receive(:display_flash_error)
 
         post :create, params: {passage: invalid_attributes}
         expect(response).to redirect_to(new_passage_path)
@@ -76,7 +76,7 @@ describe PassagesController do
         passage = double('passage')
 
         expect(Passage).to receive(:find).and_return(passage)
-        allow_any_instance_of(PassagesController).to receive(:flash_error)
+        allow_any_instance_of(PassagesController).to receive(:display_flash_error)
         allow_any_instance_of(PassagesController).to receive(:permit_params).and_return(valid_attributes)
         expect(passage).to receive(:update_attributes).with(valid_attributes).and_return(false)
 
@@ -231,10 +231,23 @@ describe PassagesController do
     describe 'PUT #commence' do
       it 'should commence the passage' do
         past_time = DateTime.now+2.days
-        passage = double('Passage')
-        expect(passage).to receive(:commence)
+        passage = double('Passage', commence: true)
         expect(Passage).to receive(:find).and_return(passage)
         put :commence, params: {id: 12, passage: {close_time: past_time}}
+        expect(response).to redirect_to(passages_path)
+      end
+
+      it 'should not commence the passage' do
+        past_time = DateTime.now - 1.days
+        errors = double('Errors', messages: [['close_time', 'must be a future time']])
+        passage = double('Passage', errors: errors)
+
+        expect(passage).to receive(:commence)
+        expect(Passage).to receive(:find).and_return(passage)
+
+        put :commence, params: {id: 12, passage: {close_time: past_time}}
+
+        expect(flash[:danger]).to eq('Close time must be a future time')
         expect(response).to redirect_to(passages_path)
       end
     end
