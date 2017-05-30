@@ -18,17 +18,17 @@ User.create(
 Passage.create(
     [
         {
-            title: 'Climate Change', text: 'climate change passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '3600'
+            title: 'Climate Change', text: 'climate change passage', start_time: Time.current, close_time: (Time.current+2), duration: '3600'
         },
 
         {
-            title: 'Person', text: 'person passage', start_time: DateTime.now, close_time: (DateTime.now+1), duration: '7200'
+            title: 'Person', text: 'person passage', start_time: Time.current, close_time: (Time.current+1), duration: '7200'
         },
         {
-            title: 'Program', text: 'program passage', start_time: (DateTime.now-3), close_time: (DateTime.now+1), duration: '7200'
+            title: 'Program', text: 'program passage', start_time: (Time.current-3), close_time: (Time.current+1), duration: '7200'
         },
         {
-            title: 'Computer', text: 'computer passage', start_time: (DateTime.now+3), close_time: (DateTime.now+7), duration: '7200'
+            title: 'Computer', text: 'computer passage', start_time: (Time.current+3), close_time: (Time.current+7), duration: '7200'
         },
         {
             title: 'Human', text: 'human passage', start_time: nil, close_time: nil, duration: '7200'
@@ -36,8 +36,8 @@ Passage.create(
     ]
 )
 
-Passage.new(title: 'News', text: 'news passage', start_time: (DateTime.now-2), close_time: (DateTime.now-1), duration: '7200').save(validate: false)
-Passage.new(title: 'Class', text: 'class passage', start_time: (DateTime.now-3), close_time: (DateTime.now-1), duration: '7200').save(validate: false)
+Passage.new(title: 'News', text: 'news passage', start_time: (Time.current-2), close_time: (Time.current-1), duration: '7200').save(validate: false)
+Passage.new(title: 'Class', text: 'class passage', start_time: (Time.current-3), close_time: (Time.current-1), duration: '7200').save(validate: false)
 
 
 # --------------- Response Seeds ---------------------

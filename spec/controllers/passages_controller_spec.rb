@@ -18,7 +18,7 @@ describe PassagesController do
   let(:passages) {
     [
         {
-            title: 'Climate Change', text: 'climate change passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '1'
+            title: 'Climate Change', text: 'climate change passage', start_time: Time.current, close_time: (Time.current+2), duration: '1'
         }
     ]
   }
@@ -230,7 +230,7 @@ describe PassagesController do
 
     describe 'PUT #commence' do
       it 'should commence the passage' do
-        past_time = DateTime.now+2.days
+        past_time = Time.current+2.days
         passage = double('Passage', commence: true)
         expect(Passage).to receive(:find).and_return(passage)
         put :commence, params: {id: 12, passage: {close_time: past_time}}
@@ -238,7 +238,7 @@ describe PassagesController do
       end
 
       it 'should not commence the passage' do
-        past_time = DateTime.now - 1.days
+        past_time = Time.current - 1.days
         errors = double('Errors', messages: [['close_time', 'must be a future time']])
         passage = double('Passage', errors: errors)
 

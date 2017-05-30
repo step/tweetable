@@ -15,20 +15,20 @@ describe ResponsesTracking do
   let(:passages) {
     [
         {
-            title: 'Climate Change', text: 'climate change passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+            title: 'Climate Change', text: 'climate change passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
         },
 
         {
-            title: 'Person', text: 'person passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+            title: 'Person', text: 'person passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
         },
         {
-            title: 'Program', text: 'program passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+            title: 'Program', text: 'program passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
         },
         {
-            title: 'Computer', text: 'computer passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+            title: 'Computer', text: 'computer passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
         },
         {
-            title: 'Human', text: 'human passage', start_time: DateTime.now, close_time: (DateTime.now+2), duration: '86400'
+            title: 'Human', text: 'human passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
         }
     ]
   }
@@ -64,17 +64,16 @@ describe ResponsesTracking do
   describe 'remaining_time' do
     context 'when the candidate has not taken the passage yet' do
       it 'should save the start time of the ongoing response session for the passage' do
-        # binding.pry
 
         remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
-        expect(remaining_time.round).to be(86400)
+        expect(remaining_time.round).to eq(86400)
 
       end
     end
     context 'when the candidate has started the test and not yet completed' do
       it 'should give remaining time from the time the test started' do
-        time = (DateTime.now - 0.5)
+        time = (Time.current - 0.5.day)
         ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, created_at: time, updated_at: time})
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
@@ -82,7 +81,7 @@ describe ResponsesTracking do
 
       end
       it 'should give remaining time 0 if the duration has ended' do
-        time = (DateTime.now - 1)
+        time = (Time.current - 1.day)
         ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, created_at: time, updated_at: time})
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
@@ -91,7 +90,7 @@ describe ResponsesTracking do
       end
       it 'should give remaining time 0 if the passage closing time is less than current date time' do
 
-        time = (DateTime.now + 1.98)
+        time = (Time.current + 1.98.day)
         ResponsesTracking.create({passage_id: @passages.first.id, user_id: @users.first.id, created_at: time, updated_at: time})
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
 
@@ -100,7 +99,7 @@ describe ResponsesTracking do
       end
       it 'should give remaining time 0 if the response has been submitted' do
 
-        ResponsesTracking.create({passage_id: @passages.fifth.id, user_id: @users.first.id, created_at: (DateTime.now + 1.98)})
+        ResponsesTracking.create({passage_id: @passages.fifth.id, user_id: @users.first.id, created_at: (Time.current + 1.98)})
         ResponsesTracking.update_end_time(@passages.fifth.id, @users.first.id)
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.fifth.id, @users.first.id)
 

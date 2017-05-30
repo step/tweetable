@@ -37,7 +37,7 @@ class Passage < ApplicationRecord
 
   def self.missed_by_candidate(user)
     finished = self.finished - user.passages
-    now = DateTime.now
+    now = Time.current
     opened_passages = Passage.where(['start_time <= ? and close_time > ?', now, now])
     finished + self.get_timed_out_passages(opened_passages,user.id)
   end
