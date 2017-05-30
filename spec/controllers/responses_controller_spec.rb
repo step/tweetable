@@ -8,7 +8,7 @@ describe ResponsesController, type: :controller do
 
       it 'renders the new template' do
         stub_logged_in(true)
-        user = double('User', admin: false,id:1)
+        user = double('User', admin: false, id: 1)
         stub_current_user(user)
 
         expect(Passage).to receive(:find).and_return(passage)
@@ -36,29 +36,58 @@ describe ResponsesController, type: :controller do
     let(:intern) {User.create(name: 'Intern', auth_id: '1243234324')}
 
     context 'When user and passage exists' do
-      context 'Response length is valid' do
-        it 'should create  response' do
-          stub_logged_in(true)
-          user = double('User', admin: false,id:1)
-          stub_current_user(user)
-          expect(ResponsesTracking).to receive(:update_end_time)
+      context 'When Responding time is over' do
+        context 'Response length is valid' do
+          it 'should create  response' do
+            stub_logged_in(true)
+            user = double('User', admin: false, id: 1)
+            stub_current_user(user)
+            expect(ResponsesTracking).to receive(:remaining_time).and_return(0)
 
-          post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'Response to test passage'}
-          expect(response).to redirect_to(passages_path)
-          expect(flash[:success]).to match('Response was successfully created.')
+            post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'Response to test passage'}
+            expect(response).to redirect_to(passages_path)
+            expect(flash[:danger]).to match('Your response submission time is expired!')
+          end
+        end
+        context 'Response length is invalid' do
+          it 'should not create  response' do
+            stub_logged_in(true)
+            user = double('User', admin: false, id: 1)
+            stub_current_user(user)
+            expect(ResponsesTracking).to receive(:remaining_time).and_return(-1)
+
+            post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'This is an invalid response because its contains more that 140 characters. This is an invalid response because its contains more that 140 chars.'}
+            expect(response).to redirect_to(passages_path)
+            expect(flash[:danger]).to match('Your response submission time is expired!')
+          end
         end
       end
-    end
-    context 'Response length is invalid' do
-      it 'should not create  response' do
-        stub_logged_in(true)
-        user = double('User', admin: false,id:1)
-        stub_current_user(user)
-        expect(ResponsesTracking).to receive(:update_end_time)
+      context 'When Responding time is not over' do
+        context 'Response length is valid' do
+          it 'should create  response' do
+            stub_logged_in(true)
+            user = double('User', admin: false, id: 1)
+            stub_current_user(user)
+            expect(ResponsesTracking).to receive(:update_end_time)
+            expect(ResponsesTracking).to receive(:remaining_time).and_return(2)
 
-        post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'This is an invalid response because its contains more that 140 characters. This is an invalid response because its contains more that 140 chars.'}
-        expect(response).to redirect_to(new_passage_response_path(passage))
-        expect(flash[:danger]).to match('Response was invalid!')
+            post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'Response to test passage'}
+            expect(response).to redirect_to(passages_path)
+            expect(flash[:success]).to match('Response was successfully created.')
+          end
+        end
+        context 'Response length is invalid' do
+          it 'should not create  response' do
+            stub_logged_in(true)
+            user = double('User', admin: false, id: 1)
+            stub_current_user(user)
+            expect(ResponsesTracking).to receive(:remaining_time).and_return(2)
+
+            post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'This is an invalid response because its contains more that 140 characters. This is an invalid response because its contains more that 140 chars.'}
+            expect(response).to redirect_to(new_passage_response_path(passage))
+            expect(flash[:danger]).to match('Response was invalid!')
+          end
+        end
       end
     end
   end

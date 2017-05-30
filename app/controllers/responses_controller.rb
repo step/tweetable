@@ -20,11 +20,18 @@ class ResponsesController < ApplicationController
   end
 
   def create
-    @response = Response.new(response_params)
-    ResponsesTracking.update_end_time(params[:passage_id],current_user.id)
+    passage = Passage.find(params[:passage_id])
+    user = current_user
+    remaining_time = ResponsesTracking.remaining_time(passage.id, user.id)
 
+    @response = Response.new(response_params)
     respond_to do |format|
-      if @response.save
+
+      if remaining_time<=0
+        flash[:danger] = 'Your response submission time is expired!'
+        format.html {redirect_to passages_path}
+      elsif @response.save
+        ResponsesTracking.update_end_time(params[:passage_id],current_user.id)
         flash[:success] = 'Response was successfully created.'
         format.html {redirect_to passages_path}
       else
