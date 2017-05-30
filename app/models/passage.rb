@@ -3,32 +3,32 @@ class Passage < ApplicationRecord
   validates :title, presence: true
   validates :text, presence: true
   validates_numericality_of :duration, greater_than: 0
-  validate :is_valid_close_date?
+  validate :is_valid_close_time?
 
   has_many :responses, dependent: :destroy
   has_many :responses_trackings, dependent: :destroy
 
   def commence(close_time)
-    self.update_attributes(start_time: DateTime.now,close_time:close_time)
+    self.update_attributes(start_time: Time.current,close_time: ( close_time))
   end
 
   def close
-    self.close_time = DateTime.now
+    self.close_time = Time.current
     self.save
   end
 
   def self.drafts
-    Passage.where(['start_time > ?', DateTime.now]).or(Passage.where(start_time: nil))
+    Passage.where(['start_time > ?', Time.current]).or(Passage.where(start_time: nil))
   end
 
   def self.ongoing(user)
-    now = DateTime.now
+    now = Time.current
     opened_passages = Passage.where(['start_time <= ? and close_time > ?', now, now])
     opened_passages - get_timed_out_passages(opened_passages,user.id)
   end
 
   def self.finished
-    Passage.where(['close_time < ?', DateTime.now])
+    Passage.where(['close_time < ?', Time.current])
   end
 
   def self.commence_for_candidate(user)
@@ -62,17 +62,23 @@ class Passage < ApplicationRecord
   end
 
 
-  def is_valid_close_date?
-    #TODO: write test for custom validation
-    if self.close_time.nil?  or greater_equal_now?
-      true
-    else
+  def is_valid_close_time?
+    if (self.close_time.present?  and invalid_close_time?) or is_valid_start_time?
       errors.add(:close_time, 'must be a future time...')
     end
   end
 
-  def greater_equal_now?
-    DateTime.parse(self.close_time.to_s) >= DateTime.parse(DateTime.now.utc.to_s)
+  def is_valid_start_time?
+    self.start_time.present?  and invalid_start_time?
+  end
+
+  def invalid_close_time?
+    self.close_time <= Time.current
+  end
+
+
+  def invalid_start_time?
+    self.close_time <= self.start_time
   end
 
 end
