@@ -4,7 +4,6 @@ class TaggingsController < ApplicationController
   def create_tagging_by_tag_name
     tag = Tag.find_or_create_by(name: params[:tag_name])
     tag.taggings.create(response_id: params[:response_id])
-    # Tagging.create(response_id: params[:response_id], tag_id: tag.id)
     render plain: params[:tag_name]
   end
 
