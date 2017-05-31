@@ -15,20 +15,20 @@ describe ResponsesTracking do
   let(:passages) {
     [
         {
-            title: 'Climate Change', text: 'climate change passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
+            title: 'Climate Change', text: 'climate change passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
         },
 
         {
-            title: 'Person', text: 'person passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
+            title: 'Person', text: 'person passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
         },
         {
-            title: 'Program', text: 'program passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
+            title: 'Program', text: 'program passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
         },
         {
-            title: 'Computer', text: 'computer passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
+            title: 'Computer', text: 'computer passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
         },
         {
-            title: 'Human', text: 'human passage', start_time: Time.current, close_time: (Time.current + 2.days), duration: '86400'
+            title: 'Human', text: 'human passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
         }
     ]
   }

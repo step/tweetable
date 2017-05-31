@@ -10,10 +10,10 @@ class ResponsesTracking < ApplicationRecord
     unless tracking_detail.updated_at.eql?tracking_detail.created_at
       return 0
     end
-    close_time_duration = tracking_detail.passage.close_time - Time.current
+    conclude_time_duration = tracking_detail.passage.conclude_time - Time.current
     passage_duration = tracking_detail.passage.duration
     remaining_time = passage_duration - (Time.current - tracking_detail.created_at)
-    [remaining_time, close_time_duration].min
+    [remaining_time, conclude_time_duration].min
   end
 
   def self.update_end_time(passage_id, user_id)

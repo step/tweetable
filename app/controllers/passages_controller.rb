@@ -73,14 +73,14 @@ class PassagesController < ApplicationController
   end
 
   def commence
-    close_time = params[:passage][:close_time]
+    conclude_time = params[:passage][:conclude_time]
     passage = Passage.find(params[:id])
-    display_flash_error(passage) unless passage.commence(close_time)
+    display_flash_error(passage) unless passage.commence(conclude_time)
     redirect_to :passages
   end
 
-  def close
-    Passage.find(params[:id]).close
+  def conclude
+    Passage.find(params[:id]).conclude
     redirect_to :passages
   end
 
@@ -136,7 +136,7 @@ class PassagesController < ApplicationController
   end
 
   def permit_params
-    params.require("passage").permit(:title, :text, :duration, :start_time, :close_time)
+    params.require("passage").permit(:title, :text, :duration, :commence_time, :conclude_time)
   end
 
   def display_flash_error(passage)

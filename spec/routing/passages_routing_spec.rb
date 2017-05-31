@@ -37,8 +37,8 @@ describe PassagesController, type: :routing do
       expect(:put => '/passages/1/commence').to route_to('passages#commence', :id => '1')
     end
 
-    it 'routes to #close' do
-      expect(:get => '/passages/1/close').to route_to('passages#close', :id => '1')
+    it 'routes to #conclude' do
+      expect(:get => '/passages/1/conclude').to route_to('passages#conclude', :id => '1')
     end
 
     it 'routes to #passasges/drafts' do

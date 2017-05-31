@@ -18,26 +18,26 @@ User.create(
 Passage.create(
     [
         {
-            title: 'Climate Change', text: 'climate change passage', start_time: Time.current, close_time: (Time.current+2.days.days), duration: '3600'
+            title: 'Climate Change', text: 'climate change passage', commence_time: Time.current, conclude_time: (Time.current+2.days.days), duration: '3600'
         },
 
         {
-            title: 'Person', text: 'person passage', start_time: Time.current, close_time: (Time.current+1.days), duration: '7200'
+            title: 'Person', text: 'person passage', commence_time: Time.current, conclude_time: (Time.current+1.days), duration: '7200'
         },
         {
-            title: 'Program', text: 'program passage', start_time: (Time.current-3.days), close_time: (Time.current+1.days), duration: '7200'
+            title: 'Program', text: 'program passage', commence_time: (Time.current-3.days), conclude_time: (Time.current+1.days), duration: '7200'
         },
         {
-            title: 'Computer', text: 'computer passage', start_time: (Time.current+3.days), close_time: (Time.current+7.days), duration: '7200'
+            title: 'Computer', text: 'computer passage', commence_time: (Time.current+3.days), conclude_time: (Time.current+7.days), duration: '7200'
         },
         {
-            title: 'Human', text: 'human passage', start_time: nil, close_time: nil, duration: '7200'
+            title: 'Human', text: 'human passage', commence_time: nil, conclude_time: nil, duration: '7200'
         }
     ]
 )
 
-Passage.new(title: 'News', text: 'news passage', start_time: (Time.current-2.days), close_time: (Time.current-1.days), duration: '7200').save(validate: false)
-Passage.new(title: 'Class', text: 'class passage', start_time: (Time.current-3.days), close_time: (Time.current-1.days), duration: '7200').save(validate: false)
+Passage.new(title: 'News', text: 'news passage', commence_time: (Time.current-2.days), conclude_time: (Time.current-1.days), duration: '7200').save(validate: false)
+Passage.new(title: 'Class', text: 'class passage', commence_time: (Time.current-3.days), conclude_time: (Time.current-1.days), duration: '7200').save(validate: false)
 
 
 # --------------- Response Seeds ---------------------

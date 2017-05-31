@@ -2,10 +2,10 @@
   <span>Duration: <%= duration_of_interval_in_words(passage.duration.seconds) %></span>
 </div>
 <div class="col-md-3">
-  <span>Commences on: <%= to_preferred_time_format(passage.start_time) %></span>
+  <span>Commences on: <%= to_preferred_time_format(passage.commence_time) %></span>
 </div>
 <div class="col-md-3">
-  <span>Concludes on: <%= to_preferred_time_format(passage.close_time) %></span>
+  <span>Concludes on: <%= to_preferred_time_format(passage.conclude_time) %></span>
 </div>
 <div class="col-md-3">
   <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#confirmation-dialog_<%= passage.id %>">Commence</button>
@@ -18,7 +18,7 @@
         </div>
         <%= bootstrap_form_for(passage, :url => commence_passage_path(passage.id), method: :put)  do |form| %>
             <div class="modal-body">
-              <%= form.datetime_field :close_time, :class => "col-10 form-control", :value => (Time.current+2.days).strftime("%Y-%m-%dT%H:%M") %>
+              <%= form.datetime_field :conclude_time, :class => "col-10 form-control", :value => (Time.current+2.days).strftime("%Y-%m-%dT%H:%M") %>
               <p>The passage will be open for candidates right now. Check the closing date and click on OK to
                 continue...</p>
             </div>

@@ -18,7 +18,7 @@ describe PassagesHelper, type: :helper do
     end
 
     it 'should return false when its not a drafts passage pertial' do
-      expect(helper.drafts_passage_partial?('closed_passages')).to eq(false)
+      expect(helper.drafts_passage_partial?('concluded_passages')).to eq(false)
     end
   end
 

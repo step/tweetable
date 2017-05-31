@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
     member do
       put 'commence', to: 'passages#commence'
-      get 'close', to: 'passages#close'
+      get 'conclude', to: 'passages#conclude'
     end
   end
   resources :taggings

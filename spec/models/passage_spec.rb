@@ -8,19 +8,19 @@ describe Passage, type: :model do
 
     it {should validate_numericality_of(:duration).is_greater_than(0)}
 
-    it 'raises an error if close time is lower than current time' do
+    it 'raises an error if conclude time is lower than current time' do
       current = Time.current
-      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400, start_time: current, close_time: current - 1.day)
-      expect(passage.errors.full_messages).to include('Close time must be a future time...')
+      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400, commence_time: current, conclude_time: current - 1.day)
+      expect(passage.errors.full_messages).to include('Conclude time must be a future time...')
     end
 
-    it 'raises an error if close time is lower than start time' do
+    it 'raises an error if conclude time is lower than commence time' do
       current_time = Time.current
-      start_time = current_time + 4.days
-      close_time = current_time + 2.days
-      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400, start_time: start_time, close_time: close_time)
+      commence_time = current_time + 4.days
+      conclude_time = current_time + 2.days
+      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400, commence_time: commence_time, conclude_time: conclude_time)
 
-      expect(passage.errors.full_messages).to include('Close time must be a future time...')
+      expect(passage.errors.full_messages).to include('Conclude time must be a future time...')
     end
 
   end
@@ -32,12 +32,12 @@ describe Passage, type: :model do
   end
 
   describe 'commence' do
-    it 'should set the close time as current time' do
+    it 'should set the conclude time as current time' do
       Time.zone = 'Astana'
       passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400)
       now = Time.now.in_time_zone(ActiveSupport::TimeZone.new('Chennai'))
       passage.commence(now.to_s)
-      expect(passage.close_time).to eq(Time.zone.parse now.to_s)
+      expect(passage.conclude_time).to eq(Time.zone.parse now.to_s)
     end
   end
 
@@ -46,7 +46,7 @@ describe Passage, type: :model do
       user = double('User', passages: [], id: 2)
       now = Time.current
       expect(Time).to receive(:current).and_return(now)
-      expect(Passage).to receive(:where).with(['start_time <= ? and close_time > ?', now, now]).and_return([])
+      expect(Passage).to receive(:where).with(['commence_time <= ? and conclude_time > ?', now, now]).and_return([])
       Passage.ongoing(user)
 
     end
@@ -57,18 +57,18 @@ describe Passage, type: :model do
       now = Time.current
       expect(Time).to receive(:current).and_return(now)
       passage_or = double('OR')
-      expect(Passage).to receive(:where).with(start_time: nil)
+      expect(Passage).to receive(:where).with(commence_time: nil)
       expect(passage_or).to receive(:or)
-      expect(Passage).to receive(:where).with(['start_time > ?', now]).and_return(passage_or)
+      expect(Passage).to receive(:where).with(['commence_time > ?', now]).and_return(passage_or)
       Passage.drafts
     end
   end
 
-  describe 'closed_passages' do
-    it 'should get all closed passages' do
+  describe '#concluded_passages' do
+    it 'should get all concluded passages' do
       now = Time.current
       expect(Time).to receive(:current).and_return(now)
-      expect(Passage).to receive(:where).with(['close_time < ?', now])
+      expect(Passage).to receive(:where).with(['conclude_time < ?', now])
       Passage.finished
     end
   end

@@ -8,8 +8,8 @@
       <%= form.text_field :title, :class => "col-10 form-control", :required => true %>
       <%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true %>
       <%= form.text_field :duration, :class => "form-control", :id => "duration", :value => value %>
-      <%= form.datetime_local_field :start_time, :class => "col-10 form-control" %>
-      <%= form.datetime_local_field :close_time, :class => "col-10 form-control" %>
+      <%= form.datetime_local_field :commence_time, :class => "col-10 form-control" %>
+      <%= form.datetime_local_field :conclude_time, :class => "col-10 form-control" %>
       <%= form.submit "Save", :class => "btn btn-success pull-right padding-bottom" %>
       <%= link_to "Cancel", passages_path, {:class=>"btn btn-danger pull-right cancel_edit"} %>
   <% end %>

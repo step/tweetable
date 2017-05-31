@@ -18,7 +18,7 @@ describe PassagesController do
   let(:passages) {
     [
         {
-            title: 'Climate Change', text: 'climate change passage', start_time: Time.current, close_time: (Time.current+2), duration: '1'
+            title: 'Climate Change', text: 'climate change passage', commence_time: Time.current, conclude_time: (Time.current+2), duration: '1'
         }
     ]
   }
@@ -188,7 +188,7 @@ describe PassagesController do
       end
     end
 
-    describe 'GET #closed' do
+    describe 'GET #concluded' do
 
       context 'Admin' do
         before(:each) do
@@ -196,7 +196,7 @@ describe PassagesController do
           stub_current_user(user)
         end
         context 'When the request is generated withing the tabs' do
-          it 'should give all the yet to closed passages' do
+          it 'should give all the yet to concluded passages' do
             get :finished, params: {from_tab: true}
 
             expect(flash[:danger]).to be_nil
@@ -220,7 +220,7 @@ describe PassagesController do
           user = double('User', admin: false)
           stub_current_user(user)
         end
-        it 'should not have access to closed passages' do
+        it 'should not have access to concluded passages' do
           get :finished
           expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
           should redirect_to(passages_path)
@@ -233,21 +233,21 @@ describe PassagesController do
         past_time = Time.current+2.days
         passage = double('Passage', commence: true)
         expect(Passage).to receive(:find).and_return(passage)
-        put :commence, params: {id: 12, passage: {close_time: past_time}}
+        put :commence, params: {id: 12, passage: {conclude_time: past_time}}
         expect(response).to redirect_to(passages_path)
       end
 
       it 'should not commence the passage' do
         past_time = Time.current - 1.days
-        errors = double('Errors', messages: [['close_time', 'must be a future time']])
+        errors = double('Errors', messages: [['conclude_time', 'must be a future time']])
         passage = double('Passage', errors: errors)
 
         expect(passage).to receive(:commence)
         expect(Passage).to receive(:find).and_return(passage)
 
-        put :commence, params: {id: 12, passage: {close_time: past_time}}
+        put :commence, params: {id: 12, passage: {conclude_time: past_time}}
 
-        expect(flash[:danger]).to eq('Close time must be a future time')
+        expect(flash[:danger]).to eq('Conclude time must be a future time')
         expect(response).to redirect_to(passages_path)
       end
     end
