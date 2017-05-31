@@ -5,6 +5,10 @@ var updateRemainingCharacters = function (event) {
     $('#totalChars').html(totalChars);
 };
 
+var disableSubmission = function () {
+    $(".response-submission").attr("disabled", "disabled");
+};
+
 var showRemainingTime = function () {
     var date = new Date();
     var remainingTimeElement = $("#remaining_time");
@@ -15,6 +19,9 @@ var showRemainingTime = function () {
             $(this).text(
                 event.strftime('%H:%M:%S')
             );
+            var remaining_time = remainingTimeElement.html();
+            if (remaining_time == "00:00:00")
+                disableSubmission();
         });
 };
 
@@ -26,4 +33,3 @@ document.addEventListener("turbolinks:load", function () {
     showRemainingCharacters();
     showRemainingTime();
 });
-
