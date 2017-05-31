@@ -1,4 +1,5 @@
 class Passage < ApplicationRecord
+  after_initialize :defaults, unless: :persisted?
 
   validates :title, presence: true
   validates :text, presence: true
@@ -7,6 +8,8 @@ class Passage < ApplicationRecord
 
   has_many :responses, dependent: :destroy
   has_many :responses_trackings, dependent: :destroy
+
+  DEFAULT_DURATION = 3600
 
   def commence(conclude_time)
     self.update_attributes(commence_time: Time.current,conclude_time: ( conclude_time))
@@ -80,6 +83,10 @@ class Passage < ApplicationRecord
 
   def invalid_commence_time?
     self.conclude_time <= self.commence_time
+  end
+
+  def defaults
+    self.duration ||= DEFAULT_DURATION
   end
 
 end
