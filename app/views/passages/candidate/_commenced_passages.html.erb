@@ -2,7 +2,7 @@
   <span>Duration: <%= duration_of_interval_in_words(passage.duration.seconds) %></span>
 </div>
 <div class="col-md-4">
-  <span>Completed by: <%= passage.responses.count %></span>
+  <span>Attempted by: <%= passage.responses.count %></span>
 </div>
 <div class="col-md-4">
   <%=   link_to(content_tag(:button, 'Attempt', class: 'btn btn-success pull-right'), new_passage_response_path(passage) ) %>
