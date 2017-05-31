@@ -29,7 +29,16 @@ var showRemainingCharacters = function () {
     $('#text').on('input', updateRemainingCharacters);
 };
 
+var remove_flash_messages = function () {
+    $(".alert").ready(function(){
+        setTimeout(function(){
+            $(".alert").alert('close')
+        },5000);
+    })
+};
+
 document.addEventListener("turbolinks:load", function () {
     showRemainingCharacters();
     showRemainingTime();
+    remove_flash_messages();
 });
