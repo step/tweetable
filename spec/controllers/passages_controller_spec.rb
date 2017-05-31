@@ -67,7 +67,7 @@ describe PassagesController do
         post :update, params: {id: 'id', passage: valid_attributes}
 
         expect(response).to redirect_to(passages_path)
-        expect(flash[:success]).to match('Passage was successfully updated...')
+        expect(flash[:success]).to match('Passage was successfully updated.')
       end
     end
 

@@ -44,11 +44,11 @@ class PassagesController < ApplicationController
 
     respond_to do |format|
       if passage.update_attributes(permit_params)
-        flash[:success] = 'Passage was successfully updated...'
-        format.html { redirect_to passages_path }
+        flash[:success] = 'Passage was successfully updated.'
+        format.html {redirect_to passages_path}
       else
         display_flash_error(passage)
-        format.html { redirect_to edit_passage_path }
+        format.html {redirect_to edit_passage_path}
       end
     end
   end
@@ -59,17 +59,20 @@ class PassagesController < ApplicationController
     respond_to do |format|
       if passage.save
         flash[:success] = 'Passage was successfully created.'
-        format.html { redirect_to passages_path }
+        format.html {redirect_to passages_path}
       else
         display_flash_error(passage)
-        format.html { redirect_to new_passage_path }
+        format.html {redirect_to new_passage_path}
       end
     end
   end
 
   def destroy
-    Passage.find(params[:id]).destroy
-    redirect_to :passages
+    respond_to do |format|
+      Passage.find(params[:id]).destroy
+      flash[:success] = 'Passage was successfully deleted.'
+      format.html {redirect_to passages_path}
+    end
   end
 
   def commence

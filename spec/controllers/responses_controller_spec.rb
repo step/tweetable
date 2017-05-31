@@ -46,7 +46,7 @@ describe ResponsesController, type: :controller do
 
             post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'Response to test passage'}
             expect(response).to redirect_to(passages_path)
-            expect(flash[:danger]).to match('Your response submission time is expired!')
+            expect(flash[:danger]).to match('Sorry, Your response submission time is expired!')
           end
         end
         context 'Response length is invalid' do
@@ -58,7 +58,7 @@ describe ResponsesController, type: :controller do
 
             post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'This is an invalid response because its contains more that 140 characters. This is an invalid response because its contains more that 140 chars.'}
             expect(response).to redirect_to(passages_path)
-            expect(flash[:danger]).to match('Your response submission time is expired!')
+            expect(flash[:danger]).to match('Sorry, Your response submission time is expired!')
           end
         end
       end
@@ -73,7 +73,7 @@ describe ResponsesController, type: :controller do
 
             post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'Response to test passage'}
             expect(response).to redirect_to(passages_path)
-            expect(flash[:success]).to match('Response was successfully created.')
+            expect(flash[:success]).to match('Your response was successfully recorded.')
           end
         end
         context 'Response length is invalid' do
@@ -85,7 +85,7 @@ describe ResponsesController, type: :controller do
 
             post :create, params: {passage_id: passage.id, user_id: intern.id, text: 'This is an invalid response because its contains more that 140 characters. This is an invalid response because its contains more that 140 chars.'}
             expect(response).to redirect_to(new_passage_response_path(passage))
-            expect(flash[:danger]).to match('Response was invalid!')
+            expect(flash[:danger]).to match('Sorry, Your response was invalid!')
           end
         end
       end

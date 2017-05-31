@@ -28,14 +28,14 @@ class ResponsesController < ApplicationController
     respond_to do |format|
 
       if remaining_time<=0
-        flash[:danger] = 'Your response submission time is expired!'
+        flash[:danger] = 'Sorry, Your response submission time is expired!'
         format.html {redirect_to passages_path}
       elsif @response.save
         ResponsesTracking.update_end_time(params[:passage_id],current_user.id)
-        flash[:success] = 'Response was successfully created.'
+        flash[:success] = 'Your response was successfully recorded.'
         format.html {redirect_to passages_path}
       else
-        flash[:danger] = 'Response was invalid!'
+        flash[:danger] = 'Sorry, Your response was invalid!'
         format.html {redirect_to new_passage_response_path(Passage.find(params[:passage_id]))}
       end
     end
