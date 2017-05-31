@@ -21,10 +21,9 @@ class Passage < ApplicationRecord
     Passage.where(['commence_time > ?', Time.current]).or(Passage.where(commence_time: nil))
   end
 
-  def self.ongoing(user)
+  def self.ongoing
     now = Time.current
-    opened_passages = Passage.where(['commence_time <= ? and conclude_time > ?', now, now])
-    opened_passages - get_timed_out_passages(opened_passages,user.id)
+    Passage.where(['commence_time <= ? and conclude_time > ?', now, now])
   end
 
   def self.finished
@@ -32,14 +31,13 @@ class Passage < ApplicationRecord
   end
 
   def self.commence_for_candidate(user)
-    self.ongoing(user) - user.passages
+    ongoing_passages = self.ongoing
+    (ongoing_passages - user.passages) - get_timed_out_passages(ongoing_passages, user.id)
   end
 
   def self.missed_by_candidate(user)
     finished = self.finished - user.passages
-    now = Time.current
-    opened_passages = Passage.where(['commence_time <= ? and conclude_time > ?', now, now])
-    finished + self.get_timed_out_passages(opened_passages,user.id)
+    finished + self.get_timed_out_passages(self.ongoing,user.id)
   end
 
   def self.attempted_by_candidate(user)

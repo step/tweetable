@@ -43,11 +43,10 @@ describe Passage, type: :model do
 
   describe 'open_passages' do
     it 'should get all open passages' do
-      user = double('User', passages: [], id: 2)
       now = Time.current
       expect(Time).to receive(:current).and_return(now)
       expect(Passage).to receive(:where).with(['commence_time <= ? and conclude_time > ?', now, now]).and_return([])
-      Passage.ongoing(user)
+      Passage.ongoing
 
     end
   end
@@ -73,7 +72,7 @@ describe Passage, type: :model do
     end
   end
 
-  describe 'open_for_candidate_passages' do
+  describe 'commence_for_candidate_passages' do
     it 'should get all open passages for the candidate which are not attempted by user count to be one' do
       passage1 = double('Passage 1', id: 11)
       passage2 = double('Passage 2', id: 12)

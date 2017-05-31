@@ -95,7 +95,7 @@ class PassagesController < ApplicationController
   end
 
   def ongoing
-    filtered_passages = Passage.ongoing(current_user)
+    filtered_passages = Passage.ongoing
     render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "ongoing_passages"}
   end
 
