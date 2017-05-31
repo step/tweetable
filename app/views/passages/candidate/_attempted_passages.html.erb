@@ -2,7 +2,7 @@
   <% if passage_with_response[:response].tags.empty? %>
       <%= render :partial => "passages/candidate/response_status" %>
   <% else %>
-      <%= render :partial => "passages/candidate/tagging_status" , locals: {tags: passage_with_response[:response].tags} %>
+        <%= render :partial => "passages/candidate/tagging_status" , locals: {tags: passage_with_response[:response].tags} %>
   <% end %>
 </div>
 <div class="col-md-4">

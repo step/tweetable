@@ -1,1 +1,1 @@
-<span>Tags: <%= tags.map {|tag| tag.name}.join(', ')%></span>
+<span class="tag-label">Tags: </span><span class="show-tags"><%= tags.map {|tag| '#'+tag.name}.join(', ')%></span>

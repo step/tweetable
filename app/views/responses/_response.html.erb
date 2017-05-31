@@ -8,5 +8,9 @@
   <div class="media-body">
     <h4 class="media-heading user_name"><%= response.user.name %></h4>
     <%= response.text %>
+    <br>
+    <% unless response.tags.empty? %>
+          <%= render :partial => 'passages/candidate/tagging_status', locals: {tags: response.tags} %>
+    <% end %>
   </div>
 </div>
