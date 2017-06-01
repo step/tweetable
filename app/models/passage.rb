@@ -38,7 +38,7 @@ class Passage < ApplicationRecord
   end
 
   def self.missed_by_candidate(user)
-    timed_out_passages = self.get_timed_out_passages(self.ongoing,user.id)
+    timed_out_passages = self.get_timed_out_passages(self.ongoing, user.id)
     (self.finished + timed_out_passages) - user.passages
   end
 
@@ -66,17 +66,18 @@ class Passage < ApplicationRecord
   end
 
   def date_validations
-    unless is_valid_conclude_time? and is_valid_commence_time?
+    unless is_valid_commence_time?
       errors.add(:conclude_time, 'must be a future time...')
     end
   end
 
   def is_valid_conclude_time?
-    (conclude_time.present? and (conclude_time.to_i >= Time.current.to_i))
+    conclude_time.present? and conclude_time > commence_time
   end
 
   def is_valid_commence_time?
-    (commence_time.present? and self.conclude_time > self.commence_time)
+    return true unless commence_time.present?
+    is_valid_conclude_time?
   end
 
   def defaults

@@ -8,19 +8,29 @@ describe Passage, type: :model do
 
     it {should validate_numericality_of(:duration).is_greater_than(0)}
 
-    it 'raises an error if conclude time is lower than current time' do
-      current = Time.current
-      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400, commence_time: current, conclude_time: current - 1.day)
+    it 'validate if commence time and conclude time is nil' do
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400)
+      expect(passage.save).to be true
+    end
+
+    it 'validate if commence time is nil and conclude time is given' do
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400,  conclude_time: Time.current)
+      expect(passage.save).to be true
+    end
+
+    it 'validate if commence time present and conclude time past time with commence time' do
+      current_time = Time.current
+      past_time = current_time - 4.days
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400, commence_time: current_time, conclude_time: past_time)
+      expect(passage.save).to be false
       expect(passage.errors.full_messages).to include('Conclude time must be a future time...')
     end
 
-    it 'raises an error if conclude time is lower than commence time' do
+    it 'validate for conclude time present time' do
       current_time = Time.current
-      commence_time = current_time + 4.days
-      conclude_time = current_time + 2.days
-      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400, commence_time: commence_time, conclude_time: conclude_time)
-
-      expect(passage.errors.full_messages).to include('Conclude time must be a future time...')
+      past_time = current_time - 4.days
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400, commence_time: past_time, conclude_time: current_time)
+      expect(passage.save).to be true
     end
 
   end
@@ -92,8 +102,8 @@ describe Passage, type: :model do
 
       expect(Passage).to receive(:ongoing).and_return([passage1, passage2])
       expect(user).to receive(:passages).and_return([])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:passage1.id,user_id:user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:passage2.id,user_id:user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: passage1.id, user_id: user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: passage2.id, user_id: user.id}).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).and_return(0)
 
       passage_open_for_candidate = Passage.commence_for_candidate(user)
@@ -125,17 +135,17 @@ describe Passage, type: :model do
 
       user = double('User', id: 1)
 
-      expect(Passage).to receive(:finished).and_return([finished_psg1,finished_psg2])
+      expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2])
-      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1,ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg1.id,user_id:user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg2.id,user_id:user.id}).and_return(tracking_details2)
-      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id,user.id).and_return(0)
+      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg1.id, user_id: user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg2.id, user_id: user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(0)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 
       expect(passage_missed_for_candidate.count).to be(2)
-      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1,ongoing_psg2)
+      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1, ongoing_psg2)
     end
     it 'should not get the passage whose remaining time is not less than or equal to zero' do
       finished_psg1 = double('Passage 1', id: 11, duration: 4600)
@@ -146,12 +156,12 @@ describe Passage, type: :model do
 
       user = double('User', id: 1)
 
-      expect(Passage).to receive(:finished).and_return([finished_psg1,finished_psg2])
+      expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2])
-      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1,ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg1.id,user_id:user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg2.id,user_id:user.id}).and_return(tracking_details2)
-      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id,user.id).and_return(10)
+      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg1.id, user_id: user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg2.id, user_id: user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(10)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 
@@ -167,12 +177,12 @@ describe Passage, type: :model do
 
       user = double('User', id: 1)
 
-      expect(Passage).to receive(:finished).and_return([finished_psg1,finished_psg2])
-      expect(user).to receive(:passages).and_return([finished_psg2,ongoing_psg2])
-      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1,ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg1.id,user_id:user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg2.id,user_id:user.id}).and_return(tracking_details2)
-      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id,user.id).and_return(0)
+      expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
+      expect(user).to receive(:passages).and_return([finished_psg2, ongoing_psg2])
+      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg1.id, user_id: user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg2.id, user_id: user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(0)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 
@@ -208,54 +218,54 @@ describe Passage, type: :model do
     end
   end
 
-  describe 'private methods' do
-    describe '#valid_conclude_time?' do
-      it 'should return false if conclude time is not provided' do
-        passage = Passage.new(text: 'text', title: 'title')
-        expect(passage.send(:is_valid_conclude_time?)).to eq false
-      end
-
-      it 'should return false if conclude time is a past time' do
-        passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current - 2.days)
-        expect(passage.send(:is_valid_conclude_time?)).to eq false
-      end
-
-      it 'should return true if conclude time is present and is a future time' do
-        passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current + 2.days)
-        expect(passage.send(:is_valid_conclude_time?)).to eq true
-      end
-
-      it 'should return true if conclude time is present and is current time' do
-        passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current)
-        expect(passage.send(:is_valid_conclude_time?)).to eq true
-      end
-    end
-
-    describe '#valid_commence_time?' do
-      it 'should return false if commence time is not provided' do
-        passage = Passage.new(text: 'text', title: 'title')
-        expect(passage.send(:is_valid_commence_time?)).to eq false
-      end
-
-      it 'should return false if commence time is future than conclude_time' do
-        now = Time.current
-        future_time = now + 2.days
-        passage = Passage.new(text: 'text', title: 'title', commence_time: future_time, conclude_time: now)
-        expect(passage.send(:is_valid_commence_time?)).to eq false
-      end
-
-      it 'should return false if commence time and conclude_time is same' do
-        now = Time.current
-        passage = Passage.new(text: 'text', title: 'title', commence_time: now, conclude_time: now)
-        expect(passage.send(:is_valid_commence_time?)).to eq false
-      end
-
-      it 'should return true if commence time past with conculde time' do
-        now = Time.current
-        future_time = now + 2.days
-        passage = Passage.new(text: 'text', title: 'title', commence_time: now, conclude_time: future_time)
-        expect(passage.send(:is_valid_commence_time?)).to eq true
-      end
-    end
-  end
+  # describe 'private methods' do
+  #   describe '#valid_conclude_time?' do
+  #     it 'should return false if conclude time is not provided' do
+  #       passage = Passage.new(text: 'text', title: 'title')
+  #       expect(passage.send(:is_valid_conclude_time?)).to eq false
+  #     end
+  #
+  #     it 'should return false if conclude time is a past time' do
+  #       passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current - 2.days)
+  #       expect(passage.send(:is_valid_conclude_time?)).to eq false
+  #     end
+  #
+  #     it 'should return true if conclude time is present and is a future time' do
+  #       passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current + 2.days)
+  #       expect(passage.send(:is_valid_conclude_time?)).to eq true
+  #     end
+  #
+  #     it 'should return true if conclude time is present and is current time' do
+  #       passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current)
+  #       expect(passage.send(:is_valid_conclude_time?)).to eq true
+  #     end
+  #   end
+  #
+  #   describe '#valid_commence_time?' do
+  #     it 'should return false if commence time is not provided' do
+  #       passage = Passage.new(text: 'text', title: 'title')
+  #       expect(passage.send(:is_valid_commence_time?)).to eq false
+  #     end
+  #
+  #     it 'should return false if commence time is future than conclude_time' do
+  #       now = Time.current
+  #       future_time = now + 2.days
+  #       passage = Passage.new(text: 'text', title: 'title', commence_time: future_time, conclude_time: now)
+  #       expect(passage.send(:is_valid_commence_time?)).to eq false
+  #     end
+  #
+  #     it 'should return false if commence time and conclude_time is same' do
+  #       now = Time.current
+  #       passage = Passage.new(text: 'text', title: 'title', commence_time: now, conclude_time: now)
+  #       expect(passage.send(:is_valid_commence_time?)).to eq false
+  #     end
+  #
+  #     it 'should return true if commence time past with conculde time' do
+  #       now = Time.current
+  #       future_time = now + 2.days
+  #       passage = Passage.new(text: 'text', title: 'title', commence_time: now, conclude_time: future_time)
+  #       expect(passage.send(:is_valid_commence_time?)).to eq true
+  #     end
+  #   end
+  # end
 end
