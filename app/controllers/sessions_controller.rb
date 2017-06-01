@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_or_create_by(auth_id: user_params[:auth_id])
+    user = User.find_or_create_by(user_params)
     session[:auth_id]=user.auth_id
     session[:user_name]=user.name
     session[:image_url]=user.image_url
