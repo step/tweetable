@@ -3,7 +3,7 @@
     <small><%= time_ago_in_words(response.created_at) %> ago</small>
   </p>
   <a class="media-left" href="#">
-    <img class="user-image" style="font-size: 35px" src=<%= response.user.image_url %>>
+    <img class="user-image" src=<%= response.user.image_url %>>
   </a>
   <div class="media-body">
     <h4 class="media-heading user_name"><%= response.user.name %></h4>
