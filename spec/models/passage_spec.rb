@@ -207,4 +207,55 @@ describe Passage, type: :model do
       end
     end
   end
+
+  describe 'private methods' do
+    describe '#valid_conclude_time?' do
+      it 'should return false if conclude time is not provided' do
+        passage = Passage.new(text: 'text', title: 'title')
+        expect(passage.send(:is_valid_conclude_time?)).to eq false
+      end
+
+      it 'should return false if conclude time is a past time' do
+        passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current - 2.days)
+        expect(passage.send(:is_valid_conclude_time?)).to eq false
+      end
+
+      it 'should return true if conclude time is present and is a future time' do
+        passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current + 2.days)
+        expect(passage.send(:is_valid_conclude_time?)).to eq true
+      end
+
+      it 'should return true if conclude time is present and is current time' do
+        passage = Passage.new(text: 'text', title: 'title', conclude_time: Time.current)
+        expect(passage.send(:is_valid_conclude_time?)).to eq true
+      end
+    end
+
+    describe '#valid_commence_time?' do
+      it 'should return false if commence time is not provided' do
+        passage = Passage.new(text: 'text', title: 'title')
+        expect(passage.send(:is_valid_commence_time?)).to eq false
+      end
+
+      it 'should return false if commence time is future than conclude_time' do
+        now = Time.current
+        future_time = now + 2.days
+        passage = Passage.new(text: 'text', title: 'title', commence_time: future_time, conclude_time: now)
+        expect(passage.send(:is_valid_commence_time?)).to eq false
+      end
+
+      it 'should return false if commence time and conclude_time is same' do
+        now = Time.current
+        passage = Passage.new(text: 'text', title: 'title', commence_time: now, conclude_time: now)
+        expect(passage.send(:is_valid_commence_time?)).to eq false
+      end
+
+      it 'should return true if commence time past with conculde time' do
+        now = Time.current
+        future_time = now + 2.days
+        passage = Passage.new(text: 'text', title: 'title', commence_time: now, conclude_time: future_time)
+        expect(passage.send(:is_valid_commence_time?)).to eq true
+      end
+    end
+  end
 end

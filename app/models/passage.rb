@@ -4,7 +4,7 @@ class Passage < ApplicationRecord
   validates :title, presence: true
   validates :text, presence: true
   validates_numericality_of :duration, greater_than: 0
-  validate :is_valid_conclude_time?
+  validate :date_validations
 
   has_many :responses, dependent: :destroy
   has_many :responses_trackings, dependent: :destroy
@@ -16,7 +16,7 @@ class Passage < ApplicationRecord
   end
 
   def conclude
-    update_attributes(conclude_time:Time.current)
+    update_attributes(conclude_time: Time.current)
   end
 
   def self.drafts
@@ -65,22 +65,18 @@ class Passage < ApplicationRecord
     ongoing_passages.select {|passage| is_passage_missed(passage, user_id)}
   end
 
-  def is_valid_conclude_time?
-    unless (self.conclude_time.present? and valid_conclude_time?) and is_valid_commence_time?
+  def date_validations
+    unless is_valid_conclude_time? and is_valid_commence_time?
       errors.add(:conclude_time, 'must be a future time...')
     end
   end
 
+  def is_valid_conclude_time?
+    (conclude_time.present? and (conclude_time.to_i >= Time.current.to_i))
+  end
+
   def is_valid_commence_time?
-    self.commence_time.present? and valid_commence_time?
-  end
-
-  def valid_conclude_time?
-    self.conclude_time >= Time.current
-  end
-
-  def valid_commence_time?
-    self.conclude_time > self.commence_time
+    (commence_time.present? and self.conclude_time > self.commence_time)
   end
 
   def defaults
