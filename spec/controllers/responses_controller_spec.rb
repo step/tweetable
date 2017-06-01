@@ -91,4 +91,47 @@ describe ResponsesController, type: :controller do
       end
     end
   end
+
+  describe 'GET #index' do
+
+    context 'When user is Admin' do
+
+      it 'renders the index page with response_evaluation' do
+        stub_logged_in(true)
+        user = double('User', admin: true, id: 1)
+        stub_current_user(user)
+
+        passage_id = 'passage_id'
+        passage = double('passage')
+        responses = double('responses')
+
+        expect(Passage).to receive(:find).with(passage_id).and_return(passage)
+        expect(passage).to receive(:responses).and_return(responses)
+
+        get :index, params: {passage_id: passage_id}
+        should render_template("index")
+
+      end
+    end
+
+    context 'When user is Candidate' do
+
+      it 'renders the new template' do
+        stub_logged_in(true)
+        user = double('User', admin: false, id: 1)
+        stub_current_user(user)
+
+        passage_id = 'passage_id'
+        passage = double('passage')
+        responses = double('responses')
+        partial = 'response'
+
+        expect(Passage).to receive(:find).with(passage_id).and_return(passage)
+        expect(passage).to receive(:responses).and_return(responses)
+
+        get :index ,params:{passage_id:passage_id}
+        should render_template("index")
+      end
+    end
+  end
 end
