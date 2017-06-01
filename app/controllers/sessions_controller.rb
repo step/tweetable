@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_or_create_by(user_params)
+    user = User.find_or_create_by(user_params[:auth_id])
     session[:auth_id]=user.auth_id
     session[:user_name]=user.name
     session[:image_url]=user.image_url
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
     {
         auth_id: omniauth['uid'],
         name: omniauth['info']['name'],
-        image_url: omniauth['info']['image'].gsub(/http/,'https')
+        image_url: omniauth['info']['image'].gsub(/http:/,'https:')
     }
   end
 end
