@@ -1,4 +1,4 @@
-<div class="response-holder col-lg-12 col-md-12">
+<li class="response-holder col-lg-12 col-md-12">
 
   <div class="media col-lg-8 col-md-10">
     <i class="media-left" href="#">
@@ -15,4 +15,4 @@
   <div class="tags-holder col-lg-12 col-md-12">
     <input  id="response-<%= response.id %>" data-response-id="<%=response.id%>" class="form-control tags autocomplete" type="text" value="<%= response.tags.map{|tag| tag.name}.join(',') %>" />
   </div>
-</div>
+</li>

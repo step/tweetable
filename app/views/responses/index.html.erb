@@ -16,12 +16,12 @@
         <h3><%= content_tag('small', responses.count.to_s + ' tweets', class: 'pull-right') %> Tweets </h3>
       </div>
 
-      <div class="comments-list">
+      <ul class="comments-list">
         <% responses.each do |response| %>
         <%= render partial, response: response %>
         <% end %>
 
-      </div>
+      </ul>
     </div>
   </div>
 
