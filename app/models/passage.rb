@@ -39,8 +39,8 @@ class Passage < ApplicationRecord
   end
 
   def self.missed_by_candidate(user)
-    finished = self.finished - user.passages
-    finished + self.get_timed_out_passages(self.ongoing,user.id)
+    missed = self.get_timed_out_passages(self.ongoing,user.id)
+    (self.finished + missed) - user.passages
   end
 
   def self.attempted_by_candidate(user)

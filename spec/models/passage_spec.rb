@@ -47,7 +47,6 @@ describe Passage, type: :model do
       expect(Time).to receive(:current).and_return(now)
       expect(Passage).to receive(:where).with(['commence_time <= ? and conclude_time > ?', now, now]).and_return([])
       Passage.ongoing
-
     end
   end
 
@@ -73,7 +72,7 @@ describe Passage, type: :model do
   end
 
   describe 'commence_for_candidate_passages' do
-    it 'should get all open passages for the candidate which are not attempted by user count to be one' do
+    it 'should get all open passages for the candidate which are not attempted by user' do
       passage1 = double('Passage 1', id: 11)
       passage2 = double('Passage 2', id: 12)
       user = double('User', id: 1)
@@ -85,14 +84,30 @@ describe Passage, type: :model do
       expect(passage_open_for_candidate.count).to be(1)
       expect(passage_open_for_candidate).to contain_exactly(passage2)
     end
+    it 'should not get passages that are open but remaining time is expired' do
+      passage1 = double('Passage 1', id: 11)
+      passage2 = double('Passage 2', id: 12)
+      user = double('User', id: 1)
+      tracking_details2 = double('Responses Tracking')
+
+      expect(Passage).to receive(:ongoing).and_return([passage1, passage2])
+      expect(user).to receive(:passages).and_return([])
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:passage1.id,user_id:user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:passage2.id,user_id:user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:remaining_time).and_return(0)
+
+      passage_open_for_candidate = Passage.commence_for_candidate(user)
+
+      expect(passage_open_for_candidate.count).to be(1)
+      expect(passage_open_for_candidate).to contain_exactly(passage1)
+    end
   end
 
   describe '#missed_by_candidate_passages' do
-    it 'should get all missed passages for the candidate which are not attempted by user count to be one' do
+    it 'should get all missed passages for the candidate which are not attempted by user' do
       passage1 = double('Passage 1', id: 11, duration: 4600)
       passage2 = double('Passage 2', id: 12)
       user = double('User', id: 1)
-
 
       expect(Passage).to receive(:finished).and_return([passage1, passage2])
       expect(user).to receive(:passages).and_return([passage1])
@@ -100,6 +115,69 @@ describe Passage, type: :model do
 
       expect(passage_missed_for_candidate.count).to be(1)
       expect(passage_missed_for_candidate).to contain_exactly(passage2)
+    end
+    it 'should get all missed passages for the candidate which are not attempted by user in the remaining time' do
+      finished_psg1 = double('Passage 1', id: 11, duration: 4600)
+      finished_psg2 = double('Passage 2', id: 12)
+      ongoing_psg1 = double('Passage 3', id: 13)
+      ongoing_psg2 = double('Passage 4', id: 14)
+      tracking_details2 = double('Responses Tracking')
+
+      user = double('User', id: 1)
+
+      expect(Passage).to receive(:finished).and_return([finished_psg1,finished_psg2])
+      expect(user).to receive(:passages).and_return([finished_psg2])
+      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1,ongoing_psg2])
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg1.id,user_id:user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg2.id,user_id:user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id,user.id).and_return(0)
+
+      passage_missed_for_candidate = Passage.missed_by_candidate(user)
+
+      expect(passage_missed_for_candidate.count).to be(2)
+      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1,ongoing_psg2)
+    end
+    it 'should not get the passage whose remaining time is not less than or equal to zero' do
+      finished_psg1 = double('Passage 1', id: 11, duration: 4600)
+      finished_psg2 = double('Passage 2', id: 12)
+      ongoing_psg1 = double('Passage 3', id: 13)
+      ongoing_psg2 = double('Passage 4', id: 14)
+      tracking_details2 = double('Responses Tracking')
+
+      user = double('User', id: 1)
+
+      expect(Passage).to receive(:finished).and_return([finished_psg1,finished_psg2])
+      expect(user).to receive(:passages).and_return([finished_psg2])
+      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1,ongoing_psg2])
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg1.id,user_id:user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg2.id,user_id:user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id,user.id).and_return(10)
+
+      passage_missed_for_candidate = Passage.missed_by_candidate(user)
+
+      expect(passage_missed_for_candidate.count).to be(1)
+      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1)
+    end
+    it 'should not get the passage whose response is already submitted' do
+      finished_psg1 = double('Passage 1', id: 11, duration: 4600)
+      finished_psg2 = double('Passage 2', id: 12)
+      ongoing_psg1 = double('Passage 3', id: 13)
+      ongoing_psg2 = double('Passage 4', id: 14)
+      tracking_details2 = double('Responses Tracking')
+
+      user = double('User', id: 1)
+
+      expect(Passage).to receive(:finished).and_return([finished_psg1,finished_psg2])
+      expect(user).to receive(:passages).and_return([finished_psg2,ongoing_psg2])
+      expect(Passage).to receive(:ongoing).and_return([ongoing_psg1,ongoing_psg2])
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg1.id,user_id:user.id}).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({passage_id:ongoing_psg2.id,user_id:user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id,user.id).and_return(0)
+
+      passage_missed_for_candidate = Passage.missed_by_candidate(user)
+
+      expect(passage_missed_for_candidate.count).to be(1)
+      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1)
     end
   end
 
