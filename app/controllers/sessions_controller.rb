@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
     {
         auth_id: omniauth['uid'],
         name: omniauth['info']['name'],
-        image_url: omniauth['info']['image']
+        image_url: omniauth['info']['image'].gsub(/http/,'https')
     }
   end
 end
