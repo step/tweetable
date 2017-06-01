@@ -2,8 +2,7 @@
   <span>Attempted by: <%= passage.responses.count %> candidates</span>
 </div>
 <div class="col-md-3">
-  <span>Evaluated: 0</span>
-  <!--#TODO Show the Evaluated Responses Count-->
+  <span>Evaluated: <%= evaluation_count(passage.responses) %> responses</span>
 </div>
 <div class="col-md-3">
   <span>Concluded at: <%= to_preferred_time_format(passage.conclude_time) %></span>

@@ -32,5 +32,12 @@ module PassagesHelper
     end.join(', ')
   end
 
+  def evaluation_count(passage_responses)
+    passage_responses.map { |response|
+      tags = response.tags
+      !(tags.nil? || tags.empty?)
+    }.count(true)
+  end
+
 end
 
