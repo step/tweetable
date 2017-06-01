@@ -32,3 +32,16 @@
 #passage_text{
   height: 150px;
 }
+.passage-holder {
+  border-top: 1px solid #bbbbbb;
+  border-bottom: 1px solid #bbbbbb;
+  letter-spacing: 0.02em;
+  line-height: 1.9em;
+  padding: 5px;
+  font-size: 15px;
+  color: black;
+}
+
+.passage-heading {
+  text-align: left;
+}

@@ -27,6 +27,7 @@
   border-radius: 33px;
   border: 1px solid grey;
   margin: 5px 4px 6px 0;
+  font-size: 35px;
 }
 div.tagsinput {
   border-radius: 5px;
@@ -46,11 +47,33 @@ div.tagsinput {
 .tag-label{
   font-weight: bold;
 }
-
-.show-tags{
-  color: #0086b3;
+.media-heading.user_name{
+  margin-bottom: 6px;
+  margin-top: 5px;
+}
+.tags-holder {
+  margin-top: 6px;
+  padding-bottom: 6px;
 }
 
-.user-image{
-  font-size: 35px;
+.media {
+  margin-bottom: 6px;
+}
+
+
+.comments-list {
+  margin-bottom: 15px;
+}
+.tag {
+  border-radius: 5px;
+  padding: 2px 10px 2px 10px;
+  text-decoration: none;
+  background: #cde69c;
+  color: #638421;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.media-body.passage {
+  margin-bottom: 15px;
 }
