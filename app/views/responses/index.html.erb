@@ -4,9 +4,9 @@
       <h3 class="passage-heading">
         <%= passage.title %>
       </h3>
-      <p  class="passage-holder">
-        <%= passage.text %>
-      </p>
+      <div  class="passage-holder">
+        <%= simple_format(passage.text) %>
+      </div>
     </div>
 
   </div>

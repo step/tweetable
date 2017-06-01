@@ -36,9 +36,8 @@ ActiveRecord::Schema.define(version: 20170601044417) do
   create_table "responses_trackings", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "passage_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["passage_id"], name: "index_responses_trackings_on_passage_id"
     t.index ["user_id"], name: "index_responses_trackings_on_user_id"
   end

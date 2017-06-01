@@ -7,10 +7,9 @@
               <h4 class="pull-right remaining_time" >Remaining Time: <span class="count" id="remaining_time"><%= remaining_time %></span></h4>
           <% end %>
       <% end %>
-
-      <p class='passage-content' style="border-style: ridge; border-radius: 10px; padding: 10px;">
-        <%= passage.text %>
-      </p>
+      <div class="passage-holder">
+        <%= simple_format(passage.text) %>
+      </div>
     </div>
     <%= render 'form', response: response, passage: passage, user: user %>
   </div>
