@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
   def new
-    redirect_to passages_path and return if logged_in?
+    redirect_to passages_path if logged_in?
   end
 
   def create
@@ -22,10 +22,12 @@ class SessionsController < ApplicationController
 
   def user_params
     omniauth=request.env["omniauth.auth"]
+    binding.pry
     {
         auth_id: omniauth['uid'],
         name: omniauth['info']['name'],
-        image_url: omniauth['info']['image'].gsub(/http:/,'https:')
+        email: omniauth['info']['email'],
+        image_url: omniauth['info']['image']
     }
   end
 end

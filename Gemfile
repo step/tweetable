@@ -8,23 +8,27 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
-gem 'omniauth-facebook'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
-
+# Views using bootstrap
 gem 'bootstrap_form'
+
+# jquery for front-end logics
 gem 'jquery-rails'
+
+# handling validity of sessions in back-end
 gem 'activerecord-session_store' , '~> 1.1.0'
+
+# gmail authentication using omniauth
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

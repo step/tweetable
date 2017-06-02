@@ -1,6 +1,6 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, ENV['APP_ID'], ENV['APP_SECRET'],
-           {
-               authorize_params: {force_login: true}
-           }
+  provider :google_oauth2, ENV['APP_ID'], ENV['APP_SECRET'], {
+      authorize_params: {force_login: true},
+      hd: 'thoughtworks.com'
+  }
 end
