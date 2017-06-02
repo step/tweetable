@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  validates :auth_id, presence: true
+  validates_uniqueness_of :auth_id
+  validates :email, uniqueness: true, presence: true
+
   has_many :responses
   has_many :passages, through: :responses
   has_many :tag, through: :responses
