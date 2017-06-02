@@ -7,4 +7,9 @@ class User < ApplicationRecord
   def self.is_admin?(id)
     User.find_by(auth_id: id).admin
   end
+
+  def update_if_changed(user_params)
+    self.update_attributes(user_params)
+    self
+  end
 end

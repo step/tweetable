@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_or_create_by(user_params)
-    session[:auth_id]=user.auth_id
-    session[:user_name]=user.name
-    session[:image_url]=user.image_url
+    email = user_params[:email]
+    user = User.find_by(email: email) || User.create(user_params)
+    user = user.update_if_changed(user_params)
+    assign_session_details(user)
     redirect_to passages_path
   end
 
@@ -20,9 +20,14 @@ class SessionsController < ApplicationController
 
   private
 
+  def assign_session_details(user)
+    session[:auth_id]=user.auth_id
+    session[:user_name]=user.name
+    session[:image_url]=user.image_url
+  end
+
   def user_params
     omniauth=request.env["omniauth.auth"]
-    binding.pry
     {
         auth_id: omniauth['uid'],
         name: omniauth['info']['name'],
