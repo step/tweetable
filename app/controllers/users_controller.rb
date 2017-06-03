@@ -1,17 +1,18 @@
 class UsersController < ApplicationController
 
   def index
+    @users = User.where.not(id: current_user.id).order('name ASC')
+  end
+
+  def conformation
     is_active_user = current_user.active
     if is_active_user
       redirect_to passages_path
     else
-      render :index
+      render :conformation
     end
   end
 
-  def record
-    @users = User.where.not(id: current_user.id).order('name ASC')
-  end
 
   def update
     user = User.find(params[:id])

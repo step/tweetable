@@ -1,3 +1,6 @@
+<!--TODO check why current_user not available here -->
+<% current_user = User.find_by(auth_id: session[:auth_id]) %>
+
 <nav class="navbar navbar-default row">
     <div class="navbar-header col-xs-10 col-sm-10 col-md-10 col-lg-10">
       <%= link_to content_tag(:h3, "Tweetable", class: "navbar-brand"), passages_path %>
@@ -9,10 +12,8 @@
       <ul class="dropdown-menu dropdown-menu-right pull-right" dropdown-toggle="focus">
         <%= content_tag(:li, link_to(session[:user_name], "#")) %>
 
-        <!--TODO check why current_user not available here -->
-
-        <% if User.find_by(auth_id: session[:auth_id]).admin %>
-            <%= content_tag(:li, link_to('Users', record_users_path)) %>
+        <% if current_user.admin && current_user.active %>
+            <%= content_tag(:li, link_to('Users', users_path)) %>
         <% end %>
 
         <%= content_tag(:li, "", class: "divider") %>

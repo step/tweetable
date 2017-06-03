@@ -1,8 +1,8 @@
 describe UsersController, type: :routing do
   describe 'users routing' do
 
-    it 'routes to #index' do
-      expect(:get => '/users').to route_to('users#index')
+    it 'routes to #conformation' do
+      expect(:get => '/users/conformation').to route_to('users#conformation')
     end
 
     it 'routes to #update via PUT' do
@@ -13,8 +13,8 @@ describe UsersController, type: :routing do
       expect(:patch => '/users/1').to route_to('users#update', :id => '1')
     end
 
-    it 'routes to #record' do
-      expect(:get => '/users/record').to route_to('users#record')
+    it 'routes to #index' do
+      expect(:get => '/users').to route_to('users#index')
     end
   end
 end

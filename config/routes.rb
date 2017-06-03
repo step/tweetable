@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index,:update] do
     collection do
-      get 'record', to: 'users#record'
+      get 'conformation', to: 'users#conformation'
     end
 
   end

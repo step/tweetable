@@ -8,7 +8,7 @@ describe SessionsController, type: :controller do
       it 'redirects to passages path' do
         stub_logged_in(true)
         get :new
-        expect(response).to redirect_to(passages_path)
+        expect(response).to redirect_to(conformation_users_path)
       end
     end
 
@@ -39,7 +39,7 @@ describe SessionsController, type: :controller do
 
           post :create, params: {provider: 'provider'}
 
-          expect(response).to redirect_to(passages_path)
+          expect(response).to redirect_to(conformation_users_path)
         end
 
     end
@@ -55,7 +55,7 @@ describe SessionsController, type: :controller do
 
         post :create, params: {provider: 'provider'}
 
-        expect(response).to redirect_to(passages_path)
+        expect(response).to redirect_to(conformation_users_path)
       end
     end
 
