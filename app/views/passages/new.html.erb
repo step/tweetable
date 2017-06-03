@@ -9,7 +9,7 @@
       <%= form.datetime_local_field :commence_time, :class => "col-10 form-control" %>
       <%= form.datetime_local_field :conclude_time, :class => "col-10 form-control" %>
       <%= form.submit "Save", :class => "btn btn-success pull-right padding-bottom" %>
-      <%= link_to "Cancel", passages_path, {:class=>"btn btn-danger pull-right cancel_edit"} %>
+      <%= link_to "Cancel", drafts_passages_path, {:class=>"btn btn-danger pull-right cancel_edit"} %>
   <% end %>
   <%= javascript_tag "$('#duration').durationPicker({showDays: false});" %>
 </div>
