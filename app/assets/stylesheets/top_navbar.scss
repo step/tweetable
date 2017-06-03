@@ -1,0 +1,30 @@
+@import "colors";
+
+#navbar_top {
+  height: 50px;
+  background-color: $top-navbar-color;
+
+  .navbar-brand {
+    float: left;
+    padding: 0 0 0 11px;
+    a {
+      color: white !important;
+      text-decoration: none;
+    }
+    h2 {
+      padding: 5px 0 0 20px;
+      line-height: 4px;
+    }
+  }
+
+  .profile_section {
+    align-items: center;
+    height: 100%;
+    width: 5%;
+  }
+  #user_icon {
+    width: 50px;
+    border-radius: 37px;
+    cursor: pointer;
+  }
+}
