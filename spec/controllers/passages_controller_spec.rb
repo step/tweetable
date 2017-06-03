@@ -106,7 +106,7 @@ describe PassagesController do
 
   describe 'GET #edit' do
     it 'should give edit form for the passage' do
-      passage = double('Passage',text:'This is a passage text')
+      passage = double('Passage', text: 'This is a passage text')
 
       expect(Passage).to receive(:find).with('12').and_return(passage)
       get :edit, params: {id: 12}
@@ -122,23 +122,13 @@ describe PassagesController do
           stub_current_user(user)
         end
 
-        context 'When the request is generated withing the tabs' do
 
-          it 'should give all the yet to open passages' do
-            get :drafts, params: {from_tab: true}
-            expect(response).to be_success
-            expect(flash[:danger]).to be_nil
-            should render_template('passages/admin/passages_pane',)
-          end
-
+        it 'should give all the yet to open passages' do
+          get :drafts, params: {from_tab: true}
+          expect(response).to be_success
+          expect(flash[:danger]).to be_nil
+          should render_template('passages/admin/passages_pane',)
         end
-        context 'When the request is generated out side of the tabs' do
-          it 'redirects to the created passage' do
-            get :drafts
-            should redirect_to(passages_path)
-          end
-        end
-
       end
 
       context 'Candidate' do
@@ -157,22 +147,14 @@ describe PassagesController do
     describe 'GET #opened' do
       context 'Admin' do
         before(:each) do
-          user = double('User', admin: true,id: 1)
+          user = double('User', admin: true, id: 1)
           stub_current_user(user)
         end
-        context 'When the request is generated withing the tabs' do
-          it 'should give all the yet to open passages' do
-            get :ongoing, params: {from_tab: true}
-            expect(response).to be_success
-            expect(flash[:danger]).to be_nil
-            should render_template('passages/admin/passages_pane',)
-          end
-        end
-        context 'When the request is generated out side of the tabs' do
-          it 'redirects to the created passage' do
-            get :ongoing
-            should redirect_to(passages_path)
-          end
+        it 'should give all the yet to open passages' do
+          get :ongoing, params: {from_tab: true}
+          expect(response).to be_success
+          expect(flash[:danger]).to be_nil
+          should render_template('passages/admin/passages_pane',)
         end
       end
       context 'Candidate' do
@@ -195,23 +177,12 @@ describe PassagesController do
           user = double('User', admin: true)
           stub_current_user(user)
         end
-        context 'When the request is generated withing the tabs' do
-          it 'should give all the yet to concluded passages' do
-            get :finished, params: {from_tab: true}
+        it 'should give all the yet to concluded passages' do
+          get :finished, params: {from_tab: true}
 
-            expect(flash[:danger]).to be_nil
-            expect(response).to be_success
-            should render_template('passages/admin/passages_pane',)
-          end
-        end
-        context 'When the request is generated out side of the tabs' do
-          it 'redirects to the passages page with respective tab open' do
-
-            get :finished
-            expect(flash[:danger]).to be_nil
-            should redirect_to(passages_path)
-
-          end
+          expect(flash[:danger]).to be_nil
+          expect(response).to be_success
+          should render_template('passages/admin/passages_pane',)
         end
       end
 
@@ -254,7 +225,7 @@ describe PassagesController do
 
     describe 'GET #commenced_for_candidate' do
       it 'should give all the yet to open passages' do
-        stub_current_user(double('User', passages: [],id:2))
+        stub_current_user(double('User', passages: [], id: 2))
         get :commenced_for_candidate, params: {from_tab: true}
         expect(response).to be_success
         should render_template('passages/candidate/passages_pane',)
