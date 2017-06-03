@@ -8,6 +8,13 @@
 
       <ul class="dropdown-menu dropdown-menu-right pull-right" dropdown-toggle="focus">
         <%= content_tag(:li, link_to(session[:user_name], "#")) %>
+
+        <!--TODO check why current_user not available here -->
+
+        <% if User.find_by(auth_id: session[:auth_id]).admin %>
+            <%= content_tag(:li, link_to('Users', record_users_path)) %>
+        <% end %>
+
         <%= content_tag(:li, "", class: "divider") %>
         <%= content_tag(:li, link_to("Logout", logout_url)) %>
       </ul>

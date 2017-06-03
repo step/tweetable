@@ -1,0 +1,19 @@
+.user_details {
+  list-style-type: none;
+  border: 1px solid rgba(211, 211, 211, 0.42);
+  padding: 5px;
+  background-color: rgba(211, 211, 211, 0.25);
+  margin: auto;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+#user-list {
+  margin-bottom: 15px;
+  display: inline;
+}
+#user-list li:nth-child(even) {
+  background-color: white;
+}
+.user_list_heading {
+  padding-left: 15px;
+}

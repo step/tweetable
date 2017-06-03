@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: email) || User.create(user_params)
     user = user.update_if_changed(user_params)
     assign_session_details(user)
-    redirect_to passages_path
+    redirect_to users_path
   end
 
   def destroy
