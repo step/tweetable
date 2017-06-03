@@ -1,10 +1,9 @@
 class PassagesController < ApplicationController
   helper PassagesHelper
 
-  # layout false, except: [:index, :edit]
 
   before_action :verify_privileges, only: [:drafts, :ongoing, :finished]
-  # before_action :set_active_tab_and_redirect, only: [:new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
+  before_action :set_active_tab_and_redirect, only: [:index,:new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
 
   NEW = 'new'
   DRAFTS = 'drafts'
@@ -12,7 +11,7 @@ class PassagesController < ApplicationController
   COMMENCED = 'commenced'
   MISSED = 'missed'
   ATTEMPTED = 'attempted'
-  FINISHED = 'finished'
+  FINISHED = 'concluded'
 
 
   ALL_TABS = {
@@ -127,7 +126,6 @@ class PassagesController < ApplicationController
 
   def set_active_tab_and_redirect
     set_current_tab ALL_TABS[params[:action].to_sym]
-    redirect_to passages_path unless from_tab?
   end
 
   def verify_privileges

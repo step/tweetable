@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
-  def set_current_tab(tab)
-    session[:current_tab] = tab
+  def set_current_tab(tab = nil)
+    session[:current_tab] = (tab || current_tab )
   end
 
 
