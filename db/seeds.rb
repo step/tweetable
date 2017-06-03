@@ -2,13 +2,13 @@
 User.create(
     [
         {
-            name: 'Kamal Hasan', admin: false, auth_id: '132271', image_url: 'http://graph.facebook.com/demo1'
+            name: 'Kamal Hasan', admin: false, email: 'kamalhasan@email.com', auth_id: '132271', image_url: 'http://graph.facebook.com/demo1'
         },
         {
-            name: 'Vimal Hasan', admin: false, auth_id: '132273', image_url: 'http://graph.facebook.com/demo1'
+            name: 'Vimal Hasan', admin: false, email: 'vimalhasan@email.com', auth_id: '132273', image_url: 'http://graph.facebook.com/demo1'
         },
         {
-            name: 'Rajanikanth', admin: true, auth_id: '132272', image_url: 'http://graph.facebook.com/demo2'
+            name: 'Rajanikanth', admin: false, email: 'rajinikanth@email.com', auth_id: '132272', image_url: 'http://graph.facebook.com/demo2'
         }
     ]
 )
@@ -67,10 +67,10 @@ Response.create(
 Tag.create(
     [
         {
-            name: 'Grammatical Error', weight: -5, description: 'something'
+            name: 'Error', weight: -5, description: 'something'
         },
         {
-            name: 'Grammatical Excellence', weight: 5, description: 'something'
+            name: 'Excellence', weight: 5, description: 'something'
         },
         {
             name: 'Vocabulary', weight: 4, description: 'something'
@@ -83,10 +83,10 @@ Tag.create(
 Tagging.create(
     [
         {
-            response_id: Response.find_by(text: 'respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Grammatical Error').id
+            response_id: Response.find_by(text: 'respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Error').id
         },
         {
-            response_id: Response.find_by(text: 'respose for Person').id, tag_id: Tag.find_by(name: 'Grammatical Excellence').id
+            response_id: Response.find_by(text: 'respose for Person').id, tag_id: Tag.find_by(name: 'Excellence').id
         }
     ]
 )
