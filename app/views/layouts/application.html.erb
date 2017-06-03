@@ -4,19 +4,31 @@
   <title>Tweetable</title>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track'=> 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track'=> 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
   <link href='//fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
 </head>
 
 <body>
 <div class="container-fluid">
-  <%= render :partial => "shared/top_nav_bar" if logged_in? %>
-  <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% if logged_in? %>
+      <%= render :partial => "shared/top_nav_bar" %>
+      <div class="row main_content">
+        <%= render :partial => "shared/side_nav_bar" %>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 main_body">
+          <% flash.each do |key, value| %>
+              <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
+  <% else %>
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <%= yield %>
   <% end %>
-  <%= yield %>
 </div>
 
 </body>

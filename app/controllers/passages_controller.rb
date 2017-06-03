@@ -1,10 +1,10 @@
 class PassagesController < ApplicationController
   helper PassagesHelper
 
-  layout false, except: [:index, :edit]
+  # layout false, except: [:index, :edit]
 
   before_action :verify_privileges, only: [:drafts, :ongoing, :finished]
-  before_action :set_active_tab_and_redirect, only: [:new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
+  # before_action :set_active_tab_and_redirect, only: [:new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
 
   NEW = 'new'
   DRAFTS = 'drafts'
