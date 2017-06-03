@@ -24,7 +24,7 @@
 .byebug_history
 .DS_Store
 dev_secret
-config/facebook_config.yml
+config/auth_config.yml
 coverage
 dev_setup/.vagrant
 dev_setup/*.retry

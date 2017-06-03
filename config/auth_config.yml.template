@@ -3,5 +3,6 @@
 # This file should be listed in .gitignore to keep your settings secret!
 # Each entry gets set as a local environment variable.
 # This file overrides ENV variables in the Unix shell.
-APP_ID: '<facebook_app_id>'
-APP_SECRET: '<facebook_app_secret>'
+APP_ID: '<auth_app_id>'
+APP_SECRET: '<auth_app_secret>'
+ALLOWED_DOMAIN: '<allowed_domain_name>'
