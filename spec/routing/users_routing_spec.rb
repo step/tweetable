@@ -1,10 +1,6 @@
 describe UsersController, type: :routing do
   describe 'users routing' do
 
-    it 'routes to #conformation' do
-      expect(:get => '/users/conformation').to route_to('users#conformation')
-    end
-
     it 'routes to #update via PUT' do
       expect(:put => '/users/1').to route_to('users#update', :id => '1')
     end

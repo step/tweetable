@@ -18,34 +18,14 @@ describe UsersController, type: :controller do
     }
   }
 
-  describe 'GET #conformation' do
-
-    it 'should render conformation if user is not a active user' do
-      user = double('User', admin: false, id: 1, active: false)
-      stub_current_user(user)
-
-      get :conformation, params: {id: user.id}
-      should render_template('conformation')
-    end
-
-    it 'should redirect to passage path if user is active user' do
-      user = double('User', admin: false, id: 1, active: true)
-      stub_current_user(user)
-
-      get :conformation, params: {id: user.id}
-      expect(response).to redirect_to(passages_path)
-    end
-
-  end
-
   describe 'GET #index' do
 
     it 'should index active user' do
-      user = double('User', admin: false, id: 1, active: false)
+      user = double('User', admin: false, id: 1, active: true)
       stub_current_user(user)
 
       get :index, params: {id: user.id}
-      should render_template('index')
+      should render_template(:index)
     end
   end
 

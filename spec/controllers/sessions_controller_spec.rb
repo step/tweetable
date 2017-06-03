@@ -1,20 +1,25 @@
 describe SessionsController, type: :controller do
 
   let(:user_info) {{auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture'}}
-
+  before(:each) do
+    user = double('User', active: true)
+    stub_current_user(user)
+  end
   describe 'GET #new' do
 
     context 'When user is logged_in' do
       it 'redirects to passages path' do
         stub_logged_in(true)
+
         get :new
-        expect(response).to redirect_to(conformation_users_path)
+        expect(response).to redirect_to(passages_path)
       end
     end
 
     context 'When user is not logged_in' do
       it 'should render login page' do
         stub_logged_in(false)
+
         get :new
         should render_template(:new)
       end
@@ -30,17 +35,17 @@ describe SessionsController, type: :controller do
 
     context 'When user exists' do
 
-        it 'should not create a new user' do
-          user = double('user')
+      it 'should not create a new user' do
+        user = double('user')
 
-          expect(User).to receive(:find_by).with(email: user_info[:email]).and_return(user)
-          expect(user).to receive(:update_if_changed).with(user_info)
-          expect(controller).to receive(:assign_session_details)
+        expect(User).to receive(:find_by).with(email: user_info[:email]).and_return(user)
+        expect(user).to receive(:update_if_changed).with(user_info)
+        expect(controller).to receive(:assign_session_details)
 
-          post :create, params: {provider: 'provider'}
+        post :create, params: {provider: 'provider'}
 
-          expect(response).to redirect_to(conformation_users_path)
-        end
+        expect(response).to redirect_to(passages_path)
+      end
 
     end
 
@@ -55,7 +60,7 @@ describe SessionsController, type: :controller do
 
         post :create, params: {provider: 'provider'}
 
-        expect(response).to redirect_to(conformation_users_path)
+        expect(response).to redirect_to(passages_path)
       end
     end
 

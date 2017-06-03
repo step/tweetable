@@ -4,13 +4,15 @@ describe ResponsesController, type: :controller do
 
     let(:passage) {Passage.new(id: 1)}
 
+    before(:each) do
+      stub_logged_in(true)
+      user = double('User', admin: false, id: 1, active: true)
+      stub_current_user(user)
+    end
+
     context 'When passage id exists' do
 
       it 'renders the new template' do
-        stub_logged_in(true)
-        user = double('User', admin: false, id: 1)
-        stub_current_user(user)
-
         expect(Passage).to receive(:find).and_return(passage)
         expect(ResponsesTracking).to receive(:remaining_time).and_return(6000)
 
@@ -32,7 +34,7 @@ describe ResponsesController, type: :controller do
 
   describe 'Post #create' do
     let(:passage) {double('passage', id: 'passage_id', title: 'Test passage title', text: 'Test passage text', duration: 1)}
-    let(:intern) {double('intern', id: 'user_id', name: 'Intern', auth_id: 'auth_id', admin: false)}
+    let(:intern) {double('intern', id: 'user_id', name: 'Intern', auth_id: 'auth_id', admin: false, active: true)}
 
     before(:each) do
       stub_logged_in(true)
@@ -104,7 +106,7 @@ describe ResponsesController, type: :controller do
 
       it 'renders the index page with response_evaluation' do
         stub_logged_in(true)
-        user = double('User', admin: true, id: 1)
+        user = double('User', admin: true, id: 1, active: true)
         stub_current_user(user)
 
         passage_id = 'passage_id'
@@ -124,7 +126,7 @@ describe ResponsesController, type: :controller do
 
       it 'renders the new template' do
         stub_logged_in(true)
-        user = double('User', admin: false, id: 1)
+        user = double('User', admin: false, id: 1, active: true)
         stub_current_user(user)
 
         passage_id = 'passage_id'
@@ -135,7 +137,7 @@ describe ResponsesController, type: :controller do
         expect(Passage).to receive(:find).with(passage_id).and_return(passage)
         expect(passage).to receive(:responses).and_return(responses)
 
-        get :index ,params:{passage_id:passage_id}
+        get :index, params: {passage_id: passage_id}
         should render_template("index")
       end
     end

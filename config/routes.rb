@@ -4,13 +4,9 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: :login
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get '/clearance', to: 'application#clearance',as: :clearance
 
-  resources :users, only: [:index,:update] do
-    collection do
-      get 'conformation', to: 'users#conformation'
-    end
-
-  end
+  resources :users, only: [:index, :update]
 
   resources :responses do
     resources :taggings do

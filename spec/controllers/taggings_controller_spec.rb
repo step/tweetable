@@ -3,7 +3,7 @@ describe TaggingsController, type: :controller do
   describe 'POST #create_tagging_by_tag_name' do
     before(:each) do
       stub_logged_in(true)
-      user = double('User', admin: false, id: 1)
+      user = double('User', admin: false, id: 1, active: true)
       stub_current_user(user)
     end
 
@@ -17,7 +17,7 @@ describe TaggingsController, type: :controller do
       expect(tag).to receive(:taggings).and_return(taggings)
       expect(taggings).to receive(:create).with(response_id: response_id)
 
-      post :create_tagging_by_tag_name, params: {response_id: response_id, tag_name:tag_name}
+      post :create_tagging_by_tag_name, params: {response_id: response_id, tag_name: tag_name}
     end
 
   end
@@ -25,7 +25,7 @@ describe TaggingsController, type: :controller do
   describe 'DELETE #delete_tagging_by_tag_name' do
     before(:each) do
       stub_logged_in(true)
-      user = double('User', admin: false, id: 1)
+      user = double('User', admin: false, id: 1, active: true)
       stub_current_user(user)
     end
 
@@ -41,7 +41,7 @@ describe TaggingsController, type: :controller do
       expect(Tagging).to receive(:find_by).with(response_id: response_id, tag_id: tag_id).and_return(tagging)
       expect(tagging).to receive(:destroy)
 
-      post :delete_tagging_by_tag_name, params: {response_id: response_id, tag_name:tag_name}
+      post :delete_tagging_by_tag_name, params: {response_id: response_id, tag_name: tag_name}
     end
 
   end
