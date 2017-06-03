@@ -34,6 +34,8 @@ gem 'coffee-script', '~> 2.4', '>= 2.4.1'
 
 gem 'x-editable-rails'
 
+# automatic evaluator
+gem 'after_the_deadline'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
