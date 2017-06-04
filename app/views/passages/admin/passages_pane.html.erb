@@ -1,36 +1,48 @@
-<div class="tab-pane">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel-group" id="panel-982585">
-
-        <% filtered_passages.each do |passage| %>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <a class="panel-title" data-toggle="collapse" data-parent="#panel-982585" href="#panel-element-<%= passage.id %>">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <span><%= passage.title %></span>
-                    </div>
-                    <% if drafts_passage_partial?(partial_name) %>
-                        <div class="col-md-1 pull-right">
-                          <%= link_to '', edit_passage_path(passage.id), class: 'fa fa-pencil' %>
-                          <a class="fa fa-trash" data-toggle="modal" data-target="#delete_modal_<%= passage.id %>"></a>
-                          <%= render 'passages/admin/delete_passage', :passage => passage %>
-                        </div>
-                    <% end %>
-                  </div>
-                </a>
-              </div>
-              <div id="panel-element-<%= passage.id %>" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <div class="row">
-                    <%= render "passages/admin/" + partial_name, :passage => passage %>
-                  </div>
-                </div>
-              </div>
-            </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="row passage_container">
+	<% filtered_passages.each do |passage| %>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="thumbnail passage">
+					<div class="header">
+						<div class="title header_component">
+							<%= content_tag(:span, passage.title, class: 'pull-left') %>
+						</div>
+						<div class="timeline header_component ">
+                  <span class="duration">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i> <%= duration_of_interval_in_words(passage.duration.seconds) %>
+                  </span>
+							<span class="commences_on">
+										<span class="icon">
+	                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+										</span>
+										<span class="content">
+		                   <span>Commences</span><span><%= to_preferred_time_format(passage.commence_time)|| '(not set)' %></span>
+										</span>
+									</span>
+							<span class="concludes_on">
+										<span class="icon">
+	                    <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+										</span>
+										<span class="content">
+		                   <span>Concludes</span> <span><%= to_preferred_time_format(passage.conclude_time) || '(not set)' %></span>
+										</span>
+                  </span>
+						</div>
+						<div class="actions header_component">
+							<a href="#" class="fa fa-edit"></a>
+							<a href="#" class="fa fa-trash"></a>
+						</div>
+					</div>
+					<div class="content">
+						<%= content_tag(:p) do %>
+								<%= truncate(passage.text, length: 400, omission:'...') %><a href="#">See more</a>
+						<% end %>
+					</div>
+					<div class="actions">
+						<p>
+							<a href="#" class="btn btn-success pull-right">Commences</a>
+						</p>
+					</div>
+				</div>
+			</div>
+	<% end %>
 </div>

@@ -1,47 +1,138 @@
 // Place all the styles related to the Passages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.bdp-input input {
-  display: inline-block;
-  margin-bottom: 3px;
-  width: 60px;
+@media (min-width: 300px) {
+  .passage_container .col-xs-5 {
+    width: 49%;
+  }
+
+  .passage {
+    .title {
+      font-size: 21px;
+      display: inline-flex;
+    }
+    .title .actions a {
+      font-size: 14px;
+      text-decoration: none;
+      color: black;
+    }
+    .title .actions a:hover {
+      font-size: 14px;
+      text-decoration: none;
+      color: gray;
+    }
+    .title .actions .fa-trash {
+      left: 76%;
+    }
+    div {
+      display: inline-block;
+    }
+    .title, .title span, .timeline, .actions {
+      width: 100%;
+    }
+    .header {
+      width: 100%;
+      background-color: rgba(198, 198, 198, 0.38);
+      border-radius: 2px;
+      padding: 5px;
+      .timeline {
+        width: 150%;
+        .commences_on, .concludes_on {
+          width: 27%;
+          display: inline-flex;
+          .content {
+            line-height: 0;
+            font-size: 10px;
+            padding-top: 7px;
+          }
+          .icon {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
 }
 
-.bdp-block {
-  display: inline-block;
-  line-height: 1;
-  text-align: center;
-  padding: 5px 3px;
-}
+//@media (min-width: 768px) {
+//
+//}
+//
+//@media (min-width: 1000px) {
+//
+//}
 
-.fa.fa-pencil{
-  padding-right: 20px;
-  color: black;
-  cursor: pointer;
-}
+@media (min-width: 1200px) {
+  .passage_container {
+    margin-top: 15px;
+    height: calc(100% - 50px);
+    .col-lg-8 {
+      margin-left: 5%;
+      width: 88.666667%;
+    }
+  }
 
-.fa.fa-trash{
-  color: black;
-  cursor: pointer;
-}
-
-.cancel_edit{
-  margin-right: 1em;
-}
-
-#passage_text{
-  height: 150px;
-}
-.passage-holder {
-  border-top: 1px solid #bbbbbb;
-  border-bottom: 1px solid #bbbbbb;
-  letter-spacing: 0.02em;
-  line-height: 1.9em;
-  padding: 5px;
-  font-size: 15px;
-  color: black;
-}
-
-.passage-heading {
-  text-align: left;
+  .passage {
+    .title {
+      font-size: 21px;
+      display: inline-flex;
+    }
+    .title .actions a {
+      font-size: 14px;
+      text-decoration: none;
+      color: black;
+    }
+    .title .actions a:hover {
+      font-size: 14px;
+      text-decoration: none;
+      color: gray;
+    }
+    .title .actions .fa-trash {
+      left: 76%;
+    }
+    div {
+      display: inline-block;
+    }
+    .title, .title span, .timeline, .actions {
+      width: 100%;
+    }
+    .header {
+      width: 100%;
+      background-color: rgba(198, 198, 198, 0.38);
+      border-radius: 2px;
+      padding: 5px;
+      display: inline-flex;
+      .header_component {
+        padding-top: 1%;
+      }
+      .timeline {
+        width: 70%;
+        .duration {
+          padding-right: 15px;
+        }
+        .commences_on, .concludes_on {
+          width: 27%;
+          display: inline-flex;
+          .content {
+            display: inline-grid;
+            line-height: 0;
+            font-size: 8px;
+            padding-top: 7px;
+          }
+          .icon {
+            font-size: 14px;
+          }
+        }
+      }
+      .actions {
+        width: 10%;
+        a {
+          color: black;
+          padding-left: 10px;
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }

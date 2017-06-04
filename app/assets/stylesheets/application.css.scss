@@ -16,6 +16,8 @@
 @import "bootstrap";
 @import "bootstrap-sprockets";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,700,900');
+@import "constants";
+
 
 body {
   font-family: 'Open Sans';
@@ -28,4 +30,65 @@ p {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto';
   font-weight: 700;
+}
+
+html,
+body,
+.container-fluid {
+  height: $view-port-height;
+  font-family: 'Roboto', sans-serif;
+}
+
+div.main_body,
+div.main_content {
+  height: $main-content-height;
+}
+
+nav.sidebar,
+.main_body {
+  -webkit-transition: margin 200ms ease-out;
+  -moz-transition: margin 200ms ease-out;
+  -o-transition: margin 200ms ease-out;
+  transition: margin 200ms ease-out;
+}
+
+@media (min-width: 300px) {
+  .main_body.col-xs-8 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 400px) {
+  .main_body.col-sm-8 {
+    width: 100%;
+    height: $view-port-height;
+  }
+}
+
+@media (min-width: 768px) {
+  .main_body.col-md-8 {
+    width: 80%;
+    height: $view-port-height;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main_body.col-lg-8 {
+    width: 86%;
+    height: $view-port-height;
+  }
+}
+
+div.main_body {
+  overflow-y: scroll;
+  align-content: center;
+}
+
+div.main-content {
+  padding: 10px 10px 0 10px;
+  align-content: center;
+}
+
+div.col-sm-2 {
+  padding: 0;
 }

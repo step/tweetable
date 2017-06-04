@@ -10,11 +10,6 @@ nav.sidebar.navbar {
 }
 
 @media (min-width: 768px) {
-  .main_body {
-    position: absolute;
-    margin-left: 200px;
-    float: right;
-  }
   nav.sidebar .navbar-nav > li:first-child {
     border-top: 1px #e5e5e5 solid;
   }
@@ -41,14 +36,8 @@ nav.sidebar.navbar {
 }
 
 @media (min-width: 1330px) {
-  div.col-sm-2,
-  div.col-sm-2 {
-    height: calc(100% - 50px);
-  }
-  .main_body {
-    width: calc(100% - 200px);
-  }
-  nav.sidebar {
+  .sidebar {
+    height: 100%;
     margin-left: 0px;
     float: left;
   }
@@ -63,8 +52,8 @@ a.navbar-brand {
   color: black;
 }
 
-nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover,
-nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
+nav.sidebar .navbar-nav .open .dropdown-menu > li > a:hover,
+nav.sidebar .navbar-nav .open .dropdown-menu > li > a:focus {
   color: #CCC;
   background-color: transparent;
 }

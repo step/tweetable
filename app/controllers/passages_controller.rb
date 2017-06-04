@@ -3,7 +3,7 @@ class PassagesController < ApplicationController
 
 
   before_action :verify_privileges, only: [:drafts, :ongoing, :finished]
-  before_action :set_active_tab_and_redirect, only: [:index,:new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
+  before_action :set_active_tab_and_redirect, only: [:index, :new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
 
   NEW = 'new'
   DRAFTS = 'drafts'
