@@ -24,9 +24,8 @@ describe PassagesController do
   }
 
   before(:each) do
-    user = double('user', active: true)
     stub_logged_in(true)
-    stub_current_user(user)
+    stub_current_active_user
   end
 
   describe 'POST #create' do
@@ -120,8 +119,7 @@ describe PassagesController do
     describe 'GET #drafts' do
       context 'Admin' do
         before(:each) do
-          user = double('User', admin: true, active: true)
-          stub_current_user(user)
+          stub_current_active_admin_user
         end
 
 
@@ -135,8 +133,7 @@ describe PassagesController do
 
       context 'Candidate' do
         before(:each) do
-          user = double('User', admin: false, active: true)
-          stub_current_user(user)
+          stub_current_active_intern_user
         end
         it 'should not have access to drafts passages' do
           get :drafts
@@ -149,10 +146,7 @@ describe PassagesController do
     describe 'GET #opened' do
       context 'Admin' do
         before(:each) do
-
-          user = double('User', admin: true, id: 1, active: true)
-
-          stub_current_user(user)
+          stub_current_active_admin_user
         end
         it 'should give all the yet to open passages' do
           get :ongoing, params: {from_tab: true}
@@ -163,8 +157,7 @@ describe PassagesController do
       end
       context 'Candidate' do
         before(:each) do
-          user = double('User', admin: false, active: true)
-          stub_current_user(user)
+          stub_current_active_intern_user
         end
         it 'should not have access to opened passages' do
           get :ongoing
@@ -178,8 +171,7 @@ describe PassagesController do
 
       context 'Admin' do
         before(:each) do
-          user = double('User', admin: true, active: true)
-          stub_current_user(user)
+          stub_current_active_admin_user
         end
         it 'should give all the yet to concluded passages' do
           get :finished, params: {from_tab: true}
@@ -192,8 +184,7 @@ describe PassagesController do
 
       context 'Candidate' do
         before(:each) do
-          user = double('User', admin: false, active: true)
-          stub_current_user(user)
+          stub_current_active_intern_user
         end
         it 'should not have access to concluded passages' do
           get :finished
@@ -229,8 +220,7 @@ describe PassagesController do
 
     describe 'GET #commenced_for_candidate' do
       it 'should give all the yet to open passages' do
-        user = double('User', passages: [], id: 2, active: true)
-        stub_current_user(user)
+        stub_current_user_with_attributes({passages: [], id: 2, active: true})
 
         get :commenced_for_candidate, params: {from_tab: true}
 

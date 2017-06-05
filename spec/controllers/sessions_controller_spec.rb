@@ -2,8 +2,7 @@ describe SessionsController, type: :controller do
 
   let(:user_info) {{auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture'}}
   before(:each) do
-    user = double('User', active: true)
-    stub_current_user(user)
+    stub_current_active_user
   end
   describe 'GET #new' do
 

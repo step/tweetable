@@ -6,8 +6,7 @@ describe ResponsesController, type: :controller do
 
     before(:each) do
       stub_logged_in(true)
-      user = double('User', admin: false, id: 1, active: true)
-      stub_current_user(user)
+      stub_current_user_with_attributes({admin: false, id: 1, active: true})
     end
 
     context 'When passage id exists' do
@@ -106,8 +105,7 @@ describe ResponsesController, type: :controller do
 
       it 'renders the index page with response_evaluation' do
         stub_logged_in(true)
-        user = double('User', admin: true, id: 1, active: true)
-        stub_current_user(user)
+        stub_current_active_admin_user
 
         passage_id = 'passage_id'
         passage = double('passage')
@@ -126,13 +124,11 @@ describe ResponsesController, type: :controller do
 
       it 'renders the new template' do
         stub_logged_in(true)
-        user = double('User', admin: false, id: 1, active: true)
-        stub_current_user(user)
+        stub_current_active_admin_user
 
         passage_id = 'passage_id'
         passage = double('passage')
         responses = double('responses')
-        partial = 'response'
 
         expect(Passage).to receive(:find).with(passage_id).and_return(passage)
         expect(passage).to receive(:responses).and_return(responses)

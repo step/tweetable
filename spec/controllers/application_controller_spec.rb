@@ -1,9 +1,6 @@
 describe ApplicationController, type: :controller do
+
   describe '#active_user' do
-    before(:each) do
-      user = double('user')
-      stub_logged_in user
-    end
     context 'if the user is active' do
       it 'should return 200' do
         user = double('user')

@@ -1,11 +1,10 @@
 describe TaggingsController, type: :controller do
+  before(:each) do
+    stub_logged_in(true)
+    stub_current_active_admin_user
+  end
 
   describe 'POST #create_tagging_by_tag_name' do
-    before(:each) do
-      stub_logged_in(true)
-      user = double('User', admin: false, id: 1, active: true)
-      stub_current_user(user)
-    end
 
     it 'should create a new tagging with id of given tag name' do
       tag_name = 'tag_name'
@@ -23,11 +22,6 @@ describe TaggingsController, type: :controller do
   end
 
   describe 'DELETE #delete_tagging_by_tag_name' do
-    before(:each) do
-      stub_logged_in(true)
-      user = double('User', admin: false, id: 1, active: true)
-      stub_current_user(user)
-    end
 
     it 'should create a delete tagging with id of given tag name' do
       tag_name = 'tag_name'
