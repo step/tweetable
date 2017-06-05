@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :require_login, :active_user?
   skip_before_action :active_user?, only: [:clearance]
 
-  helper_method :logged_in?
+  helper_method :logged_in?, :current_user
 
   def current_user
     User.find_by(auth_id: session[:auth_id])
