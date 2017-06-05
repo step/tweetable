@@ -4,6 +4,6 @@ function submitCheckboxAction() {
     });
 }
 
-$(document).ready(function () {
+document.addEventListener("turbolinks:load", function () {
     submitCheckboxAction();
 });

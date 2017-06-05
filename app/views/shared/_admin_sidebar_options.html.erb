@@ -4,7 +4,7 @@
     <% admin_tabs.each do |method_name, tab_name| %>
         <% class_name = (tab_name.to_s.eql? session[:current_tab]) ? 'active' : '' %>
         <%= content_tag(:li, class: class_name) do %>
-            <%= link_to(tab_name.to_s.humanize , "#{url_for(action: method_name )}") %>
+            <%= link_to(tab_name.to_s.humanize , "#{url_for(action: method_name,controller: :passages )}") %>
         <% end %>
     <% end %>
   </ul>
