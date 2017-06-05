@@ -2,6 +2,10 @@ nav.sidebar.navbar {
   border-radius: 0px;
 }
 
+li.tab_action.active{
+  background-color: rgba(124, 124, 124, 0.28);
+}
+
 @media (min-width: 400px) {
   .sidebar,
   .sidebar_items {
