@@ -1,11 +1,18 @@
-<li class=" ">
+<li >
   <div class="secion navbar_section">Passages</div>
-  <ul class="nav navbar-nav passages_category sub_menu" role="menu">
+  <ul class="nav navbar-nav sub_category passages_category sub_menu" role="menu">
     <% admin_tabs.each do |method_name, tab_name| %>
         <% class_name = (tab_name.to_s.eql? session[:current_tab]) ? 'active' : '' %>
         <%= content_tag(:li, class: "#{class_name} tab_action") do %>
             <%= link_to(tab_name.to_s.humanize , "#{url_for(action: method_name,controller: :passages )}") %>
         <% end %>
     <% end %>
+  </ul>
+</li>
+
+<li>
+  <div class="secion navbar_section">Admin</div>
+  <ul class="nav navbar-nav sub_category admin_category sub_menu" role="menu">
+     <%= content_tag(:li, link_to('Users', users_path)) %>
   </ul>
 </li>

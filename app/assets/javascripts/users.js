@@ -1,9 +1,9 @@
-function submitCheckboxAction() {
-    $('.submittable').click(function () {
+function submitForm(action) {
+    $(action).click(function () {
         $(this).parents('form').submit();
     });
 }
-
 document.addEventListener("turbolinks:load", function () {
-    submitCheckboxAction();
+    submitForm('.submittable_active');
+    submitForm('.submittable_admin');
 });

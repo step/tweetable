@@ -78,16 +78,20 @@ nav.sidebar .navbar-nav li {
   padding: 5px 0 5px 50px;
 }
 
-.passages_category li {
+.sub_category li {
   margin: 0 0 5px 0;
   list-style-type: none;
+}
+
+.sub_category {
+  width: 100%;
 }
 
 .profile_category hr {
   margin: 0 0 4px 0;
 }
 
-.passages_category li a {
+.sub_category li a {
   text-decoration: none;
 }
 

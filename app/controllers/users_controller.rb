@@ -27,8 +27,13 @@ class UsersController < ApplicationController
   end
 
   def update_params(params)
-    params[:user][:active] = params[:user][:active].eql?('1') ? true : false
-    params[:user][:admin] = params[:user][:admin].eql?('1') ? true : false
+    # TODO refactor this code add some test
+    update_key = params[:user].keys[0]
+    if update_key.eql?('admin')
+      params[:user][:admin] = params[:user][:admin].eql?('1') ? true : false
+    elsif update_key.eql?('active')
+      params[:user][:active] = params[:user][:active].eql?('1') ? true : false
+    end
   end
 
 end

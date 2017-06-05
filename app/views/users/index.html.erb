@@ -1,20 +1,31 @@
-<h3> Users Record</h3>
 <div class="container">
-  <ul id="user-list">
+  <h2>Users Record</h2>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Active</th>
+      <th>Admin</th>
+    </tr>
+    </thead>
+    <tbody>
     <% @users.each do |user| %>
-        <li class="row user_details col-lg-12 col-md-12">
-          <div class="col-lg-8 col-md-4"><%= image_tag(user.image_url, :class => 'user-circle-icon') %>
-            <span><%= user.email %></span>
-          </div>
-          <div class="col-lg-8 col-md-4">
-            <span><%= user.name %></span>
-          </div>
-
-          <%= bootstrap_form_for(user, :url => user_path(user.id), method: :put) do |form| %>
-              <%= form.check_box :admin, :class => 'submittable' %>
-              <%= form.check_box :active, :class => 'submittable' %>
-          <% end %>
-        </li>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.name %></td>
+          <td>
+            <%= form_for(user, :url => user_path(user.id),method: :put) do |form| %>
+                <%= form.check_box :active , :class => 'submittable_active',:label => "" %>
+            <% end %>
+          </td>
+          <td>
+            <%= form_for(user, :url => user_path(user.id),method: :put) do |form| %>
+                <%= form.check_box :admin, :class => 'submittable_admin',:label => ""%>
+            <% end %>
+          </td>
+        </tr>
     <% end %>
-  </ul>
+    </tbody>
+  </table>
 </div>
