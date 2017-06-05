@@ -1,12 +1,17 @@
-<div class="col-md-3">
-  <span>Attempted by: <%= passage.responses.count %> candidates</span>
-</div>
-<div class="col-md-3">
-  <span>Evaluated: <%= evaluation_count(passage.responses) %> responses</span>
-</div>
-<div class="col-md-3">
-  <span>Concluded at: <%= to_preferred_time_format(passage.conclude_time) %></span>
-</div>
-<div class="col-md-2">
-  <%= button_to 'Review', passage_responses_path(passage.id), class: 'btn btn-info pull-right', method: :get %>
+
+<div class="thumbnail passage">
+	<div class="header">
+		<div class="title header_component">
+			<%= content_tag(:span, passage.title, class: 'pull-left') %>
+		</div>
+		<div class="timeline header_component ">
+			<%= render :partial => 'passages/admin/concludes', locals: {passage: passage} %>
+		</div>
+	</div>
+	<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
+	<div class="more_options">
+		<span>Attempted by: <%= passage.responses.count %> candidates</span>
+		<span>Evaluated: <%= evaluation_count(passage.responses) %> responses</span>
+		<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id), class: 'btn btn-info pull-right') %>
+	</div>
 </div>
