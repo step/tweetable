@@ -2,12 +2,12 @@
 <div class="thumbnail passage">
 	<div class="header">
 		<div class="title header_component">
-			<%= content_tag(:span, passage.title, class: 'pull-left') %>
-		</div>
-		<div class="timeline header_component ">
-			<%= render :partial => 'passages/admin/concludes', locals: {passage: passage} %>
+			<%= content_tag(:span, passage.title, class: 'pull-left heading') %>
 		</div>
 	</div>
+		<div class="timeline header_component ">
+			<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concluded on'} %>
+		</div>
 	<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
 	<div class="more_options">
 		<span>Attempted by: <%= passage.responses.count %> candidates</span>

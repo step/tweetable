@@ -20,15 +20,19 @@
 
 
 body {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans' !important;
+  .heading{
+    font-size: 21px;
+    font-weight: 400;
+  }
 }
 
 p {
   font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto';
+h1, h2, h3, h4, h5, h6, .heading {
+  font-family: 'Roboto' !important;
   font-weight: 700;
 }
 
@@ -67,17 +71,15 @@ nav.sidebar,
 
 @media (min-width: 768px) {
   .main_body.col-md-8 {
-    width: 80%;
+    width: calc(100% - 200px);
     height: $view-port-height;
   }
 }
 
-@media (min-width: 1200px) {
-  .main_body.col-lg-8 {
-    width: 80%;
-    height: $view-port-height;
-  }
-}
+//@media (min-width: 1200px) {
+//  .main_body.col-lg-8 {
+//  }
+//}
 
 div.main_body {
   overflow: hidden;
