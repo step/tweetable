@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def clearance
     return redirect_to passages_path if current_user.active
-    render 'shared/clearance', locals: {user: current_user}
+    render 'shared/clearance', layout: false
   end
 
 
