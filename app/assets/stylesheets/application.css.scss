@@ -74,13 +74,13 @@ nav.sidebar,
 
 @media (min-width: 1200px) {
   .main_body.col-lg-8 {
-    width: 86%;
+    width: 85%;
     height: $view-port-height;
   }
 }
 
 div.main_body {
-  overflow-y: scroll;
+  overflow: hidden;
   align-content: center;
 }
 

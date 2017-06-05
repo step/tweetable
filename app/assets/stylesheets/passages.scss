@@ -1,8 +1,13 @@
 // Place all the styles related to the Passages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#passage_container{
+  overflow: auto;
+  margin-right: -31px;
+  padding-top: 20px;
+}
 @media (min-width: 300px) {
-  .passage_container .col-xs-5 {
+  #passage_container .col-xs-5 {
     width: 49%;
   }
 
@@ -63,7 +68,7 @@
 //}
 
 @media (min-width: 1200px) {
-  .passage_container {
+  #passage_container {
     margin-top: 15px;
     height: calc(100% - 50px);
     .col-lg-8 {
