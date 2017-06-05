@@ -1,17 +1,18 @@
-<div class="col-md-3">
-  <span>Attempted by: <%= passage.responses.count %> candidates</span>
-</div>
-<div class="col-md-3">
-  <span>Commenced on: <%= to_preferred_time_format(passage.commence_time) %></span>
-</div>
-<div class="col-md-3">
-  <span>Concluding on: <%= to_preferred_time_format(passage.conclude_time) %></span>
-</div>
-<div class="col-md-3 passage_action_buttons">
-  <%= button_to 'Review', passage_responses_path(passage.id), class: 'btn btn-info pull-left', method: :get %>
-  <i data-url=<%= conclude_passage_path(passage.id) %>>
-    <button type="button" class="btn btn-danger pull-right">
-      Conclude
-    </button>
-  </i>
+<div class="thumbnail passage">
+	<div class="header">
+		<div class="title header_component">
+			<%= content_tag(:span, passage.title, class: 'pull-left') %>
+		</div>
+		<div class="timeline header_component ">
+			<%= render :partial => 'passages/admin/duration', locals: {passage: passage} %>
+			<%= render :partial => 'passages/admin/commences', locals: {passage: passage} %>
+			<%= render :partial => 'passages/admin/concludes', locals: {passage: passage} %>
+		</div>
+	</div>
+	<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
+	<div class="more_options">
+			<span>Attempted by: <%= passage.responses.count %> candidates</span>
+			<%= content_tag(:a, 'Conclude', href: conclude_passage_path(passage.id), class: 'btn btn-danger pull-right') %>
+			<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id), class: 'btn btn-info pull-right') %>
+	</div>
 </div>

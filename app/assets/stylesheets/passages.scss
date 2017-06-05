@@ -16,89 +16,10 @@
       font-size: 21px;
       display: inline-flex;
     }
-    .title .actions a {
-      font-size: 14px;
-      text-decoration: none;
-      color: black;
-    }
-    .title .actions a:hover {
-      font-size: 14px;
-      text-decoration: none;
-      color: gray;
-    }
-    .title .actions .fa-trash {
-      left: 76%;
-    }
     div {
       display: inline-block;
     }
-    .title, .title span, .timeline, .actions {
-      width: 100%;
-    }
-    .header {
-      width: 100%;
-      background-color: rgba(198, 198, 198, 0.38);
-      border-radius: 2px;
-      padding: 5px;
-      .timeline {
-        width: 150%;
-        .commences_on, .concludes_on {
-          width: 27%;
-          display: inline-flex;
-          .content {
-            line-height: 0;
-            font-size: 10px;
-            padding-top: 7px;
-          }
-          .icon {
-            font-size: 20px;
-          }
-        }
-      }
-    }
-  }
-}
-
-//@media (min-width: 768px) {
-//
-//}
-//
-//@media (min-width: 1000px) {
-//
-//}
-
-@media (min-width: 1200px) {
-  #passage_container {
-    margin-top: 15px;
-    height: calc(100% - 50px);
-    .col-lg-8 {
-      margin-left: 5%;
-      width: 88.666667%;
-    }
-  }
-
-  .passage {
-    .title {
-      font-size: 21px;
-      display: inline-flex;
-    }
-    .title .actions a {
-      font-size: 14px;
-      text-decoration: none;
-      color: black;
-    }
-    .title .actions a:hover {
-      font-size: 14px;
-      text-decoration: none;
-      color: gray;
-    }
-    .title .actions .fa-trash {
-      left: 76%;
-    }
-    div {
-      display: inline-block;
-    }
-    .title, .title span, .timeline, .actions {
+    .title, .title span, .timeline, .more_options {
       width: 100%;
     }
     .header {
@@ -138,6 +59,22 @@
           text-decoration: none;
         }
       }
+    }
+    .more_options{
+      a{
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  #passage_container {
+    margin-top: 15px;
+    height: calc(100% - 50px);
+    .col-lg-8 {
+      margin-left: 5%;
+      width: 88.666667%;
     }
   }
 }

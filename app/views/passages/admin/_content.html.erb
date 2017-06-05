@@ -1,0 +1,5 @@
+<div class="content">
+	<%= content_tag(:p) do %>
+			<%= truncate(passage.text, length: 400, omission: '...') %><a href="#">See more</a>
+	<% end %>
+</div>

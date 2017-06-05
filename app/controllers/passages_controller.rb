@@ -83,7 +83,7 @@ class PassagesController < ApplicationController
 
   def conclude
     Passage.find(params[:id]).conclude
-    redirect_to :passages
+    redirect_to ongoing_passages_path
   end
 
   #TODO all the passage getter methods should give out json if asked for
