@@ -1,15 +1,24 @@
 <%= javascript_include_tag 'bootstrap-duration-picker' %>
 
-<p id="notice"><%= notice %></p>
-<div class="container" style="margin-top: 25px">
-  <%= bootstrap_form_for(@passage) do |form| %>
-      <%= form.text_field :title, :class => "col-10 form-control", :required => true %>
-      <%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true %>
-      <%= form.text_field :duration, :class => "form-control", :id => "duration" %>
-      <%= form.datetime_local_field :commence_time, :class => "col-10 form-control" %>
-      <%= form.datetime_local_field :conclude_time, :class => "col-10 form-control" %>
-      <%= form.submit "Save", :class => "btn btn-success pull-right padding-bottom" %>
-      <%= link_to "Cancel", drafts_passages_path, {:class=>"btn btn-danger pull-right cancel_edit"} %>
-  <% end %>
-  <%= javascript_tag "$('#duration').durationPicker({showDays: false});" %>
+<div class="container" id="new_passage">
+	<%= bootstrap_form_for(@passage) do |form| %>
+			<%= form.text_field :title, :class => "col-10 form-control", :required => true %>
+			<%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true, rows:8 %>
+			<span class="timeline">
+			<span class="duration_limit">
+          <%= form.text_field :duration, :class => "form-control", :id => "duration" %>
+			</span>
+			<span class="commence_time">
+        <%= form.datetime_local_field :commence_time, :class => "col-10 form-control" %>
+			</span>
+			<span class="conclude_time">
+       <%= form.datetime_local_field :conclude_time, :class => "col-10 form-control" %>
+			</span>
+				</span>
+			<span class="actions">
+			<%= form.submit "Save", :class => "btn btn-success pull-right padding-bottom" %>
+				<%= link_to "Cancel", drafts_passages_path, {:class => "btn btn-danger pull-right cancel_edit"} %>
+				</span>
+	<% end %>
+	<%= javascript_tag "$('#duration').durationPicker({showDays: false});" %>
 </div>

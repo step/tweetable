@@ -66,6 +66,26 @@
       }
     }
   }
+
+  #new_passage{
+    margin-top: 20px;
+    .duration_limit{
+      .form-group{
+        display: inline-grid;
+        div.bdp-input{
+          display: inline-flex;
+          .bdp-block:nth-child(3){
+            padding-left: 20px;
+          }
+        }
+      }
+    }
+    .actions{
+      a {
+        margin-right: 20px;
+      }
+    }
+  }
 }
 
 @media (min-width: 1200px) {
