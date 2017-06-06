@@ -30,6 +30,19 @@ gem 'activerecord-session_store' , '~> 1.1.0'
 # gmail authentication using omniauth
 gem 'omniauth-google-oauth2'
 
+# que
+gem 'que', '~> 0.12.3'
+
+# scheduler for que job
+gem 'whenever', :require => false
+
+#que viewing
+gem 'que-web'
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra'
+
+# que testing
+gem 'que-testing', :require => false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
