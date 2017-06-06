@@ -4,15 +4,17 @@
 			<%= content_tag(:span, passage.title, class: 'pull-left heading') %>
 		</div>
 		<div class="actions header_component">
-			<a href="#" class="fa fa-trash pull-right"></a>
-			<a href="#" class="fa fa-edit pull-right"></a>
+			<%= form_tag(passage_path(passage.id), :method => :delete, :class => 'internal') do %>
+					<button type="submit" class="fa fa-trash pull-right button_with_delete_icon"></button>
+			<% end %>
+			<a href="<%= edit_passage_path(passage.id) %>" class="fa fa-edit pull-right"></a>
 		</div>
 	</div>
-		<div class="timeline header_component ">
-			<%= render :partial => 'passages/admin/duration', locals: {passage: passage} %>
-			<%= render :partial => 'passages/admin/commences', locals: {passage: passage, name: 'Commences on'} %>
-			<%= render :partial => 'passages/admin/concludes', locals: {passage: passage , name: 'Concludes on'} %>
-		</div>
+	<div class="timeline header_component ">
+		<%= render :partial => 'passages/admin/duration', locals: {passage: passage} %>
+		<%= render :partial => 'passages/admin/commences', locals: {passage: passage, name: 'Commences on'} %>
+		<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concludes on'} %>
+	</div>
 	<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
 	<div class="more_options">
 		<a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#confirmation_dialog_<%= passage.id %>">Commences</a>
