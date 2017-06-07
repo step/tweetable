@@ -30,6 +30,11 @@ gem 'activerecord-session_store' , '~> 1.1.0'
 # gmail authentication using omniauth
 gem 'omniauth-google-oauth2'
 
+gem 'coffee-script', '~> 2.4', '>= 2.4.1'
+
+gem 'x-editable-rails'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
