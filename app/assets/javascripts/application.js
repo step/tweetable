@@ -12,7 +12,8 @@
 //
 //= require jQuery
 //= require turbolinks
-//= require_tree .
 //= require bootstrap
 //= require jquery_ujs
-//= require bootstrap-editable.min.js
+//= require editable/bootstrap-editable
+//= require editable/rails
+//= require_tree .

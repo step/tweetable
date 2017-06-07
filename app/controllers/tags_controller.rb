@@ -1,10 +1,12 @@
 class TagsController < ApplicationController
+  helper_method :xeditable?
+
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
+    @tags = Tag.all.order('name ASC')
   end
 
   # GET /tags/1
@@ -40,15 +42,7 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
   def update
-    respond_to do |format|
-      if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
-    end
+    @tag.update(tag_params)
   end
 
   # DELETE /tags/1
@@ -59,6 +53,11 @@ class TagsController < ApplicationController
       format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def xeditable? object = nil
+    true # Or something like current_user.xeditable?
   end
 
   private

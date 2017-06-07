@@ -1,7 +1,10 @@
-$.fn.editable.defaults.mode = 'inline';
-
-$(document).ready(function() {
-    $('#tag-name').editable();
+document.addEventListener("turbolinks:load", function () {
+    $(document).ready(function () {
+        $.fn.editable.defaults.mode = 'inline';
+        $('.editable').editable({
+            ajaxOptions: {
+                type: 'PUT'
+            }
+        })
+    });
 });
-
-console.log("inline");
