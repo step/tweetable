@@ -1,0 +1,6 @@
+<h1>Add user page</h1>
+
+<%= form_tag(create_users_users_path, method: :post) do %>
+    <%= text_field_tag :emails, '', placeholder: 'Add users here'%>
+    <%= submit_tag 'Add', :class => "btn btn-success" %>
+<% end %>

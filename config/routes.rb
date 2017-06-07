@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/clearance', to: 'application#clearance',as: :clearance
-  resources :users, only: [:index, :update]
+
+  resources :users do
+    collection do
+      get 'new_users', to: 'users#new_users'
+      post 'create_users', to: 'users#create_users'
+    end
+  end
 
   resources :responses do
     resources :taggings do
