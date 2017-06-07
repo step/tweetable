@@ -48,7 +48,7 @@ describe UsersController, type: :controller do
     end
   end
 
-  describe 'POST #create' do
+  describe 'POST #create_users' do
     context 'all emails are vaild' do
 
       it 'should create an active user with the given email' do
@@ -60,7 +60,7 @@ describe UsersController, type: :controller do
         expect(User).to receive(:new).with({email: email, active: true}).and_return user
         expect(user).to receive(:save).and_return true
 
-        post :create, params: {emails: email}
+        post :create_users, params: {emails: email}
 
         expect(flash[:success]).to match("Users something@email.com created successfully...")
       end
@@ -78,7 +78,7 @@ describe UsersController, type: :controller do
         expect(user1).to receive(:save).and_return true
         expect(user2).to receive(:save).and_return true
 
-        post :create, params: {emails: [email1, email2].join(',')}
+        post :create_users, params: {emails: [email1, email2].join(',')}
 
         expect(flash[:success]).to match("Users something1@email.com, something2@email.com created successfully...")
       end
@@ -99,7 +99,7 @@ describe UsersController, type: :controller do
         expect(user1).to receive(:save).and_return true
         expect(user2).to receive(:save).and_return false
 
-        post :create, params: {emails: [email1, email2].join(',')}
+        post :create_users, params: {emails: [email1, email2].join(',')}
 
         expect(flash[:success]).to match("Users something@email.com created successfully...")
         expect(flash[:danger]).to match("Users something@email.com failed to create...")
@@ -123,7 +123,7 @@ describe UsersController, type: :controller do
         expect(user2).to receive(:save).and_return false
         expect(user3).to receive(:save).and_return true
 
-        post :create, params: {emails: [email1, email2, email3].join(',')}
+        post :create_users, params: {emails: [email1, email2, email3].join(',')}
 
         expect(flash[:success]).to match("Users something@email.com, something2@email.com created successfully...")
         expect(flash[:danger]).to match("Users something@email.com failed to create...")

@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get 'new_users', to: 'users#new_users'
       post 'create_users', to: 'users#create_users'
     end
   end

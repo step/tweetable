@@ -17,10 +17,6 @@ class UsersController < ApplicationController
     emails_as_string.split(',').collect(&:strip)
   end
 
-  def new_users
-  end
-
-
   def create_users
     emails = refine_emails(params[:emails])
 
