@@ -46,11 +46,6 @@ body,
   font-family: 'Roboto', sans-serif;
 }
 
-div.main_body,
-div.main_content {
-  height: $main-content-height;
-}
-
 nav.sidebar,
 .main_body {
   -webkit-transition: margin 200ms ease-out;

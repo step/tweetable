@@ -1,99 +1,21 @@
-nav.sidebar.navbar {
-  border-radius: 0px;
-}
+@import 'constants';
 
-li.tab_action.active{
-  background-color: rgba(124, 124, 124, 0.28);
-}
-
-@media (min-width: 400px) {
-  .sidebar,
-  .sidebar_items {
-    /*width: 100%;*/
+@media screen and (max-width: $responsive) {
+  .navbar-header .navbar-brand {
+    padding-left: 70px;
   }
-}
-
-@media (min-width: 768px) {
-  nav.sidebar .navbar-nav > li:first-child {
-    //border-top: 1px #e5e5e5 solid;
-  }
-  nav.sidebar .navbar-collapse,
-  nav.sidebar .container-fluid {
-    padding: 0 0px 0 0px;
-  }
-  nav.sidebar {
-    width: 200px;
-    height: 100%;
-    float: left;
-    z-index: 8000;
-    margin-bottom: 0px;
-  }
-  nav.sidebar li {
-    width: 100%;
-  }
-  nav.sidebar:hover {
-    margin-left: 0px;
-  }
-  .forAnimate {
-    opacity: 0;
-  }
-}
-
-@media (min-width: 1330px) {
-  .sidebar {
-    height: 100%;
-    margin-left: 0px;
-    float: left;
-  }
-  nav.sidebar .forAnimate {
-    opacity: 1;
+  .app-sidebar-links-container {
+    position: relative;
+    margin-top: -50px;
+    z-index: 9999;
   }
 }
 
 
-nav.sidebar .navbar-nav .open .dropdown-menu > li > a:hover,
-nav.sidebar .navbar-nav .open .dropdown-menu > li > a:focus {
-  color: #CCC;
-  background-color: transparent;
+.app-sidebar-links-container {
+  position: relative;
+  margin-top: 20px;
 }
-
-nav:hover .forAnimate {
-  opacity: 1;
-}
-
-nav:hover .forAnimate {
-  opacity: 1;
-}
-
-nav.sidebar .navbar-nav li {
-  border-bottom: none;
-}
-
-.sidebar .sub_menu li a {
-  padding: 5px 0 5px 50px;
-}
-
-.sub_category li {
-  margin: 0 0 5px 0;
-  list-style-type: none;
-}
-
-.sub_category {
-  width: 100%;
-}
-
-.profile_category hr {
-  margin: 0 0 4px 0;
-}
-
-.sub_category li a {
-  text-decoration: none;
-}
-
-.sidebar .secion {
-  padding: 15px;
-}
-
 .icon-bar {
   background-color: #000000;
 }

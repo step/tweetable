@@ -16,8 +16,10 @@
   <% if logged_in? %>
       <%= render :partial => "shared/top_nav_bar" %>
       <div class="row main_content">
-        <%= render :partial => "shared/side_nav_bar" %>
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 main_body">
+	      <div class=" col-sm-2 col-md-2 app-sidebar-links-container">
+		      <%= render :partial => "shared/side_nav_bar" %>
+	      </div>
+        <div class="col-sm-10 col-md-10">
           <% flash.each do |key, value| %>
               <div class="alert alert-<%= key %>"><%= value %></div>
           <% end %>

@@ -1,17 +1,15 @@
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<%= link_to 'Tweetable', passages_path, class: "navbar-brand" %>
 		</div>
 		
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="app-user-name">
+		<div class="app-user-name hidden-xs">
 			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<%= link_to  "Welcome, #{current_user.name}" ,'javascript:void(0)' %>
 				</li>
 			</ul>
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
+		</div>
+	</div>
 </nav>
