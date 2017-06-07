@@ -8,7 +8,14 @@ var updateRemainingCharacters = function (event) {
 };
 
 var disableSubmission = function () {
-    $(".response-submission").attr("disabled", "disabled");
+    $(".response-submission").attr("disabled","disabled");
+    $(".response-submission").css("display", "none");
+    $(".back-btn").removeClass("hidden")
+    $("#timeout_alert").html('<div class="alert alert-danger"> <strong>Oops..!</strong> Your submission time has been expired..</div>')
+    setTimeout(function(){
+        $(".alert").alert('close')
+    },5000);
+
 };
 
 var showRemainingTime = function () {

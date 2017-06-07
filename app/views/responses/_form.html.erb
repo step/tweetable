@@ -5,6 +5,7 @@
       <%= text_field_tag 'text', nil, placeholder: 'Tweet here',  maxlength: 140, class: 'form-control', style: 'width: 1000px', id: 'text' %>
     </div>
     <button type="button" class="btn btn-primary response-submission" data-toggle="modal" data-target="#confirmation-dialog_response_<%= passage.id %>">Submit</button>
+    <%= link_to "Back", passages_path, {:class => "hidden btn btn-primary back-btn"} %>
     <div class="modal fade bd-example-modal-sm" id="confirmation-dialog_response_<%= passage.id %>" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
