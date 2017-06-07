@@ -14,16 +14,18 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:auth_id)
+    session.delete(:user_id)
+    session.delete(:user_name)
+    session.delete(:image_url)
     redirect_to login_path
   end
 
   private
 
   def assign_session_details(user)
-    session[:auth_id]=user.auth_id
+    session[:user_id]=user.id
     session[:user_name]=user.name
-    session[:image_url]=user.image_url
+    session[:user_image_url]=user.image_url
   end
 
   def user_params

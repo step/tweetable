@@ -3,7 +3,7 @@
     <%= link_to content_tag(:h2, 'Tweetable'), passages_path %>
   </div>
   <div class="dropdown pull-right profile_section">
-    <%= image_tag(session[:image_url], :id => 'user_icon', class: 'dropdown-toggle', 'data-toggle' => 'dropdown') %>
+    <%= image_tag(session[:user_image_url], :id => 'user_icon', class: 'dropdown-toggle', 'data-toggle' => 'dropdown') %>
     <ul class="dropdown-menu">
       <%= content_tag(:li, link_to(session[:user_name], '#')) %>
 

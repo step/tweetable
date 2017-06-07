@@ -1,4 +1,4 @@
-<% if User.is_admin?(session[:auth_id])%>
+<% if current_user.admin %>
     <%= render 'passages/admin/index', active_tab: active_tab %>
 <% else %>
     <%= render 'passages/candidate/index' , active_tab: active_tab %>

@@ -1,5 +1,5 @@
 <!--TODO check why current_user not available here -->
-<% current_user = User.find_by(auth_id: session[:auth_id]) %>
+<% logged_in_user = current_user %>
 
 <nav class="navbar navbar-default row">
     <div class="navbar-header col-xs-10 col-sm-10 col-md-10 col-lg-10">
@@ -7,12 +7,12 @@
     </div>
     <div class="nav navbar-nav  user-emoji col-xs-2 col-sm-2 col-md-2 col-lg-2">
 
-      <%= link_to image_tag(session[:image_url],:class => 'user-circle-icon'), '#', class: 'dropdown-toggle pull-right', 'data-toggle' =>'dropdown' %>
+      <%= link_to image_tag(logged_in_user.image_url,:class => 'user-circle-icon'), '#', class: 'dropdown-toggle pull-right', 'data-toggle' =>'dropdown' %>
 
       <ul class="dropdown-menu dropdown-menu-right pull-right" dropdown-toggle="focus">
-        <%= content_tag(:li, link_to(session[:user_name], "#")) %>
+        <%= content_tag(:li, link_to(logged_in_user.name, "#")) %>
 
-        <% if current_user.admin && current_user.active %>
+        <% if logged_in_user.admin && logged_in_user.active %>
             <%= content_tag(:li, link_to('Users', users_path)) %>
         <% end %>
 
