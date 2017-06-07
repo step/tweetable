@@ -2,6 +2,7 @@ class TagsController < ApplicationController
   helper_method :xeditable?
 
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  layout false, only: [:new, :edit]
 
   # GET /tags
   # GET /tags.json
