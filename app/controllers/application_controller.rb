@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
-  def set_current_tab(tab = nil)
-    session[:current_tab] = (tab || current_tab )
-  end
-
   def clearance
     return redirect_to passages_path if current_user.active
     render 'shared/clearance', layout: false
@@ -30,10 +26,6 @@ class ApplicationController < ActionController::Base
     unless current_user.active
       redirect_to clearance_url
     end
-  end
-
-  def current_tab
-    session[:current_tab] || (current_user.admin ? :drafts : :commenced).to_s
   end
 
   def require_login

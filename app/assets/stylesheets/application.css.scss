@@ -17,7 +17,7 @@
 @import "bootstrap-sprockets";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,700,900');
 @import "constants";
-
+@import "bootstrap-editable";
 
 body {
   font-family: 'Open Sans' !important;
@@ -30,6 +30,7 @@ body {
 p {
   font-weight: 300;
 }
+
 
 h1, h2, h3, h4, h5, h6, .heading {
   font-family: 'Roboto' !important;

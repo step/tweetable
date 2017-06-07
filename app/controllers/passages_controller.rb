@@ -3,26 +3,6 @@ class PassagesController < ApplicationController
 
 
   before_action :verify_privileges, only: [:drafts, :ongoing, :finished]
-  before_action :set_active_tab_and_redirect, only: [:index, :new, :drafts, :finished, :ongoing, :commenced_for_candidate, :missed_by_candidate, :attempted_by_candidate]
-
-  NEW = 'new'
-  DRAFTS = 'drafts'
-  ONGOING = 'ongoing'
-  COMMENCED = 'commenced'
-  MISSED = 'missed'
-  ATTEMPTED = 'attempted'
-  FINISHED = 'concluded'
-
-
-  ALL_TABS = {
-      new: NEW,
-      drafts: DRAFTS,
-      ongoing: ONGOING,
-      finished: FINISHED,
-      commenced_for_candidate: COMMENCED,
-      missed_by_candidate: MISSED,
-      attempted_by_candidate: ATTEMPTED
-  }
 
   def new
     @passage = Passage.new
@@ -35,7 +15,11 @@ class PassagesController < ApplicationController
 
   def index
     @passages = Passage.all
-    render :index, locals: {active_tab: current_tab}
+    if current_user.admin
+      redirect_to drafts_passages_url
+    else
+      redirect_to commenced_passages_url
+    end
   end
 
   def update
@@ -103,34 +87,25 @@ class PassagesController < ApplicationController
     render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "finished_passages"}
   end
 
-  def commenced_for_candidate
+  def commenced
     filtered_passages = Passage.commence_for_candidate(current_user)
     render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "commenced_passages"}
   end
 
-  def missed_by_candidate
+  def missed
     filtered_passages = Passage.missed_by_candidate(current_user)
     render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "missed_passages"}
   end
 
-  def attempted_by_candidate
+  def attempted
     passages = Passage.attempted_by_candidate(current_user)
     render "passages/candidate/attempted_passages_pane", locals: {filtered_passages: passages}
   end
 
   private
 
-  def from_tab?
-    params[:from_tab].eql? 'true'
-  end
-
-  def set_active_tab_and_redirect
-    set_current_tab ALL_TABS[params[:action].to_sym]
-  end
-
   def verify_privileges
     unless current_user.admin
-      set_current_tab COMMENCED
       flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
       redirect_to passages_path
     end

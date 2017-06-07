@@ -7,7 +7,7 @@ module PassagesHelper
   end
 
   def candidate_tabs
-    {commenced_for_candidate: :commenced, attempted_by_candidate: :attempted, missed_by_candidate: :missed}
+    {commenced: :commenced, attempted: :attempted, missed: :missed}
   end
 
   def to_preferred_time_format(time)

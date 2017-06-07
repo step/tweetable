@@ -222,7 +222,7 @@ describe PassagesController do
       it 'should give all the yet to open passages' do
         stub_current_user_with_attributes({passages: [], id: 2, active: true})
 
-        get :commenced_for_candidate, params: {from_tab: true}
+        get :commenced, params: {from_tab: true}
 
         expect(response).to be_success
         should render_template('passages/candidate/passages_pane',)

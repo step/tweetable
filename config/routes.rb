@@ -24,9 +24,9 @@ Rails.application.routes.draw do
       get 'drafts', to: 'passages#drafts'
       get 'ongoing', to: 'passages#ongoing'
       get 'finished', to: 'passages#finished'
-      get 'commenced_for_candidate', to: 'passages#commenced_for_candidate'
-      get 'missed_by_candidate', to: 'passages#missed_by_candidate'
-      get 'attempted_by_candidate', to: 'passages#attempted_by_candidate'
+      get 'commenced', to: 'passages#commenced'
+      get 'missed', to: 'passages#missed'
+      get 'attempted', to: 'passages#attempted'
     end
 
     member do
