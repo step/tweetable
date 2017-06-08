@@ -41,52 +41,20 @@ h1, h2, h3, h4, h5, h6, .heading {
 
 html,
 body,
-.container-fluid {
+.container-fluid, .app-main-content , .app-main-body{
   height: $view-port-height;
+  padding-bottom: 0;
   font-family: 'Roboto', sans-serif;
 }
 
 nav.sidebar,
-.main_body {
+.app-main-body {
   -webkit-transition: margin 200ms ease-out;
   -moz-transition: margin 200ms ease-out;
   -o-transition: margin 200ms ease-out;
   transition: margin 200ms ease-out;
 }
 
-@media (min-width: 300px) {
-  .main_body.col-xs-8 {
-    width: 100%;
-  }
-}
-
-@media (min-width: 400px) {
-  .main_body.col-sm-8 {
-    width: 100%;
-    height: $view-port-height;
-  }
-}
-
-@media (min-width: 768px) {
-  .main_body.col-md-8 {
-    width: calc(100% - 200px);
-    height: $view-port-height;
-  }
-}
-
-div.main_body {
-  overflow: hidden;
-  align-content: center;
-}
-
-div.main-content {
-  padding: 10px 10px 0 10px;
-  align-content: center;
-}
-
-div.col-sm-2 {
-  padding: 0;
-}
 .clearance {
   margin-top: 5%;
 }

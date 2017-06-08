@@ -4,6 +4,7 @@
   .navbar-header .navbar-brand {
     padding-left: 70px;
   }
+  ul.nav{padding-left: 40px;}
   .app-sidebar-links-container {
     position: relative;
     margin-top: -50px;
@@ -15,6 +16,7 @@
   .app-sidebar-links-container {
     position: relative;
     margin-top: 20px;
+    height: $view-port-height;
   }
 }
 .icon-bar {
