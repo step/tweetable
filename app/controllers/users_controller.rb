@@ -36,11 +36,6 @@ class UsersController < ApplicationController
     user.update_attributes(permit_params)
   end
 
-  def leader_board
-    users = User.where.not(auth_id: nil, admin: true)
-    @leader_list = leader_list(users)
-  end
-
   private
 
   def generate_creation_notice(saved, failed)
@@ -63,23 +58,4 @@ class UsersController < ApplicationController
     end
   end
 
-  def leader_list(users)
-    users_score = users.map {|user| {
-        image: user.image_url,
-        name: user.name,
-        points: user.tags.reduce(0) {|score, tag| score + tag.weight.to_i}}
-    }
-    users_score = users_score.sort_by {|user| user[:points]}.reverse
-    users_score.first[:rank] = 1
-    users_score.each_with_index do |user, index|
-      unless index.eql? 0
-        competitor = users_score[index-1]
-        if user[:points].eql? competitor[:points]
-          user[:rank] = competitor[:rank]
-        else
-          user[:rank] = competitor[:rank].next
-        end
-      end
-    end
-  end
 end

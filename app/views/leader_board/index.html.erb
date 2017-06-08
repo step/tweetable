@@ -3,16 +3,18 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th>Name</th>
       <th>Rank</th>
+      <th>Name</th>
+      <th>Points</th>
     </tr>
     </thead>
     <tbody>
 
     <% @leader_list.each do |user| %>
         <tr>
+          <td><%= user[:rank] %></td>
           <td><img class="user-image" src=<%= user[:image] %>><%= user[:name] %></td>
-          <td><%= user[:rank] %><span class="points"> ( Points: <%= user[:points] %> )</span></td>
+          <td><%= user[:points] %></td>
         </tr>
     <% end %>
     </tbody>

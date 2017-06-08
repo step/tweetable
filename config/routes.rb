@@ -8,10 +8,11 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get 'leader_board', to: 'users#leader_board'
       post 'create_users', to: 'users#create_users'
     end
   end
+
+  resources :leader_board, only: [:index]
 
   resources :responses do
     resources :taggings do

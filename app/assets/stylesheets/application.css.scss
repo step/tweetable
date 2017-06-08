@@ -69,3 +69,11 @@ input[type="checkbox"] {
 .editable-buttons{
   display: none;
 }
+
+.table > tbody{
+  text-align: center;
+}
+
+.table > thead > tr > th{
+  text-align: center;
+}
