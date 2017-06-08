@@ -38,14 +38,14 @@ class UsersController < ApplicationController
 
   def leader_board
     users = User.where.not(auth_id: nil, admin: true)
-    @leader_list = leader_list(users).sort_by { |user| user[:points].to_i }.reverse
+    @leader_list = leader_list(users)
   end
 
   private
 
   def generate_creation_notice(saved, failed)
-    flash[:danger] = "Users #{failed.map { |user| user.email }.join(', ')} failed to create..." unless failed.empty?
-    flash[:success]= "Users #{saved.map { |user| user.email }.join(', ')} created successfully..." unless saved.empty?
+    flash[:danger] = "Users #{failed.map {|user| user.email}.join(', ')} failed to create..." unless failed.empty?
+    flash[:success]= "Users #{saved.map {|user| user.email}.join(', ')} created successfully..." unless saved.empty?
   end
 
 
@@ -64,11 +64,22 @@ class UsersController < ApplicationController
   end
 
   def leader_list(users)
-    users.map { |user| {
+    users_score = users.map {|user| {
         image: user.image_url,
-        email: user.email,
         name: user.name,
-        points: user.tags.map { |tag| tag.weight }.reduce(:+)}
+        points: user.tags.reduce(0) {|score, tag| score + tag.weight.to_i}}
     }
+    users_score = users_score.sort_by {|user| user[:points]}.reverse
+    users_score.first[:rank] = 1
+    users_score.each_with_index do |user, index|
+      unless index.eql? 0
+        competitor = users_score[index-1]
+        if user[:points].eql? competitor[:points]
+          user[:rank] = competitor[:rank]
+        else
+          user[:rank] = competitor[:rank].next
+        end
+      end
+    end
   end
 end

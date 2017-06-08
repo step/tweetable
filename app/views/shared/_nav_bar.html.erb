@@ -10,10 +10,12 @@
       <%= link_to image_tag(logged_in_user.image_url,:class => 'user-circle-icon'), '#', class: 'dropdown-toggle pull-right', 'data-toggle' =>'dropdown' %>
 
       <ul class="dropdown-menu dropdown-menu-right pull-right" dropdown-toggle="focus">
-        <%= content_tag(:li, link_to(logged_in_user.name, "#")) %>
+        <%= content_tag(:li, link_to(logged_in_user.name, "/")) %>
 
         <% if logged_in_user.admin && logged_in_user.active %>
             <%= content_tag(:li, link_to('Users', users_path)) %>
+            <%= content_tag(:li, link_to('Tags', tags_path)) %>
+            <%= content_tag(:li, link_to('Leader Board', leader_board_users_path)) %>
         <% end %>
 
         <%= content_tag(:li, "", class: "divider") %>

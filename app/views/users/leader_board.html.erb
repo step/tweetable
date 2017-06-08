@@ -9,10 +9,10 @@
     </thead>
     <tbody>
 
-    <% @leader_list.each_with_index do |user,index| %>
+    <% @leader_list.each do |user| %>
         <tr>
           <td><img class="user-image" src=<%= user[:image] %>><%= user[:name] %></td>
-          <td><%= index+1 %><span class="points"> ( Points: <%= user[:points] ? user[:points] : 0 %> )</span></td>
+          <td><%= user[:rank] %><span class="points"> ( Points: <%= user[:points] %> )</span></td>
         </tr>
     <% end %>
     </tbody>
