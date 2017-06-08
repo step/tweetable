@@ -9,6 +9,10 @@ describe UsersController, type: :routing do
       expect(:patch => '/users/1').to route_to('users#update', :id => '1')
     end
 
+    it 'routes to #leader_board via GET' do
+      expect(:get => '/users/leader_board').to route_to('users#leader_board')
+    end
+
     it 'routes to #index' do
       expect(:get => '/users').to route_to('users#index')
     end

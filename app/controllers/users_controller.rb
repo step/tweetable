@@ -36,6 +36,11 @@ class UsersController < ApplicationController
     user.update_attributes(permit_params)
   end
 
+  def leader_board
+    users = User.where.not(auth_id: nil, admin: true)
+    @leader_list = leader_list(users).sort_by { |user| user[:points].to_i }.reverse
+  end
+
   private
 
   def generate_creation_notice(saved, failed)
@@ -58,4 +63,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def leader_list(users)
+    users.map { |user| {
+        image: user.image_url,
+        email: user.email,
+        name: user.name,
+        points: user.tags.map { |tag| tag.weight }.reduce(:+)}
+    }
+  end
 end

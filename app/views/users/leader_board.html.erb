@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Leader Board</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Rank</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @leader_list.each_with_index do |user,index| %>
+        <tr>
+          <td><img class="user-image" src=<%= user[:image] %>><%= user[:name] %></td>
+          <td><%= index+1 %><span class="points"> ( Points: <%= user[:points] ? user[:points] : 0 %> )</span></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

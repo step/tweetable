@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   has_many :responses
   has_many :passages, through: :responses
-  has_many :tag, through: :responses
+  has_many :tags, through: :responses
 
   def self.is_admin?(id)
     User.find_by(auth_id: id).admin
