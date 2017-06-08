@@ -1,10 +1,11 @@
 <%= javascript_include_tag 'bootstrap-duration-picker' %>
 
-<div class="container" id="new_passage">
-	<%= bootstrap_form_for(@passage) do |form| %>
-			<%= form.text_field :title, :class => "col-10 form-control", :required => true %>
-			<%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true, rows:8 %>
-			<span class="timeline">
+<div class="row">
+	<div class="col-lg-12">
+		<%= bootstrap_form_for(@passage) do |form| %>
+				<%= form.text_field :title, :class => "col-10 form-control", :required => true %>
+				<%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true, rows:8 %>
+				<span class="timeline">
 			<span class="duration_limit">
           <%= form.text_field :duration, :class => "form-control", :id => "duration" %>
 			</span>
@@ -15,10 +16,11 @@
        <%= form.datetime_local_field :conclude_time, :class => "col-10 form-control" %>
 			</span>
 				</span>
-			<span class="actions">
-			<%= form.submit "Save", :class => "btn btn-success pull-right padding-bottom" %>
-				<%= link_to "Cancel", drafts_passages_path, {:class => "btn btn-danger pull-right cancel_edit"} %>
+				<span class="actions pull-right">
+					<%= link_to "Cancel", drafts_passages_path, {:class => "btn btn-danger cancel_edit"} %>
+					<%= form.submit "Save", :class => "btn btn-success padding-bottom" %>
 				</span>
-	<% end %>
-	<%= javascript_tag "$('#duration').durationPicker({showDays: false});" %>
+		<% end %>
+		<%= javascript_tag "$('#duration').durationPicker({showDays: false});" %>
+	</div>
 </div>

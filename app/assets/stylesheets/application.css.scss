@@ -47,12 +47,21 @@ body,
   font-family: 'Roboto', sans-serif;
 }
 
+.app-main-content {
+  padding-top: 20px;
+}
+
 nav.sidebar,
 .app-main-body {
   -webkit-transition: margin 200ms ease-out;
   -moz-transition: margin 200ms ease-out;
   -o-transition: margin 200ms ease-out;
   transition: margin 200ms ease-out;
+}
+
+.app-main-body {
+  height: 100%;
+  overflow: auto;
 }
 
 .clearance {

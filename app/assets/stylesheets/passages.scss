@@ -1,136 +1,157 @@
-// Place all the styles related to the Passages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-#passage_container {
-  overflow: auto;
-  margin-right: -31px;
-  padding-top: 20px;
-  height: calc(100% - 50px);
-  font-family: Open Sans;
-  .passage{
-    .header .actions{
-      width: 20%;
-    }
-    .content {
-      margin-top: 10px;
-      p{
-      line-height: 26px;
-      }
-    }
-  }
+.app-passage-head {
+  display: flex;
+  justify-content: space-between;
 }
-
-@media (min-width: 300px) {
-  #passage_container .col-xs-5 {
-    margin-left: 5%;
-    width: 90%;
-    .thumbnail{
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  }
-
-  .passage {
-    .title {
-      display: inline-flex;
-    }
-    div {
-      display: inline-block;
-    }
-    .title, .title span, .timeline, .more_options {
-      width: 100%;
-    }
-    .header {
-      width: 100%;
-      border-bottom: 1px solid lightgray;
-      padding: 5px;
-      display: inline-flex;
-      .header_component {
-        padding-top: 1%;
-      }
-
-      .actions {
-        a {
-          font-size: 15px;
-          color: black;
-          cursor: pointer;
-          padding-left: 10%;
-          padding-top: 10%;
-          text-decoration: none;
-        }
-        button{
-          margin-top: 9%;
-          border: none;
-          background-color: transparent;
-        }
-      }
-    }
-    .timeline {
-      padding: 2px 0 2px 5px;
-      display: inline-grid;
-      border-bottom: 1px solid lightgray;
-      .duration, .commences_on, .concludes_on {
-          margin-right: 20px;
-      }
-    }
-    .more_options {
-      a, span {
-        margin-left: 10px;
-      }
-    }
-  }
-
-  #new_passage {
-    margin-top: 20px;
-    .duration_limit {
-      .form-group {
-        display: inline-grid;
-        div.bdp-input {
-          display: inline-flex;
-          .bdp-block:nth-child(3) {
-            padding-left: 20px;
-          }
-        }
-      }
-    }
-    .actions {
-      a {
-        margin-right: 20px;
-      }
-    }
-  }
-}
-
-#passage_container{
-  margin-top: 15px;
-  .col-lg-8 ,.col-md-8, .col-sm-8, .col-xs-8{
-    margin-left: 5%;
-    width: 90%;
-  }
-}
-
-@media (min-width: 400px){
-  .passage{
-    .header .actions{
-      width: 10%;
-    }
-  }
-}
-@media (min-width: 600px){
-  .passage{
-    .header .actions{
-        width: 10%;
-    }
-  }
-}
-
-@media (min-width: 1015px){
-  .passage .timeline {
-    padding: 2px 0 2px 5px;
-    display: inline-flex;
-    .duration, .commences_on, .concludes_on {
-      margin-right: 20px;
-    }
+.passage-actions {
+  display: flex;
+  align-items: center;
+  .fa {
+    margin-left: 10px;
   }
 }
 
 
+
+
+
+
+
+
+
+
+//// Place all the styles related to the Passages controller here.
+//// They will automatically be included in application.css.
+//// You can use Sass (SCSS) here: http://sass-lang.com/
+//#passage_container {
+//  overflow: auto;
+//  margin-right: -31px;
+//  padding-top: 20px;
+//  height: calc(100% - 50px);
+//  font-family: Open Sans;
+//  .passage{
+//    .header .actions{
+//      width: 20%;
+//    }
+//    .content {
+//      margin-top: 10px;
+//      p{
+//      line-height: 26px;
+//      }
+//    }
+//  }
+//}
+//
+//@media (min-width: 300px) {
+//  #passage_container .col-xs-5 {
+//    margin-left: 5%;
+//    width: 90%;
+//    .thumbnail{
+//      background-color: rgba(255, 255, 255, 0.1);
+//    }
+//  }
+//
+//  .passage {
+//    .title {
+//      display: inline-flex;
+//    }
+//    div {
+//      display: inline-block;
+//    }
+//    .title, .title span, .timeline, .more_options {
+//      width: 100%;
+//    }
+//    .header {
+//      width: 100%;
+//      border-bottom: 1px solid lightgray;
+//      padding: 5px;
+//      display: inline-flex;
+//      .header_component {
+//        padding-top: 1%;
+//      }
+//
+//      .actions {
+//        a {
+//          font-size: 15px;
+//          color: black;
+//          cursor: pointer;
+//          padding-left: 10%;
+//          padding-top: 10%;
+//          text-decoration: none;
+//        }
+//        button{
+//          margin-top: 9%;
+//          border: none;
+//          background-color: transparent;
+//        }
+//      }
+//    }
+//    .timeline {
+//      padding: 2px 0 2px 5px;
+//      display: inline-grid;
+//      border-bottom: 1px solid lightgray;
+//      .duration, .commences_on, .concludes_on {
+//          margin-right: 20px;
+//      }
+//    }
+//    .more_options {
+//      a, span {
+//        margin-left: 10px;
+//      }
+//    }
+//  }
+//
+//  #new_passage {
+//    margin-top: 20px;
+//    .duration_limit {
+//      .form-group {
+//        display: inline-grid;
+//        div.bdp-input {
+//          display: inline-flex;
+//          .bdp-block:nth-child(3) {
+//            padding-left: 20px;
+//          }
+//        }
+//      }
+//    }
+//    .actions {
+//      a {
+//        margin-right: 20px;
+//      }
+//    }
+//  }
+//}
+//
+//#passage_container{
+//  margin-top: 15px;
+//  .col-lg-8 ,.col-md-8, .col-sm-8, .col-xs-8{
+//    margin-left: 5%;
+//    width: 90%;
+//  }
+//}
+//
+//@media (min-width: 400px){
+//  .passage{
+//    .header .actions{
+//      width: 10%;
+//    }
+//  }
+//}
+//@media (min-width: 600px){
+//  .passage{
+//    .header .actions{
+//        width: 10%;
+//    }
+//  }
+//}
+//
+//@media (min-width: 1015px){
+//  .passage .timeline {
+//    padding: 2px 0 2px 5px;
+//    display: inline-flex;
+//    .duration, .commences_on, .concludes_on {
+//      margin-right: 20px;
+//    }
+//  }
+//}
+//
+//

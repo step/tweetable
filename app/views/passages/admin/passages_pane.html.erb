@@ -1,6 +1,6 @@
 <div class="row" id="app-passage-container">
 	<% filtered_passages.each do |passage| %>
-			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<div class="col-lg-12">
 				<%= render "passages/admin/" + partial_name, :passage => passage %>
 			</div>
 	<% end %>

@@ -15,10 +15,23 @@
 @media screen and (min-width: $responsive) {
   .app-sidebar-links-container {
     position: relative;
-    margin-top: 20px;
     height: $view-port-height;
   }
 }
 .icon-bar {
   background-color: #000000;
+}
+
+@media screen and (max-width: $responsive) {
+  .navbar-toggle {
+    position: fixed !important;
+    top: 0;
+  }
+  .navbar {
+    margin-bottom: 0!important;
+    min-height: 20px!important;
+  }
+  .app-sidebar-links-container {
+    padding-top: 30px!important;
+  }
 }
