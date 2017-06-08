@@ -1,18 +1,21 @@
-<div class="thumbnail passage">
-	<div class="header">
-		<div class="title header_component">
-			<%= content_tag(:span, passage.title, class: 'pull-left heading') %>
+
+<div class="panel panel-default">
+	<div class="panel-heading app-passage-head">
+		<div class="passage-header">
+			<%= content_tag(:span, passage.title) %>
 		</div>
 	</div>
+	<div class="panel-body">
 		<div class="timeline header_component ">
 			<%= render :partial => 'passages/admin/duration', locals: {passage: passage} %>
 			<%= render :partial => 'passages/admin/commences', locals: {passage: passage, name: 'Commences on'} %>
 			<%= render :partial => 'passages/admin/concludes', locals: {passage: passage , name: 'Concludes on'} %>
 		</div>
-	<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
-	<div class="more_options">
+		<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
+		<div class="more_options">
 			<span>Attempted by: <%= passage.responses.count %> candidates</span>
-			<%= content_tag(:a, 'Conclude', href: conclude_passage_path(passage.id), class: 'btn btn-danger pull-right') %>
-			<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id), class: 'btn btn-info pull-right') %>
+			<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id) , class: 'btn btn-info pull-right' ) %>
+			<%= content_tag(:a, 'Conclude', href: conclude_passage_path(passage.id), class: 'btn btn-danger pull-right' ) %>
+		</div>
 	</div>
 </div>
