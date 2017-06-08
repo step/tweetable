@@ -11,10 +11,11 @@
   }
 }
 
-
-.app-sidebar-links-container {
-  position: relative;
-  margin-top: 20px;
+@media screen and (min-width: $responsive) {
+  .app-sidebar-links-container {
+    position: relative;
+    margin-top: 20px;
+  }
 }
 .icon-bar {
   background-color: #000000;
