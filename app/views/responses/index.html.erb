@@ -16,8 +16,10 @@
       </div>
 
       <ul id="response-list" class="comments-list">
-        <% responses.each do |response| %>
-        <%= render partial, response: response %>
+        <% current_user_res , other_responses  = responses.partition { |response| response.user_id == current_user.id } %>
+        <%= render partial, response: current_user_res[0] %>
+        <% other_responses.each do |response| %>
+              <%= render partial, response: response %>
         <% end %>
       </ul>
   </div>

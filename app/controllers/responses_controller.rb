@@ -3,7 +3,7 @@ class ResponsesController < ApplicationController
 
   def index
     passage = Passage.find(params[:passage_id])
-    responses = passage.responses
+    responses = passage.responses.order('created_at DESC')
     partial = (current_user.admin) ? 'response_evaluation' : 'response'
     render 'index', locals: {responses: responses, passage: passage, partial: partial}
   end
