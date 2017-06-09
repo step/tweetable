@@ -1,6 +1,8 @@
 class TagsController < ApplicationController
   helper_method :xeditable?
 
+  before_action :verify_privileges, except: []
+
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
   layout false, only: [:new, :edit]
 

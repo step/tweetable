@@ -1,16 +1,9 @@
 class UsersController < ApplicationController
 
+  before_action :verify_privileges, only: [:index,:create_users]
+
   def index
     @users = User.where.not(id: current_user.id).order('name ASC')
-  end
-
-  def conformation
-    is_active_user = current_user.active
-    if is_active_user
-      redirect_to passages_path
-    else
-      render :conformation
-    end
   end
 
   def refine_emails(emails_as_string)

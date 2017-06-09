@@ -104,13 +104,6 @@ class PassagesController < ApplicationController
 
   private
 
-  def verify_privileges
-    unless current_user.admin
-      flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
-      redirect_to passages_path
-    end
-  end
-
   def permit_params
     params.require("passage").permit(:title, :text, :duration, :commence_time, :conclude_time)
   end
