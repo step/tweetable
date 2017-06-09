@@ -1,22 +1,7 @@
 describe UsersController, type: :controller do
   before(:each) do
     stub_logged_in(true)
-
   end
-
-  let(:valid_attributes) {
-    {
-        active: '0',
-        admin: '0'
-    }
-  }
-
-  let(:params_to_permit) {
-    {
-        active: false,
-        admin: false
-    }
-  }
 
   describe 'GET #index' do
 
@@ -32,18 +17,15 @@ describe UsersController, type: :controller do
 
     context 'with valid params' do
       it 'update the user record' do
-        user_params = {admin: false, id: 1, active: true}
-        stub_current_user_with_attributes(user_params)
+        stub_current_active_user
+        user_to_be_updated = double('user')
+        attributes_to_update = {id: 'some_id', active: true, admin: true}
 
-        # TODO add test while assertion
-        # expect(User).to receive(:find).and_return(user_params)
-        # allow_any_instance_of(UsersController).to receive(:permit_params).and_return(params_to_permit)
-        # expect(user).to receive(:update_attributes).with(params_to_permit).and_return(true)
-        #
-        # put :update, params: {id: user_params[:id], user: valid_attributes}
+        expect(User).to receive(:find).with(attributes_to_update[:id]).and_return(user_to_be_updated)
+        expect(controller).to receive(:permit_params).and_return(attributes_to_update)
+        expect(user_to_be_updated).to receive(:update_attributes).with(attributes_to_update).and_return(true)
 
-        # expect(user.active).to   eq(false)
-
+        put :update, params: {id: attributes_to_update[:id], user: attributes_to_update}
       end
     end
   end
