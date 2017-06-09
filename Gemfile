@@ -36,6 +36,7 @@ gem 'x-editable-rails'
 
 # automatic evaluator
 gem 'after_the_deadline'
+gem 'rufus-scheduler', '~> 3.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
