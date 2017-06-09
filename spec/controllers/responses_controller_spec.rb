@@ -113,6 +113,7 @@ describe ResponsesController, type: :controller do
 
         expect(Passage).to receive(:find).with(passage_id).and_return(passage)
         expect(passage).to receive(:responses).and_return(responses)
+        expect(responses).to receive(:order).with('created_at DESC')
 
         get :index, params: {passage_id: passage_id}
         should render_template("index")
@@ -124,7 +125,7 @@ describe ResponsesController, type: :controller do
 
       it 'renders the new template' do
         stub_logged_in(true)
-        stub_current_active_admin_user
+        stub_current_active_intern_user
 
         passage_id = 'passage_id'
         passage = double('passage')
@@ -132,6 +133,7 @@ describe ResponsesController, type: :controller do
 
         expect(Passage).to receive(:find).with(passage_id).and_return(passage)
         expect(passage).to receive(:responses).and_return(responses)
+        expect(responses).to receive(:order).with('created_at DESC')
 
         get :index, params: {passage_id: passage_id}
         should render_template("index")
