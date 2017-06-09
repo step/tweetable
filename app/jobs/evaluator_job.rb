@@ -10,7 +10,7 @@ class EvaluatorJob
     errors = e.evaluate(passage.text,response.text)
     response_job.destroy unless errors.nil?
     errors.each {|err|
-      tag = Tag.find_or_create_by(name: err.type+' error', description: err.description, weight: -5)
+      tag = Tag.find_or_create_by({name: err.type+' error', description: err.description, weight: -5})
       tag.taggings.create({response_id: response.id})
     }
   end
