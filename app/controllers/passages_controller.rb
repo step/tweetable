@@ -1,8 +1,7 @@
 class PassagesController < ApplicationController
   helper PassagesHelper
 
-
-  before_action :verify_privileges, only: [:drafts, :ongoing, :finished]
+  before_action :verify_privileges, except: [:index, :commenced, :missed, :attempted]
 
   def new
     @passage = Passage.new

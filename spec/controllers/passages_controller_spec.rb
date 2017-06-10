@@ -1,20 +1,5 @@
 describe PassagesController do
 
-  let(:valid_attributes) {
-    {
-        title: 'title',
-        text: 'passage text',
-        duration: '1234'
-    }
-  }
-
-  let(:invalid_attributes) {
-    {
-        title: 'title',
-        duration: 1234
-    }
-  }
-
   let(:passages) {
     [
         {
@@ -23,178 +8,111 @@ describe PassagesController do
     ]
   }
 
-  before(:each) do
-    stub_logged_in(true)
-    stub_current_active_user
-  end
-
-  describe 'POST #create' do
-
-    context 'with valid params' do
-      it 'redirects to the created passage' do
-        passage = double('passage')
-        expect(Passage).to receive(:new).and_return(passage)
-        expect(passage).to receive(:save).and_return(true)
-        post :create, params: {passage: valid_attributes}
-        expect(response).to redirect_to(passages_path)
-        expect(flash[:success]).to match('Passage was successfully created.')
-      end
+  context 'admin specific features' do
+    before(:each) do
+      stub_logged_in(true)
+      stub_current_active_admin_user
     end
 
-    context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        passage = double('passage')
-        expect(Passage).to receive(:new).and_return(passage)
-        expect(passage).to receive(:save).and_return(false)
-        allow_any_instance_of(PassagesController).to receive(:display_flash_error)
+    describe 'POST #create' do
 
-        post :create, params: {passage: invalid_attributes}
-        expect(response).to redirect_to(new_passage_path)
-      end
-    end
-  end
+      context 'with valid params' do
+        it 'redirects to the created passage' do
+          passage = double('passage')
+          valid_attributes = {title: 'title', duration: 1234}
 
+          expect(Passage).to receive(:new).and_return(passage)
+          expect(passage).to receive(:save).and_return(true)
 
-  describe 'POST #update' do
+          post :create, params: {passage: valid_attributes}
 
-    context 'with valid params' do
-      it 'redirects to the created passage' do
-        passage = double('passage')
-
-        expect(Passage).to receive(:find).and_return(passage)
-        allow_any_instance_of(PassagesController).to receive(:permit_params).and_return(valid_attributes)
-        expect(passage).to receive(:update_attributes).with(valid_attributes).and_return(true)
-
-        post :update, params: {id: 'id', passage: valid_attributes}
-
-        expect(response).to redirect_to(passages_path)
-        expect(flash[:success]).to match('Passage was successfully updated.')
-      end
-    end
-
-    context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        passage = double('passage')
-
-        expect(Passage).to receive(:find).and_return(passage)
-        allow_any_instance_of(PassagesController).to receive(:display_flash_error)
-        allow_any_instance_of(PassagesController).to receive(:permit_params).and_return(valid_attributes)
-        expect(passage).to receive(:update_attributes).with(valid_attributes).and_return(false)
-
-        post :update, params: {id: 'id', passage: valid_attributes}
-
-        expect(response).to redirect_to(edit_passage_path)
-      end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    context 'with passage id' do
-      it 'should delete the passage' do
-        @passages = Passage.create!(passages)
-
-        passage_find_by = Passage.find_by(title: 'Climate Change')
-        delete :destroy, params: {id: passage_find_by.id}
-
-        expect(Passage.find_by(title: 'Climate Change')).to eq(nil)
-        expect(response).to redirect_to(passages_path)
-
-        @passages.each(&:delete)
-      end
-    end
-
-  end
-
-  describe 'GET #edit' do
-    it 'should give edit form for the passage' do
-      passage = double('Passage', text: 'This is a passage text')
-
-      expect(Passage).to receive(:find).with('12').and_return(passage)
-      get :edit, params: {id: 12}
-      should render_template('passages/new')
-    end
-  end
-
-  describe 'filter methods' do
-    describe 'GET #drafts' do
-      context 'Admin' do
-        before(:each) do
-          stub_current_active_admin_user
-        end
-
-
-        it 'should give all the yet to open passages' do
-          get :drafts, params: {from_tab: true}
-          expect(response).to be_success
-          expect(flash[:danger]).to be_nil
-          should render_template('passages/admin/passages_pane',)
+          expect(response).to redirect_to(passages_path)
+          expect(flash[:success]).to match('Passage was successfully created.')
         end
       end
 
-      context 'Candidate' do
-        before(:each) do
-          stub_current_active_intern_user
-        end
-        it 'should not have access to drafts passages' do
-          get :drafts
-          expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-          should redirect_to(passages_path)
+      context 'with invalid params' do
+        it "returns a success response (i.e. to display the 'new' template)" do
+          passage = double('passage')
+          invalid_attributes = {title: 'title', text: 'passage text', duration: '1234'}
+
+          expect(Passage).to receive(:new).and_return(passage)
+          expect(passage).to receive(:save).and_return(false)
+          allow_any_instance_of(PassagesController).to receive(:display_flash_error)
+
+          post :create, params: {passage: invalid_attributes}
+
+          expect(response).to redirect_to(new_passage_path)
         end
       end
     end
 
-    describe 'GET #opened' do
-      context 'Admin' do
-        before(:each) do
-          stub_current_active_admin_user
-        end
-        it 'should give all the yet to open passages' do
-          get :ongoing, params: {from_tab: true}
-          expect(response).to be_success
-          expect(flash[:danger]).to be_nil
-          should render_template('passages/admin/passages_pane',)
+    describe 'POST #update' do
+
+      context 'with valid params' do
+        it 'redirects to the created passage' do
+          passage = double('passage')
+          valid_attributes = {title: 'title', duration: 1234}
+
+          expect(Passage).to receive(:find).and_return(passage)
+          allow_any_instance_of(PassagesController).to receive(:permit_params).and_return(valid_attributes)
+          expect(passage).to receive(:update_attributes).with(valid_attributes).and_return(true)
+
+          post :update, params: {id: 'id', passage: valid_attributes}
+
+          expect(response).to redirect_to(passages_path)
+          expect(flash[:success]).to match('Passage was successfully updated.')
         end
       end
-      context 'Candidate' do
-        before(:each) do
-          stub_current_active_intern_user
-        end
-        it 'should not have access to opened passages' do
-          get :ongoing
-          expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-          should redirect_to(passages_path)
+
+      context 'with invalid params' do
+        it "returns a success response (i.e. to display the 'new' template)" do
+          passage = double('passage')
+          valid_attributes = {title: 'title', text: 'passage text', duration: '1234'}
+
+          expect(Passage).to receive(:find).and_return(passage)
+          allow_any_instance_of(PassagesController).to receive(:display_flash_error)
+          allow_any_instance_of(PassagesController).to receive(:permit_params).and_return(valid_attributes)
+          expect(passage).to receive(:update_attributes).with(valid_attributes).and_return(false)
+
+          post :update, params: {id: 'id', passage: valid_attributes}
+
+          expect(response).to redirect_to(edit_passage_path)
         end
       end
     end
 
-    describe 'GET #concluded' do
+    describe 'DELETE #destroy' do
 
-      context 'Admin' do
-        before(:each) do
-          stub_current_active_admin_user
-        end
-        it 'should give all the yet to concluded passages' do
-          get :finished, params: {from_tab: true}
+      context 'with passage id' do
+        it 'should delete the passage' do
+          @passages = Passage.create!(passages)
 
-          expect(flash[:danger]).to be_nil
-          expect(response).to be_success
-          should render_template('passages/admin/passages_pane',)
+          passage_find_by = Passage.find_by(title: 'Climate Change')
+          delete :destroy, params: {id: passage_find_by.id}
+
+          expect(Passage.find_by(title: 'Climate Change')).to eq(nil)
+          expect(response).to redirect_to(passages_path)
+
+          @passages.each(&:delete)
         end
       end
 
-      context 'Candidate' do
-        before(:each) do
-          stub_current_active_intern_user
-        end
-        it 'should not have access to concluded passages' do
-          get :finished
-          expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-          should redirect_to(passages_path)
-        end
+    end
+
+    describe 'GET #edit' do
+
+      it 'should give edit form for the passage' do
+        passage = double('Passage', text: 'This is a passage text')
+
+        expect(Passage).to receive(:find).with('12').and_return(passage)
+        get :edit, params: {id: 12}
+        should render_template('passages/new')
       end
     end
 
     describe 'PUT #commence' do
+
       it 'should commence the passage' do
         past_time = Time.current+2.days
         passage = double('Passage', commence: true)
@@ -217,18 +135,133 @@ describe PassagesController do
         expect(response).to redirect_to(passages_path)
       end
     end
+  end
 
-    describe 'GET #commenced_for_candidate' do
-      it 'should give all the yet to open passages' do
-        stub_current_user_with_attributes({passages: [], id: 2, active: true})
+  describe 'filter methods' do
 
-        get :commenced, params: {from_tab: true}
+    context 'admin filters' do
+      before(:each) do
+        stub_current_active_admin_user
+      end
 
-        expect(response).to be_success
-        should render_template('passages/candidate/passages_pane',)
+      describe 'GET #drafts' do
+        it 'should give all the yet to open passages' do
+          get :drafts, params: {from_tab: true}
+          expect(response).to be_success
+          expect(flash[:danger]).to be_nil
+          should render_template('passages/admin/passages_pane')
+        end
+      end
+
+      describe 'GET #opened' do
+        it 'should give all the yet to open passages' do
+          get :ongoing, params: {from_tab: true}
+          expect(response).to be_success
+          expect(flash[:danger]).to be_nil
+          should render_template('passages/admin/passages_pane')
+        end
+      end
+
+      describe 'GET #concluded' do
+        it 'should give all the yet to concluded passages' do
+          get :finished, params: {from_tab: true}
+
+          expect(response).to be_success
+          should render_template('passages/admin/passages_pane')
+        end
       end
     end
 
+    context 'candidate filters' do
+      before(:each) do
+        stub_current_active_intern_user
+      end
+
+      describe 'GET #commenced' do
+        it 'should give all the yet to open passages' do
+
+          expect(Passage).to receive(:commence_for_candidate)
+
+          get :commenced
+
+          expect(response).to be_success
+          should render_template('passages/candidate/passages_pane')
+        end
+      end
+
+      describe 'GET #missed' do
+        it 'should give all the missed passages by user' do
+
+          expect(Passage).to receive(:missed_by_candidate)
+
+          get :missed
+
+          expect(response).to be_success
+          should render_template('passages/candidate/passages_pane')
+        end
+      end
+
+      describe 'GET #attempted' do
+        it 'should give all the passages that are already attempted by candidate' do
+
+          expect(Passage).to receive(:attempted_by_candidate)
+
+          get :attempted
+
+          expect(response).to be_success
+          should render_template('passages/candidate/attempted_passages_pane')
+        end
+      end
+    end
+
+  end
+
+  describe 'validations' do
+    before(:each) do
+      stub_current_active_intern_user
+    end
+
+    it 'should not allow candidate to create a passage' do
+      post :create
+      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+      should redirect_to(passages_path)
+    end
+
+    it 'should not allow candidate to edit a passage' do
+      post :update, params: {id: 'some_id'}
+      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+      should redirect_to(passages_path)
+    end
+
+    it 'should not allow candidate to commence a passage' do
+      post :commence, params: {id: 'some_id'}
+      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+      should redirect_to(passages_path)
+    end
+
+    it 'should not allow candidate to conclude a passage' do
+      post :conclude, params: {id: 'some_id'}
+      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+      should redirect_to(passages_path)
+    end
+
+    it 'should not have access to concluded passages' do
+      get :finished
+      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+      should redirect_to(passages_path)
+    end
+
+    it 'should not have access to opened passages' do
+      get :ongoing
+      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+      should redirect_to(passages_path)
+    end
+
+    it 'should not have access to drafts passages' do
+      get :drafts
+      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
+      should redirect_to(passages_path)
+    end
 
   end
 end

@@ -6,7 +6,7 @@ describe UsersController, type: :controller do
   describe 'GET #index' do
 
     it 'should index active user' do
-      user_params = {admin: false, id: 1, active: true}
+      user_params = {admin: true, id: 1, active: true}
       stub_current_user_with_attributes(user_params)
       get :index, params: {id: user_params[:id]}
       should render_template(:index)
