@@ -12,7 +12,6 @@
 				<%= render :partial => 'passages/admin/duration', locals: {passage: passage} %>
 				<%= render :partial => 'passages/admin/commences', locals: {passage: passage, name: 'Commences on'} %>
 				<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concludes on'} %>
-				<% count = passage.responses.count %>
 				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>
 			</div>
 			<div class="app-passage-actions">

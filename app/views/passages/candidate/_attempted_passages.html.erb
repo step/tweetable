@@ -1,17 +1,29 @@
-<div class="col-md-4">
-  <% if passage_with_response[:response].tags.empty? %>
-      <%= render :partial => "passages/candidate/response_status" %>
-  <% else %>
-        <%= render :partial => "passages/candidate/tagging_status" , locals: {tags: passage_with_response[:response].tags} %>
-  <% end %>
-</div>
-<div class="col-md-4">
-  <span>Attempted by: <%= passage_with_response[:passage].responses.count %> candidates</span>
-</div>
-<div class="col-md-4">
-  <%= button_to 'View all responses', passage_responses_path(passage_with_response[:passage].id), class: 'btn btn-info pull-right', method: :get %>
-</div>
-
-<div class="col-md-8" style="color: gray">
-  <span>My tweet :   <%= passage_with_response[:response].text %></span>
+<% passage = passage_with_response[:passage] %>
+<% tags = passage_with_response[:response].tags %>
+<% passage_text = passage.text %>
+<div class="panel panel-default">
+	<div class="panel-heading app-passage-head">
+		<div class="passage-header">
+			<%= content_tag(:span, passage.title) %>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="content">
+			<%= content_tag(:p) do %>
+					<%= truncate(passage_text, length: 400, omission: '...') %><%= content_tag(:a, 'See more') if passage_text.length > 400 %>
+			<% end %>
+			<p><strong>Tweet :</strong> <%= passage_with_response[:response].text %></p>
+			<%= render :partial => "passages/candidate/tagging_status", locals: {tags: tags} unless tags.empty? %>
+			
+		</div>
+		<div class="app-passage-options">
+			<div class="app-passage-info">
+				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>
+				<%= render :partial => "passages/candidate/response_status" if tags.empty? %>
+			</div>
+			<div class="app-passage-actions">
+				<%= link_to(content_tag(:button, 'View all responses', class: 'btn btn-info pull-right'), passage_responses_path(passage)) %>
+			</div>
+		</div>
+	</div>
 </div>

@@ -1,9 +1,25 @@
-<div class="col-md-4">
-  <span>Duration: <%= duration_of_interval_in_words(passage.duration.seconds) %></span>
-</div>
-<div class="col-md-4">
-  <span>Attempted by: <%= passage.responses.count %> candidates</span>
-</div>
-<div class="col-md-4">
-  <%=   link_to(content_tag(:button, 'Attempt', class: 'btn btn-success pull-right'), new_passage_response_path(passage) ) %>
+<div class="panel panel-default">
+	<div class="panel-heading app-passage-head">
+		<div class="passage-header">
+			<%= content_tag(:span, passage.title) %>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="app-empty-passage content">
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+		</div>
+		<div class="app-passage-options">
+			<div class="app-passage-info">
+				<%= render :partial => 'passages/admin/duration', locals: {passage: passage} %>
+				<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concludes on'} %>
+				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>
+			</div>
+			<div class="app-passage-actions">
+				<%=   link_to(content_tag(:button, 'Attempt', class: 'btn btn-success pull-right'), new_passage_response_path(passage) ) %>
+			</div>
+		</div>
+	</div>
 </div>
