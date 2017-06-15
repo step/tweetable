@@ -3,7 +3,7 @@
 		<div class="passage-header">
 			<%= content_tag(:span, passage.title) %>
 		</div>
-		<div class="passage-actions">
+		<div class="app-passage-actions">
 			<a href="<%= edit_passage_path(passage.id) %>" class="fa fa-edit"></a>
 			<%= form_tag(passage_path(passage.id), :method => :delete, :class => 'internal') do %>
 					<button type="submit" class="fa fa-trash pull-right button_with_delete_icon"></button>
@@ -12,14 +12,14 @@
 	</div>
 	<div class="panel-body">
 		<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
-		<div class="options">
-			<div class="timeline header_component ">
+		<div class="app-passage-options">
+			<div class="app-passage-info">
 				<%= render :partial => 'passages/admin/duration', locals: {passage: passage} %>
 				<%= render :partial => 'passages/admin/commences', locals: {passage: passage, name: 'Commences on'} %>
 				<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concludes on'} %>
 			</div>
-			<div class="more_options">
-				<a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#confirmation_dialog_<%= passage.id %>">Commences</a>
+			<div class="app-passage-actions">
+				<a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#confirmation_dialog_<%= passage.id %>">Commence</a>
 			</div>
 		</div>
 	</div>

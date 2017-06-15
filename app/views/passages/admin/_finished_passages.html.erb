@@ -6,14 +6,16 @@
 		</div>
 	</div>
 	<div class="panel-body">
-		<div class="timeline header_component ">
-			<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concluded on'} %>
-		</div>
 		<%= render :partial => 'passages/admin/content', locals: {passage: passage} %>
-		<div class="more_options">
-			<span>Attempted by: <%= passage.responses.count %> candidates</span>
-			<span>Evaluated: <%= evaluation_count(passage.responses) %> responses</span>
-			<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id), class: 'btn btn-info pull-right') %>
+		<div class="app-passage-options">
+			<div class="app-passage-info">
+				<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concluded on'} %>
+				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>
+				<span class="app-passage-info-item"><i class="fa fa-check" aria-hidden="true"></i> <%= evaluation_count(passage.responses) %></span>
+			</div>
+			<div class="app-passage-actions">
+				<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id), class: 'btn btn-info pull-right') %>
+			</div>
 		</div>
 	</div>
 </div>

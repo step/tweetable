@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
 }
-.passage-actions {
+
+.app-passage-actions {
   display: flex;
   align-items: center;
   .fa {
@@ -10,19 +11,27 @@
   }
 }
 
-.panel-body{
+.panel-body {
   display: flex;
-  .content{
-    width:80%;
+  .content {
+    width: 80%;
   }
-  div.options{
-
+  div.app-passage-options {
     padding: 10px;
     border-left: 3px solid rgba(0, 0, 0, 0.26);
-
-    .timeline{
+    .app-passage-info {
       display: flex;
-      flex-direction:column;
+      flex-direction: column;
+      .app-passage-info-item {
+        margin-bottom: 5px;
+        color: rgba(0, 0, 0, 0.6);
+        .fa {
+          margin-right: 10px;
+        }
+      }
+    }
+    .app-passage-actions a {
+      margin-right: 20px;
     }
   }
 }

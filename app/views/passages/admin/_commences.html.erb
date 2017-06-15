@@ -1,5 +1,3 @@
-<span class="commences_on">
-	<span class="content">
-     <i class="fa fa-calendar" aria-hidden="true"></i> <span><%= to_preferred_time_format(passage.commence_time)|| '(not set)' %></span>
-	</span>
+<span class="app-passage-info-item commences_on">
+     <i class="fa fa-calendar" aria-hidden="true"></i><%= to_preferred_time_format(passage.commence_time)|| '(not set)' %>
 </span>
