@@ -1,22 +1,29 @@
-<div class="container">
-  <h2>Leader Board</h2>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Rank</th>
-      <th>Name</th>
-      <th>Points</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="row">
+	<h3>Leader Board</h3>
+	<div class="col-lg-6">
+		<% @leader_list.each do |user| %>
+				<div class="card hovercard app-rank-card">
+					<div class="app-rank-card-head">
+						<svg >
+							<defs>
+								<clipPath id="circleView">
+									<circle cx="60" cy="60" r="35" fill="#FFFFFF"></circle>
+								</clipPath>
+							</defs>
+							<image x="25" y="25" width="80" height="80" xlink:href=<%= user[:image] %> clip-path="url(#circleView)"></image>
+							<path d="M 1 1 L 80 1 L 1 80 z"
+							       ></path>
+							<text x="0" y="70" font-family="Verdana" font-size="14" fill="black" transform="translate(-25,-5)rotate(-45)">
+								<%= user[:rank].ordinalize %>
+							</text>
+						</svg>
+					</div>
+					<div class="app-rank-card-body">
+						<%= content_tag(:strong, "#{user[:points]} Points") %>
+						<%= content_tag(:strong, user[:name]) %>
+					</div>
+				</div>
+		<% end %>
+	</div>
 
-    <% @leader_list.each do |user| %>
-        <tr>
-          <td><%= user[:rank] %></td>
-          <td><img class="user-image" src=<%= user[:image] %>><%= user[:name] %></td>
-          <td><%= user[:points] %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
 </div>
