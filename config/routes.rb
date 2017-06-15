@@ -42,4 +42,6 @@ Rails.application.routes.draw do
   end
 
   resources :tags
+  resources :groups
+
 end

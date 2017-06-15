@@ -1,0 +1,41 @@
+<div class="container">
+  <h2>GROUPS</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @groups.each do |group| %>
+        <tr data-id="<%= group.id %>">
+          <td id='group-name'><%= editable group, :name, url: group_path(group.id), value: group.name %></td>
+          <td id='group-desc'><%= editable group, :description, url: group_path(group.id), value: group.description %></td>
+
+          <td><%= link_to '', group, method: :delete, class: 'fa fa-trash' %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <button type="button" id='add-group' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Group</button>
+
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Group</h4>
+        </div>
+        <div class="modal-body", id="app-add-group-modal-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

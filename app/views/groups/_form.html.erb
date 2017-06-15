@@ -1,0 +1,5 @@
+<%= bootstrap_form_for(@group) do |form| %>
+    <%= form.text_field :name, id: :group_name, class: 'form-control', required: true, maxlength: 25%>
+    <%= form.text_field :description, id: :group_description, class: 'form-control' %>
+    <%= form.submit "Save", :class => "btn btn-success padding-bottom" %>
+<% end %>
