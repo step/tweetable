@@ -30,13 +30,24 @@
         }
       }
     }
-    .app-passage-actions a {
-      margin-right: 20px;
-    }
   }
 }
 
+.app-passage-actions a {
+  margin-right: 20px;
+}
 .app-empty-passage p{
   margin: 0 10px 27px 0;
   border: 1px dashed lightgray;
+}
+
+.app-new-passage-container{
+  .app-duration-limit{
+    .bdp-input{
+      display: flex;
+      .bdp-block{
+        margin-right: 10px;
+      }
+    }
+  }
 }

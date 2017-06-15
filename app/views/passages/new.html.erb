@@ -1,22 +1,22 @@
 <%= javascript_include_tag 'bootstrap-duration-picker' %>
 
 <div class="row">
-	<div class="col-lg-12">
+	<div class="app-new-passage-container col-lg-11">
 		<%= bootstrap_form_for(@passage) do |form| %>
 				<%= form.text_field :title, :class => "col-10 form-control", :required => true %>
 				<%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true, rows:8 %>
 				<span class="timeline">
-			<span class="duration_limit">
+			<span class="app-duration-limit">
           <%= form.text_field :duration, :class => "form-control", :id => "duration" %>
 			</span>
-			<span class="commence_time">
+			<span class="app-commence-time">
         <%= form.datetime_local_field :commence_time, :class => "col-10 form-control" %>
 			</span>
-			<span class="conclude_time">
+			<span class="app-conclude-time">
        <%= form.datetime_local_field :conclude_time, :class => "col-10 form-control" %>
 			</span>
 				</span>
-				<span class="actions pull-right">
+				<span class="app-passage-actions pull-right">
 					<%= link_to "Cancel", drafts_passages_path, {:class => "btn btn-danger cancel_edit"} %>
 					<%= form.submit "Save", :class => "btn btn-success padding-bottom" %>
 				</span>
