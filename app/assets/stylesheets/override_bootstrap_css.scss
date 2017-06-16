@@ -1,0 +1,22 @@
+@import "variables";
+
+a.btn-success, button.btn-success {
+  background-color: $app-secondary-color;
+  border-color: $app-secondary-color;
+}
+
+a.btn-success:hover, button.btn-success:hover {
+  background-color: #078457;
+  border-color: #078457;
+}
+
+li.divider {
+  height: 1px;
+  margin: 9px 1px;
+  overflow: hidden;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+nav.navbar {
+  margin-bottom: 0px;
+}

@@ -1,5 +1,31 @@
 @import 'variables';
 
+div.app-sidebar-links-container {
+  padding: 0;
+  .sidebar, .app-navbar-collapse,.app-navbar-options {
+    width: 100%;
+    height: 100% !important;
+    padding:0;
+  }
+  .app-navbar-collapse{
+    padding-top: 10px;
+    background-color: $app-brand-name-color;
+  }
+  .app-navbar-options{
+    margin-top: 10px;
+  }
+  .app-navbar-options li a{
+    cursor: pointer;
+    padding-left: 14%;
+    &:hover{
+      background-color:#c8e2de
+    }
+  }
+
+  .app-navbar-options label{
+    padding-left: 10%;
+  }
+}
 @media screen and (max-width: $responsive) {
   .navbar-header .navbar-brand {
     padding-left: 70px;
@@ -16,6 +42,13 @@
   .app-sidebar-links-container {
     position: relative;
     height: $view-port-height;
+
+    .app-navbar-options li:last-child{
+      position: absolute;
+      width: 100%;
+      bottom: 30px;
+    }
+
   }
 }
 .icon-bar {
