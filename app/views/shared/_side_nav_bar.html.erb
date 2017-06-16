@@ -9,15 +9,15 @@
     </button>
   </div>
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-    <ul class="nav navbar-nav">
+  <div class="collapse navbar-collapse app-navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+    <ul class="nav navbar-nav app-navbar-options">
       <% if current_user.admin %>
           <%= render 'shared/admin_sidebar_options' %>
       <% else %>
           <%= render 'shared/intern_sidebar_options' %>
       <% end %>
-	    <%=	content_tag(:li ) do  %>
-	        <%=	 link_to('Logout', logout_path ,class: 'fa fa-signout') %>
+	    <%=	content_tag(:li, class: 'app-navbar-item' ) do  %>
+	        <%=	 link_to('Logout', logout_path ) %>
 	    <%	 end %>
     </ul>
   </div>
