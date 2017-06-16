@@ -10,13 +10,16 @@ $app-user-icon-dimension: 30px;
   }
 }
 
-.navbar-default .navbar-brand {
-  color: $app-brand-name-color !important;
-  font-size: 35px;
-  font-family: 'Open Sans', 'Sans-Serif';
-  font-weight: 900;
+nav.navbar-default {
+  background-color: $app-primary-color;
+  .navbar-brand {
+    color: $app-brand-name-color;
+    font-size: 35px;
+    font-family: 'Open Sans', 'Sans-Serif';
+    font-weight: 900;
+    text-shadow: 1px 1px 1px black;
+  }
 }
-
 .navbar-nav {
   display: flex;
   flex-direction: column;

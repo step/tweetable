@@ -21,6 +21,7 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 
 body {
+  background-color: $app-background-color;
   padding: 50px 0;
   font-family: 'Open Sans' !important;
   .heading{
