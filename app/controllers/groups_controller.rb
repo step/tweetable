@@ -9,11 +9,6 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
-  def edit
-  end
-
-  def show
-  end
 
   def index
     @groups = Group.all.order('name ASC')
@@ -29,10 +24,10 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.html do
         if @group.save
-          flash[:success] = 'Group was successfully created.'
+          flash[:success] = "Group #{@group.name} was successfully created."
         else
           error = @group.errors.messages
-          flash[:danger] = "name #{error[:name][0]}"
+          flash[:danger] = "name #{error[:name].first}"
         end
         redirect_to groups_path
       end
@@ -42,7 +37,7 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      flash[:danger] = 'Group was successfully deleted.'
+      flash[:danger] = "Group #{@group.name} was successfully deleted."
       format.html {redirect_to groups_path}
       format.json {head :no_content}
     end
