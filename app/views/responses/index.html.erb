@@ -4,18 +4,18 @@
       <h3 class="passage-heading">
         <%= passage.title %>
       </h3>
-      <div  class="passage-holder">
+      <div  class="app-passage-holder">
         <%= simple_format(passage.text) %>
       </div>
     </div>
 
   </div>
   <div class="row">
-      <div class="page-header">
+      <div class="app-page-header">
         <h3><%= content_tag('small', responses.count.to_s + ' tweets', class: 'pull-right') %> Tweets </h3>
       </div>
 
-      <ul id="response-list" class="comments-list">
+      <ul id="app-response-list" class="app-comments-list">
         <% current_user_res , other_responses  = responses.partition { |response| response.user_id == current_user.id } %>
         <%= render partial, response: current_user_res.first unless current_user_res.blank? %>
         <% other_responses.each do |response| %>

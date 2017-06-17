@@ -7,7 +7,7 @@
 
 //@import "jquery.tagsinput.min"
 
-.totalChars {
+.app-total-chars {
   margin-bottom: 15px;
   margin-left: 25px;
   color: rgba(37, 37, 75, 0.72);
@@ -18,7 +18,7 @@
   color: grey;
 }
 
-.remaining_time{
+.app-remaining-time{
   color: rgba(37, 37, 75, 0.72);
   font-weight: bold;
 }
@@ -37,11 +37,11 @@ div.tagsinput {
   margin: 5px;
 }
 
-#response-list li:nth-child(even) {
+#app-response-list li:nth-child(even) {
   background-color: white;
 }
 
-.response-holder {
+.app-response-container {
   border: 1px solid rgba(211, 211, 211, 0.25);
   padding: 5px;
   background-color: rgba(211, 211, 211, 0.25);
@@ -54,7 +54,7 @@ div.tagsinput {
 .tag-label{
   font-weight: bold;
 }
-.media-heading.user_name{
+.media-heading.app-user-name{
   margin-bottom: 6px;
   margin-top: 5px;
 }

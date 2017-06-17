@@ -1,4 +1,4 @@
-<li class="response-holder col-lg-12 col-md-12">
+<li class="app-response-container col-lg-12 col-md-12">
   <div class="media">
     <p class="pull-right">
       <small><%= time_ago_in_words(response.created_at) %> ago</small>
@@ -7,7 +7,7 @@
       <img class="user-image" src=<%= response.user.image_url %>>
     </i>
     <div class="media-body">
-      <h4 class="media-heading user_name"><%= response.user.name %></h4>
+      <h4 class="media-heading app-user-name"><%= response.user.name %></h4>
       <p class="passage"><%= response.text %></p>
       <% unless response.tags.empty? %>
           <%= render :partial => 'passages/candidate/tagging_status', locals: {tags: response.tags} %>

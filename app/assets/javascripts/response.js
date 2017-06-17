@@ -4,12 +4,12 @@ var updateRemainingCharacters = function (event) {
     var charLimit = event.target.maxLength;
     var presentCount = event.target.value.length;
     var totalChars = charLimit - presentCount;
-    $('#totalChars').html(totalChars);
+    $('#app-total-chars').html(totalChars);
 };
 
 var disableSubmission = function () {
-    $(".response-submission").attr("disabled","disabled");
-    $(".response-submission").css("display", "none");
+    $(".app-response-submission").attr("disabled","disabled");
+    $(".app-response-submission").css("display", "none");
     $(".back-btn").removeClass("hidden")
     $("#timeout_alert").html('<div class="alert alert-danger"> <strong>Oops..!</strong> Your submission time has been expired..</div>')
     setTimeout(function(){
@@ -20,7 +20,7 @@ var disableSubmission = function () {
 
 var showRemainingTime = function () {
     var date = new Date();
-    var remainingTimeElement = $("#remaining_time");
+    var remainingTimeElement = $("#app-remaining-time");
     var time = remainingTimeElement.html();
     date.setSeconds(time);
     remainingTimeElement

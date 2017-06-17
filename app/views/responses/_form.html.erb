@@ -1,12 +1,12 @@
 <%= form_for([passage, response], method: 'post', html: {class: 'form-inline text-center'}) do %>
-    <div class="pull-left totalChars" >Remaining characters: <span class="count" id="totalChars">140</span></div>
+    <div class="pull-left app-total-chars" >Remaining characters: <span class="count" id="app-total-chars">140</span></div>
     <div class="form-group mx-sm-3" style="margin-right: 50px">
       <%= hidden_field_tag 'user_id', user.id %>
       <%= text_area_tag 'text', nil, placeholder: 'Tweet here',  maxlength: 140, class: 'form-control', style: 'width: 1000px', id: 'text' %>
     </div>
-    <button type="button" class="btn btn-primary response-submission" data-toggle="modal" data-target="#confirmation-dialog_response_<%= passage.id %>">Submit</button>
+    <button type="button" class="btn btn-primary app-response-submission" data-toggle="modal" data-target="#app-confirm-passage-<%= passage.id %>-response">Submit</button>
     <%= link_to "Back", passages_path, {:class => "hidden btn btn-primary back-btn"} %>
-    <div class="modal fade bd-example-modal-sm" id="confirmation-dialog_response_<%= passage.id %>" role="dialog">
+    <div class="modal fade bd-example-modal-sm" id="app-confirm-passage-<%= passage.id %>-response" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -17,7 +17,7 @@
             <p>Your tweet cannot be edited once submitted. Do you confirm...?</p>
           </div>
           <div class="modal-footer">
-            <%= submit_tag('Ok', class: 'btn btn-primary response-submission') %>
+            <%= submit_tag('Ok', class: 'btn btn-primary app-response-submission') %>
           </div>
         </div>
       </div>

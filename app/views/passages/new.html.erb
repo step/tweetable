@@ -4,7 +4,7 @@
 	<div class="app-new-passage-container col-lg-11">
 		<%= bootstrap_form_for(@passage) do |form| %>
 				<%= form.text_field :title, :class => "col-10 form-control", :required => true %>
-				<%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true, rows:8 %>
+				<%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true, rows: 8 %>
 				<span class="timeline">
 			<span class="app-duration-limit">
           <%= form.text_field :duration, :class => "form-control", :id => "duration" %>
