@@ -1,3 +1,3 @@
-$(function () {
-  Turbolinks.visit($('.sidebar li.active a').attr('href'));
-});
+// $(function () {
+//   Turbolinks.visit($('.sidebar li.active a').attr('href'));
+// });

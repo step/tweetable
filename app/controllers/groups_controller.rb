@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
 
   before_action :verify_privileges, only: [:index, :create]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-  layout false, only: [:new, :edit,:create,:destroy]
+  layout false, only: [:new, :edit, :create, :destroy]
 
   def new
     @group = Group.new
@@ -27,12 +27,14 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
     respond_to do |format|
-      if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
-      else
-        format.html { render :new }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+      format.html do
+        if @group.save
+          flash[:success] = 'Group was successfully created.'
+        else
+          error = @group.errors.messages
+          flash[:danger] = "name #{error[:name][0]}"
+        end
+        redirect_to groups_path
       end
     end
   end
@@ -40,8 +42,9 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_path, notice: 'Group was successfully destroyed.' }
-      format.json { head :no_content }
+      flash[:danger] = 'Group was successfully deleted.'
+      format.html {redirect_to groups_path}
+      format.json {head :no_content}
     end
   end
 
@@ -60,4 +63,3 @@ class GroupsController < ApplicationController
   end
 
 end
-

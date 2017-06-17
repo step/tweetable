@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
 
   has_many :responses
+  has_many :user_groups
   has_many :passages, through: :responses
   has_many :tags, through: :responses
 
