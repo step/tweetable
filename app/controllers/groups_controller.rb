@@ -37,7 +37,7 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      flash[:danger] = "Group #{@group.name} was successfully deleted."
+      flash[:success] = "Group #{@group.name} was successfully deleted."
       format.html {redirect_to groups_path}
       format.json {head :no_content}
     end
