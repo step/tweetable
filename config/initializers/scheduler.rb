@@ -3,12 +3,13 @@
 require 'rufus-scheduler'
 require './app/jobs/evaluator_job'
 
-def shedule
-  scheduler = Rufus::Scheduler.new
+scheduler = Rufus::Scheduler.new
 
-  scheduler.every '30s' do
-    EvaluatorJob.execute
-  end
+scheduler.every '10s' do
+  job = EvaluatorJob.new
+  engine = EvaluationEngine.new
+  tagger = Tagger.new
+  job.execute ResponseQueue, engine, tagger
 end
 
 shedule if Rails.env.production?

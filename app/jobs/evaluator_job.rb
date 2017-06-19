@@ -1,19 +1,20 @@
-# frozen_string_literal: true
-
-require './lib/evaluator/evaluation_engine'
-
 class EvaluatorJob
-  def self.execute
-    response_job = ResponseQueue.first
+  def execute (queue, engine, tagger)
+    # pull response from the queue
+    response_job = queue.fetch
     return if response_job.nil?
+
+    # get response text and passage text
     response = Response.find(response_job.response_id)
     passage = response.passage
-    e = EvaluationEngine.new
-    errors = e.evaluate(passage.text,response.text)
-    response_job.destroy unless errors.nil?
-    errors.each {|err|
-      tag = Tag.find_or_create_by({name: err.type+' error', description: err.description, weight: -5})
-      tag.taggings.create({response_id: response.id})
-    }
+
+    # evaluating using given engine
+    results = engine.evaluate(passage.text, response.text)
+
+    # generating taggings
+    tagger.generate_taggings response, results
+
+    # acknowledge the queue
+    queue.ack(response_job)
   end
 end
