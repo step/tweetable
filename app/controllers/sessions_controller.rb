@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  skip_before_action :require_login, :active_user?, only: [:new, :create, :destroy]
+  skip_before_action :require_login, :active_user?, only: %i[new create destroy]
 
   def new
     redirect_to passages_path if logged_in?

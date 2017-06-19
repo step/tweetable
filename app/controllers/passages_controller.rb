@@ -3,7 +3,7 @@
 class PassagesController < ApplicationController
   helper PassagesHelper
 
-  before_action :verify_privileges, except: [:index, :commenced, :missed, :attempted]
+  before_action :verify_privileges, except: %i[index commenced missed attempted]
 
   def new
     @passage = Passage.new

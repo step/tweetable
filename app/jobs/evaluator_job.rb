@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EvaluatorJob
   def execute (queue, engine, tagger)
     # pull response from the queue

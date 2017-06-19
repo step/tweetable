@@ -3,9 +3,9 @@
 class GroupsController < ApplicationController
   helper_method :xeditable?
 
-  before_action :verify_privileges, only: [:index, :create]
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
-  layout false, only: [:new, :edit, :create, :destroy]
+  before_action :verify_privileges, only: %i[index create]
+  before_action :set_group, only: %i[show edit update destroy]
+  layout false, only: %i[new edit create destroy]
 
   def new
     @group = Group.new

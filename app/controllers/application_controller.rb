@@ -28,18 +28,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   private
 
   def active_user?
-    unless current_user.active
-      redirect_to clearance_url
-    end
+    redirect_to clearance_url unless current_user.active
   end
 
   def require_login
-    unless logged_in?
-      redirect_to login_url
-    end
+    redirect_to login_url unless logged_in?
   end
 end

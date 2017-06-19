@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 describe EvaluatorJob do
-  describe "#execute" do
+  describe '#execute' do
     it 'should return if there is no job in queue' do
       queue = double('queue')
       expect(queue).to receive(:fetch).and_return nil

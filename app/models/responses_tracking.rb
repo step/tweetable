@@ -9,9 +9,7 @@ class ResponsesTracking < ApplicationRecord
 
   def self.remaining_time(passage_id, user_id)
     tracking_detail = ResponsesTracking.find_or_create_by(passage_id: passage_id, user_id: user_id)
-    unless tracking_detail.updated_at.eql?tracking_detail.created_at
-      return 0
-    end
+    return 0 unless tracking_detail.updated_at.eql?tracking_detail.created_at
     conclude_time_duration = tracking_detail.passage.conclude_time - Time.current
     passage_duration = tracking_detail.passage.duration
     remaining_time = passage_duration - (Time.current - tracking_detail.created_at)

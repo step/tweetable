@@ -6,7 +6,6 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-
 unless ARGV.any? {|a| a =~ /^gems/} # Don't load anything when running the gems:* tasks
 
 vendored_cucumber_bin = Dir["#{Rails.root}/vendor/{gems,plugins}/cucumber*/bin/cucumber"].first
@@ -35,12 +34,12 @@ begin
     end
 
     desc 'Run all features'
-    task all: [:ok, :wip]
+    task all: %i[ok wip]
 
     task :statsetup do
       require 'rails/code_statistics'
       ::STATS_DIRECTORIES << %w(Cucumber\ features features) if File.exist?('features')
-      ::CodeStatistics::TEST_TYPES << "Cucumber features" if File.exist?('features')
+      ::CodeStatistics::TEST_TYPES << 'Cucumber features' if File.exist?('features')
     end
 
     task :annotations_setup do

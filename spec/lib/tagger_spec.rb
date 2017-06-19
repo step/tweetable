@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require './lib/evaluator/tagger'
 
 describe Tagger do
-
   describe '#get_tag' do
     context 'if tag exists' do
       it 'should get the tag with the name' do
@@ -47,5 +48,4 @@ describe Tagger do
       tagger.generate_taggings job, results
     end
   end
-
 end

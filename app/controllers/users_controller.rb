@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
 
-  before_action :verify_privileges, only: [:index,:create_users]
+  before_action :verify_privileges, only: %i[index create_users]
 
   def index
     @users = User.where.not(id: current_user.id).order('name ASC')
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       @user = User.new(email: email, active: true)
       @user.save ? saved.push(@user) : failed.push(@user)
     end
-    generate_creation_notice(saved,failed)
+    generate_creation_notice(saved, failed)
     redirect_to(users_path)
   end
 

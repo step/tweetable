@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: :login
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/clearance', to: 'application#clearance',as: :clearance
+  get '/clearance', to: 'application#clearance', as: :clearance
 
   resources :users do
     collection do

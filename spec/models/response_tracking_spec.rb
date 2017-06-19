@@ -11,7 +11,6 @@ describe ResponsesTracking do
     it { should belong_to(:passage) }
   end
 
-
   let(:passages) do
     [
       {
@@ -47,7 +46,6 @@ describe ResponsesTracking do
     ]
   end
 
-
   before(:each) do
     @users = User.create(users)
     @passages = Passage.create(passages)
@@ -58,7 +56,6 @@ describe ResponsesTracking do
     @users.each(&:delete)
     @passages.each(&:delete)
   end
-
 
   describe 'remaining_time' do
     context 'when the candidate has not taken the passage yet' do

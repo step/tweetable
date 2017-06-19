@@ -12,6 +12,7 @@ describe LeaderBoard, type: :model do
                   { image: '/i', name: 'user2', score: 5 }]
       user_score = LeaderBoard.calculate_score([user1, user2])
 
+<<<<<<< 744e2043c9929482e3213db1aee487497e24b9af
       expect(user_score).to match_array(expected)
     end
   end
@@ -33,6 +34,15 @@ describe LeaderBoard, type: :model do
                   { image: '/i', name: 'user4', score: 0, rank: 4 }]
       users = [user1, user2, user3, user4, user5]
       leader_board = LeaderBoard.generate_list(users)
+=======
+      expected = [{ image: 'url', name: 'user1', points: 15, rank: 1 },
+                  { image: 'url', name: 'user3', points: 10, rank: 2 },
+                  { image: 'url', name: 'user3', points: 5, rank: 3 },
+                  { image: 'url', name: 'user2', points: 5, rank: 3 },
+                  { image: 'url', name: 'user3', points: 0, rank: 4 }]
+
+      leader_board = LeaderBoard.generate_list([user1, user2, user3, user4, user5])
+>>>>>>> [Dharmenn] SpaceAfterComma, EmptyLines, UselessAssignment, EmptyLinesAroundBlockBody, TrailingBlankLines, FrozenStringLiteralComment, EmptyLineAfterMagicComment, IfUnlessModifier, SpaceAfterColon, StringLiterals, SymbolArray issue
 
       expect(leader_board).to match_array(expected)
     end

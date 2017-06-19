@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tagger
 
   def generate_taggings job, results

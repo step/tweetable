@@ -33,7 +33,7 @@ class ResponsesController < ApplicationController
         flash[:danger] = 'Sorry, Your response submission time is expired!'
         format.html { redirect_to passages_path }
       elsif @response.save
-        ResponsesTracking.update_end_time(params[:passage_id],current_user.id)
+        ResponsesTracking.update_end_time(params[:passage_id], current_user.id)
         flash[:success] = 'Your response was successfully recorded.'
         format.html { redirect_to passages_path }
       else

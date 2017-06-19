@@ -5,8 +5,8 @@ class TagsController < ApplicationController
 
   before_action :verify_privileges, except: []
 
-  before_action :set_tag, only: [:show, :edit, :update, :destroy]
-  layout false, only: [:new, :edit]
+  before_action :set_tag, only: %i[show edit update destroy]
+  layout false, only: %i[new edit]
 
   def index
     @tags = Tag.all.order('name ASC')

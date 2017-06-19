@@ -85,7 +85,6 @@ describe UsersController, type: :controller do
         expect(flash[:danger]).to match('Users something@email.com failed to create...')
       end
 
-
       it 'should create active users for the valid email and should not for invalid one' do
         user_params = { admin: true, id: 1, active: true }
         stub_current_user_with_attributes(user_params)
