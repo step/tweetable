@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 describe SessionsController, type: :controller do
-  let(:user_info) { { id:12234, auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture' } }
-  let(:new_user_info) { { id:12235, auth_id: 'auth_id', name: 'new user first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/new_user_profile_picture' } }
+  let(:user_info) { { id:12_234, auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture' } }
+  let(:new_user_info) { { id:12_235, auth_id: 'auth_id', name: 'new user first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/new_user_profile_picture' } }
   before(:each) do
     stub_current_active_user
   end
@@ -37,10 +37,10 @@ describe SessionsController, type: :controller do
 
         post :create, params: { provider: 'provider' }
 
-        session =  controller.session
+        session = controller.session
 
         expect(response).to redirect_to(passages_path)
-        expect(session[:user_id]).to eql(12234)
+        expect(session[:user_id]).to eql(12_234)
         expect(session[:user_name]).to eql('first_name last_name')
         expect(session[:user_image_url]).to eql('https://something.com/profile_picture')
       end
@@ -58,10 +58,10 @@ describe SessionsController, type: :controller do
 
         post :create, params: { provider: 'provider' }
 
-        session =  controller.session
+        session = controller.session
 
         expect(response).to redirect_to(passages_path)
-        expect(session[:user_id]).to eql(12235)
+        expect(session[:user_id]).to eql(12_235)
         expect(session[:user_name]).to eql('new user first_name last_name')
         expect(session[:user_image_url]).to eql('https://something.com/new_user_profile_picture')
       end

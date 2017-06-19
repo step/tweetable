@@ -11,7 +11,6 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
-
   def index
     @groups = Group.all.order('name ASC')
   end

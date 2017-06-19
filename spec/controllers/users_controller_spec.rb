@@ -38,7 +38,7 @@ describe UsersController, type: :controller do
         email = 'something@email.com'
         user = double('user', email: email)
 
-        expect(User).to receive(:new).with({ email: email, active: true }).and_return user
+        expect(User).to receive(:new).with(email: email, active: true).and_return user
         expect(user).to receive(:save).and_return true
 
         post :create_users, params: { emails: email }
@@ -54,8 +54,8 @@ describe UsersController, type: :controller do
         user1 = double('user', email: email1)
         user2 = double('user', email: email2)
 
-        expect(User).to receive(:new).with({ email: email1, active: true }).and_return user1
-        expect(User).to receive(:new).with({ email: email2, active: true }).and_return user2
+        expect(User).to receive(:new).with(email: email1, active: true).and_return user1
+        expect(User).to receive(:new).with(email: email2, active: true).and_return user2
         expect(user1).to receive(:save).and_return true
         expect(user2).to receive(:save).and_return true
 
@@ -74,8 +74,8 @@ describe UsersController, type: :controller do
         user1 = double('user', email: email1)
         user2 = double('user', email: email2)
 
-        expect(User).to receive(:new).with({ email: email1, active: true }).and_return user1
-        expect(User).to receive(:new).with({ email: email2, active: true }).and_return user2
+        expect(User).to receive(:new).with(email: email1, active: true).and_return user1
+        expect(User).to receive(:new).with(email: email2, active: true).and_return user2
         expect(user1).to receive(:save).and_return true
         expect(user2).to receive(:save).and_return false
 
@@ -96,9 +96,9 @@ describe UsersController, type: :controller do
         user2 = double('user', email: email2)
         user3 = double('user', email: email3)
 
-        expect(User).to receive(:new).with({ email: email1, active: true }).and_return user1
-        expect(User).to receive(:new).with({ email: email2, active: true }).and_return user2
-        expect(User).to receive(:new).with({ email: email3, active: true }).and_return user3
+        expect(User).to receive(:new).with(email: email1, active: true).and_return user1
+        expect(User).to receive(:new).with(email: email2, active: true).and_return user2
+        expect(User).to receive(:new).with(email: email3, active: true).and_return user3
         expect(user1).to receive(:save).and_return true
         expect(user2).to receive(:save).and_return false
         expect(user3).to receive(:save).and_return true

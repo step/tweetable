@@ -6,7 +6,7 @@ describe ResponsesController, type: :controller do
 
     before(:each) do
       stub_logged_in(true)
-      stub_current_user_with_attributes({ admin: false, id: 1, active: true })
+      stub_current_user_with_attributes(admin: false, id: 1, active: true)
     end
 
     context 'When passage id exists' do

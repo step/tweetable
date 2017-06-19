@@ -25,15 +25,15 @@ class SessionsController < ApplicationController
   private
 
   def assign_session_details(user)
-    session[:user_id]=user.id
-    session[:user_name]=user.name
-    session[:user_image_url]=user.image_url
+    session[:user_id] = user.id
+    session[:user_name] = user.name
+    session[:user_image_url] = user.image_url
   end
 
   def user_params
-    omniauth=request.env['omniauth.auth']
+    omniauth = request.env['omniauth.auth']
     {
-        auth_id: omniauth['uid'],
+      auth_id: omniauth['uid'],
         name: omniauth['info']['name'],
         email: omniauth['info']['email'],
         image_url: omniauth['info']['image']

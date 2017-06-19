@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
     render 'shared/clearance', layout: false
   end
 
-
   def verify_privileges
     unless current_user.admin
       flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"

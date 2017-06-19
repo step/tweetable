@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 describe GroupsController do
-  let(:groups) {
+  let(:groups) do
     [
-        {
-            name: 'step-15-17', description: '4th batch'
-        }
+      {
+        name: 'step-15-17', description: '4th batch'
+      }
     ]
-  }
+  end
 
   context 'admin specific features' do
     before(:each) do

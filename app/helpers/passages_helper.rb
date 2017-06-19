@@ -35,10 +35,10 @@ module PassagesHelper
   end
 
   def evaluation_count(passage_responses)
-    passage_responses.map { |response|
+    passage_responses.map do |response|
       tags = response.tags
       !(tags.nil? || tags.empty?)
-    }.count(true)
+    end.count(true)
   end
 
 end

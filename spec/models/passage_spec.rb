@@ -9,19 +9,19 @@ describe Passage, type: :model do
     it { should validate_numericality_of(:duration).is_greater_than(0) }
 
     it 'validate if commence time and conclude time is nil' do
-      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400)
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86_400)
       expect(passage.save).to be true
     end
 
     it 'validate if commence time is nil and conclude time is given' do
-      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400,  conclude_time: Time.current)
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86_400, conclude_time: Time.current)
       expect(passage.save).to be true
     end
 
     it 'validate if commence time present and conclude time past time with commence time' do
       current_time = Time.current
       past_time = current_time - 4.days
-      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400, commence_time: current_time, conclude_time: past_time)
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86_400, commence_time: current_time, conclude_time: past_time)
       expect(passage.save).to be false
       expect(passage.errors.full_messages).to include('Conclude time must be a future time...')
     end
@@ -29,7 +29,7 @@ describe Passage, type: :model do
     it 'validate for conclude time present time' do
       current_time = Time.current
       past_time = current_time - 4.days
-      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400, commence_time: past_time, conclude_time: current_time)
+      passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86_400, commence_time: past_time, conclude_time: current_time)
       expect(passage.save).to be true
     end
   end
@@ -41,7 +41,7 @@ describe Passage, type: :model do
   describe 'commence' do
     it 'should set the conclude time as current time' do
       Time.zone = 'Astana'
-      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86400)
+      passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86_400)
       now = Time.now.in_time_zone(ActiveSupport::TimeZone.new('Chennai'))
       passage.commence(now.to_s)
       expect(passage.conclude_time).to eq(Time.zone.parse now.to_s)
@@ -99,8 +99,8 @@ describe Passage, type: :model do
 
       expect(Passage).to receive(:ongoing).and_return([passage1, passage2])
       expect(user).to receive(:passages).and_return([])
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: passage1.id, user_id: user.id }).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: passage2.id, user_id: user.id }).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: passage1.id, user_id: user.id).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: passage2.id, user_id: user.id).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).and_return(0)
 
       passage_open_for_candidate = Passage.commence_for_candidate(user)
@@ -135,8 +135,8 @@ describe Passage, type: :model do
       expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg1.id, user_id: user.id }).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg2.id, user_id: user.id }).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg1.id, user_id: user.id).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg2.id, user_id: user.id).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(0)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
@@ -156,8 +156,8 @@ describe Passage, type: :model do
       expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg1.id, user_id: user.id }).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg2.id, user_id: user.id }).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg1.id, user_id: user.id).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg2.id, user_id: user.id).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(10)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
@@ -177,8 +177,8 @@ describe Passage, type: :model do
       expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2, ongoing_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg1.id, user_id: user.id }).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg2.id, user_id: user.id }).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg1.id, user_id: user.id).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg2.id, user_id: user.id).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(0)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)

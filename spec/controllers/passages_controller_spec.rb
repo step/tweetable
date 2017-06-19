@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 describe PassagesController do
-  let(:passages) {
+  let(:passages) do
     [
-        {
-            title: 'Climate Change', text: 'climate change passage', commence_time: Time.current, conclude_time: (Time.current+2), duration: '1'
-        }
+      {
+        title: 'Climate Change', text: 'climate change passage', commence_time: Time.current, conclude_time: (Time.current + 2), duration: '1'
+      }
     ]
-  }
+  end
 
   context 'admin specific features' do
     before(:each) do
@@ -109,7 +109,7 @@ describe PassagesController do
 
     describe 'PUT #commence' do
       it 'should commence the passage' do
-        past_time = Time.current+2.days
+        past_time = Time.current + 2.days
         passage = double('Passage', commence: true)
         expect(Passage).to receive(:find).and_return(passage)
         put :commence, params: { id: 12, passage: { conclude_time: past_time } }

@@ -42,7 +42,7 @@ end
 Before('@omniauth_test') do
   OmniAuth.config.test_mode = true
 
-  omniauth_hash = { 'uid' => '12345', 'info' => {'name' => 'Tweetable','image' => 'image.png'} }
+  omniauth_hash = { 'uid' => '12345', 'info' => { 'name' => 'Tweetable','image' => 'image.png' } }
 
   OmniAuth.config.add_mock(:facebook, omniauth_hash)
 end
