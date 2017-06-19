@@ -51,7 +51,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rails-controller-testing'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
 
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
