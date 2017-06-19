@@ -11,7 +11,7 @@ class ResponseQueue < ApplicationRecord
     ResponseQueue.first
   end
 
-  def self.ack response_job
+  def self.ack(response_job)
     response_job.destroy
   end
 end

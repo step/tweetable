@@ -71,7 +71,7 @@ class PassagesController < ApplicationController
     redirect_to ongoing_passages_path
   end
 
-  #TODO all the passage getter methods should give out json if asked for
+  # TODO: all the passage getter methods should give out json if asked for
 
   def drafts
     filtered_passages = Passage.drafts
@@ -114,5 +114,4 @@ class PassagesController < ApplicationController
       m.join(' ').humanize
     end.join("\n")
   end
-
 end

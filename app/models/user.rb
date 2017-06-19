@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def update_if_changed(user_params)
-    self.update_attributes(user_params)
+    update_attributes(user_params)
     self
   end
 end

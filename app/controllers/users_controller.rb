@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-
   before_action :verify_privileges, only: %i[index create_users]
 
   def index
@@ -51,5 +50,4 @@ class UsersController < ApplicationController
   #     params[:user][:active] = params[:user][:active].eql?('1') ? true : false
   #   end
   # end
-
 end

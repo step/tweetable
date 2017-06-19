@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module PassagesHelper
-
   DRAFT_PASSAGES = 'drafts_passages'
 
   def admin_tabs
@@ -40,5 +39,4 @@ module PassagesHelper
       !(tags.nil? || tags.empty?)
     end.count(true)
   end
-
 end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Helpers
-
   def stub_logged_in(is_logged_in)
     mocked_app_controller.to receive(:logged_in?).and_return(is_logged_in)
   end

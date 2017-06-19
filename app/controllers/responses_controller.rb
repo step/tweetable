@@ -51,5 +51,4 @@ class ResponsesController < ApplicationController
   def response_params
     params.permit(:user_id, :passage_id, :text)
   end
-
 end

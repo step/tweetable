@@ -35,13 +35,13 @@ class Passage < ApplicationRecord
   end
 
   def self.commence_for_candidate(user)
-    ongoing_passages = self.ongoing
+    ongoing_passages = ongoing
     (ongoing_passages - user.passages) - get_timed_out_passages(ongoing_passages, user.id)
   end
 
   def self.missed_by_candidate(user)
-    timed_out_passages = self.get_timed_out_passages(self.ongoing, user.id)
-    (self.finished + timed_out_passages) - user.passages
+    timed_out_passages = get_timed_out_passages(ongoing, user.id)
+    (finished + timed_out_passages) - user.passages
   end
 
   def self.attempted_by_candidate(user)
@@ -85,5 +85,4 @@ class Passage < ApplicationRecord
   def defaults
     self.duration ||= DEFAULT_DURATION
   end
-
 end

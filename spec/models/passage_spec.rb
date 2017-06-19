@@ -44,7 +44,7 @@ describe Passage, type: :model do
       passage = Passage.create(title: 'passage title', text: 'passage text', duration: 86_400)
       now = Time.now.in_time_zone(ActiveSupport::TimeZone.new('Chennai'))
       passage.commence(now.to_s)
-      expect(passage.conclude_time).to eq(Time.zone.parse now.to_s)
+      expect(passage.conclude_time).to eq(Time.zone.parse(now.to_s))
     end
   end
 

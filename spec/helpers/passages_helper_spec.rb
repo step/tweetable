@@ -3,13 +3,13 @@
 describe PassagesHelper, type: :helper do
   describe 'to_preferred_time_format' do
     it 'converts the time into preffered format' do
-      expect(helper.to_preferred_time_format(DateTime.civil(2017, 05, 3, 4, 5, 6))).to eq('03-05-2017 04:05AM')
+      expect(helper.to_preferred_time_format(DateTime.civil(2017, 0o5, 3, 4, 5, 6))).to eq('03-05-2017 04:05AM')
     end
   end
 
   describe 'to_specified_time_format' do
     it 'converts the time into specified format' do
-      expect(helper.to_display_time_format(DateTime.civil(2017, 05, 3, 4, 5, 6))).to eq('03 May 04:05 AM')
+      expect(helper.to_display_time_format(DateTime.civil(2017, 0o5, 3, 4, 5, 6))).to eq('03 May 04:05 AM')
     end
   end
 
@@ -53,15 +53,15 @@ describe PassagesHelper, type: :helper do
     end
 
     it 'should return 2 when admin evaluated two responses' do
-    response1 = double('Response', text: 'response', passage_id: 1, id: 1)
-    response2 = double('Response', text: 'another response', passage_id: 1, id: 2)
-    tag1 = double('Tag', name: 'Grammatical Error', id: 1)
-    tag2 = double('Tag', name: 'Type Error', id: 2)
+      response1 = double('Response', text: 'response', passage_id: 1, id: 1)
+      response2 = double('Response', text: 'another response', passage_id: 1, id: 2)
+      tag1 = double('Tag', name: 'Grammatical Error', id: 1)
+      tag2 = double('Tag', name: 'Type Error', id: 2)
 
-    expect(response1).to receive(:tags).and_return([tag1])
-    expect(response2).to receive(:tags).and_return([tag2])
+      expect(response1).to receive(:tags).and_return([tag1])
+      expect(response2).to receive(:tags).and_return([tag2])
 
-    expect(helper.evaluation_count([response1, response2])).to eq(2)
+      expect(helper.evaluation_count([response1, response2])).to eq(2)
     end
 
     it 'should return 1 when admin evaluated 1 response and another response evaluation is left' do

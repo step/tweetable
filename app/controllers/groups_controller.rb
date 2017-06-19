@@ -44,8 +44,8 @@ class GroupsController < ApplicationController
     end
   end
 
-  def xeditable? object = nil
-    true # Or something like current_user.xeditable?
+  def xeditable?(_object = nil)
+    false # Or something like current_user.xeditable?
   end
 
   private
@@ -57,5 +57,4 @@ class GroupsController < ApplicationController
   def group_params
     params.require('group').permit(:name, :description)
   end
-
 end

@@ -3,7 +3,6 @@
 require 'after_the_deadline'
 
 class EvaluationEngine
-
   def evaluate(passage, response)
     dict = create_dict passage
     AfterTheDeadline(dict, nil)
@@ -13,5 +12,4 @@ class EvaluationEngine
   def create_dict(passage)
     passage.split(' ')
   end
-
 end

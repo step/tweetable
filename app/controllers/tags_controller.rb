@@ -44,7 +44,7 @@ class TagsController < ApplicationController
     end
   end
 
-  def xeditable? object = nil
+  def xeditable?(_object = nil)
     true
   end
 
@@ -58,5 +58,4 @@ class TagsController < ApplicationController
   def tag_params
     params.require(:tag).permit(:name, :weight, :description)
   end
-
 end
