@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe SessionsController, type: :controller do
 
   let(:user_info) {{id:12234, auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture'}}

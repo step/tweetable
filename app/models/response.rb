@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Response < ApplicationRecord
   after_save :notify_observer
   validates :text, presence: true

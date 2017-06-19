@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe ResponsesController, type: :controller do
 
   describe 'GET #new' do

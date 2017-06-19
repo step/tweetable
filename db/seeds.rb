@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 unless ENV['TWEETABLE_ADMIN_EMAIL']
   puts 'run this command to seed admin user ==>'
   puts "\t source TWEETABLE_ADMIN_EMAIL=admin_email@domain"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 RSpec.describe "Passages", type: :request do
   describe "GET /passages" do
     it "works! (now write some real specs)" do

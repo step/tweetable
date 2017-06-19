@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe ResponsesTracking do
   describe 'validations ' do
     it {should validate_presence_of(:user_id)}

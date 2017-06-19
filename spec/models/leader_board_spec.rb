@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe LeaderBoard, type: :model do
 
   context 'leader board is calculated on the basis of the credit points they got' do

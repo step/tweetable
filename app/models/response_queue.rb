@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResponseQueue < ApplicationRecord
   validates_uniqueness_of :response_id
 

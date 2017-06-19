@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResponsesTracking < ApplicationRecord
   validates :user_id, presence: true
   validates :passage_id, presence: true

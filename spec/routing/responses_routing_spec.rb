@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 require 'rails_helper'
 
 describe ResponsesController, type: :routing  do

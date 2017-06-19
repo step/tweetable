@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/evaluator/evaluation_engine'
 
 class EvaluatorJob

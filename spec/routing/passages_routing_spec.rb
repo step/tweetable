@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe PassagesController, type: :routing do
   describe 'routing' do
 

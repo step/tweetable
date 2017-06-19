@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe UsersController, type: :routing do
   describe 'users routing' do
 

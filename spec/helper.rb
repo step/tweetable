@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 module Helpers
 
   def stub_logged_in(is_logged_in)

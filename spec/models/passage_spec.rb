@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe Passage, type: :model do
 
   describe 'validations ' do

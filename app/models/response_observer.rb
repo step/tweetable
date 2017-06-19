@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResponseObserver
 
   def self.notify(response_id)

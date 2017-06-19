@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe TaggingsController, type: :controller do
   before(:each) do
     stub_logged_in(true)

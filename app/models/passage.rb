@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Passage < ApplicationRecord
   after_initialize :defaults, unless: :persisted?
 

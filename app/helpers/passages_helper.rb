@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PassagesHelper
 
   DRAFT_PASSAGES = 'drafts_passages'

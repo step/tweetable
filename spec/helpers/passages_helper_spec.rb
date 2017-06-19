@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe PassagesHelper, type: :helper do
 
   describe 'to_preferred_time_format' do

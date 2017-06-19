@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.config.middleware.use OmniAuth::Builder do
   param = {
       authorize_params: {force_login: true}

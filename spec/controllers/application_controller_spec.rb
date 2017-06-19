@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe ApplicationController, type: :controller do
 
   describe '#active_user' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe TaggingsController, type: :routing do
   describe 'routing' do
     it 'routes to #create_tagging_by_tag_name' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^I am on the Tweetable login homepage$/) do
   visit login_path
 end

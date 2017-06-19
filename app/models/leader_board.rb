@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LeaderBoard
 
   def self.generate_list(users)

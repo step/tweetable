@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe LeaderBoardController, type: :controller do
 
   describe 'GET #Index' do

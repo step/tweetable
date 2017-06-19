@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TaggingsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :verify_privileges, only: [:create_tagging_by_tag_name,:delete_tagging_by_tag_name]

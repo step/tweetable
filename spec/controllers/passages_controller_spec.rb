@@ -1,3 +1,5 @@
+# frozen_string_literal: true 
+
 describe PassagesController do
 
   let(:passages) {
