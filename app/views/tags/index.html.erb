@@ -16,8 +16,10 @@
           <td id='tag-name'><%= editable tag, :name, url: tag_path(tag.id), value: tag.name %></td>
           <td id='tag-weight'><%= editable tag, :weight, url: tag_path(tag.id), value: tag.weight %></td>
           <td id='tag-desc'><%= editable tag, :description, url: tag_path(tag.id), value: tag.description %></td>
-
-          <td><%= link_to '', tag, method: :delete, class: 'fa fa-trash' %></td>
+          <td>
+            <a href="#" class="fa fa-trash" data-toggle="modal" data-target="#delete_modal_<%= tag.id %>"></a>
+            <%= render :partial => 'tags/delete_tag', locals: {tag: tag} %>
+          </td>
         </tr>
     <% end %>
     </tbody>
