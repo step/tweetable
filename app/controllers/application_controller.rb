@@ -22,10 +22,9 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_privileges
-    unless current_user.admin
-      flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
-      redirect_to passages_path
-    end
+    return if current_user.admin
+    flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
+    redirect_to passages_path
   end
 
   private

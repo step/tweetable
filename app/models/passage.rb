@@ -56,9 +56,8 @@ class Passage < ApplicationRecord
 
   def self.is_passage_missed(passage, user_id)
     tracking_details = ResponsesTracking.find_by(passage_id: passage.id, user_id: user_id)
-    unless tracking_details.nil?
-      ResponsesTracking.remaining_time(passage.id, user_id) <= 0
-    end
+    return false if tracking_details.nil?
+    ResponsesTracking.remaining_time(passage.id, user_id) <= 0
   end
 
   def self.get_timed_out_passages(ongoing_passages, user_id)
@@ -70,9 +69,8 @@ class Passage < ApplicationRecord
   private
 
   def date_validations
-    unless is_valid_commence_time?
-      errors.add(:conclude_time, 'must be a future time...')
-    end
+    return if is_valid_commence_time?
+    errors.add(:conclude_time, 'must be a future time...')
   end
 
   def is_valid_conclude_time?
