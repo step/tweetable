@@ -40,6 +40,9 @@ gem 'rufus-scheduler', '~> 3.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'rails-footnotes', '~> 4.0'
+
+  gem 'rubocop', '~> 0.49.1'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda-matchers'
