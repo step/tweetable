@@ -19,11 +19,11 @@ describe GroupsController do
       context 'with valid params' do
         it 'redirects to the created passage' do
           group = double('group')
-          valid_attributes = {name: 'step-17-19', description: '5th batch'}
+          valid_attributes = { name: 'step-17-19', description: '5th batch' }
           expect(Group).to receive(:new).and_return(group)
           expect(group).to receive(:save).and_return(true)
 
-          post :create, params: {group: valid_attributes}
+          post :create, params: { group: valid_attributes }
 
           expect(response).to redirect_to(groups_path)
           expect(flash[:success]).to match('Group was successfully created.')
@@ -32,13 +32,13 @@ describe GroupsController do
       context 'with invalid params' do
         it "returns a success response (i.e. to display the 'new' template)" do
           group = double('group')
-          invalid_attributes = {name:''}
+          invalid_attributes = { name:'' }
 
           expect(Group).to receive(:new).and_return(group)
           expect(group).to receive(:save).and_return(false)
           allow_any_instance_of(GroupsController).to receive(:display_flash_error)
 
-          post :create, params: {group: invalid_attributes}
+          post :create, params: { group: invalid_attributes }
 
           expect(response).to redirect_to(new_group_path)
         end

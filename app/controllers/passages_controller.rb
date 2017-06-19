@@ -29,10 +29,10 @@ class PassagesController < ApplicationController
     respond_to do |format|
       if passage.update_attributes(permit_params)
         flash[:success] = 'Passage was successfully updated.'
-        format.html {redirect_to passages_path}
+        format.html { redirect_to passages_path }
       else
         display_flash_error(passage)
-        format.html {redirect_to edit_passage_path}
+        format.html { redirect_to edit_passage_path }
       end
     end
   end
@@ -43,10 +43,10 @@ class PassagesController < ApplicationController
     respond_to do |format|
       if passage.save
         flash[:success] = 'Passage was successfully created.'
-        format.html {redirect_to passages_path}
+        format.html { redirect_to passages_path }
       else
         display_flash_error(passage)
-        format.html {redirect_to new_passage_path}
+        format.html { redirect_to new_passage_path }
       end
     end
   end
@@ -55,7 +55,7 @@ class PassagesController < ApplicationController
     respond_to do |format|
       Passage.find(params[:id]).destroy
       flash[:success] = 'Passage was successfully deleted.'
-      format.html {redirect_to passages_path}
+      format.html { redirect_to passages_path }
     end
   end
 
@@ -75,38 +75,38 @@ class PassagesController < ApplicationController
 
   def drafts
     filtered_passages = Passage.drafts
-    render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "drafts_passages"}
+    render 'passages/admin/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'drafts_passages' }
   end
 
   def ongoing
     filtered_passages = Passage.ongoing
-    render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "ongoing_passages"}
+    render 'passages/admin/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'ongoing_passages' }
   end
 
   def finished
     filtered_passages = Passage.finished
-    render "passages/admin/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "finished_passages"}
+    render 'passages/admin/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'finished_passages' }
   end
 
   def commenced
     filtered_passages = Passage.commence_for_candidate(current_user)
-    render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "commenced_passages"}
+    render 'passages/candidate/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'commenced_passages' }
   end
 
   def missed
     filtered_passages = Passage.missed_by_candidate(current_user)
-    render "passages/candidate/passages_pane", locals: {filtered_passages: filtered_passages, partial_name: "missed_passages"}
+    render 'passages/candidate/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'missed_passages' }
   end
 
   def attempted
     passages = Passage.attempted_by_candidate(current_user)
-    render "passages/candidate/attempted_passages_pane", locals: {filtered_passages: passages}
+    render 'passages/candidate/attempted_passages_pane', locals: { filtered_passages: passages }
   end
 
   private
 
   def permit_params
-    params.require("passage").permit(:title, :text, :duration, :commence_time, :conclude_time)
+    params.require('passage').permit(:title, :text, :duration, :commence_time, :conclude_time)
   end
 
   def display_flash_error(passage)

@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
   end
 
   def user_params
-    omniauth=request.env["omniauth.auth"]
+    omniauth=request.env['omniauth.auth']
     {
         auth_id: omniauth['uid'],
         name: omniauth['info']['name'],

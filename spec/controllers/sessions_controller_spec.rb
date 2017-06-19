@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 describe SessionsController, type: :controller do
-  let(:user_info) {{id:12234, auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture'}}
-  let(:new_user_info) {{id:12235, auth_id: 'auth_id', name: 'new user first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/new_user_profile_picture'}}
+  let(:user_info) { { id:12234, auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture' } }
+  let(:new_user_info) { { id:12235, auth_id: 'auth_id', name: 'new user first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/new_user_profile_picture' } }
   before(:each) do
     stub_current_active_user
   end
@@ -35,7 +35,7 @@ describe SessionsController, type: :controller do
         expect(User).to receive(:find_by).with(email: user_info[:email]).and_return(user)
         expect(user).to receive(:update_if_changed).with(user_info).and_return(user)
 
-        post :create, params: {provider: 'provider'}
+        post :create, params: { provider: 'provider' }
 
         session =  controller.session
 
@@ -56,7 +56,7 @@ describe SessionsController, type: :controller do
         expect(User).to receive(:create).with(new_user_info).and_return(user)
         expect(user).to receive(:update_if_changed).with(new_user_info).and_return(user)
 
-        post :create, params: {provider: 'provider'}
+        post :create, params: { provider: 'provider' }
 
         session =  controller.session
 
@@ -70,7 +70,7 @@ describe SessionsController, type: :controller do
 
   describe 'GET #destroy' do
     it 'should delete the session' do
-      my_session = {session_id: 'session_id'}
+      my_session = { session_id: 'session_id' }
 
       delete :destroy, session: my_session
 

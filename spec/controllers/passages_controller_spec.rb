@@ -19,12 +19,12 @@ describe PassagesController do
       context 'with valid params' do
         it 'redirects to the created passage' do
           passage = double('passage')
-          valid_attributes = {title: 'title', duration: 1234}
+          valid_attributes = { title: 'title', duration: 1234 }
 
           expect(Passage).to receive(:new).and_return(passage)
           expect(passage).to receive(:save).and_return(true)
 
-          post :create, params: {passage: valid_attributes}
+          post :create, params: { passage: valid_attributes }
 
           expect(response).to redirect_to(passages_path)
           expect(flash[:success]).to match('Passage was successfully created.')
@@ -34,13 +34,13 @@ describe PassagesController do
       context 'with invalid params' do
         it "returns a success response (i.e. to display the 'new' template)" do
           passage = double('passage')
-          invalid_attributes = {title: 'title', text: 'passage text', duration: '1234'}
+          invalid_attributes = { title: 'title', text: 'passage text', duration: '1234' }
 
           expect(Passage).to receive(:new).and_return(passage)
           expect(passage).to receive(:save).and_return(false)
           allow_any_instance_of(PassagesController).to receive(:display_flash_error)
 
-          post :create, params: {passage: invalid_attributes}
+          post :create, params: { passage: invalid_attributes }
 
           expect(response).to redirect_to(new_passage_path)
         end
@@ -51,13 +51,13 @@ describe PassagesController do
       context 'with valid params' do
         it 'redirects to the created passage' do
           passage = double('passage')
-          valid_attributes = {title: 'title', duration: 1234}
+          valid_attributes = { title: 'title', duration: 1234 }
 
           expect(Passage).to receive(:find).and_return(passage)
           allow_any_instance_of(PassagesController).to receive(:permit_params).and_return(valid_attributes)
           expect(passage).to receive(:update_attributes).with(valid_attributes).and_return(true)
 
-          post :update, params: {id: 'id', passage: valid_attributes}
+          post :update, params: { id: 'id', passage: valid_attributes }
 
           expect(response).to redirect_to(passages_path)
           expect(flash[:success]).to match('Passage was successfully updated.')
@@ -67,14 +67,14 @@ describe PassagesController do
       context 'with invalid params' do
         it "returns a success response (i.e. to display the 'new' template)" do
           passage = double('passage')
-          valid_attributes = {title: 'title', text: 'passage text', duration: '1234'}
+          valid_attributes = { title: 'title', text: 'passage text', duration: '1234' }
 
           expect(Passage).to receive(:find).and_return(passage)
           allow_any_instance_of(PassagesController).to receive(:display_flash_error)
           allow_any_instance_of(PassagesController).to receive(:permit_params).and_return(valid_attributes)
           expect(passage).to receive(:update_attributes).with(valid_attributes).and_return(false)
 
-          post :update, params: {id: 'id', passage: valid_attributes}
+          post :update, params: { id: 'id', passage: valid_attributes }
 
           expect(response).to redirect_to(edit_passage_path)
         end
@@ -87,7 +87,7 @@ describe PassagesController do
           @passages = Passage.create!(passages)
 
           passage_find_by = Passage.find_by(title: 'Climate Change')
-          delete :destroy, params: {id: passage_find_by.id}
+          delete :destroy, params: { id: passage_find_by.id }
 
           expect(Passage.find_by(title: 'Climate Change')).to eq(nil)
           expect(response).to redirect_to(passages_path)
@@ -102,7 +102,7 @@ describe PassagesController do
         passage = double('Passage', text: 'This is a passage text')
 
         expect(Passage).to receive(:find).with('12').and_return(passage)
-        get :edit, params: {id: 12}
+        get :edit, params: { id: 12 }
         should render_template('passages/new')
       end
     end
@@ -112,7 +112,7 @@ describe PassagesController do
         past_time = Time.current+2.days
         passage = double('Passage', commence: true)
         expect(Passage).to receive(:find).and_return(passage)
-        put :commence, params: {id: 12, passage: {conclude_time: past_time}}
+        put :commence, params: { id: 12, passage: { conclude_time: past_time } }
         expect(response).to redirect_to(passages_path)
       end
 
@@ -124,7 +124,7 @@ describe PassagesController do
         expect(passage).to receive(:commence)
         expect(Passage).to receive(:find).and_return(passage)
 
-        put :commence, params: {id: 12, passage: {conclude_time: past_time}}
+        put :commence, params: { id: 12, passage: { conclude_time: past_time } }
 
         expect(flash[:danger]).to eq('Conclude time must be a future time')
         expect(response).to redirect_to(passages_path)
@@ -140,7 +140,7 @@ describe PassagesController do
 
       describe 'GET #drafts' do
         it 'should give all the yet to open passages' do
-          get :drafts, params: {from_tab: true}
+          get :drafts, params: { from_tab: true }
           expect(response).to be_success
           expect(flash[:danger]).to be_nil
           should render_template('passages/admin/passages_pane')
@@ -149,7 +149,7 @@ describe PassagesController do
 
       describe 'GET #opened' do
         it 'should give all the yet to open passages' do
-          get :ongoing, params: {from_tab: true}
+          get :ongoing, params: { from_tab: true }
           expect(response).to be_success
           expect(flash[:danger]).to be_nil
           should render_template('passages/admin/passages_pane')
@@ -158,7 +158,7 @@ describe PassagesController do
 
       describe 'GET #concluded' do
         it 'should give all the yet to concluded passages' do
-          get :finished, params: {from_tab: true}
+          get :finished, params: { from_tab: true }
 
           expect(response).to be_success
           should render_template('passages/admin/passages_pane')
@@ -218,19 +218,19 @@ describe PassagesController do
     end
 
     it 'should not allow candidate to edit a passage' do
-      post :update, params: {id: 'some_id'}
+      post :update, params: { id: 'some_id' }
       expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
       should redirect_to(passages_path)
     end
 
     it 'should not allow candidate to commence a passage' do
-      post :commence, params: {id: 'some_id'}
+      post :commence, params: { id: 'some_id' }
       expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
       should redirect_to(passages_path)
     end
 
     it 'should not allow candidate to conclude a passage' do
-      post :conclude, params: {id: 'some_id'}
+      post :conclude, params: { id: 'some_id' }
       expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
       should redirect_to(passages_path)
     end

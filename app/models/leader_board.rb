@@ -6,7 +6,7 @@ class LeaderBoard
     users_score = users.map { |user| {
         image: user.image_url,
         name: user.name,
-        points: user.tags.reduce(0) { |score, tag| score + tag.weight.to_i }}
+        points: user.tags.reduce(0) { |score, tag| score + tag.weight.to_i } }
     }
     users_score = users_score.sort_by { |user| user[:points] }.reverse
     users_score.first[:rank] = 1

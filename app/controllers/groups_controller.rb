@@ -40,8 +40,8 @@ class GroupsController < ApplicationController
     @group.destroy
     respond_to do |format|
       flash[:success] = "Group #{@group.name} was successfully deleted."
-      format.html {redirect_to groups_path}
-      format.json {head :no_content}
+      format.html { redirect_to groups_path }
+      format.json { head :no_content }
     end
   end
 
@@ -56,7 +56,7 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require("group").permit(:name, :description)
+    params.require('group').permit(:name, :description)
   end
 
 end

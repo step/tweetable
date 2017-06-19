@@ -2,11 +2,11 @@
 
 describe Passage, type: :model do
   describe 'validations ' do
-    it {should validate_presence_of(:title)}
+    it { should validate_presence_of(:title) }
 
-    it {should validate_presence_of(:text)}
+    it { should validate_presence_of(:text) }
 
-    it {should validate_numericality_of(:duration).is_greater_than(0)}
+    it { should validate_numericality_of(:duration).is_greater_than(0) }
 
     it 'validate if commence time and conclude time is nil' do
       passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400)
@@ -35,7 +35,7 @@ describe Passage, type: :model do
   end
 
   describe 'associations' do
-    it {should have_many(:responses).dependent(:destroy)}
+    it { should have_many(:responses).dependent(:destroy) }
   end
 
   describe 'commence' do
@@ -99,8 +99,8 @@ describe Passage, type: :model do
 
       expect(Passage).to receive(:ongoing).and_return([passage1, passage2])
       expect(user).to receive(:passages).and_return([])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: passage1.id, user_id: user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: passage2.id, user_id: user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: passage1.id, user_id: user.id }).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: passage2.id, user_id: user.id }).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).and_return(0)
 
       passage_open_for_candidate = Passage.commence_for_candidate(user)
@@ -135,8 +135,8 @@ describe Passage, type: :model do
       expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg1.id, user_id: user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg2.id, user_id: user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg1.id, user_id: user.id }).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg2.id, user_id: user.id }).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(0)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
@@ -156,8 +156,8 @@ describe Passage, type: :model do
       expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg1.id, user_id: user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg2.id, user_id: user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg1.id, user_id: user.id }).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg2.id, user_id: user.id }).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(10)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
@@ -177,8 +177,8 @@ describe Passage, type: :model do
       expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
       expect(user).to receive(:passages).and_return([finished_psg2, ongoing_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg1.id, user_id: user.id}).and_return(nil)
-      expect(ResponsesTracking).to receive(:find_by).with({passage_id: ongoing_psg2.id, user_id: user.id}).and_return(tracking_details2)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg1.id, user_id: user.id }).and_return(nil)
+      expect(ResponsesTracking).to receive(:find_by).with({ passage_id: ongoing_psg2.id, user_id: user.id }).and_return(tracking_details2)
       expect(ResponsesTracking).to receive(:remaining_time).with(ongoing_psg2.id, user.id).and_return(0)
 
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
@@ -199,7 +199,7 @@ describe Passage, type: :model do
 
         attempted_by_candidate = Passage.attempted_by_candidate(user)
 
-        expect(attempted_by_candidate).to eq([{passage: passage1, response: response1}])
+        expect(attempted_by_candidate).to eq([{ passage: passage1, response: response1 }])
       end
 
       it 'should get empty if attempted passage is zero ' do

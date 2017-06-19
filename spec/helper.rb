@@ -15,17 +15,17 @@ module Helpers
   end
 
   def stub_current_active_user
-    user = stub_user_with_attributes({active: true})
+    user = stub_user_with_attributes({ active: true })
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_admin_user
-    user = stub_user_with_attributes({admin: true, active: true})
+    user = stub_user_with_attributes({ admin: true, active: true })
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_intern_user
-    user = stub_user_with_attributes({admin: false, active: true})
+    user = stub_user_with_attributes({ admin: false, active: true })
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 

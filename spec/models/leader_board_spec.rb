@@ -12,11 +12,11 @@ describe LeaderBoard, type: :model do
       user5 = double('user', name: 'user3', image_url: 'url', tags: [tag1])
 
 
-      expected = [{image: 'url', name: 'user1', points: 15, rank: 1},
-                  {image: 'url', name: 'user3', points: 10, rank: 2},
-                  {image: 'url', name: 'user3', points: 5, rank: 3},
-                  {image: 'url', name: 'user2', points: 5, rank: 3},
-                  {image: 'url', name: 'user3', points: 0, rank: 4}]
+      expected = [{ image: 'url', name: 'user1', points: 15, rank: 1 },
+                  { image: 'url', name: 'user3', points: 10, rank: 2 },
+                  { image: 'url', name: 'user3', points: 5, rank: 3 },
+                  { image: 'url', name: 'user2', points: 5, rank: 3 },
+                  { image: 'url', name: 'user3', points: 0, rank: 4 }]
 
       leader_board = LeaderBoard.generate_list(users=[user1, user2, user3, user4, user5])
 

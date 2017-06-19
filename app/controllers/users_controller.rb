@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     failed = []
     saved = []
     emails.each do |email|
-      @user = User.new({email: email, active: true})
+      @user = User.new({ email: email, active: true })
       @user.save ? saved.push(@user) : failed.push(@user)
     end
     generate_creation_notice(saved,failed)
@@ -34,13 +34,13 @@ class UsersController < ApplicationController
   private
 
   def generate_creation_notice(saved, failed)
-    flash[:danger] = "Users #{failed.map {|user| user.email}.join(', ')} failed to create..." unless failed.empty?
-    flash[:success]= "Users #{saved.map {|user| user.email}.join(', ')} created successfully..." unless saved.empty?
+    flash[:danger] = "Users #{failed.map { |user| user.email }.join(', ')} failed to create..." unless failed.empty?
+    flash[:success]= "Users #{saved.map { |user| user.email }.join(', ')} created successfully..." unless saved.empty?
   end
 
 
   def permit_params
-    params.require("user").permit(:admin, :active)
+    params.require('user').permit(:admin, :active)
   end
 
   # def update_params(params)

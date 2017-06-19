@@ -47,24 +47,24 @@ class Passage < ApplicationRecord
   def self.attempted_by_candidate(user)
     passages = user.passages
     responses = user.responses
-    passages.map {|passage| {passage: passage, response: get_passages_with_corresponding_response(responses, passage.id)}}
+    passages.map { |passage| { passage: passage, response: get_passages_with_corresponding_response(responses, passage.id) } }
   end
 
   private
 
   def self.get_passages_with_corresponding_response(responses, passage_id)
-    responses.find {|response| response.passage_id.equal?(passage_id)}
+    responses.find { |response| response.passage_id.equal?(passage_id) }
   end
 
   def self.is_passage_missed(passage, user_id)
-    tracking_details = ResponsesTracking.find_by({passage_id: passage.id, user_id: user_id})
+    tracking_details = ResponsesTracking.find_by({ passage_id: passage.id, user_id: user_id })
     unless tracking_details.nil?
       ResponsesTracking.remaining_time(passage.id, user_id) <= 0
     end
   end
 
   def self.get_timed_out_passages(ongoing_passages, user_id)
-    ongoing_passages.select {|passage| is_passage_missed(passage, user_id)}
+    ongoing_passages.select { |passage| is_passage_missed(passage, user_id) }
   end
 
   def date_validations

@@ -19,7 +19,7 @@ module Tweetable
       g.javascripts     false
       g.test_framework  :rspec, fixture: true, views: false
       g.integration_tool :rspec, fixture: true, views: true
-      g.fixture_replacement :factory_girl, dir: "spec/support/factories"
+      g.fixture_replacement :factory_girl, dir: 'spec/support/factories'
     end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

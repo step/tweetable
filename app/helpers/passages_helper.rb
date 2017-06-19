@@ -5,15 +5,15 @@ module PassagesHelper
   DRAFT_PASSAGES = 'drafts_passages'
 
   def admin_tabs
-    {drafts: :drafts, ongoing: :ongoing, finished: :concluded, new: :new}
+    { drafts: :drafts, ongoing: :ongoing, finished: :concluded, new: :new }
   end
 
   def candidate_tabs
-    {commenced: :commenced, attempted: :attempted, missed: :missed}
+    { commenced: :commenced, attempted: :attempted, missed: :missed }
   end
 
   def to_preferred_time_format(time)
-    time.strftime("%d-%m-%Y %I:%M%p") unless time.nil?
+    time.strftime('%d-%m-%Y %I:%M%p') unless time.nil?
   end
 
   def drafts_passage_partial?(partial)
@@ -21,11 +21,11 @@ module PassagesHelper
   end
 
   def to_display_time_format(time)
-    time.strftime("%d %b %I:%m %p")
+    time.strftime('%d %b %I:%m %p')
   end
 
   def duration_of_interval_in_words(interval)
-    interval_time = Time.at(interval).utc.strftime("%H:%M")
+    interval_time = Time.at(interval).utc.strftime('%H:%M')
     hours, minutes = interval_time.split(':').map(&:to_i)
 
     [].tap do |parts|

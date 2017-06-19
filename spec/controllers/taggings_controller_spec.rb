@@ -17,7 +17,7 @@ describe TaggingsController, type: :controller do
       expect(tag).to receive(:taggings).and_return(taggings)
       expect(taggings).to receive(:create).with(response_id: response_id)
 
-      post :create_tagging_by_tag_name, params: {response_id: response_id, tag_name: tag_name}
+      post :create_tagging_by_tag_name, params: { response_id: response_id, tag_name: tag_name }
     end
   end
 
@@ -34,7 +34,7 @@ describe TaggingsController, type: :controller do
       expect(Tagging).to receive(:find_by).with(response_id: response_id, tag_id: tag_id).and_return(tagging)
       expect(tagging).to receive(:destroy)
 
-      post :delete_tagging_by_tag_name, params: {response_id: response_id, tag_name: tag_name}
+      post :delete_tagging_by_tag_name, params: { response_id: response_id, tag_name: tag_name }
     end
   end
 end
