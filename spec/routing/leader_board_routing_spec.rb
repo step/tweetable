@@ -1,4 +1,4 @@
-# frozen_string_literal: true 
+# frozen_string_literal: true
 
 describe LeaderBoardController, type: :routing do
   describe 'leader_board routing' do
