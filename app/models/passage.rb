@@ -54,32 +54,32 @@ class Passage < ApplicationRecord
     responses.find { |response| response.passage_id.equal?(passage_id) }
   end
 
-  def self.is_passage_missed(passage, user_id)
+  def self.passage_missed?(passage, user_id)
     tracking_details = ResponsesTracking.find_by(passage_id: passage.id, user_id: user_id)
     return false if tracking_details.nil?
     ResponsesTracking.remaining_time(passage.id, user_id) <= 0
   end
 
   def self.get_timed_out_passages(ongoing_passages, user_id)
-    ongoing_passages.select { |passage| is_passage_missed(passage, user_id) }
+    ongoing_passages.select { |passage| passage_missed?(passage, user_id) }
   end
 
-  private_class_method :is_passage_missed, :get_passages_with_corresponding_response, :get_timed_out_passages
+  private_class_method :passage_missed?, :get_passages_with_corresponding_response, :get_timed_out_passages
 
   private
 
   def date_validations
-    return if is_valid_commence_time?
+    return if valid_commence_time?
     errors.add(:conclude_time, 'must be a future time...')
   end
 
-  def is_valid_conclude_time?
+  def valid_conclude_time?
     conclude_time.present? and conclude_time > commence_time
   end
 
-  def is_valid_commence_time?
+  def valid_commence_time?
     return true unless commence_time.present?
-    is_valid_conclude_time?
+    valid_conclude_time?
   end
 
   def defaults
