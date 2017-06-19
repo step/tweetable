@@ -7,7 +7,6 @@ describe TaggingsController, type: :controller do
   end
 
   describe 'POST #create_tagging_by_tag_name' do
-
     it 'should create a new tagging with id of given tag name' do
       tag_name = 'tag_name'
       tag = double('tag')
@@ -20,11 +19,9 @@ describe TaggingsController, type: :controller do
 
       post :create_tagging_by_tag_name, params: {response_id: response_id, tag_name: tag_name}
     end
-
   end
 
   describe 'DELETE #delete_tagging_by_tag_name' do
-
     it 'should create a delete tagging with id of given tag name' do
       tag_name = 'tag_name'
       tag = double('tag')
@@ -39,6 +36,5 @@ describe TaggingsController, type: :controller do
 
       post :delete_tagging_by_tag_name, params: {response_id: response_id, tag_name: tag_name}
     end
-
   end
 end

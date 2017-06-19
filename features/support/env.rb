@@ -40,7 +40,6 @@ rescue NameError
 end
 
 Before('@omniauth_test') do
-
   OmniAuth.config.test_mode = true
 
   omniauth_hash = { 'uid' => '12345', 'info' => {'name' => 'Tweetable','image' => 'image.png'} }

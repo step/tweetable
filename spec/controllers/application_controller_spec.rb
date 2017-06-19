@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 describe ApplicationController, type: :controller do
-
   describe '#active_user' do
     context 'if the user is active' do
       it 'should return 200' do
@@ -26,6 +25,5 @@ describe ApplicationController, type: :controller do
         controller.send(:active_user?)
       end
     end
-
   end
 end

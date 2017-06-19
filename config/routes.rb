@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   get '', to: redirect('/login')
   get 'login', to: 'sessions#new', as: :login
   get '/auth/:provider/callback', to: 'sessions#create'
@@ -45,5 +44,4 @@ Rails.application.routes.draw do
 
   resources :tags
   resources :groups
-
 end

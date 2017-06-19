@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 describe PassagesController do
-
   let(:passages) {
     [
         {
@@ -17,7 +16,6 @@ describe PassagesController do
     end
 
     describe 'POST #create' do
-
       context 'with valid params' do
         it 'redirects to the created passage' do
           passage = double('passage')
@@ -50,7 +48,6 @@ describe PassagesController do
     end
 
     describe 'POST #update' do
-
       context 'with valid params' do
         it 'redirects to the created passage' do
           passage = double('passage')
@@ -85,7 +82,6 @@ describe PassagesController do
     end
 
     describe 'DELETE #destroy' do
-
       context 'with passage id' do
         it 'should delete the passage' do
           @passages = Passage.create!(passages)
@@ -99,11 +95,9 @@ describe PassagesController do
           @passages.each(&:delete)
         end
       end
-
     end
 
     describe 'GET #edit' do
-
       it 'should give edit form for the passage' do
         passage = double('Passage', text: 'This is a passage text')
 
@@ -114,7 +108,6 @@ describe PassagesController do
     end
 
     describe 'PUT #commence' do
-
       it 'should commence the passage' do
         past_time = Time.current+2.days
         passage = double('Passage', commence: true)
@@ -140,7 +133,6 @@ describe PassagesController do
   end
 
   describe 'filter methods' do
-
     context 'admin filters' do
       before(:each) do
         stub_current_active_admin_user
@@ -181,7 +173,6 @@ describe PassagesController do
 
       describe 'GET #commenced' do
         it 'should give all the yet to open passages' do
-
           expect(Passage).to receive(:commence_for_candidate)
 
           get :commenced
@@ -193,7 +184,6 @@ describe PassagesController do
 
       describe 'GET #missed' do
         it 'should give all the missed passages by user' do
-
           expect(Passage).to receive(:missed_by_candidate)
 
           get :missed
@@ -205,7 +195,6 @@ describe PassagesController do
 
       describe 'GET #attempted' do
         it 'should give all the passages that are already attempted by candidate' do
-
           expect(Passage).to receive(:attempted_by_candidate)
 
           get :attempted
@@ -215,7 +204,6 @@ describe PassagesController do
         end
       end
     end
-
   end
 
   describe 'validations' do
@@ -264,6 +252,5 @@ describe PassagesController do
       expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
       should redirect_to(passages_path)
     end
-
   end
 end

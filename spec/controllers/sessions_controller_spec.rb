@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 describe SessionsController, type: :controller do
-
   let(:user_info) {{id:12234, auth_id: 'auth_id', name: 'first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/profile_picture'}}
   let(:new_user_info) {{id:12235, auth_id: 'auth_id', name: 'new user first_name last_name', email: 'someone@email.com', image_url: 'https://something.com/new_user_profile_picture'}}
   before(:each) do
     stub_current_active_user
   end
   describe 'GET #new' do
-
     context 'When user is logged_in' do
       it 'redirects to passages path' do
         stub_logged_in(true)
@@ -29,9 +27,7 @@ describe SessionsController, type: :controller do
   end
 
   describe 'GET #create' do
-
     context 'When user exists' do
-
       it 'should not create a new user' do
         allow_any_instance_of(SessionsController).to receive(:user_params).and_return(user_info)
         user = double('user',id:user_info[:id],name: user_info[:name], image_url: user_info[:image_url])
@@ -48,12 +44,10 @@ describe SessionsController, type: :controller do
         expect(session[:user_name]).to eql('first_name last_name')
         expect(session[:user_image_url]).to eql('https://something.com/profile_picture')
       end
-
     end
 
     context 'When user does not exist' do
       it 'should create a new user' do
-
         allow_any_instance_of(SessionsController).to receive(:user_params).and_return(new_user_info)
 
         user = double('user',id:new_user_info[:id],name: new_user_info[:name], image_url: new_user_info[:image_url])
@@ -70,10 +64,8 @@ describe SessionsController, type: :controller do
         expect(session[:user_id]).to eql(12235)
         expect(session[:user_name]).to eql('new user first_name last_name')
         expect(session[:user_image_url]).to eql('https://something.com/new_user_profile_picture')
-
       end
     end
-
   end
 
   describe 'GET #destroy' do

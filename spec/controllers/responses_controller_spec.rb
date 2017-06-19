@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 describe ResponsesController, type: :controller do
-
   describe 'GET #new' do
-
     let(:passage) {Passage.new(id: 1)}
 
     before(:each) do
@@ -12,7 +10,6 @@ describe ResponsesController, type: :controller do
     end
 
     context 'When passage id exists' do
-
       it 'renders the new template' do
         expect(Passage).to receive(:find).and_return(passage)
         expect(ResponsesTracking).to receive(:remaining_time).and_return(6000)
@@ -24,7 +21,6 @@ describe ResponsesController, type: :controller do
     end
 
     context 'When passage does not exists' do
-
       it 'renders the new template' do
         stub_logged_in(true)
         get :new, params: {passage_id: passage.id}
@@ -102,9 +98,7 @@ describe ResponsesController, type: :controller do
   end
 
   describe 'GET #index' do
-
     context 'When user is Admin' do
-
       it 'renders the index page with response_evaluation' do
         stub_logged_in(true)
         stub_current_active_admin_user
@@ -119,12 +113,10 @@ describe ResponsesController, type: :controller do
 
         get :index, params: {passage_id: passage_id}
         should render_template("index")
-
       end
     end
 
     context 'When user is Candidate' do
-
       it 'renders the new template' do
         stub_logged_in(true)
         stub_current_active_intern_user

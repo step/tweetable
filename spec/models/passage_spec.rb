@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 describe Passage, type: :model do
-
   describe 'validations ' do
-
     it {should validate_presence_of(:title)}
 
     it {should validate_presence_of(:text)}
@@ -34,13 +32,10 @@ describe Passage, type: :model do
       passage = Passage.new(title: 'passage title', text: 'passage text', duration: 86400, commence_time: past_time, conclude_time: current_time)
       expect(passage.save).to be true
     end
-
   end
 
   describe 'associations' do
-
     it {should have_many(:responses).dependent(:destroy)}
-
   end
 
   describe 'commence' do
@@ -196,7 +191,6 @@ describe Passage, type: :model do
   describe '#attended_passage_by_candidate' do
     context 'get all attended passages with response' do
       it 'should belongs to the logged candidate ' do
-
         passage1 = double('Passage', id: 11)
 
         response1 = double('Response', id: 1, passage_id: 11)
@@ -209,8 +203,6 @@ describe Passage, type: :model do
       end
 
       it 'should get empty if attempted passage is zero ' do
-
-
         user = double('User', passages: [], responses: [])
 
         attempted_by_candidate = Passage.attempted_by_candidate(user)

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 describe GroupsController do
-
   let(:groups) {
     [
         {
@@ -17,7 +16,6 @@ describe GroupsController do
     end
 
     describe 'POST #create' do
-
       context 'with valid params' do
         it 'redirects to the created passage' do
           group = double('group')
@@ -29,7 +27,6 @@ describe GroupsController do
 
           expect(response).to redirect_to(groups_path)
           expect(flash[:success]).to match('Group was successfully created.')
-
         end
       end
       context 'with invalid params' do

@@ -6,7 +6,6 @@ describe UsersController, type: :controller do
   end
 
   describe 'GET #index' do
-
     it 'should index active user' do
       user_params = {admin: true, id: 1, active: true}
       stub_current_user_with_attributes(user_params)
@@ -16,7 +15,6 @@ describe UsersController, type: :controller do
   end
 
   describe 'PUT #update' do
-
     context 'with valid params' do
       it 'update the user record' do
         stub_current_active_user
@@ -34,7 +32,6 @@ describe UsersController, type: :controller do
 
   describe 'POST #create_users' do
     context 'all emails are vaild' do
-
       it 'should create an active user with the given email' do
         user_params = {admin: true, id: 1, active: true}
         stub_current_user_with_attributes(user_params)
@@ -66,7 +63,6 @@ describe UsersController, type: :controller do
 
         expect(flash[:success]).to match("Users something1@email.com, something2@email.com created successfully...")
       end
-
     end
 
     context 'some emails are invalid' do
@@ -113,6 +109,5 @@ describe UsersController, type: :controller do
         expect(flash[:danger]).to match("Users something@email.com failed to create...")
       end
     end
-
   end
 end

@@ -2,7 +2,6 @@
 
 describe UsersController, type: :routing do
   describe 'users routing' do
-
     it 'routes to #update via PUT' do
       expect(put: '/users/1').to route_to('users#update', id: '1')
     end

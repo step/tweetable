@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 describe LeaderBoard, type: :model do
-
   context 'leader board is calculated on the basis of the credit points they got' do
     it 'should calculate rank of the user' do
       tag1 = double('tag', weight: 5)
@@ -22,8 +21,6 @@ describe LeaderBoard, type: :model do
       leader_board = LeaderBoard.generate_list(users=[user1, user2, user3, user4, user5])
 
       expect(leader_board).to match_array(expected)
-
     end
   end
-
 end

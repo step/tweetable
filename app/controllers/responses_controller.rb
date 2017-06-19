@@ -29,7 +29,6 @@ class ResponsesController < ApplicationController
 
     @response = Response.new(response_params)
     respond_to do |format|
-
       if remaining_time<=0
         flash[:danger] = 'Sorry, Your response submission time is expired!'
         format.html {redirect_to passages_path}

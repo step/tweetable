@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 describe PassagesHelper, type: :helper do
-
   describe 'to_preferred_time_format' do
     it 'converts the time into preffered format' do
       expect(helper.to_preferred_time_format(DateTime.civil(2017, 05, 3, 4, 5, 6))).to eq('03-05-2017 04:05AM')
@@ -47,7 +46,6 @@ describe PassagesHelper, type: :helper do
 
   describe 'evaluation_count' do
     it 'should return zero when evaluation still pending for a response' do
-
       response1 = double('Response',text:'This is a passage text',passage_id:1,id:1)
 
       expect(response1).to receive(:tags).and_return(nil)
@@ -55,7 +53,6 @@ describe PassagesHelper, type: :helper do
     end
 
     it 'should return 2 when admin evaluated two responses' do
-
     response1 = double('Response',text:'response',passage_id:1,id:1)
     response2 = double('Response',text:'another response',passage_id:1,id:2)
     tag1 = double('Tag',name:'Grammatical Error',id:1)
@@ -68,7 +65,6 @@ describe PassagesHelper, type: :helper do
     end
 
     it 'should return 1 when admin evaluated 1 response and another response evaluation is left' do
-
       response1 = double('Response',text:'response',passage_id:1,id:1)
       response2 = double('Response',text:'another response',passage_id:1,id:2)
       tag1 = double('Tag',name:'Grammatical Error',id:1)
@@ -81,7 +77,6 @@ describe PassagesHelper, type: :helper do
     end
 
     it 'should return zero when there is no tag associate with response' do
-
       response1 = double('Response',text:'response',passage_id:1,id:1)
 
       expect(response1).to receive(:tags).and_return([])
@@ -89,5 +84,4 @@ describe PassagesHelper, type: :helper do
       expect(helper.evaluation_count([response1])).to eq(0)
     end
   end
-
 end

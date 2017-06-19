@@ -2,7 +2,6 @@
 
 describe PassagesController, type: :routing do
   describe 'routing' do
-
     it 'routes to #index' do
       expect(get: '/passages').to route_to('passages#index')
     end
@@ -62,6 +61,5 @@ describe PassagesController, type: :routing do
     it 'routes to #passasges/finished with params' do
       expect(get: '/passages/finished?query=something').to route_to('passages#finished', query: 'something')
     end
-
   end
 end

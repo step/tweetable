@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 describe Response do
-
   describe 'validations ' do
     it {should validate_presence_of(:text)}
 
@@ -16,7 +15,5 @@ describe Response do
     it { should belong_to(:passage) }
     it { should have_many(:taggings) }
     it { should have_many(:tags).through(:taggings) }
-
   end
-
 end
