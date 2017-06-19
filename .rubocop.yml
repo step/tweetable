@@ -1,0 +1,15 @@
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
