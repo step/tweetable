@@ -9,5 +9,3 @@ describe ResponsesController, type: :routing  do
     end
   end
 end
-
-

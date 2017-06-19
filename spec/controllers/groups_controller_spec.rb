@@ -46,4 +46,3 @@ describe GroupsController do
     end
   end
 end
-

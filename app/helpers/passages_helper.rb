@@ -42,4 +42,3 @@ module PassagesHelper
   end
 
 end
-
