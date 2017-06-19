@@ -10,6 +10,4 @@ scheduler.every '10s' do
   engine = EvaluationEngine.new
   tagger = Tagger.new
   job.execute ResponseQueue, engine, tagger
-end
-
-shedule if Rails.env.production?
+end if Rails.env.production?
