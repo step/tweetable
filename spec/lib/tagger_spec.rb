@@ -11,7 +11,7 @@ describe Tagger do
         expect(Tag).to receive(:find_by).with(name: err.type+' error').and_return tag
 
         job = Tagger.new
-        expect(job.send(:get_tag, err)).to eq tag
+        expect(job.get_tag(err)).to eq tag
       end
     end
 
@@ -24,8 +24,27 @@ describe Tagger do
         expect(Tag).to receive(:create).with(name: err.type+' error', description: err.description).and_return tag
 
         job = Tagger.new
-        expect(job.send(:get_tag, err)).to eq tag
+        expect(job.get_tag(err)).to eq tag
       end
+    end
+  end
+
+  describe '#generate_taggings' do
+    it 'generate taggings on all the given error' do
+      err = double('err', type: 'err_type', description: 'err_description')
+      response_id = 'response_id'
+      job = double('job')
+      results = [err]
+      tagger = Tagger.new
+      tag = double('tag')
+      taggings = double('taggings')
+
+      expect(job).to receive(:response_id).and_return response_id
+      expect(tagger).to receive(:get_tag).with(err).and_return tag
+      expect(tag).to receive(:taggings).and_return taggings
+      expect(taggings).to receive(:create).with(response_id: response_id)
+
+      tagger.generate_taggings job, results
     end
   end
 
