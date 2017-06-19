@@ -2,7 +2,7 @@
 
 class ResponseObserver
 
-  def self.notify(response_id)
-    ResponseQueue.enqueue(response_id) if Rails.env.production?
+  def self.notify(passage, response)
+    ResponseQueue.enqueue(passage, response) if Rails.env.production?
   end
 end

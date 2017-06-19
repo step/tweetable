@@ -1,9 +1,9 @@
 class Tagger
 
-  def generate_taggings response, results
+  def generate_taggings job, results
     results.each {|err|
       tag = get_tag(err)
-      tag.taggings.create({response_id: response.id})
+      tag.taggings.create(response_id: job.response_id)
     }
   end
 

@@ -3,8 +3,8 @@
 class ResponseQueue < ApplicationRecord
   validates_uniqueness_of :response_id
 
-  def self.enqueue(response_id)
-    ResponseQueue.create({response_id: response_id})
+  def self.enqueue(passage, response)
+    ResponseQueue.create(response_id: response.id, response_text: response.text, passage_id: passage.id, passage_text: passage.text)
   end
 
   def self.fetch

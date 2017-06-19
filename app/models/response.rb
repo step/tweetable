@@ -14,6 +14,6 @@ class Response < ApplicationRecord
   accepts_nested_attributes_for :user, :passage
 
   def notify_observer
-    ResponseObserver.notify(self.id)
+    ResponseObserver.notify(self.passage, self)
   end
 end

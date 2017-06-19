@@ -1,20 +1,20 @@
 class EvaluatorJob
   def execute (queue, engine, tagger)
     # pull response from the queue
-    response_job = queue.fetch
-    return if response_job.nil?
+    job = queue.fetch
+    return if job.nil?
 
     # get response text and passage text
-    response = Response.find(response_job.response_id)
-    passage = response.passage
+    response_text = job.response_text
+    passage_text = job.passage_text
 
     # evaluating using given engine
-    results = engine.evaluate(passage.text, response.text)
+    results = engine.evaluate(passage_text, response_text)
 
     # generating taggings
-    tagger.generate_taggings response, results
+    tagger.generate_taggings job, results
 
     # acknowledge the queue
-    queue.ack(response_job)
+    queue.ack(job)
   end
 end
