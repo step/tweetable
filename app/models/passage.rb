@@ -14,7 +14,7 @@ class Passage < ApplicationRecord
   DEFAULT_DURATION = 3600
 
   def commence(conclude_time)
-    update_attributes(commence_time: Time.current, conclude_time: (conclude_time))
+    update_attributes(commence_time: Time.current, conclude_time: conclude_time)
   end
 
   def conclude
@@ -50,8 +50,6 @@ class Passage < ApplicationRecord
     passages.map { |passage| { passage: passage, response: get_passages_with_corresponding_response(responses, passage.id) } }
   end
 
-  private
-
   def self.get_passages_with_corresponding_response(responses, passage_id)
     responses.find { |response| response.passage_id.equal?(passage_id) }
   end
@@ -66,6 +64,10 @@ class Passage < ApplicationRecord
   def self.get_timed_out_passages(ongoing_passages, user_id)
     ongoing_passages.select { |passage| is_passage_missed(passage, user_id) }
   end
+
+  private_class_method :is_passage_missed, :get_passages_with_corresponding_response, :get_timed_out_passages
+
+  private
 
   def date_validations
     unless is_valid_commence_time?

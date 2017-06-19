@@ -33,8 +33,8 @@ class UsersController < ApplicationController
   private
 
   def generate_creation_notice(saved, failed)
-    flash[:danger] = "Users #{failed.map { |user| user.email }.join(', ')} failed to create..." unless failed.empty?
-    flash[:success] = "Users #{saved.map { |user| user.email }.join(', ')} created successfully..." unless saved.empty?
+    flash[:danger] = "Users #{failed.map(&:email).join(', ')} failed to create..." unless failed.empty?
+    flash[:success] = "Users #{saved.map(&:email).join(', ')} created successfully..." unless saved.empty?
   end
 
   def permit_params

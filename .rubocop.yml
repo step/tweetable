@@ -8,7 +8,6 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
-    - 'config/environments/*'
 
 AllCops:
   Exclude:
@@ -18,3 +17,4 @@ AllCops:
     - 'bin/**/*'
     - 'Gemfile'
     - 'Gemfile.lock'
+    - 'config/environments/*'

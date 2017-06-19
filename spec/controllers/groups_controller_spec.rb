@@ -19,7 +19,7 @@ describe GroupsController do
       context 'with valid params' do
         it 'redirects to the groups path with success message' do
           group = double('Group')
-          valid_attributes = {name: 'step-17-19', description: '5th batch'}
+          valid_attributes = { name: 'step-17-19', description: '5th batch' }
           expect(Group).to receive(:new).and_return(group)
           expect(group).to receive(:save).and_return(true)
           expect(group).to receive(:name).and_return valid_attributes[:name]

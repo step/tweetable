@@ -12,15 +12,13 @@ class TagsController < ApplicationController
     @tags = Tag.all.order('name ASC')
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @tag = Tag.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @tag = Tag.new(tag_params)
@@ -49,6 +47,7 @@ class TagsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_tag
     @tag = Tag.find(params[:id])

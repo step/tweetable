@@ -4,12 +4,12 @@ Given(/^I am on the Tweetable login homepage$/) do
   visit login_path
 end
 
-Then(/^I should see "(.*?)"$/) do |expectedText|
-  expect(page).to have_content(expectedText)
+Then(/^I should see "(.*?)"$/) do |expected_text|
+  expect(page).to have_content(expected_text)
 end
 
-Then(/^I should see "(.*?)" passages$/) do |expectedText|
-  expect(page).to have_content(expectedText)
+Then(/^I should see "(.*?)" passages$/) do |expected_text|
+  expect(page).to have_content(expected_text)
 end
 
 Then(/^As a candidate user I click on login with Facebook$/) do

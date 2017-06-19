@@ -34,9 +34,9 @@ class SessionsController < ApplicationController
     omniauth = request.env['omniauth.auth']
     {
       auth_id: omniauth['uid'],
-        name: omniauth['info']['name'],
-        email: omniauth['info']['email'],
-        image_url: omniauth['info']['image']
+      name: omniauth['info']['name'],
+      email: omniauth['info']['email'],
+      image_url: omniauth['info']['image']
     }
   end
 end

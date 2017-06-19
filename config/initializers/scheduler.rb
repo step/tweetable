@@ -5,9 +5,11 @@ require './app/jobs/evaluator_job'
 
 scheduler = Rufus::Scheduler.new
 
-scheduler.every '10s' do
-  job = EvaluatorJob.new
-  engine = EvaluationEngine.new
-  tagger = Tagger.new
-  job.execute ResponseQueue, engine, tagger
-end if Rails.env.production?
+if Rails.env.production?
+  scheduler.every '10s' do
+    job = EvaluatorJob.new
+    engine = EvaluationEngine.new
+    tagger = Tagger.new
+    job.execute ResponseQueue, engine, tagger
+  end
+end

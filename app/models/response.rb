@@ -3,7 +3,7 @@
 class Response < ApplicationRecord
   after_save :notify_observer
   validates :text, presence: true
-  validates_length_of :text, maximum: 140, on: :create , too_long: "Tweet length can't be more than 140 characters"
+  validates_length_of :text, maximum: 140, on: :create, too_long: "Tweet length can't be more than 140 characters"
   validates :user_id, presence: true
   validates :passage_id, presence: true
 

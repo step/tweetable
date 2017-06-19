@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EvaluatorJob
-  def execute (queue, engine, tagger)
+  def execute(queue, engine, tagger)
     # pull response from the queue
     job = queue.fetch
     return if job.nil?
