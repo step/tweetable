@@ -33,17 +33,13 @@ describe GroupsController do
       context 'with invalid params' do
         it "returns a error flash msg response (i.e. to display the 'new' template)" do
           group = double('group')
-<<<<<<< 744e2043c9929482e3213db1aee487497e24b9af
-          invalid_attributes = {name:''}
-          errors = double('errors')
-          error = {name:["can't be blank"]}
-=======
           invalid_attributes = { name: '' }
->>>>>>> [Dharmenn] SpaceAfterComma, EmptyLines, UselessAssignment, EmptyLinesAroundBlockBody, TrailingBlankLines, FrozenStringLiteralComment, EmptyLineAfterMagicComment, IfUnlessModifier, SpaceAfterColon, StringLiterals, SymbolArray issue
+          errors = double('errors')
+          error = { name: ["can't be blank"] }
 
           expect(Group).to receive(:new).and_return(group)
           expect(group).to receive(:save).and_return(false)
-          expect(group).to receive(:errors).and_return (errors)
+          expect(group).to receive(:errors).and_return(errors)
           expect(errors).to receive(:messages).and_return error
 
           post :create, params: { group: invalid_attributes }
