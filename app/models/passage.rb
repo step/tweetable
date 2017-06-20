@@ -58,7 +58,6 @@ class Passage < ApplicationRecord
     tracking_details = ResponsesTracking.find_by(passage_id: passage.id, user_id: user_id)
     return false if tracking_details.nil?
     ResponsesTracking.remaining_time(passage.id, user_id) <= 0
-    
   end
 
   def self.get_timed_out_passages(ongoing_passages, user_id)
@@ -75,7 +74,7 @@ class Passage < ApplicationRecord
   end
 
   def valid_conclude_time?
-    conclude_time.present? and conclude_time > commence_time
+    conclude_time.present? && conclude_time > commence_time
   end
 
   def valid_commence_time?

@@ -21,7 +21,6 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-
     respond_to do |format|
       format.html do
         if @group.save
