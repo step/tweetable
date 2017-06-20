@@ -7,7 +7,7 @@
         <h4 class="modal-title">Confirmation</h4>
       </div>
       <div class="modal-body">
-        <p>Your tag cannot be retrieve once deleted. Do you confirm...?</p>
+        <p>Deleting tag <%= tag.name %> will delete all its associated tagging. Are you sure...?</p>
       </div>
       <div class="modal-footer">
         <%= button_to 'Delete', tag_path(tag.id), class: 'btn btn-danger', method: :delete %>
