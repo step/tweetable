@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619050203) do
+ActiveRecord::Schema.define(version: 20170620111952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,17 +32,6 @@ ActiveRecord::Schema.define(version: 20170619050203) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "que_jobs", primary_key: ["queue", "priority", "run_at", "job_id"], force: :cascade, comment: "3" do |t|
-    t.integer "priority", limit: 2, default: 100, null: false
-    t.datetime "run_at", default: -> { "now()" }, null: false
-    t.bigserial "job_id", null: false
-    t.text "job_class", null: false
-    t.json "args", default: [], null: false
-    t.integer "error_count", default: 0, null: false
-    t.text "last_error"
-    t.text "queue", default: "", null: false
   end
 
   create_table "response_queues", force: :cascade do |t|
@@ -91,6 +80,7 @@ ActiveRecord::Schema.define(version: 20170619050203) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "color"
   end
 
   create_table "user_groups", force: :cascade do |t|
@@ -107,8 +97,8 @@ ActiveRecord::Schema.define(version: 20170619050203) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
     t.boolean "active", default: false
+    t.string "email"
   end
 
   add_foreign_key "responses_trackings", "passages"
