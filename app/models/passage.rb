@@ -58,6 +58,7 @@ class Passage < ApplicationRecord
     tracking_details = ResponsesTracking.find_by(passage_id: passage.id, user_id: user_id)
     return false if tracking_details.nil?
     ResponsesTracking.remaining_time(passage.id, user_id) <= 0
+    
   end
 
   def self.get_timed_out_passages(ongoing_passages, user_id)
