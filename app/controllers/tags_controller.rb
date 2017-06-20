@@ -3,7 +3,7 @@
 class TagsController < ApplicationController
   helper_method :xeditable?
 
-  before_action :verify_privileges, except: []
+  before_action :verify_privileges
 
   before_action :set_tag, only: %i[show edit update destroy]
   layout false, only: %i[new edit]
@@ -12,22 +12,19 @@ class TagsController < ApplicationController
     @tags = Tag.all.order('name ASC')
   end
 
-  def show; end
-
   def new
     @tag = Tag.new
   end
-
-  def edit; end
 
   def create
     @tag = Tag.new(tag_params)
     if @tag.save
       flash[:success] = 'Tag was successfully created.'
+      redirect_to tags_path
     else
-      flash[:danger] = 'Tag was cannot be created.'
+      flash[:danger] = @tag.errors.messages.map { |m| m.join(' ').humanize }.join('\n')
+      render :index, status: :unprocessable_entity
     end
-    redirect_to tags_url
   end
 
   def update
@@ -55,6 +52,6 @@ class TagsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def tag_params
-    params.require(:tag).permit(:name, :weight, :description)
+    params.require(:tag).permit(:name, :weight, :description, :color)
   end
 end

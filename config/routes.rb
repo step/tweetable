@@ -43,6 +43,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tags
-  # resources :groups
+  resources :tags, except: [:edit, :show]
 end
