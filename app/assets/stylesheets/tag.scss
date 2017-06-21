@@ -1,0 +1,37 @@
+@import 'variables';
+
+.app-tag-color-container {
+  margin: auto;
+  width: 20px;
+
+  .input-group-addon {
+    border: 1px solid $app-input-border-color;
+    padding: 2px;
+  }
+  .input-group-addon:last-child {
+    border-left: 1px solid $app-input-border-color;
+    border-radius: 2px;
+  }
+}
+
+.app-add-tag-form-color.colorpicker-component{
+  display: block;
+  .input-group-addon {
+    background-color: transparent;
+    border: 1px solid $app-input-border-color;
+    height: 34px;
+    padding: 2px;
+    i{
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .input-group-addon:last-child {
+    border-left: 1px solid $app-input-border-color;
+    border-radius: 4px;
+  }
+}
+
+.app-tag-color-picker.colorpicker {
+    z-index: 10000;
+}
