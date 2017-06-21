@@ -16,4 +16,11 @@ class TaggingsController < ApplicationController
     tagging.destroy
     render plain: params[:tag_name]
   end
+
+  def review_taggings
+    response = Response.find(params[:response_id])
+    taggings = response.all_taggings
+    taggings.update_all(reviewed: true)
+    render json: taggings
+  end
 end

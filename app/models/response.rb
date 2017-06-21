@@ -16,4 +16,12 @@ class Response < ApplicationRecord
   def notify_observer
     ResponseObserver.notify(passage, self)
   end
+
+  def all_tags
+    all_taggings.map(& :tag)
+  end
+
+  def all_taggings
+    taggings.unscoped.where(response_id: id)
+  end
 end

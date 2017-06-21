@@ -37,4 +37,18 @@ describe TaggingsController, type: :controller do
       post :delete_tagging_by_tag_name, params: { response_id: response_id, tag_name: tag_name }
     end
   end
+
+  describe 'PUT #review_taggings' do
+    it 'should update all the taggings reviewed to be true' do
+      response_id = 'response_id'
+      response = double('response')
+      taggings = double('taggings')
+
+      expect(Response).to receive(:find).with(response_id).and_return response
+      expect(response).to receive(:all_taggings).and_return taggings
+      expect(taggings).to receive(:update_all).with reviewed: true
+
+      put :review_taggings, params: { response_id: response_id }
+    end
+  end
 end

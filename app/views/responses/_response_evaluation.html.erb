@@ -12,7 +12,13 @@
   <div class="col-lg-4 col-md-2">
     <small class="pull-right"><%= time_ago_in_words(response.created_at) %></small>
   </div>
-  <div class="tags-holder col-lg-12 col-md-12">
-    <input  id="response-<%= response.id %>" data-response-id="<%=response.id%>" class="form-control tags autocomplete" type="text" value="<%= response.tags.map{|tag| tag.name}.join(',') %>" />
+  <div class="row ">
+
+    <div class="tags-holder col-lg-11 col-md-11">
+      <input  id="response-<%= response.id %>" data-response-id="<%=response.id%>" class="form-control tags autocomplete" type="text" value="<%= response.all_tags.map{|tag| tag.name}.join(',') %>" />
+    </div>
+    <div class="col-lg-1 col-md-1 app-tag-review-holder">
+      <a class="fa fa-check-circle app-tag-review-btn" aria-hidden="true" data-response-id="<%=response.id%>"></a>
+    </div>
   </div>
 </li>

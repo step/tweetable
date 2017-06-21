@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       collection do
         post 'create_tagging_by_tag_name', to: 'taggings#create_tagging_by_tag_name'
         delete 'delete_tagging_by_tag_name', to: 'taggings#delete_tagging_by_tag_name'
+        put 'review_taggings', to: 'taggings#review_taggings'
       end
     end
   end

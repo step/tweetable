@@ -14,16 +14,16 @@
   font-weight: bold;
 }
 
-.count{
+.count {
   color: grey;
 }
 
-.app-remaining-time{
+.app-remaining-time {
   color: rgba(37, 37, 75, 0.72);
   font-weight: bold;
 }
 
-.user-image{
+.user-image {
   max-width: 54px;
   border-radius: 33px;
   border: 1px solid grey;
@@ -31,6 +31,7 @@
   font-size: 35px;
   max-width: 54px;
 }
+
 div.tagsinput {
   border-radius: 5px;
   padding: 8px;
@@ -51,13 +52,15 @@ div.tagsinput {
   list-style-type: none;
 }
 
-.tag-label{
+.tag-label {
   font-weight: bold;
 }
-.media-heading.app-user-name{
+
+.media-heading.app-user-name {
   margin-bottom: 6px;
   margin-top: 5px;
 }
+
 .tags-holder {
   margin-top: 6px;
   padding-bottom: 6px;
@@ -67,11 +70,11 @@ div.tagsinput {
   margin-bottom: 6px;
 }
 
-
 .comments-list {
   margin-bottom: 15px;
   display: inline;
 }
+
 .tag {
   border-radius: 5px;
   padding: 2px 10px 2px 10px;
@@ -82,9 +85,20 @@ div.tagsinput {
   margin-bottom: 5px;
   font-size: 13px;
 }
+
 .media-body.passage {
   margin-bottom: 15px;
 }
+
 .alert.alert-danger {
   margin-top: 10px;
+}
+
+.app-tag-review-holder {
+  padding-top: 13px;
+  font-size: xx-large;
+}
+
+a.fa.fa-check-circle.app-tag-review-btn {
+  text-decoration: none;
 }

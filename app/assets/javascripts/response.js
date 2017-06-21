@@ -8,13 +8,13 @@ var updateRemainingCharacters = function (event) {
 };
 
 var disableSubmission = function () {
-    $(".app-response-submission").attr("disabled","disabled");
+    $(".app-response-submission").attr("disabled", "disabled");
     $(".app-response-submission").css("display", "none");
     $(".back-btn").removeClass("hidden")
     $("#timeout_alert").html('<div class="alert alert-danger"> <strong>Oops..!</strong> Your submission time has been expired..</div>')
-    setTimeout(function(){
+    setTimeout(function () {
         $(".alert").alert('close')
-    },5000);
+    }, 5000);
 
 };
 
@@ -39,10 +39,10 @@ var showRemainingCharacters = function () {
 };
 
 var remove_flash_messages = function () {
-    $(".alert").ready(function(){
-        setTimeout(function(){
+    $(".alert").ready(function () {
+        setTimeout(function () {
             $(".alert").alert('close')
-        },4000);
+        }, 4000);
     })
 };
 
@@ -51,6 +51,7 @@ document.addEventListener("turbolinks:load", function () {
     showRemainingTime();
     remove_flash_messages();
     initializeTaggings();
+    initializeReviewButtions();
 });
 
 var initializeTaggings = function () {
@@ -81,7 +82,7 @@ var onTagAddition = function (tagName) {
     };
     var self = $(this);
     var response_id = self.attr('data-response-id');
-    var url = '/responses/' + response_id + '/taggings/'+uri;
+    var url = '/responses/' + response_id + '/taggings/' + uri;
     var data = {tag_name: tagName};
     requester(url, method, data, onSuccess).fail(function () {
         deleteTag(self, tagName)
@@ -95,12 +96,29 @@ var onTagRemoval = function (tagName) {
     };
     var self = $(this);
     var response_id = self.attr('data-response-id');
-    var url = '/responses/' + response_id + '/taggings/'+uri;
+    var url = '/responses/' + response_id + '/taggings/' + uri;
     var data = {tag_name: tagName};
     requester(url, method, data, onSuccess);
 
 };
-
 var deleteTag = function (tags, tag) {
     return tags.removeTag(tag);
+};
+
+
+var onReview = function () {
+    console.log('hello......')
+    var uri = 'review_taggings';
+    var method = 'PUT';
+    var onSuccess = function (res, status) {
+    };
+    var self = $(this);
+    var response_id = self.attr('data-response-id');
+    var url = '/responses/' + response_id + '/taggings/' + uri;
+    var data = {};
+    requester(url, method, data, onSuccess);
+};
+
+var initializeReviewButtions = function () {
+    $('.app-tag-review-btn').on('click', onReview);
 };
