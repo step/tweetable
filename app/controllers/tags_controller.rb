@@ -20,22 +20,30 @@ class TagsController < ApplicationController
     @tag = Tag.new(tag_params)
     if @tag.save
       flash[:success] = 'Tag was successfully created.'
-      redirect_to tags_path
     else
       flash[:danger] = @tag.errors.messages.map { |m| m.join(' ').humanize }.join('\n')
-      render :index, status: :unprocessable_entity
     end
+    redirect_to tags_path
   end
 
   def update
     @tag.update(tag_params)
+    respond_to do |format|
+      format.json do
+        if @tag.update(tag_params)
+          render json: { message: "#{@tag.name} color has been updated." }, status: :ok
+        else
+          render json: { error: "#{@tag.name} color has been updated." }, status: :ok
+        end
+      end
+    end
   end
 
   def destroy
     @tag.destroy
     respond_to do |format|
       format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render message: 'Tag has been updated' }
     end
   end
 
