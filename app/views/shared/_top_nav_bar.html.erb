@@ -1,15 +1,11 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<%= link_to 'Tweetable', passages_path, class: "navbar-brand" %>
-		</div>
-		
-		<div class="app-user-name hidden-xs">
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<%= link_to  "Welcome, #{current_user.name}" ,'javascript:void(0)' %>
-				</li>
-			</ul>
-		</div>
-	</div>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to 'Tweetable', passages_path, class: "navbar-brand" %>
+    </div>
+
+    <ul class="app-user-name nav navbar-nav navbar-right">
+      <li> <%= link_to "Welcome, #{current_user.name}", 'javascript:void(0)', class: 'hidden-xs' %> </li>
+    </ul>
+  </div>
 </nav>
