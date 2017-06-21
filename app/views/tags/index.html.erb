@@ -6,28 +6,35 @@
       <th>Name</th>
       <th>Weight</th>
       <th>Description</th>
+      <th>Color</th>
       <th>Delete</th>
     </tr>
     </thead>
 
     <tbody>
     <% @tags.each do |tag| %>
-        <tr data-id="<%= tag.id %>">
-          <td id='tag-name'><%= editable tag, :name, url: tag_path(tag.id), value: tag.name %></td>
-          <td id='tag-weight'><%= editable tag, :weight, url: tag_path(tag.id), value: tag.weight %></td>
-          <td id='tag-desc'><%= editable tag, :description, url: tag_path(tag.id), value: tag.description %></td>
+        <%= content_tag(:tr, id: "app-tag-#{tag.id}-info") do %>
+          <% [ tag.name, tag.weight, tag.description ].each  do | attribute | %>
+            <%= content_tag(:td, editable(tag, :name, url: tag_path(tag.id), value: attribute), id: "app-tag-#{tag.id}-#{attribute}") %>
+          <% end %>
+          <%= content_tag(:td, id: "app-tag-#{tag.id}-color") do %>
+            <%= content_tag(:div, class: "app-tag-color-container input-group colorpicker-component", data:{url:tag_path(tag.id) ,'old-color': tag.color }) do %>
+                <%= text_field_tag "app-tag-#{tag.id}-color", tag.color, class: 'form-control hide' %>
+                <span class="input-group-addon"><i></i></span>
+            <%  end %>
+          <%  end %>
           <td>
-            <a href="#" class="fa fa-trash" data-toggle="modal" data-target="#delete_modal_<%= tag.id %>"></a>
-            <%= render :partial => 'tags/delete_tag', locals: {tag: tag} %>
+            <a href="#" class="fa fa-trash" data-toggle="modal" data-target="#app-delete-tag-<%= tag.id %>-modal"></a>
+            <%= render :partial => 'tags/delete_tag', locals: {tag: tag, id:"app-delete-tag-#{tag.id}-modal" } %>
           </td>
-        </tr>
+        <%  end %>
     <% end %>
     </tbody>
   </table>
 
-  <button type="button" id='add-tag' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Tag</button>
+  <button type="button" id='add-tag' class="btn btn-info btn-lg" data-toggle="modal" data-target="#app-add-tag-modal">Add Tag</button>
 
-  <div id="myModal" class="modal fade" role="dialog">
+  <div id="app-add-tag-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
       <div class="modal-content">

@@ -27,7 +27,6 @@ class TagsController < ApplicationController
   end
 
   def update
-    @tag.update(tag_params)
     respond_to do |format|
       format.json do
         if @tag.update(tag_params)
