@@ -16,7 +16,7 @@
 				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>
 			</div>
 			<div class="app-passage-actions">
-				<%= link_to(content_tag(:button, 'View all responses', class: 'btn btn-info pull-right'), passage_responses_path(passage)) %>
+				<%= button_to 'View all responses', passage_responses_path(passage), method: :get, class: 'btn btn-info pull-right'%>
 			</div>
 		</div>
 	</div>
