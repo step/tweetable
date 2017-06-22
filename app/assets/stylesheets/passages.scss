@@ -6,8 +6,15 @@
 .app-passage-actions {
   display: flex;
   align-items: center;
-  .fa {
+  a, button {
     margin-left: 10px;
+    &.fa{
+      color: #337ab7;
+    }
+  }
+  button{
+    background-color: transparent;
+    border: none;
   }
 }
 

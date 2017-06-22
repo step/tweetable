@@ -12,12 +12,16 @@ $app-user-icon-dimension: 30px;
 
 nav.navbar-default {
   background-color: $app-primary-color;
+  height: 50px;
   .navbar-brand {
     color: $app-brand-name-color;
     font-size: 35px;
     font-family: 'Open Sans', 'Sans-Serif';
     font-weight: 900;
     text-shadow: 1px 1px 1px black;
+    &:hover{
+      color: $app-brand-name-color;
+    }
   }
 }
 .navbar-nav {

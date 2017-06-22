@@ -1,13 +1,25 @@
 @import "variables";
 
-a.btn-success, button.btn-success {
-  background-color: $app-secondary-color;
-  border-color: $app-secondary-color;
-}
 
-a.btn-success:hover, button.btn-success:hover {
-  background-color: #078457;
-  border-color: #078457;
+a, button, input {
+
+  &.btn-success{
+    background-color: $app-primary-color;
+    border-color: $app-primary-color;
+    &:hover,&:focus,&:active, &:active:hover, &:active:focus{
+      background-color: $app-pc-light-dark;
+      border-color: $app-pc-light-dark;
+    }
+  }
+
+  &.btn-danger{
+    background-color: #ea6258;
+    border-color: #ea6258;
+    &:hover,&:focus,&:active, &:active:hover, &:active:focus{
+      background-color: #d45c53;
+      border-color: #d45c53;
+    }
+  }
 }
 
 li.divider {

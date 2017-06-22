@@ -1,0 +1,9 @@
+.table-bordered {
+  border: 1px solid #ddd;
+  background-color: white;
+  box-shadow: 1px 1px 1px lightgrey;
+}
+
+.table-bordered tbody tr:nth-child(odd) {
+  background-color: rgba(108, 201, 216, 0.06);
+}

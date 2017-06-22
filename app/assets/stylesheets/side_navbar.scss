@@ -26,17 +26,6 @@ div.app-sidebar-links-container {
     padding-left: 10%;
   }
 }
-@media screen and (max-width: $responsive) {
-  .navbar-header .navbar-brand {
-    padding-left: 70px;
-  }
-  ul.nav{padding-left: 40px;}
-  .app-sidebar-links-container {
-    position: relative;
-    margin-top: -50px;
-    z-index: 9999;
-  }
-}
 
 @media screen and (min-width: $responsive) and (min-height: 550px) {
   .app-sidebar-links-container {
@@ -52,10 +41,19 @@ div.app-sidebar-links-container {
   }
 }
 .icon-bar {
-  background-color: #000000;
+  background-color: white;
 }
 
 @media screen and (max-width: $responsive) {
+  .navbar-header .navbar-brand {
+    padding-left: 70px;
+  }
+  ul.nav{padding-left: 40px;}
+  .app-sidebar-links-container {
+    position: relative;
+    margin-top: 0px;
+    z-index: 9999;
+  }
   .navbar-toggle {
     position: fixed !important;
     top: 0;
@@ -63,6 +61,9 @@ div.app-sidebar-links-container {
   .navbar {
     margin-bottom: 0!important;
     min-height: 20px!important;
+  }
+  .app-navbar-collapse{
+    margin-top: -30px;
   }
   .app-sidebar-links-container {
     padding-top: 30px!important;
