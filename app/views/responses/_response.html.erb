@@ -9,8 +9,8 @@
     <div class="media-body">
       <h4 class="media-heading app-user-name"><%= response.user.name %></h4>
       <p class="passage"><%= response.text %></p>
-      <% unless response.tags.empty? %>
-          <%= render :partial => 'passages/candidate/tagging_status', locals: {tags: response.tags} %>
+      <% unless get_all_unreviewed_taggings(response).empty? %>
+          <%= render :partial => 'passages/candidate/tagging_status', locals: { tags: get_all_unreviewed_taggings(response) } %>
       <% end %>
     </div>
   </div>
