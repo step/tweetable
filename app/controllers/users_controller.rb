@@ -26,7 +26,6 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    # update_params(params) Feels like we do not need this
     user.update_attributes(permit_params)
   end
 
@@ -40,14 +39,4 @@ class UsersController < ApplicationController
   def permit_params
     params.require('user').permit(:admin, :active)
   end
-
-  # def update_params(params)
-  #   # TODO refactor this code add some test
-  #   update_key = params[:user].keys[0]
-  #   if update_key.eql?('admin')
-  #     params[:user][:admin] = params[:user][:admin].eql?('1') ? true : false
-  #   elsif update_key.eql?('active')
-  #     params[:user][:active] = params[:user][:active].eql?('1') ? true : false
-  #   end
-  # end
 end
