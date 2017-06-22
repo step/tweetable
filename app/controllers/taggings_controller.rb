@@ -19,7 +19,7 @@ class TaggingsController < ApplicationController
 
   def review_taggings
     response = Response.find(params[:response_id])
-    taggings = response.all_taggings
+    taggings = response.taggings
     taggings.update_all(reviewed: true)
     render json: taggings
   end

@@ -45,7 +45,7 @@ describe TaggingsController, type: :controller do
       taggings = double('taggings')
 
       expect(Response).to receive(:find).with(response_id).and_return response
-      expect(response).to receive(:all_taggings).and_return taggings
+      expect(response).to receive(:taggings).and_return taggings
       expect(taggings).to receive(:update_all).with reviewed: true
 
       put :review_taggings, params: { response_id: response_id }
