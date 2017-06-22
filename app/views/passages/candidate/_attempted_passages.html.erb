@@ -9,8 +9,8 @@
 	</div>
 	<div class="panel-body">
 		<div class="app-content">
-			<%= content_tag(:p) do %>
-					<%= truncate(passage_text, length: 400, omission: '...') %><%= content_tag(:a, 'See more') if passage_text.length > 400 %>
+			<%= content_tag(:p, :class => "more passage-#{passage.id} justify") do %>
+					<%= passage_text %>
 			<% end %>
 			<p><strong>Tweet :</strong> <%= passage_with_response[:response].text %></p>
 			<%= render :partial => "passages/candidate/tagging_status", locals: {tags: tags} unless tags.empty? %>

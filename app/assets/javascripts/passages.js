@@ -30,7 +30,7 @@ function passageContent(defaultPreviewLimit, indication, moreText) {
 }
 
 document.addEventListener("turbolinks:load", function () {
-    var defaultPreviewLimit = 100;
+    var defaultPreviewLimit = 200;
     var indication = "...";
     var moreText = "Show More";
     var lessText = "Show Less";
