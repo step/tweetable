@@ -55,8 +55,10 @@ nav.sidebar,
   -o-transition: margin 200ms ease-out;
   transition: margin 200ms ease-out;
 }
-
-.app-main-body {
+.app-main-content{
+  overflow: auto;
+}
+.app-main-body{
   height: 100%;
   overflow: auto;
   padding: 20px;
