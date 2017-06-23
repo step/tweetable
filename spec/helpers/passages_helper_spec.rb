@@ -84,4 +84,23 @@ describe PassagesHelper, type: :helper do
       expect(helper.evaluation_count([response1])).to eq(0)
     end
   end
+
+  describe '#partial_name' do
+    it 'should return the correspondent passage partial_name' do
+      expect(PassagesHelper.partial_name(:drafts)).to eq('drafts_passages')
+      expect(PassagesHelper.partial_name(:attempted)).to eq('attempted_passages')
+    end
+    it 'should return the nil partial_name when tab name is different' do
+      expect(PassagesHelper.partial_name(:attempt)).to eq(nil)
+    end
+  end
+
+  describe '#empty_tab_messages' do
+    it 'should return the correspondent empty passage message based on tab name' do
+      expect(PassagesHelper.empty_tab_messages(:attempted_passages.to_s)).to eq('You have not yet attempted any passage.')
+    end
+    it 'should return the nil empty message when partial_name is different' do
+      expect(PassagesHelper.partial_name(:attempt.to_s)).to eq(nil)
+    end
+  end
 end

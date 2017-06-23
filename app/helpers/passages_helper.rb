@@ -23,7 +23,7 @@ module PassagesHelper
     partial_list[tab_name]
   end
 
-  def self.empty_tab_messages(tab_name)
+  def self.empty_tab_messages(partial_name)
     empty_tab_messages = {
       partial_name(:drafts) => 'No drafts yet, Create One',
       partial_name(:ongoing) => 'No ongoing passages, Commence One',
@@ -32,7 +32,7 @@ module PassagesHelper
       partial_name(:attempted) => 'You have not yet attempted any passage.',
       partial_name(:missed) => 'Hurry! You have not missed any passage yet.'
     }
-    empty_tab_messages[tab_name]
+    empty_tab_messages[partial_name]
   end
 
   def to_preferred_time_format(time)
