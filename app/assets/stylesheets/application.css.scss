@@ -59,7 +59,11 @@ nav.sidebar,
 .app-main-body {
   height: 100%;
   overflow: auto;
-  padding-top: 20px;
+  padding: 20px;
+
+  @media screen and (max-width: $responsive){
+    padding-top: 0;
+  }
 }
 
 .app-clearance {
