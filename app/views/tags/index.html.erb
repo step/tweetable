@@ -14,9 +14,9 @@
     <tbody>
     <% @tags.each do |tag| %>
         <%= content_tag(:tr, id: "app-tag-#{tag.id}-info") do %>
-          <% [ tag.name, tag.weight, tag.description ].each  do | attribute | %>
-            <%= content_tag(:td, editable(tag, :name, url: tag_path(tag.id), value: attribute), id: "app-tag-#{tag.id}-#{attribute}") %>
-          <% end %>
+          <%= content_tag(:td, editable(tag, :name, url: tag_path(tag.id), value: tag.name), id: "app-tag-#{tag.id}-name") %>
+          <%= content_tag(:td, editable(tag, :weight, url: tag_path(tag.id), value: tag.weight), id: "app-tag-#{tag.id}-weight") %>
+          <%= content_tag(:td, editable(tag, :description, url: tag_path(tag.id), value: tag.description ), id: "app-tag-#{tag.id}-description") %>
           <%= content_tag(:td, id: "app-tag-#{tag.id}-color") do %>
             <%= content_tag(:div, class: 'app-tag-color-container input-group colorpicker-component', data:{url:tag_path(tag.id) ,'old-color': tag.color }) do %>
                 <%= text_field_tag "app-tag-#{tag.id}-color", tag.color, class: 'form-control hide' %>
