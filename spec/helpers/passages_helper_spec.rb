@@ -97,7 +97,7 @@ describe PassagesHelper, type: :helper do
 
   describe '#empty_tab_messages' do
     it 'should return the correspondent empty passage message based on tab name' do
-      expect(PassagesHelper.empty_tab_messages(:attempted_passages.to_s)).to eq('You have not yet attempted any passage.')
+      expect(PassagesHelper.empty_tab_messages(:attempted_passages.to_s)).to eq('You have not yet attempted any passages.')
     end
     it 'should return the nil empty message when partial_name is different' do
       expect(PassagesHelper.partial_name(:attempt.to_s)).to eq(nil)

@@ -29,8 +29,8 @@ module PassagesHelper
       partial_name(:ongoing) => 'No ongoing passages, Commence One',
       partial_name(:concluded) => 'No passages are Concluded yet!',
       partial_name(:commenced) => 'No passages are commenced. Chill !',
-      partial_name(:attempted) => 'You have not yet attempted any passage.',
-      partial_name(:missed) => 'Hurry! You have not missed any passage yet.'
+      partial_name(:attempted) => 'You have not yet attempted any passages.',
+      partial_name(:missed) => 'Hurray! You haven\'t missed any passages yet.'
     }
     empty_tab_messages[partial_name]
   end
