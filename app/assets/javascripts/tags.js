@@ -31,13 +31,14 @@ document.addEventListener("turbolinks:load", function() {
         }
       }).done(function(data) {
         var mainBody = $('.app-main-body');
-        var ele = $('<div></div>',{text: data.name + ' color has been updated.', class: 'alert alert-success'});
+        var ele = $('<div></div>',{text: data.message, class: 'alert alert-success'});
         if(mainBody.find('.alert').length > 0){
           mainBody.find('.alert').remove();
           mainBody.prepend(ele);
         }else{
           mainBody.prepend(ele);
         }
+        remove_flash_messages();
       });
     })
   });
