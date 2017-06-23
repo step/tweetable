@@ -62,8 +62,14 @@ nav.sidebar,
   padding-top: 20px;
 }
 
-.clearance {
+.app-clearance {
   margin-top: 5%;
+  .logout{
+    margin-left:50%;
+    a{
+      line-height: 20px;
+    }
+  }
 }
 
 input[type="checkbox"] {

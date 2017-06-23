@@ -1,12 +1,16 @@
 <%= stylesheet_link_tag 'application' %>
 <%= javascript_include_tag 'application' %>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
 <%= render :partial => "shared/top_nav_bar" %>
 <div class=" container">
-  <div class="panel panel-success clearance">
+  <div class="panel panel-success app-clearance">
     <div class="panel-heading"><h4>Thank you, <%= current_user.name %> for signing up.</h4></div>
     <div class="panel-body">
       <p>Your account will be activated once the admin authorizes and assigns your role.</p>
+	    <%=	content_tag(:p, class: 'logout' ) do  %>
+			    <%=	 link_to('Logout', logout_path, class:'fa fa-sign-out' ) %>
+	    <%	 end %>
     </div>
   </div>
 

@@ -45,9 +45,6 @@ div.app-sidebar-links-container {
 }
 
 @media screen and (max-width: $responsive) {
-  .navbar-header .navbar-brand {
-    padding-left: 70px;
-  }
   ul.nav{padding-left: 40px;}
   .app-sidebar-links-container {
     position: relative;

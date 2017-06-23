@@ -34,3 +34,15 @@ nav.navbar-default {
   height: $app-user-icon-dimension;
   border-radius: 50%;
 }
+
+
+@media screen and (max-width: $responsive) {
+  .navbar-header .navbar-brand {
+    padding-left: 70px;
+  }
+  .app-approval-page-navbar {
+    .navbar-brand{
+      padding-left: 10px;
+    }
+  }
+}
