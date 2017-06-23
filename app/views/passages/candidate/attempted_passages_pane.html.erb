@@ -1,7 +1,11 @@
 <div class="row" id="app-passage-container">
-	<% filtered_passages.each do |passage_with_response| %>
-			<div class="col-lg-11">
-				<%= render 'passages/candidate/attempted_passages', :passage_with_response => passage_with_response %>
-			</div>
-	<% end %>
+  <% partial_name = PassagesHelper.partial_name(:attempted) %>
+  <% empty_message = PassagesHelper.empty_tab_messages(partial_name) %>
+  <%= render 'passages/common/empty_message', :message => empty_message if filtered_passages.empty? %>
+  <% filtered_passages.each do |passage_with_response| %>
+      <div class="col-lg-11">
+        <%= render 'passages/candidate/attempted_passages', :passage_with_response => passage_with_response %>
+      </div>
+  <% end %>
 </div>
+

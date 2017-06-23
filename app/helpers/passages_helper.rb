@@ -11,6 +11,30 @@ module PassagesHelper
     { commenced: :commenced, attempted: :attempted, missed: :missed }
   end
 
+  def self.partial_name(tab_name)
+    partial_list = {
+      drafts: 'drafts_passages',
+      ongoing: 'ongoing_passages',
+      concluded: 'finished_passages',
+      commenced: 'commenced_passages',
+      attempted: 'attempted_passages',
+      missed: 'missed_passages'
+    }
+    partial_list[tab_name]
+  end
+
+  def self.empty_tab_messages(tab_name)
+    empty_tab_messages = {
+      partial_name(:drafts) => 'No drafts yet, Create One',
+      partial_name(:ongoing) => 'No ongoing passages, Commence One',
+      partial_name(:concluded) => 'No passages are Concluded yet!',
+      partial_name(:commenced) => 'No passages are commenced. Chill !',
+      partial_name(:attempted) => 'You have not yet attempted any passage.',
+      partial_name(:missed) => 'Hurry! You have not missed any passage yet.'
+    }
+    empty_tab_messages[tab_name]
+  end
+
   def to_preferred_time_format(time)
     time.strftime('%d-%m-%Y %I:%M%p') unless time.nil?
   end

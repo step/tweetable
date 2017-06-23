@@ -75,27 +75,35 @@ class PassagesController < ApplicationController
 
   def drafts
     filtered_passages = Passage.drafts
-    render 'passages/admin/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'drafts_passages' }
+    render 'passages/admin/passages_pane', locals: {
+      filtered_passages: filtered_passages, partial_name: PassagesHelper.partial_name(:drafts)
+    }
   end
 
   def ongoing
     filtered_passages = Passage.ongoing
-    render 'passages/admin/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'ongoing_passages' }
+    render 'passages/admin/passages_pane', locals: {
+      filtered_passages: filtered_passages, partial_name: PassagesHelper.partial_name(:ongoing)
+    }
   end
 
   def finished
     filtered_passages = Passage.finished
-    render 'passages/admin/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'finished_passages' }
+    render 'passages/admin/passages_pane', locals: {
+      filtered_passages: filtered_passages, partial_name: PassagesHelper.partial_name(:concluded)
+    }
   end
 
   def commenced
     filtered_passages = Passage.commence_for_candidate(current_user)
-    render 'passages/candidate/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'commenced_passages' }
+    render 'passages/candidate/passages_pane', locals: {
+      filtered_passages: filtered_passages, partial_name: PassagesHelper.partial_name(:commenced)
+    }
   end
 
   def missed
     filtered_passages = Passage.missed_by_candidate(current_user)
-    render 'passages/candidate/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: 'missed_passages' }
+    render 'passages/candidate/passages_pane', locals: { filtered_passages: filtered_passages, partial_name: PassagesHelper.partial_name(:missed) }
   end
 
   def attempted
