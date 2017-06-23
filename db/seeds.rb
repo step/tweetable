@@ -53,13 +53,13 @@ unless Rails.env.production?
   User.create(
       [
           {
-              name: 'Kamal Hasan', admin: false, email: 'kamalhasan@email.com', auth_id: '132271', image_url: 'http://graph.facebook.com/demo1'
+              name: 'Kamal Hasan', admin: false, email: 'kamalhasan@email.com', auth_id: '132271', image_url: 'http://images.indianexpress.com/2015/02/kamal-hassan-759.jpg'
           },
           {
-              name: 'Vimal Hasan', admin: false, email: 'vimalhasan@email.com', auth_id: '132273', image_url: 'http://graph.facebook.com/demo1'
+              name: 'Vimal Hasan', admin: false, email: 'vimalhasan@email.com', auth_id: '132273', image_url: 'http://images.indianexpress.com/2015/02/kamal-hassan-759.jpg'
           },
           {
-              name: 'Rajanikanth', admin: false, email: 'rajinikanth@email.com', auth_id: '132272', image_url: 'http://graph.facebook.com/demo2'
+              name: 'Rajanikanth', admin: false, email: 'rajinikanth@email.com', auth_id: '132272', image_url: 'http://www.tehelka.com/wp-content/uploads/2015/09/Rajnikanth-300x270.jpg'
           }
       ]
   )
