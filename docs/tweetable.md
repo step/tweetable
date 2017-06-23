@@ -6,26 +6,32 @@ Tweetable is a platform for a teacher and student where a teacher can give a exe
 
 ## Terminology
 
-**Passage** - It is a paragraph which will be the part of the exercise.
+**Passage** - It is a paragraph which is the main part of the exercise.
 
-**Response** - It is a answer given by the student to the passage. Aka known as Tweet because of the 140 character limit.
+**Response** - It is an answer given by the student to the passage. Aka known as Tweet because of the 140 character limit.
 
-**Commence Time** - A time when a passage will be available to the students to attempt it.
+**Commence Time** - A time when a exercise will be available to the students to attempt it.
 
-**Conclude Time** - A time when a passage will no longer be available to the students.
+**Conclude Time** - A time when a exercise will no longer be available to the students.
 
-**Commence** - Gives a passage to the students right then and there.
+**Commence** - Gives a exercise to the students right away.
 
-**Conclude** - Closes a passage for the students to attempt it.
+**Conclude** - Closes a exercise for the students immediately.
 
-**Ongoing** - All the exercises which are opened for the students.
+**Ongoing** - All the ongoing exercises which are opened for the students to attempt.
+
+**Concluded** - All the exercises which are attempted by students and are no longer available for them to attempt.
+
+**New** - Create a draft for the exercise which requires title, passage and time duration.
+
+**Drafts** - The drafted exercise which are not yet available to the students.
 
 **Commenced** - All the available exercises to attempt.
 
-**Concluded** - All the exercises which are attempted and are no longer available for the students.
+**Attempted** - The exercises which are attempted by the students.
 
-**Drafts** - The drafted passages which are not yet available to the students.
+**Missed** - The exercises which are missed by the students and can not be attempted by them.
 
-**Attempted** - The passages which are attempted by the students.
+**Tag** - A grade given to a student on his/her Response.
 
-**Missed** - The passages which are missed by the students which can they can not attempt.
+**Leader Board** - A leader board which shows the position of a student among their batch.
