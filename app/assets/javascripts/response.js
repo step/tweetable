@@ -80,9 +80,9 @@ var initializeTagsInput = function () {
         itemText: 'name',
         typeaheadjs: [
             {
-                hint: true,
-                highlight: true,
-                minLength: 0,
+                hint: false,
+                highlight: false,
+                minLength: false,
                 searchOnFocus: true
             },
             {
