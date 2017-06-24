@@ -15,7 +15,7 @@
   <div class="row ">
 
     <div class="tags-holder col-lg-11 col-md-11">
-      <input  id="response-<%= response.id %>" data-response-id="<%=response.id%>" class="form-control tags autocomplete" type="text" value="<%= response.tags.map{|tag| tag.name}.join(',') %>" />
+      <input type="text" class="app-input-tag form-control" data-tags="<%= response.tags.to_json %>" data-response-id="<%= response.id %>" />
     </div>
     <div class="col-lg-1 col-md-1 app-tag-review-holder">
       <a class="fa fa-check-circle app-tag-review-btn" aria-hidden="true" data-response-id="<%=response.id%>"></a>

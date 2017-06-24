@@ -54,71 +54,112 @@ document.addEventListener("turbolinks:load", function () {
     initializeReviewButtions();
 });
 
-var initializeTaggings = function () {
-    $('.tags').tagsInput({
-        'height': '50px',
-        'width': '100%',
-        'interactive': true,
-        'onAddTag': onTagAddition,
-        'onRemoveTag': onTagRemoval
+var initializeTagsInput = function () {
+    var tags = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            url: '/tags.json',
+            cache: false
+        }
     });
+    tags.initialize();
+
+    var elt = $('.app-input-tag');
+    elt.tagsinput({
+        tagClass: function (item) {
+            return 'app-tag-input-' + item.id;
+        },
+        itemValue: 'id',
+        itemText: 'name',
+        typeaheadjs: [
+            {
+                hint: true,
+                highlight: true,
+                minLength: 2
+            },
+            {
+                name: 'tags',
+                displayKey: 'name',
+                source: tags.ttAdapter()
+            }
+        ]
+    });
+
+    elt.on('itemAdded', function (event) {
+        var tag_id = event.item.id;
+        var tag_color = event.item.color;
+        var ele = $('.app-tag-input-' + tag_id);
+        ele.css('background-color', tag_color);
+    });
+
+    elt.on('beforeItemAdd', function (event) {
+        if (event.options && event.options.preventBackendCall)
+            return;
+        var tagName = event.item.name;
+        var responseId = $(event.target).attr('data-response-id');
+        onTagAddition(tagName, responseId);
+    });
+
+    elt.on('beforeItemRemove', function (event) {
+        if (event.options && event.options.preventBackendCall)
+            return;
+        var responseId = $(event.target).attr('data-response-id');
+        var tagName = event.item.name;
+        onTagRemoval(tagName, responseId);
+    });
+
+    $(".twitter-typeahead").css('display', 'inline');
 };
 
-var requester = function (url, method, data, onSuccess) {
+var initializePreviousTags = function () {
+    $('.app-input-tag').each(function (index, inputTag) {
+        var ele = $(inputTag);
+        var tags = JSON.parse(ele.attr('data-tags'));
+        tags.forEach(function (tag) {
+            ele.tagsinput('add', tag, {preventBackendCall: true});
+        })
+    })
+};
+
+var initializeTaggings = function () {
+    initializeTagsInput();
+    initializePreviousTags();
+};
+
+var requester = function (url, method, data) {
     return $.ajax({
         url: url,
         type: method,
-        data: data,
-        success: onSuccess
+        data: data
     });
 };
 
-var onTagAddition = function (tagName) {
+var onTagAddition = function (tagName, responseId) {
     var uri = 'create_tagging_by_tag_name';
     var method = 'POST';
-    var onSuccess = function (res, status) {
-        if (status !== 'success')
-            deleteTag(self, tagName)
-    };
-    var self = $(this);
-    var response_id = self.attr('data-response-id');
-    var url = '/responses/' + response_id + '/taggings/' + uri;
+    var url = '/responses/' + responseId + '/taggings/' + uri;
     var data = {tag_name: tagName};
-    requester(url, method, data, onSuccess).fail(function () {
-        deleteTag(self, tagName)
-    });
+    requester(url, method, data)
 };
 
-var onTagRemoval = function (tagName) {
+var onTagRemoval = function (tagName, responseId) {
     var uri = 'delete_tagging_by_tag_name';
     var method = 'DELETE';
-    var onSuccess = function () {
-    };
     var self = $(this);
-    var response_id = self.attr('data-response-id');
-    var url = '/responses/' + response_id + '/taggings/' + uri;
+    var url = '/responses/' + responseId + '/taggings/' + uri;
     var data = {tag_name: tagName};
-    requester(url, method, data, onSuccess);
-
-};
-var deleteTag = function (tags, tag) {
-    return tags.removeTag(tag);
-};
-
-
-var onReview = function () {
-    console.log('hello......')
-    var uri = 'review_taggings';
-    var method = 'PUT';
-    var onSuccess = function (res, status) {
-    };
-    var self = $(this);
-    var response_id = self.attr('data-response-id');
-    var url = '/responses/' + response_id + '/taggings/' + uri;
-    var data = {};
-    requester(url, method, data, onSuccess);
+    requester(url, method, data);
 };
 
 var initializeReviewButtions = function () {
-    $('.app-tag-review-btn').on('click', onReview);
+    $('.app-tag-review-btn').on('click', function () {
+        var uri = 'review_taggings';
+        var method = 'PUT';
+        var self = $(this);
+        var response_id = self.attr('data-response-id');
+        var url = '/responses/' + response_id + '/taggings/' + uri;
+        var data = {};
+        requester(url, method, data, onSuccess);
+    });
 };

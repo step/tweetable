@@ -29,7 +29,6 @@
   border: 1px solid grey;
   margin: 5px 4px 6px 0;
   font-size: 35px;
-  max-width: 54px;
 }
 
 div.tagsinput {
@@ -95,10 +94,13 @@ div.tagsinput {
 }
 
 .app-tag-review-holder {
-  padding-top: 13px;
   font-size: xx-large;
 }
 
 a.fa.fa-check-circle.app-tag-review-btn {
   text-decoration: none;
+}
+
+.bootstrap-tagsinput {
+  width: 100%;
 }
