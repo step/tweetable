@@ -15,10 +15,9 @@ nav.navbar-default {
   height: 50px;
   .navbar-brand {
     color: $app-brand-name-color;
-    font-size: 35px;
-    font-family: 'Open Sans', 'Sans-Serif';
-    font-weight: 900;
-    text-shadow: 1px 1px 1px black;
+    font-size: 45px;
+    font-family: 'Great Vibes';
+    // text-shadow: 1px 1px 1px black;
     &:hover{
       color: $app-brand-name-color;
     }
