@@ -54,6 +54,12 @@ document.addEventListener("turbolinks:load", function () {
     initializeReviewButtions();
 });
 
+var changeReviewButtonColor = function (responseId, removeClass, addClass) {
+    var ele = $('#app-tag-review-btn-' + responseId);
+    ele.removeClass(removeClass);
+    ele.addClass(addClass);
+};
+
 var initializeTagsInput = function () {
     var tags = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -76,7 +82,8 @@ var initializeTagsInput = function () {
             {
                 hint: true,
                 highlight: true,
-                minLength: 2
+                minLength: 0,
+                searchOnFocus: true
             },
             {
                 name: 'tags',
@@ -91,6 +98,7 @@ var initializeTagsInput = function () {
         var tag_color = event.item.color;
         var ele = $('.app-tag-input-' + tag_id);
         ele.css('background-color', tag_color);
+
     });
 
     elt.on('beforeItemAdd', function (event) {
@@ -99,6 +107,7 @@ var initializeTagsInput = function () {
         var tagName = event.item.name;
         var responseId = $(event.target).attr('data-response-id');
         onTagAddition(tagName, responseId);
+        changeReviewButtonColor($(event.target).attr('data-response-id'), 'app-tag-review-btn-green', 'app-tag-review-btn-blue')
     });
 
     elt.on('beforeItemRemove', function (event) {
@@ -157,9 +166,10 @@ var initializeReviewButtions = function () {
         var uri = 'review_taggings';
         var method = 'PUT';
         var self = $(this);
-        var response_id = self.attr('data-response-id');
-        var url = '/responses/' + response_id + '/taggings/' + uri;
+        var responseId = self.attr('data-response-id');
+        var url = '/responses/' + responseId + '/taggings/' + uri;
         var data = {};
-        requester(url, method, data, onSuccess);
+        requester(url, method, data);
+        changeReviewButtonColor($(event.target).attr('data-response-id'), 'app-tag-review-btn-blue', 'app-tag-review-btn-green')
     });
 };

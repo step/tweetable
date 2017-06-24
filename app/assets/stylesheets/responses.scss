@@ -95,6 +95,13 @@ div.tagsinput {
 
 .app-tag-review-holder {
   font-size: xx-large;
+  a.app-tag-review-btn-blue:hover {
+    color: #cde69c;
+    cursor: pointer;
+  }
+  a.app-tag-review-btn-green {
+    color: #cde69c;
+  }
 }
 
 a.fa.fa-check-circle.app-tag-review-btn {
@@ -104,3 +111,4 @@ a.fa.fa-check-circle.app-tag-review-btn {
 .bootstrap-tagsinput {
   width: 100%;
 }
+
