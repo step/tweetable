@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   validates_uniqueness_of :auth_id, allow_nil: true
   validates :email, uniqueness: true, presence: true
-  validate :validate_email, :on => :create
+  validate :validate_email, on: :create
 
   has_many :responses
   has_many :user_groups
@@ -19,12 +19,10 @@ class User < ApplicationRecord
 
   def validate_email
     domain = ENV['ALLOWED_DOMAIN'] || '[A-Z0-9._%a-z\-]+'
-    unless is_valid_email(domain, email)
-      errors.add(:email, 'must be a valid email id...')
-    end
+    errors.add(:email, 'must be a valid email id...') unless valid_email?(domain, email)
   end
 
-  def is_valid_email(domain,email)
-    Regexp.new('\b[A-Z0-9._%a-z\-]+@'+domain+'\.com\z').match?(email)
+  def valid_email?(domain, email)
+    Regexp.new('\b[A-Z0-9._%a-z\-]+@' + domain + '\.com\z').match?(email)
   end
 end

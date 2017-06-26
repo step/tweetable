@@ -24,5 +24,4 @@ RSpec.describe User, type: :model do
     expect(user.save).to be false
     expect(user.errors.full_messages).to include('Email must be a valid email id...')
   end
-
 end
