@@ -61,7 +61,7 @@ Rails.application.configure do
         ENV[key.to_s] = value
       end
     else
-      print('<======== Follow the instructions given in auth_config.yml.template ========> ')
+      print('<======== Follow the instructions given in config/auth_config.yml.template ========> ')
       exit 1
     end
   end
