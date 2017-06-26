@@ -1,18 +1,21 @@
-<div class="container-fluid container">
-  <div id="timeout_alert">
-  </div>
-  <div class="row">
-    <div class="col-lg-11" style="margin-bottom: 50px; ">
-      <%= content_tag :h3, :class => 'text-left' do %>
-          <%= passage.title %>
-          <%= content_tag(:span, 'pull-right') do %>
-              <h4 class="pull-right" >Remaining Time: <span class="count" id="app-remaining-time"><%= remaining_time %></span></h4>
-          <% end %>
-      <% end %>
-      <div class="app-passage-holder">
-        <%= simple_format(passage.text) %>
-      </div>
-    </div>
-    <%= render 'form', response: response, passage: passage, user: user %>
-  </div>
+<div class="row app-new-response-container">
+	<div id="timeout_alert">
+	</div>
+	<div class="app-response-timer col-sm-12">
+		<img src="/assets/timer.png" alt="">
+		<span class="count" id="app-remaining-time"><%= remaining_time %></span>
+	</div>
+	<div class="app-passage-container col-sm-12">
+		<div class="header">
+			<%= content_tag :h3 do %>
+					<%= passage.title %>
+			<% end %>
+		</div>
+		<div class="app-passage-text">
+			<%= simple_format(passage.text) %>
+		</div>
+		<%= render 'form', response: response, passage: passage, user: user %>
+	</div>
+	<div class="col-sm-12">
+	</div>
 </div>

@@ -1,0 +1,45 @@
+.app-new-response-container {
+  padding-right: 20px;
+  .app-response-timer, .app-passage-container {
+    background-color: white;
+    box-shadow: 1px 1px 1px lightgrey;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .app-response-timer {
+    text-align: center;
+    span {
+      color: rgb(68, 68, 68);
+      font-size: 30px;
+      vertical-align: middle;
+    }
+    img {
+      vertical-align: middle;
+      width: 36px;
+    }
+  }
+
+  .app-passage-container {
+    padding: 10px 10px 40px 46px;
+    line-height: 30px;
+    .form-group {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      textarea{
+        width: 90%;
+      }
+    }
+    .app-total-chars {
+      margin-bottom: 15px;
+      color: rgba(37, 37, 75, 0.72);
+      font-weight: bold;
+    }
+    .header, .app-passage-text{
+      border-bottom: 2px solid lightgray;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}
