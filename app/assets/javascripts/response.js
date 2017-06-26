@@ -60,7 +60,7 @@ var changeReviewButtonColor = function (responseId, removeClass, addClass) {
     ele.addClass(addClass);
 };
 
-var initializeTagsInput = function () {
+var createAutoCompleteEngine = function(){
     var tags = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -70,9 +70,12 @@ var initializeTagsInput = function () {
         }
     });
     tags.initialize();
+    return tags;
+}
 
-    var elt = $('.app-input-tag');
-    elt.tagsinput({
+var initializeTagsInput = function(engine){
+    var inputElement = $('.app-input-tag');
+    inputElement.tagsinput({
         tagClass: function (item) {
             return 'app-tag-input-' + item.id;
         },
@@ -88,20 +91,22 @@ var initializeTagsInput = function () {
             {
                 name: 'tags',
                 displayKey: 'name',
-                source: tags.ttAdapter()
+                source: engine.ttAdapter()
             }
         ]
     });
+    return inputElement;
+}
 
-    elt.on('itemAdded', function (event) {
+var initializeTagInputHooks = function(inputElement){
+    inputElement.on('itemAdded', function (event) {
         var tag_id = event.item.id;
         var tag_color = event.item.color;
         var ele = $('.app-tag-input-' + tag_id);
         ele.css('background-color', tag_color);
-
     });
 
-    elt.on('beforeItemAdd', function (event) {
+    inputElement.on('beforeItemAdd', function (event) {
         if (event.options && event.options.preventBackendCall)
             return;
         var tagName = event.item.name;
@@ -110,14 +115,19 @@ var initializeTagsInput = function () {
         changeReviewButtonColor($(event.target).attr('data-response-id'), 'app-tag-review-btn-green', 'app-tag-review-btn-blue')
     });
 
-    elt.on('beforeItemRemove', function (event) {
+    inputElement.on('beforeItemRemove', function (event) {
         if (event.options && event.options.preventBackendCall)
             return;
         var responseId = $(event.target).attr('data-response-id');
         var tagName = event.item.name;
         onTagRemoval(tagName, responseId);
     });
+}
 
+var initializeTags = function () {
+    var engine = createAutoCompleteEngine();
+    var inputElement = initializeTagsInput(engine);
+    initializeTagInputHooks(inputElement);
     $(".twitter-typeahead").css('display', 'inline');
 };
 
@@ -132,7 +142,7 @@ var initializePreviousTags = function () {
 };
 
 var initializeTaggings = function () {
-    initializeTagsInput();
+    initializeTags();
     initializePreviousTags();
 };
 
