@@ -10,7 +10,7 @@ var updateRemainingCharacters = function (event) {
 var disableSubmission = function () {
     $(".app-response-submission").attr("disabled", "disabled");
     $(".app-response-submission").css("display", "none");
-    $(".back-btn").removeClass("hidden")
+    $(".back-btn").removeClass("hidden");
     $("#timeout_alert").html('<div class="alert alert-danger"> <strong>Oops..!</strong> Your submission time has been expired..</div>')
     setTimeout(function () {
         $(".alert").alert('close')
