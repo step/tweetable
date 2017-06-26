@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'github/markup'
-
 class HelpController < ApplicationController
   protect_from_forgery with: :exception
 
@@ -23,6 +21,8 @@ class HelpController < ApplicationController
 
   def markup_content(filename)
     contents = File.read(filename)
-    @text = GitHub::Markup.render(filename, contents).html_safe
+    renderer = Redcarpet::Render::HTML.new(no_links: true, hard_wrap: true)
+    markdown = Redcarpet::Markdown.new(renderer)
+    @text = markdown.render(contents).html_safe
   end
 end

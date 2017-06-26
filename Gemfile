@@ -36,11 +36,8 @@ gem 'coffee-script', '~> 2.4', '>= 2.4.1'
 
 gem 'x-editable-rails'
 
-# Require Github markup gem for text to html converters
-gem 'github-markup'
-
 # Require the Markdown converter gem
-gem 'redcarpet'
+gem 'redcarpet' ,'~> 3.4.0'
 
 # automatic evaluator
 gem 'after_the_deadline'
