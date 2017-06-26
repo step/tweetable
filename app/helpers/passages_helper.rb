@@ -4,7 +4,7 @@ module PassagesHelper
   DRAFT_PASSAGES = 'drafts_passages'.freeze
 
   def admin_tabs
-    { drafts: :drafts, ongoing: :ongoing, finished: :concluded, new: :new }
+    { drafts: :drafts, ongoing: :ongoing, concluded: :concluded, new: :new }
   end
 
   def candidate_tabs
@@ -15,7 +15,7 @@ module PassagesHelper
     partial_list = {
       drafts: 'drafts_passages',
       ongoing: 'ongoing_passages',
-      concluded: 'finished_passages',
+      concluded: 'concluded_passages',
       commenced: 'commenced_passages',
       attempted: 'attempted_passages',
       missed: 'missed_passages'

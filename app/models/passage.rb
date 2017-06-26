@@ -30,7 +30,7 @@ class Passage < ApplicationRecord
     Passage.where(['commence_time <= ? and conclude_time > ?', now, now])
   end
 
-  def self.finished
+  def self.concluded
     Passage.where(['conclude_time < ?', Time.current])
   end
 
@@ -41,7 +41,7 @@ class Passage < ApplicationRecord
 
   def self.missed_by_candidate(user)
     timed_out_passages = get_timed_out_passages(ongoing, user.id)
-    (finished + timed_out_passages) - user.passages
+    (concluded + timed_out_passages) - user.passages
   end
 
   def self.attempted_by_candidate(user)

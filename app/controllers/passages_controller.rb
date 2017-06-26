@@ -87,8 +87,8 @@ class PassagesController < ApplicationController
     }
   end
 
-  def finished
-    filtered_passages = Passage.finished
+  def concluded
+    filtered_passages = Passage.concluded
     render 'passages/admin/passages_pane', locals: {
       filtered_passages: filtered_passages, partial_name: PassagesHelper.partial_name(:concluded)
     }

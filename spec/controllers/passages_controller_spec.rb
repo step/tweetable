@@ -158,7 +158,7 @@ describe PassagesController do
 
       describe 'GET #concluded' do
         it 'should give all the yet to concluded passages' do
-          get :finished, params: { from_tab: true }
+          get :concluded, params: { from_tab: true }
 
           expect(response).to be_success
           should render_template('passages/admin/passages_pane')
@@ -236,7 +236,7 @@ describe PassagesController do
     end
 
     it 'should not have access to concluded passages' do
-      get :finished
+      get :concluded
       expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
       should redirect_to(passages_path)
     end

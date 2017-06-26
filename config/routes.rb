@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     collection do
       get 'drafts', to: 'passages#drafts'
       get 'ongoing', to: 'passages#ongoing'
-      get 'finished', to: 'passages#finished'
+      get 'concluded', to: 'passages#concluded'
       get 'commenced', to: 'passages#commenced'
       get 'missed', to: 'passages#missed'
       get 'attempted', to: 'passages#attempted'

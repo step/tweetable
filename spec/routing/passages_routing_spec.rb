@@ -54,12 +54,12 @@ describe PassagesController, type: :routing do
       expect(get: '/passages/ongoing?query=something').to route_to('passages#ongoing', query: 'something')
     end
 
-    it 'routes to #passasges/finished' do
-      expect(get: '/passages/finished/').to route_to('passages#finished')
+    it 'routes to #passasges/concluded' do
+      expect(get: '/passages/concluded/').to route_to('passages#concluded')
     end
 
-    it 'routes to #passasges/finished with params' do
-      expect(get: '/passages/finished?query=something').to route_to('passages#finished', query: 'something')
+    it 'routes to #passasges/concluded with params' do
+      expect(get: '/passages/concluded?query=something').to route_to('passages#concluded', query: 'something')
     end
   end
 end

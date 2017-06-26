@@ -74,7 +74,7 @@ describe Passage, type: :model do
       now = Time.current
       expect(Time).to receive(:current).and_return(now)
       expect(Passage).to receive(:where).with(['conclude_time < ?', now])
-      Passage.finished
+      Passage.concluded
     end
   end
 
@@ -116,7 +116,7 @@ describe Passage, type: :model do
       passage2 = double('Passage 2', id: 12)
       user = double('User', id: 1)
 
-      expect(Passage).to receive(:finished).and_return([passage1, passage2])
+      expect(Passage).to receive(:concluded).and_return([passage1, passage2])
       expect(user).to receive(:passages).and_return([passage1])
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 
@@ -124,16 +124,16 @@ describe Passage, type: :model do
       expect(passage_missed_for_candidate).to contain_exactly(passage2)
     end
     it 'should get all missed passages for the candidate which are not attempted by user in the remaining time' do
-      finished_psg1 = double('Passage 1', id: 11, duration: 4600)
-      finished_psg2 = double('Passage 2', id: 12)
+      concluded_psg1 = double('Passage 1', id: 11, duration: 4600)
+      concluded_psg2 = double('Passage 2', id: 12)
       ongoing_psg1 = double('Passage 3', id: 13)
       ongoing_psg2 = double('Passage 4', id: 14)
       tracking_details2 = double('Responses Tracking')
 
       user = double('User', id: 1)
 
-      expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
-      expect(user).to receive(:passages).and_return([finished_psg2])
+      expect(Passage).to receive(:concluded).and_return([concluded_psg1, concluded_psg2])
+      expect(user).to receive(:passages).and_return([concluded_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
       expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg1.id, user_id: user.id).and_return(nil)
       expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg2.id, user_id: user.id).and_return(tracking_details2)
@@ -142,19 +142,19 @@ describe Passage, type: :model do
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 
       expect(passage_missed_for_candidate.count).to be(2)
-      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1, ongoing_psg2)
+      expect(passage_missed_for_candidate).to contain_exactly(concluded_psg1, ongoing_psg2)
     end
     it 'should not get the passage whose remaining time is not less than or equal to zero' do
-      finished_psg1 = double('Passage 1', id: 11, duration: 4600)
-      finished_psg2 = double('Passage 2', id: 12)
+      concluded_psg1 = double('Passage 1', id: 11, duration: 4600)
+      concluded_psg2 = double('Passage 2', id: 12)
       ongoing_psg1 = double('Passage 3', id: 13)
       ongoing_psg2 = double('Passage 4', id: 14)
       tracking_details2 = double('Responses Tracking')
 
       user = double('User', id: 1)
 
-      expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
-      expect(user).to receive(:passages).and_return([finished_psg2])
+      expect(Passage).to receive(:concluded).and_return([concluded_psg1, concluded_psg2])
+      expect(user).to receive(:passages).and_return([concluded_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
       expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg1.id, user_id: user.id).and_return(nil)
       expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg2.id, user_id: user.id).and_return(tracking_details2)
@@ -163,19 +163,19 @@ describe Passage, type: :model do
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 
       expect(passage_missed_for_candidate.count).to be(1)
-      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1)
+      expect(passage_missed_for_candidate).to contain_exactly(concluded_psg1)
     end
     it 'should not get the passage whose response is already submitted' do
-      finished_psg1 = double('Passage 1', id: 11, duration: 4600)
-      finished_psg2 = double('Passage 2', id: 12)
+      concluded_psg1 = double('Passage 1', id: 11, duration: 4600)
+      concluded_psg2 = double('Passage 2', id: 12)
       ongoing_psg1 = double('Passage 3', id: 13)
       ongoing_psg2 = double('Passage 4', id: 14)
       tracking_details2 = double('Responses Tracking')
 
       user = double('User', id: 1)
 
-      expect(Passage).to receive(:finished).and_return([finished_psg1, finished_psg2])
-      expect(user).to receive(:passages).and_return([finished_psg2, ongoing_psg2])
+      expect(Passage).to receive(:concluded).and_return([concluded_psg1, concluded_psg2])
+      expect(user).to receive(:passages).and_return([concluded_psg2, ongoing_psg2])
       expect(Passage).to receive(:ongoing).and_return([ongoing_psg1, ongoing_psg2])
       expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg1.id, user_id: user.id).and_return(nil)
       expect(ResponsesTracking).to receive(:find_by).with(passage_id: ongoing_psg2.id, user_id: user.id).and_return(tracking_details2)
@@ -184,7 +184,7 @@ describe Passage, type: :model do
       passage_missed_for_candidate = Passage.missed_by_candidate(user)
 
       expect(passage_missed_for_candidate.count).to be(1)
-      expect(passage_missed_for_candidate).to contain_exactly(finished_psg1)
+      expect(passage_missed_for_candidate).to contain_exactly(concluded_psg1)
     end
   end
 
