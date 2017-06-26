@@ -7,53 +7,54 @@ Tweetable is a platform for a teacher and student where a teacher can give an ex
 ## Terminology
 
 #### Passage
-- It is a paragraph which is the main part of the exercise.
+&nbsp; &nbsp; &nbsp; It is a paragraph which is the main part of the exercise.
 
 #### Response
-- It is an answer given by the student to the passage. Also known as Tweet because of the 140 character limit.
+&nbsp; &nbsp; &nbsp; It is an answer given by the student to the passage. Also known as Tweet because of the 140 character limit.
 
 #### Commence Time
- - A time when an exercise will be available to the students to attempt it.
+&nbsp; &nbsp; &nbsp; A time when an exercise will be available to the students to attempt it.
 
 #### Conclude Time
- - A time when an exercise will no longer be available to the students.
+&nbsp; &nbsp; &nbsp; A time when an exercise will no longer be available to the students.
 
 #### Commenced
- - All the available exercises to attempt.
+&nbsp; &nbsp; &nbsp; All the available exercises to attempt.
 
 #### Attempted
- - The exercises which are attempted by the students.
+&nbsp; &nbsp; &nbsp; The exercises which are attempted by the students.
 
 #### Missed
- - The exercises which are missed by the students and can not be attempted by them.
+&nbsp; &nbsp; &nbsp; The exercises which are missed by the students and can not be attempted by them.
 
 #### Tag
- - A grade given to a student on his/her Response is known as a tag. Each tag has a weight which is the basis of the points given in leader board. Additionally, a tag has a custom color and description.
+&nbsp; &nbsp; &nbsp; A grade given to a student on his/her Response is known as a tag. Each tag has a weight which is the basis of the points given in leader board. Additionally, a tag has a custom color and description.
 
 #### Duration
-  - Time duration in which student have to attempt the exercise.Failing in that will move it to Missed section for that student.
+&nbsp; &nbsp; &nbsp; Time duration in which student have to attempt the exercise.Failing in that will move it to Missed section for that student.
 
 #### Leader Board
- - A leader board which shows the position of a student among their batch.
+&nbsp; &nbsp; &nbsp; A leader board which shows the position of a student among their batch.
 
 #### Commence
- - Gives an exercise to the students right away.
+&nbsp; &nbsp; &nbsp; Gives an exercise to the students right away.
 
 #### Conclude
- - Closes an exercise for the students immediately.
+&nbsp; &nbsp; &nbsp; Closes an exercise for the students immediately.
 
 #### New
- - Create a draft for the exercise which requires title, passage and time duration.
+&nbsp; &nbsp; &nbsp; Create a draft for the exercise which requires title, passage and time duration.
 
 #### Drafts
-- The drafted exercises which are not yet available to the students.
+&nbsp; &nbsp; &nbsp; The drafted exercises which are not yet available to the students.
 
 #### Ongoing
- - All the ongoing exercises which are opened for the students to attempt.
+&nbsp; &nbsp; &nbsp; All the ongoing exercises which are opened for the students to attempt.
 
 #### Concluded
- - All the exercises which are attempted by students and are no longer available for them to attempt.
+&nbsp; &nbsp; &nbsp; All the exercises which are attempted by students and are no longer available for them to attempt.
 
+____
 
 ## Admin Guide
 
@@ -71,6 +72,8 @@ An Example of a tag could be #concise #grammar mistake etc...
 
 **Making User Active/Admin** - In Users section by enabling on the checkbox an admin can make any user active/inactive or admin. A user which log's in without admin adding him will be inactive by default. An inactive user can not access the feature of the app unless he/she is made active by the current admin. An admin can not change his/her role.
 
+
+____
 
 ## Student Guide
 

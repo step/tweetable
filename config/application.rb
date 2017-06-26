@@ -21,7 +21,7 @@ module Tweetable
       g.integration_tool :rspec, fixture: true, views: true
       g.fixture_replacement :factory_girl, dir: 'spec/support/factories'
     end
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

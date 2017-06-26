@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PassagesHelper
-  DRAFT_PASSAGES = 'drafts_passages'
+  DRAFT_PASSAGES = 'drafts_passages'.freeze
 
   def admin_tabs
     { drafts: :drafts, ongoing: :ongoing, concluded: :concluded, new: :new }
