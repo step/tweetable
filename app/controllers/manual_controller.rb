@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HelpController < ApplicationController
+class ManualController < ApplicationController
   protect_from_forgery with: :exception
 
   def index
@@ -18,6 +18,8 @@ class HelpController < ApplicationController
     filename = "#{Rails.root}/docs/StudentManual.md"
     markup_content(filename)
   end
+
+  # TODO: pull the code to application layer if further other use case are there
 
   def markup_content(filename)
     contents = File.read(filename)
