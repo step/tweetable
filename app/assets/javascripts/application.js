@@ -16,5 +16,5 @@
 //= require jquery_ujs
 //= require editable/bootstrap-editable
 //= require editable/rails
-//= require readmore.min
+//= require readmore_2.1.0.min
 //= require_tree .
