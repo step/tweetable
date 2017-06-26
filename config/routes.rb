@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :leader_board, only: [:index]
 
+  resources :help, only: [:index]
+
   resources :responses do
     resources :taggings do
       collection do
