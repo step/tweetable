@@ -35,7 +35,9 @@ var showRemainingTime = function () {
 };
 
 var formatDate = function (date) {
-    return [date.getMonth()+1,date.getDate(),date.getFullYear()].join('/');
+   var MMddyyyyFormat = [date.getMonth()+1,date.getDate(),date.getFullYear()].join('/');
+   var hhmmssFormat = [date.getHours(),date.getMinutes(),date.getSeconds()].join(':');
+   return [MMddyyyyFormat,hhmmssFormat].join(' ');
 }
 
 var showRemainingCharacters = function () {
