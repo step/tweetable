@@ -24,15 +24,19 @@ var showRemainingTime = function () {
     var time = remainingTimeElement.html();
     date.setSeconds(time);
     remainingTimeElement
-        .countdown(date.toLocaleString(), function (event) {
+        .countdown(formatDate(date), function (event) {
             $(this).text(
                 event.strftime('%H:%M:%S')
             );
             var remaining_time = remainingTimeElement.html();
-            if (remaining_time == "00:00:00")
+            if (remaining_time === "00:00:00")
                 disableSubmission();
         });
 };
+
+var formatDate = function (date) {
+    return [date.getMonth()+1,date.getDate(),date.getFullYear()].join('/');
+}
 
 var showRemainingCharacters = function () {
     $('#text').on('input', updateRemainingCharacters);
