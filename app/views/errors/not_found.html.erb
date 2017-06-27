@@ -1,4 +1,10 @@
 <%= stylesheet_link_tag 'application' %>
 <%= javascript_include_tag 'application' %>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-<%= render 'passages/common/empty_message', :message => 'Content not found!' %>
+<div class="col-md-12 text-center">
+  <% if logged_in? %>
+      <%= render :partial => "shared/top_nav_bar" %>
+      <%= render 'passages/common/empty_message', :message => 'Content not found!' %>
+      <%= content_tag(:a, 'Back', href: '/passages', class: 'btn btn-default',style: 'background: lightgrey') %>
+  <% end %>
+</div>
