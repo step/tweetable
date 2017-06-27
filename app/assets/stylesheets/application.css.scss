@@ -23,7 +23,8 @@
 body {
   background-color: $app-background-color;
   padding: 50px 0;
-  font-family: 'Open Sans' !important;
+  font-family: 'Open Sans', 'Sans-Serif' !important;
+  line-height: 30px;
   .heading{
     font-size: 21px;
     font-weight: 400;

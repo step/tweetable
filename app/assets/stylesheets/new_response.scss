@@ -7,8 +7,11 @@
     margin: 10px;
   }
 
-  .app-response-btn-holder{
-    margin-top: 7px;
+  .app-response-btn-holder {
+    margin-top: 10px;
+    .app-total-chars {
+      margin-right: 20px;
+    }
   }
   .app-response-timer {
     text-align: center;
@@ -24,16 +27,14 @@
   }
 
   .app-passage-container {
-    padding: 10px 10px 40px 46px;
-    line-height: 30px;
+    padding: 10px 40px 10px 40px;
     .form-group {
       display: flex;
       justify-content: space-between;
       padding: 0;
-      textarea{
+      textarea {
         width: 99%;
         margin: 2px 15px 2px 10px;
-
       }
     }
     .app-total-chars {
@@ -42,7 +43,7 @@
       font-weight: bold;
       padding: 0;
     }
-    .header, .app-passage-text{
+    .header, .app-passage-text {
       border-bottom: 2px solid lightgray;
       margin-top: 20px;
       margin-bottom: 20px;

@@ -4,6 +4,6 @@ document.addEventListener("turbolinks:load", function () {
         speed: 500,
         lessLink: '<a href="#">Show less</a>',
         moreLink: '<a href="#">Show more</a>',
-        collapsedHeight: 40
+        collapsedHeight: 30
     });
 });

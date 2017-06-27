@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ErrorsController < ApplicationController
   layout false
   skip_before_action :require_login, :active_user?

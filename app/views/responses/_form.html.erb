@@ -1,31 +1,32 @@
 <%= form_for([passage, response], method: 'post', html: {class: 'form-inline text-center'}) do %>
 		<div class="row">
-			<div class="form-group col-lg-12 col-sm-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group col-sm-12">
 				<%= hidden_field_tag 'user_id', user.id %>
 				<%= text_area_tag 'text', nil, placeholder: 'Tweet here', maxlength: 140, class: 'form-control', id: 'text' %>
 			</div>
-			<div class="col-lg-12 col-sm-12 col-md-12 col-sm-12 col-xs-12 app-response-btn-holder">
-				<div class="pull-left app-total-chars col-lg-11 col-md-11 col-sm-11 col-xs-10"> <span class="count pull-right" id="app-total-chars">140</span></span>
-				</div>
-				<button type="button" class="btn btn-primary app-response-submission pull-right col-xs-2" data-toggle="modal" data-target="#app-confirm-passage-<%= passage.id %>-response">Submit</button>
+			<div class="col-sm-12 app-response-btn-holder">
+				<button type="button" class="btn btn-primary app-response-submission pull-right " data-toggle="modal" data-target="#app-confirm-passage-<%= passage.id %>-response">Submit</button>
 				<%= button_to 'Back', passages_path, class: 'btn btn-primary hidden back-btn pull-right', method: :get %>
+				<div class="pull-right app-total-chars">
+					<span class="count" id="app-total-chars">140</span></span>
+				</div>
 			</div>
-		</div>
-		
-		<div class="modal fade bd-example-modal-sm" id="app-confirm-passage-<%= passage.id %>-response" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Confirmation</h4>
-					</div>
-					<div class="modal-body">
-						<p>Your tweet cannot be edited once submitted. Do you confirm...?</p>
-					</div>
-					<div class="modal-footer">
-						<%= submit_tag('Ok', class: 'btn btn-primary app-response-submission') %>
+			<div class="modal fade bd-example-modal-sm" id="app-confirm-passage-<%= passage.id %>-response" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Confirmation</h4>
+						</div>
+						<div class="modal-body">
+							<p>Your tweet cannot be edited once submitted. Do you confirm...?</p>
+						</div>
+						<div class="modal-footer">
+							<%= submit_tag('Ok', class: 'btn btn-primary app-response-submission') %>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 <% end %>
