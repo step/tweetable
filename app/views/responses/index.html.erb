@@ -1,5 +1,5 @@
 <div class="row ">
-  <div class="app-md-card col-sm-8 col-md-11 center-block">
+  <div class="app-md-card col-sm-11 center-block app-passage-container">
       <h3 class="passage-heading">
         <%= passage.title %>
       </h3>
@@ -7,17 +7,15 @@
         <%= simple_format(passage.text) %>
       </div>
   </div>
-  <div class="app-page-header col-sm-8 col-md-11 center-block">
+  <div class="app-page-header col-sm-11 center-block">
     <h3><%= content_tag('small', responses.count.to_s + ' tweets', class: 'pull-right') %> Tweets </h3>
   </div>
-  <div class="col-sm-8 col-md-11 center-block">
-      <!--<ul id="app-response-list" class="app-comments-list">-->
+  <div class="col-sm-11 center-block app-responses-container">
         <% current_user_res , other_responses  = responses.partition { |response| response.user_id == current_user.id } %>
         <%= render partial, response: current_user_res.first unless current_user_res.blank? %>
         <% other_responses.each do |response| %>
               <%= render partial, response: response %>
         <% end %>
-      <!--</ul>-->
   </div>
 
 </div>

@@ -2,11 +2,6 @@
   color: grey;
 }
 
-.app-remaining-time {
-  color: rgba(37, 37, 75, 0.72);
-  font-weight: bold;
-}
-
 .user-image {
   max-width: 54px;
   border-radius: 33px;
@@ -21,36 +16,38 @@ div.tagsinput {
   margin: 5px;
 }
 
-#app-response-list li:nth-child(even) {
-  background-color: white;
-}
 
-.app-response-container {
-  border: 1px solid rgba(211, 211, 211, 0.25);
-  padding: 5px;
-  background-color: rgba(211, 211, 211, 0.25);
-  margin: auto;
-  margin-bottom: 8px;
-  border-radius: 5px;
-  list-style-type: none;
+.app-responses-container {
+  padding: 0;
+  .app-response-container {
+    margin-bottom: 20px;
+    .app-response-review-section{
+      display: flex;
+      i{
+        position: absolute;
+        top: 10px;
+        left: 24px;
+        color: gray;
+      }
+      .bootstrap-tagsinput{
+        padding-left: 31px;
+      }
+    }
+  }
+  .media-heading.app-user-name {
+    margin-bottom: 6px;
+    margin-top: 5px;
+  }
 }
 
 .tag-label {
   font-weight: bold;
 }
 
-.media-heading.app-user-name {
-  margin-bottom: 6px;
-  margin-top: 5px;
-}
 
 .tags-holder {
   margin-top: 6px;
   padding-bottom: 6px;
-}
-
-.media {
-  margin-bottom: 6px;
 }
 
 .comments-list {
@@ -73,10 +70,6 @@ div.tagsinput {
   margin-bottom: 15px;
 }
 
-.alert.alert-danger {
-  margin-top: 10px;
-}
-
 .app-tag-review-holder {
   font-size: xx-large;
   a.app-tag-review-btn-blue:hover {
@@ -95,4 +88,3 @@ a.fa.fa-check-circle.app-tag-review-btn {
 .bootstrap-tagsinput {
   width: 100%;
 }
-

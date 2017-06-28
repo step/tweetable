@@ -1,24 +1,20 @@
-<div class="app-response-container col-lg-12 col-md-12">
-
-  <div class="media col-lg-8 col-md-10">
-    <i class="media-left" href="#">
-      <img class="user-image" src=<%= response.user.image_url %>>
-    </i>
-    <div class="media-body">
-      <h4 class="media-heading app-user-name"><%= response.user.name %></h4>
-      <p><%= response.text %></p>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-2">
-    <small class="pull-right"><%= time_ago_in_words(response.created_at) %></small>
-  </div>
-  <div class="row ">
-
-    <div class="tags-holder col-lg-11 col-md-11">
-      <input type="text" class="app-input-tag form-control" id="app-input-tag-<%= response.id %>" data-tags="<%= response.tags.to_json %>" data-response-id="<%= response.id %>"/>
-    </div>
-    <div class="col-lg-1 col-md-1 app-tag-review-holder">
-      <a class="fa fa-check-circle app-tag-review-btn <%= response.taggings.all? { |tagging| tagging.reviewed } ? 'app-tag-review-btn-green' : 'app-tag-review-btn-blue' %> " id="app-tag-review-btn-<%= response.id %>" aria-hidden="true" data-response-id="<%= response.id %>"></a>
-    </div>
-  </div>
+<div class="app-response-container col-lg-12 col-md-12 app-md-card">
+	<div class="media">
+		<p class="pull-right">
+			<small><%= time_ago_in_words(response.created_at) %> ago</small>
+		</p>
+		<i class="media-left user-image-holder" href="#">
+			<img class="user-image" src=<%= response.user.image_url %>>
+		</i>
+		<div class="media-body">
+			<h4 class="media-heading app-user-name"><%= response.user.name %></h4>
+			<p><%= response.text %></p>
+			<div class="tags-holder col-lg-11 col-md-11 app-response-review-section">
+				<i class="fa fa-tags" aria-hidden="true"></i><input type="text" class="app-input-tag form-control" id="app-input-tag-<%= response.id %>" data-tags="<%= response.tags.to_json %>" data-response-id="<%= response.id %>"/>
+			</div>
+			<div class="col-lg-1 col-md-1 app-tag-review-holder">
+				<a class="fa fa-check-circle app-tag-review-btn <%= response.taggings.all? { |tagging| tagging.reviewed } ? 'app-tag-review-btn-green' : 'app-tag-review-btn-blue' %> " id="app-tag-review-btn-<%= response.id %>" aria-hidden="true" data-response-id="<%= response.id %>"></a>
+			</div>
+		</div>
+	</div>
 </div>
