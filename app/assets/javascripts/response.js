@@ -13,7 +13,6 @@ var disableSubmission = function () {
     setTimeout(function () {
         $(".alert").alert('close')
     }, 5000);
-
 };
 
 var showRemainingTime = function () {
@@ -75,7 +74,7 @@ var createAutoCompleteEngine = function(){
     });
     tags.initialize();
     return tags;
-}
+};
 
 var initializeTagsInput = function(engine){
     var inputElement = $('.app-input-tag');
@@ -100,7 +99,7 @@ var initializeTagsInput = function(engine){
         ]
     });
     return inputElement;
-}
+};
 
 var initializeTagInputHooks = function(inputElement){
     inputElement.on('itemAdded', function (event) {

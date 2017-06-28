@@ -1,6 +1,17 @@
 <div class="tags-holder app-passage-info-item">
   <span class="tag-label"><i class="fa fa-tags" aria-hidden="true"></i> </span>
   <% tags.map do |tag| %>
-      <span class="show-tags tag"> <%= tag.name %></span>
+      <span class="show-tags tag field-tip" style="background-color: <%= tag.color %>"> <%= tag.name %>
+        <% if tag.description %>
+          <div class="tip-content">
+            <p>
+              Description: <%= tag.description %>
+            </p>
+            <p>
+              Weight: <%= tag.weight %>
+            </p>
+          </div>
+        <% end %>
+      </span>
   <% end %>
 </div>

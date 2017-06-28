@@ -8,11 +8,11 @@
   align-items: center;
   a, button {
     margin-left: 10px;
-    &.fa{
+    &.fa {
       color: #337ab7;
     }
   }
-  button{
+  button {
     background-color: transparent;
     border: none;
   }
@@ -43,16 +43,17 @@
 .app-passage-actions a {
   margin-right: 20px;
 }
-.app-empty-passage p{
+
+.app-empty-passage p {
   margin: 0 10px 27px 0;
   border: 1px dashed lightgray;
 }
 
-.app-new-passage-container{
-  .app-duration-limit{
-    .bdp-input{
+.app-new-passage-container {
+  .app-duration-limit {
+    .bdp-input {
       display: flex;
-      .bdp-block{
+      .bdp-block {
         margin-right: 10px;
       }
     }
@@ -67,14 +68,61 @@
   display: block;
 }
 
-.justify{
+.justify {
   text-align: justify;
   padding-right: 15px;
 }
 
-.empty-message{
+.empty-message {
   font-family: sans-serif;
-  color:lightgrey;
-  font-size:50px;
+  color: lightgrey;
+  font-size: 50px;
   margin-top: 25%;
+}
+
+.field-tip {
+  position: relative;
+  cursor: help;
+}
+
+.field-tip .tip-content {
+  position: absolute;
+  top: -10px; /* - top padding */
+  right: 9999px;
+  width: 200px;
+  margin-right: -190px; /* width + left/right padding */
+  padding: 10px;
+  padding-bottom: 0px;
+  border-radius: 10px;
+  color: #000;
+  z-index: 10000;
+  background:#f5f5f5;
+  -webkit-box-shadow: 2px 2px 5px #aaa;
+  -moz-box-shadow: 2px 2px 5px #aaa;
+  box-shadow: 2px 2px 5px #aaa;
+  opacity: 0;
+  -webkit-transition: opacity 250ms ease-out;
+  -moz-transition: opacity 250ms ease-out;
+  -ms-transition: opacity 250ms ease-out;
+  -o-transition: opacity 250ms ease-out;
+  transition: opacity 250ms ease-out;
+}
+
+/* <http://css-tricks.com/snippets/css/css-triangle/> */
+.field-tip .tip-content:before {
+  content: ' '; /* Must have content to display */
+  position: absolute;
+  top: 50%;
+  left: -16px; /* 2 x border width */
+  width: 0;
+  height: 0;
+  margin-top: -8px; /* - border width */
+  border: 8px solid transparent;
+  border-right-color: #f5f5f5;
+  z-index: 10000;
+}
+
+.field-tip:hover .tip-content {
+  right: -20px;
+  opacity: 1;
 }
