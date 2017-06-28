@@ -1,4 +1,4 @@
-<li class="app-response-container col-lg-12 col-md-12">
+<div class="app-response-container col-lg-12 col-md-12">
   <div class="media">
     <p class="pull-right">
       <small><%= time_ago_in_words(response.created_at) %> ago</small>
@@ -8,10 +8,10 @@
     </i>
     <div class="media-body">
       <h4 class="media-heading app-user-name"><%= response.user.name %></h4>
-      <p class="passage"><%= response.text %></p>
+      <p><%= response.text %></p>
       <% unless get_all_unreviewed_taggings(response).empty? %>
           <%= render :partial => 'passages/candidate/tagging_status', locals: { tags: get_all_unreviewed_taggings(response) } %>
       <% end %>
     </div>
   </div>
-</li>
+</div>

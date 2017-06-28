@@ -1,4 +1,4 @@
-<li class="app-response-container col-lg-12 col-md-12">
+<div class="app-response-container col-lg-12 col-md-12">
 
   <div class="media col-lg-8 col-md-10">
     <i class="media-left" href="#">
@@ -21,4 +21,4 @@
       <a class="fa fa-check-circle app-tag-review-btn <%= response.taggings.all? { |tagging| tagging.reviewed } ? 'app-tag-review-btn-green' : 'app-tag-review-btn-blue' %> " id="app-tag-review-btn-<%= response.id %>" aria-hidden="true" data-response-id="<%= response.id %>"></a>
     </div>
   </div>
-</li>
+</div>
