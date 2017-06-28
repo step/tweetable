@@ -2,33 +2,38 @@
   <h2>Tags</h2>
   <table class="table table-bordered">
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Weight</th>
-      <th>Description</th>
-      <th>Color</th>
-      <th>Delete</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Description</th>
+        <th>Color</th>
+        <th>Delete</th>
+      </tr>
     </thead>
 
     <tbody>
-    <% @tags.each do |tag| %>
-        <%= content_tag(:tr, id: "app-tag-#{tag.id}-info") do %>
-          <%= content_tag(:td, editable(tag, :name, url: tag_path(tag.id), value: tag.name), id: "app-tag-#{tag.id}-name") %>
-          <%= content_tag(:td, editable(tag, :weight, url: tag_path(tag.id), value: tag.weight), id: "app-tag-#{tag.id}-weight") %>
-          <%= content_tag(:td, editable(tag, :description, url: tag_path(tag.id), value: tag.description ), id: "app-tag-#{tag.id}-description") %>
-          <%= content_tag(:td, id: "app-tag-#{tag.id}-color") do %>
-            <%= content_tag(:div, class: 'app-tag-color-container input-group colorpicker-component', data:{url:tag_path(tag.id) ,'old-color': tag.color }) do %>
-                <%= text_field_tag "app-tag-#{tag.id}-color", tag.color, class: 'form-control hide' %>
-                <span class="input-group-addon"><i></i></span>
-            <%  end %>
+      <% @tags.each do |tag| %>
+          <%= content_tag(:tr, id: "app-tag-#{tag.id}-info") do %>
+              <%= content_tag(:td, editable(tag, :name, url: tag_path(tag.id), value: tag.name), id: "app-tag-#{tag.id}-name") %>
+              <%= content_tag(:td, editable(tag, :weight, url: tag_path(tag.id), value: tag.weight), id: "app-tag-#{tag.id}-weight") %>
+              <%= content_tag(:td, editable(tag, :description, url: tag_path(tag.id), value: tag.description ), id: "app-tag-#{tag.id}-description") %>
+              <%= content_tag(:td, id: "app-tag-#{tag.id}-color") do %>
+                  <%= content_tag(:div, class: 'app-tag-color-container dropdown', data:{url:tag_path(tag.id) ,'old-color': tag.color }) do %>
+                    <%= content_tag(:span, '', class: 'input-group-addon dropdown-toggle',data:{'tag-color': tag.color,'tag-id': tag.id, 'tag-colors': @colors, 'toggle':'dropdown'}, id: "tag-addon-#{tag.id}" )%>
+                    <%= content_tag(:div, '', class: "app-color-dropdown-menu-#{tag.id} dropdown-menu", data:{'url': tag_path(tag.id), 'tag-id': tag.id}) do %>
+                        <%= text_field_tag("", tag.color, data:{'url': tag_path(tag.id), 'tag-id': tag.id}, value: tag.color, class: 'form-control app-tag-color-input') %>
+                        <% @colors.each do |color| %>
+                            <%= content_tag(:div, '', class: "app-tag-color-cell", style: "background-color:#{color}", data: {'color': color}) %>
+                        <% end%>
+                    <% end %>
+                  <%  end %>
+              <%  end %>
+              <td>
+                <a href="#" class="fa fa-trash" data-toggle="modal" data-target="#app-delete-tag-<%= tag.id %>-modal"></a>
+                <%= render :partial => 'tags/delete_tag', locals: {tag: tag, id:"app-delete-tag-#{tag.id}-modal" } %>
+              </td>
           <%  end %>
-          <td>
-            <a href="#" class="fa fa-trash" data-toggle="modal" data-target="#app-delete-tag-<%= tag.id %>-modal"></a>
-            <%= render :partial => 'tags/delete_tag', locals: {tag: tag, id:"app-delete-tag-#{tag.id}-modal" } %>
-          </td>
-        <%  end %>
-    <% end %>
+      <% end %>
     </tbody>
   </table>
 
@@ -42,9 +47,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Tag</h4>
         </div>
-        <div class="modal-body", id="app-add-tag-modal-body">
-
-        </div>
+        <div class="modal-body" , id="app-add-tag-modal-body"></div>
       </div>
     </div>
   </div>

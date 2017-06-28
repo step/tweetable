@@ -1,15 +1,38 @@
 .app-tag-color-container {
   margin: auto;
   width: 20px;
+  .fa-caret-up {
+    // color: #fff;
+  }
 
   .input-group-addon {
     border: 1px solid $app-input-border-color;
     padding: 2px;
-  }
-  .input-group-addon:last-child {
-    border-left: 1px solid $app-input-border-color;
+    width:20px;
+    height: 20px;
+    cursor: pointer;
     border-radius: 2px;
   }
+  .dropdown-menu {
+    padding: 10px;
+    left: -70px;
+    .app-tag-input {
+      margin: 2px;
+    }
+    .app-tag-color-cell {
+      margin: 3px 0px 1px 3px;
+      box-shadow: 1px 1px 1px lightgrey;
+      border-radius: 2px;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
+  // .input-group-addon:last-child {
+  //   border-left: 1px solid $app-input-border-color;
+  //   border-radius: 2px;
+  // }
 }
 
 .app-add-tag-form-color.colorpicker-component{

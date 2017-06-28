@@ -46,6 +46,7 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  config.tag_colors = ["#ff63a1","#ffa500","#ffe900","#97db4e","#1bc9e8","#ff5e5b","#0f7173","#28afb0","#6daedb","#62B6CB"]
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

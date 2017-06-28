@@ -9,6 +9,7 @@ class TagsController < ApplicationController
   layout false, only: %i[new edit]
 
   def index
+    @colors = Rails.configuration.tag_colors | Tag.select(:color).map(&:color).uniq
     @tags = Tag.all.order('name ASC')
   end
 
