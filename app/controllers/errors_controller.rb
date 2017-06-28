@@ -1,5 +1,6 @@
 class ErrorsController < ApplicationController
   layout false
+  skip_before_action :require_login, :active_user?
 
   def not_found
     render(status: 404)
