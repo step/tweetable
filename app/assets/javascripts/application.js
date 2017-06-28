@@ -17,4 +17,5 @@
 //= require editable/bootstrap-editable
 //= require editable/rails
 //= require readmore_2.1.0.min
+//= require typeahead.bundle.0.11.1
 //= require_tree .
