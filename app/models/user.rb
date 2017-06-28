@@ -18,11 +18,11 @@ class User < ApplicationRecord
   private
 
   def validate_email
-    domain = ENV['ALLOWED_DOMAIN'] || '[A-Z0-9._%a-z\-]+'
+    domain = ENV['ALLOWED_DOMAIN'] || '[A-Z0-9._%a-z\-]+\.com\z'
     errors.add(:email, 'must be a valid email id...') unless valid_email?(domain, email)
   end
 
   def valid_email?(domain, email)
-    Regexp.new('\b[A-Z0-9._%a-z\-]+@' + domain + '\.com\z').match?(email)
+    Regexp.new('\b[A-Z0-9._%a-z\-]+@' + domain).match?(email)
   end
 end

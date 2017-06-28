@@ -32,6 +32,10 @@ module Helpers
     allow_any_instance_of(ApplicationController)
   end
 
+  def stub_env_variable(variable, value)
+    stub_const('ENV', ENV.to_hash.merge(variable => value))
+  end
+
   private
 
   def stub_user_with_attributes(params)
