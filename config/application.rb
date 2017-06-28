@@ -22,6 +22,7 @@ module Tweetable
       g.fixture_replacement :factory_girl, dir: 'spec/support/factories'
     end
     config.exceptions_app = routes
+    config.tag_colors = ['#ff63a1', '#ffa500', '#ffe900', '#97db4e', '#1bc9e8', '#ff5e5b', '#0f7173', '#28afb0', '#6daedb', '#62B6CB']
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
