@@ -1,5 +1,3 @@
-//=require jquery.tagsinput.min
-
 var updateRemainingCharacters = function (event) {
     var charLimit = event.target.maxLength;
     var presentCount = event.target.value.length;

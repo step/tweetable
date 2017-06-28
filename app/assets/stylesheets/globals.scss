@@ -1,0 +1,94 @@
+body {
+  background-color: $app-background-color;
+  padding: 50px 0;
+  font-family: 'Open Sans', 'Sans-Serif';
+  line-height: 30px;
+}
+
+p {
+  font-weight: 300;
+}
+
+
+h1, h2, h3, h4, h5, h6, .heading {
+  font-family: 'Roboto';
+  font-weight: 700;
+}
+
+html,
+body,
+.container-fluid, .app-main-content , .app-main-body{
+  height: $view-port-height;
+  padding-bottom: 0;
+  font-family: 'Open sans', sans-serif;
+}
+
+nav.sidebar,
+.app-main-body {
+  -webkit-transition: margin 200ms ease-out;
+  -moz-transition: margin 200ms ease-out;
+  -o-transition: margin 200ms ease-out;
+  transition: margin 200ms ease-out;
+}
+.app-main-content{
+  overflow: auto;
+}
+.app-main-body{
+  height: 100%;
+  overflow: auto;
+  padding: 20px;
+
+  @media screen and (max-width: $responsive){
+    padding-top: 0;
+  }
+}
+
+.app-clearance {
+  margin-top: 5%;
+  .logout{
+    margin-left:50%;
+    a{
+      line-height: 20px;
+    }
+  }
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+.hidden {
+  display: none;
+}
+
+.editable-buttons{
+  display: none;
+}
+
+.table > tbody{
+  text-align: center;
+}
+
+.table > thead > tr > th{
+  text-align: center;
+}
+
+.alert {
+  margin-top: 15px;
+  margin-left: 10px;
+  width: inherit;
+}
+a{
+  text-decoration: none !important;
+}
+
+.app-md-card{
+  background-color: white;
+  -webkit-box-shadow: 1px 1px 1px lightgray;
+  -moz-box-shadow: 1px 1px 1px lightgray;
+  box-shadow: 1px 1px 1px lightgray;
+  padding: 20px;
+}
+
+.center-block{
+  float: none;
+}

@@ -9,100 +9,28 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
- *= require_tree .
- *= require_self
- *= require rails_bootstrap_forms
  */
+// third party css
 @import "bootstrap";
 @import "bootstrap-sprockets";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,700,900');
-@import "variables";
 @import "editable/bootstrap-editable";
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+@import 'rails_bootstrap_forms';
+@import "bootstrap-editable";
+@import "bootstrap-tagsinput";
+@import "bootstrap_colorpicker_2_5_1.min";
 
-body {
-  background-color: $app-background-color;
-  padding: 50px 0;
-  font-family: 'Open Sans', 'Sans-Serif' !important;
-  line-height: 30px;
-  .heading{
-    font-size: 21px;
-    font-weight: 400;
-  }
-}
-
-p {
-  font-weight: 300;
-}
-
-
-h1, h2, h3, h4, h5, h6, .heading {
-  font-family: 'Roboto' !important;
-  font-weight: 700;
-}
-
-html,
-body,
-.container-fluid, .app-main-content , .app-main-body{
-  height: $view-port-height;
-  padding-bottom: 0;
-  font-family: 'Open sans', sans-serif;
-}
-
-nav.sidebar,
-.app-main-body {
-  -webkit-transition: margin 200ms ease-out;
-  -moz-transition: margin 200ms ease-out;
-  -o-transition: margin 200ms ease-out;
-  transition: margin 200ms ease-out;
-}
-.app-main-content{
-  overflow: auto;
-}
-.app-main-body{
-  height: 100%;
-  overflow: auto;
-  padding: 20px;
-
-  @media screen and (max-width: $responsive){
-    padding-top: 0;
-  }
-}
-
-.app-clearance {
-  margin-top: 5%;
-  .logout{
-    margin-left:50%;
-    a{
-      line-height: 20px;
-    }
-  }
-}
-
-input[type="checkbox"] {
-  cursor: pointer;
-}
-.hidden {
-  display: none;
-}
-
-.editable-buttons{
-  display: none;
-}
-
-.table > tbody{
-  text-align: center;
-}
-
-.table > thead > tr > th{
-  text-align: center;
-}
-
-.alert {
-  margin-top: 15px;
-  margin-left: 10px;
-  width: inherit;
-}
-a{
-  text-decoration: none !important;
-}
+// custom css
+@import "variables";
+@import "globals";
+@import "table";
+@import "override_bootstrap_css";
+@import "top_navbar";
+@import "side_navbar";
+@import "passages";
+@import "new_response";
+@import "responses";
+@import "leader_board";
+@import "tag";
+@import "users";
