@@ -12,8 +12,6 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
-
-
   $(".app-tag-color-input").on("change", function(event) {
     var self = $(this);
     var tagColor = self.val();
