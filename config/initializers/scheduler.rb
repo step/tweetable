@@ -2,6 +2,8 @@
 
 require 'rufus-scheduler'
 require './app/jobs/evaluator_job'
+require './lib/evaluator/evaluation_engine'
+require './lib/evaluator/tagger'
 
 scheduler = Rufus::Scheduler.new
 
