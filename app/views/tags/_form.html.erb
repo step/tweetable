@@ -7,14 +7,13 @@
           </div>
           <div class="col-md-6">
             <div class="col-md-9">
-              <label class="control-label" for="tag_color">Color</label>
               <div class="app-add-tag-form-color input-group">
-                <%= text_field_tag("tag[color]", tag.color, data:{'tag-id': tag.id}, value: "", class: 'form-control app-new-tag-color-input', pattern: "#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})") %>
+                <%= form.text_field(:color, data:{'tag-id': tag.id}, class: 'form-control app-new-tag-color-input', pattern: "#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})") %>
               </div>
             </div>
             <div class="col-md-3">
               <%= content_tag(:div, class: 'app-tag-color-container dropdown new-tag-color', data:{'old-color': tag.color }) do %>
-                    <%= content_tag(:span, '', class: 'input-group-addon on-new dropdown-toggle',data:{'tag-color': tag.color,'tag-id': tag.id, 'tag-colors': @colors, 'toggle':'dropdown'}, id: "tag-addon-#{tag.id}" )%>
+                    <%= content_tag(:span, '', class: 'input-group-addon on-new dropdown-toggle',data:{'tag-color': tag.color,'tag-id': tag.id, 'tag-colors': @colors, 'toggle':'dropdown'}, id: "tag-addon-#{tag.id}", style: "background-color:#{@tag.color}" )%>
                     <%= content_tag(:div, '', class: "app-color-dropdown-menu-#{tag.id} dropdown-menu", data:{'tag-id': tag.id}) do %>
                         <% @colors.each do |color| %>
                             <%= content_tag(:div, '', class: "app-tag-color-cell new-tag-color-cell", style: "background-color:#{color}", data: {'color': color}) %>

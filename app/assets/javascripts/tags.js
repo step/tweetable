@@ -80,7 +80,7 @@ var initializeNewTagColorCell = function () {
   $(".new-tag-color-cell").on('click',function () {
     var tagColor = $(this).data('color');
       $(".on-new").css('background-color',tagColor);
-      $(".app-new-tag-color-input").attr('value',tagColor);
+      $(".app-new-tag-color-input").val(tagColor);
   })
 
 }
