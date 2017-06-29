@@ -1,4 +1,3 @@
-<% passage_text = passage.text %>
 <div class="panel panel-default">
 	<div class="panel-heading app-passage-head">
 		<div class="app-passage-header">
@@ -6,11 +5,7 @@
 		</div>
 	</div>
 	<div class="panel-body">
-		<div class="app-content">
-			<%= content_tag(:p, :class => "passage passage-#{passage.id} justify") do %>
-					<%= passage_text %>
-			<% end %>
-		</div>
+			<%= render :partial => 'passages/common/content', locals: {passage: passage} %>
 		<div class="app-passage-options">
 			<div class="app-passage-info">
 				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>

@@ -20,9 +20,6 @@
 
 .panel-body {
   display: flex;
-  .app-content {
-    width: 80%;
-  }
   div.app-passage-options {
     padding: 10px;
     border-left: 1px dotted lightgray;
@@ -41,6 +38,13 @@
       }
     }
   }
+  @media screen and (max-width: $responsive) {
+    flex-direction: column;
+    div.app-passage-options {
+      border-top: 1px dotted lightgray;
+      border-left: none;
+    }
+  }
 }
 
 .app-passage-actions a {
@@ -53,6 +57,7 @@
 }
 
 .app-new-passage-container {
+  padding-bottom: 50px;
   .app-duration-limit {
     .bdp-input {
       display: flex;
@@ -99,7 +104,7 @@
   border-radius: 10px;
   color: #000;
   z-index: 10000;
-  background:#f5f5f5;
+  background: #f5f5f5;
   -webkit-box-shadow: 2px 2px 5px #aaa;
   -moz-box-shadow: 2px 2px 5px #aaa;
   box-shadow: 2px 2px 5px #aaa;

@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'bootstrap-duration-picker' %>
 
 <div class="row">
-	<div class="app-new-passage-container col-lg-11">
+	<div class="app-new-passage-container col-lg-11 app-md-card center-block">
 		<%= bootstrap_form_for(@passage) do |form| %>
 				<%= form.text_field :title, :class => "col-10 form-control", :required => true %>
 				<%= form.text_area :text, :class => "col-10 form-control passage_area", :required => true, rows: 8 %>

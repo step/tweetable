@@ -2,7 +2,7 @@
 	<% empty_message = PassagesHelper.empty_tab_messages(partial_name) %>
 	<%= render 'passages/common/empty_message', :message => empty_message if filtered_passages.empty? %>
 	<% filtered_passages.each do |passage| %>
-			<div class="col-lg-11">
+			<div class="col-lg-11 center-block">
 				<%= render "passages/candidate/" + partial_name, :passage => passage %>
 			</div>
 	<% end %>
