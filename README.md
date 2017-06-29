@@ -41,6 +41,3 @@ You can find a template file named as config/auth_config.yml.template
 How to start the app server
 
         rails server
-
-We are using [Mingle](https://step-2015-17.mingle-staging.thoughtworks.com/projects/tweetable) for the project development tracking.
-For all the other resources look in Mingle.
