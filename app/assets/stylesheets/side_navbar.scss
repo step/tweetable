@@ -8,6 +8,7 @@ div.app-sidebar-links-container {
   .app-navbar-collapse{
     padding-top: 10px;
     background-color: $app-brand-name-color;
+    box-shadow: 1px 1px 1px 1px lightgrey;
   }
   .app-navbar-options{
     margin-top: 10px;
@@ -15,8 +16,10 @@ div.app-sidebar-links-container {
   .app-navbar-options li a{
     cursor: pointer;
     padding-left: 14%;
+    margin-right: 2px;
     &:hover{
-      background-color:#c8e2de
+      background-color:#c8e2de;
+      box-shadow: 1px 1px 1px 1px lightgray;
     }
   }
 

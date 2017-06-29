@@ -11,6 +11,7 @@ $app-user-icon-dimension: 30px;
 nav.navbar-default {
   background-color: $app-primary-color;
   height: 50px;
+  box-shadow: 1px 1px 1px 1px lightgrey;
   .navbar-brand {
     color: $app-brand-name-color;
     font-size: 45px;
