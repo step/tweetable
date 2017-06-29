@@ -25,7 +25,10 @@
   }
   div.app-passage-options {
     padding: 10px;
-    border-left: 3px solid rgba(0, 0, 0, 0.26);
+    border-left: 1px dotted lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .app-passage-info {
       display: flex;
       flex-direction: column;
