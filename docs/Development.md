@@ -14,18 +14,15 @@ Report every single bug to us.This will make both product and your life simple. 
 If you have new features in the mind.First share it with team and users get feedback about it. Once you are sure about feature then refine it to make it simple and elegant.It will help to estimate the stories and in development of that feature.
 
 ## Pre-requisite for coding
+It is suggested to read the Manual carefully to understand the features before adding new features.
 It is developed using ruby-rails and postgres as database.
-The setup information can be found in the README.md and Mingle.
-There is a dev-box setup using vagrant and ansible-playbook. But you can build it without it as well.
-
-## Building on Top of Tweetable
-<!-- uncompleted -->
+The setup information can be found in the README.md.
 
 ## Feature Proposed
 - User Groups
   This is the most useful and required feature which needs to be build.This will allow admin to group users in batches.So eventually a exercise can be given to a group rather than giving to everyone. This also changes some of the core models which requires lot of time to introduce this feature.For example Passages will be independent of the commence and conclude time.This will also allow that same passages can be given to a group multiple time.
 - Expose API's
-  The minimal version feature is the ability to give data to user on API calls where consumer can build their own visualiations on the data.It could be extended as well where as an app we expose api's which can be consumed by any one and they can build their own app.
+  The minimal version feature is the ability to give data to user on API calls where consumer can build their own visualization on the data.It could be extended as well where as an app we expose api's which can be consumed by any one and they can build their own app.
 - Badges
   A very simple feature where an admin can give badges to those people who have done excellence in something. For example if a person gets a tag grammar multiple times as an admin I wish to give him Shakespeare as bade.
   Which could be shown on user profile and leader board.
