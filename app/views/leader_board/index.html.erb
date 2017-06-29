@@ -1,26 +1,26 @@
 <div class="row">
-	<h3>Leader Board</h3>
-	<div class="col-lg-6">
+	<h3 class=" col-sm-6 center-block visible-xs-block">Leader Board</h3>
+	<div class="col-sm-6 center-block">
 		<% @leader_list.each do |user| %>
-				<div class="card hovercard app-rank-card">
-					<div class="app-rank-card-head">
+				<div class="app-rank-card app-md-card">
+					<div class="app-rank-card-head col-sm-2">
 						<svg >
 							<defs>
 								<clipPath id="app-circle-view">
-									<circle cx="60" cy="60" r="35" fill="#FFFFFF"></circle>
+									<circle cx="35" cy="35" r="25" fill="#FFFFFF"></circle>
 								</clipPath>
 							</defs>
-							<image x="25" y="25" width="80" height="80" xlink:href=<%= user[:image] %> clip-path="url(#app-circle-view)"></image>
-							<path d="M 1 1 L 80 1 L 1 80 z"
+							<image x="10" y="10" width="60" height="60" xlink:href=<%= user[:image] %> clip-path="url(#app-circle-view)"></image>
+							<path d="M 1 1 L 50 1 L 1 50 z"
 							       ></path>
-							<text x="0" y="70" font-family="Verdana" font-size="14" fill="black" transform="translate(-25,-5)rotate(-45)">
+							<text x="0" y="55" font-family="Verdana" font-size="14" fill="black" transform="translate(-25,-5)rotate(-45)">
 								<%= user[:rank].ordinalize %>
 							</text>
 						</svg>
 					</div>
-					<div class="app-rank-card-body">
-						<%= content_tag(:strong, "#{user[:score]} Points") %>
+					<div class="app-rank-card-body col-sm-10">
 						<%= content_tag(:strong, user[:name]) %>
+						<%= content_tag(:strong, "#{user[:score]} Points") %>
 					</div>
 				</div>
 		<% end %>

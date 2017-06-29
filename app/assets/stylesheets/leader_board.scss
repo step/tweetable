@@ -1,26 +1,26 @@
 .app-rank-card{
   display: flex;
-  background: rgba(228, 228, 228, 0.44);
   border-radius: 5px;
   padding: 10px;
   margin-top: 10px;
-
+  height: 80px;
   svg{
     width: 100px;
     height: 100px;
     path{
     stroke-width: 0px;
-      fill: gray;
+      fill: $app-primary-color;
     }
     text{
       fill: white;
+      stroke: white;
     }
   }
 }
 .app-rank-card-body{
-  margin-left: 20px;
+  width:100%;
+  margin: auto auto auto 20px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
 }
 
