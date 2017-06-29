@@ -1,9 +1,14 @@
+@import 'variables';
+
+.app-tag-color-container.dropdown.new-tag-color {
+    margin-top: 40px;
+    .dropdown-menu {
+      left: -106px;
+    }
+}
 .app-tag-color-container {
   margin: auto;
   width: 20px;
-  .fa-caret-up {
-    // color: #fff;
-  }
 
   .input-group-addon {
     border: 1px solid $app-input-border-color;
@@ -12,6 +17,9 @@
     height: 20px;
     cursor: pointer;
     border-radius: 2px;
+    .on-new {
+      margin-top: 10px;
+    }
   }
   .dropdown-menu {
     padding: 10px;
@@ -29,12 +37,10 @@
       cursor: pointer;
     }
   }
-  // .input-group-addon:last-child {
-  //   border-left: 1px solid $app-input-border-color;
-  //   border-radius: 2px;
-  // }
 }
-
+.input-group .form-control:last-child {
+      border-radius: 4px;
+}
 .app-add-tag-form-color.colorpicker-component{
   display: block;
   .input-group-addon {

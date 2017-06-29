@@ -1,13 +1,32 @@
 <%= bootstrap_form_for(@tag) do |form| %>
     <%= form.text_field :name, id: :tag_name, class: 'form-control', required: true, maxlength: 25%>
-      <%= form.number_field :weight, id: :tag_weight, class: 'form-control' %>
       <div class="form-group">
-        <label class="control-label" for="tag_color">Color</label>
-        <div class="app-add-tag-form-color input-group colorpicker-component">
-          <%= text_field_tag "tag[color]", '',class: 'form-control hide' , id:'tag_color' %>
-          <span class="input-group-addon"><i></i></span>
+        <div class="row">
+          <div class="col-md-6">
+            <%= form.number_field :weight, id: :tag_weight, class: 'form-control' %>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-9">
+              <label class="control-label" for="tag_color">Color</label>
+              <div class="app-add-tag-form-color input-group">
+                <%= text_field_tag("tag[color]", tag.color, data:{'tag-id': tag.id}, value: "", class: 'form-control app-new-tag-color-input', pattern: "#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})") %>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <%= content_tag(:div, class: 'app-tag-color-container dropdown new-tag-color', data:{'old-color': tag.color }) do %>
+                    <%= content_tag(:span, '', class: 'input-group-addon on-new dropdown-toggle',data:{'tag-color': tag.color,'tag-id': tag.id, 'tag-colors': @colors, 'toggle':'dropdown'}, id: "tag-addon-#{tag.id}" )%>
+                    <%= content_tag(:div, '', class: "app-color-dropdown-menu-#{tag.id} dropdown-menu", data:{'tag-id': tag.id}) do %>
+                        <% @colors.each do |color| %>
+                            <%= content_tag(:div, '', class: "app-tag-color-cell new-tag-color-cell", style: "background-color:#{color}", data: {'color': color}) %>
+                        <% end%>
+                    <% end %>
+              <%  end %>
+            </div>
+          </div>
+
         </div>
-      </div>
+        </div>
+
     <%= form.text_field :description, id: :tag_description, class: 'form-control' %>
     <%= form.submit "Save", :class => "btn btn-success padding-bottom" %>
 <% end %>

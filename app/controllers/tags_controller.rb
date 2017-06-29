@@ -14,6 +14,7 @@ class TagsController < ApplicationController
   end
 
   def new
+    @colors = Rails.configuration.tag_colors | Tag.select(:color).map(&:color).uniq
     @tag = Tag.new
   end
 

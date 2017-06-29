@@ -6,14 +6,14 @@ document.addEventListener("turbolinks:load", function() {
     $.get("tags/new", function(data) {
       $('#app-add-tag-modal-body').html(data);
       var addTagModal = $('#app-add-tag-modal');
+      initializeNewTagColor();
+      initializeNewTagColorCell();
       addTagModal.show();
-      addTagModal.find('.app-add-tag-form-color').colorpicker({
-        color: '#5bc0de',
-        format: 'hex',
-        customClass: 'app-tag-color-picker'
-      });
     });
   });
+
+
+
   $(".app-tag-color-input").on("change", function(event) {
     var self = $(this);
     var tagColor = self.val();
@@ -69,7 +69,21 @@ var onClickOnColorCell = function () {
 
   })
 };
+var initializeNewTagColor = function () {
+  $(".app-new-tag-color-input").on("input",function (event) {
+    var el = $(this);
+    var color = $(el).val();
+    $(".on-new").css('background-color',color);
+  });
+};
+var initializeNewTagColorCell = function () {
+  $(".new-tag-color-cell").on('click',function () {
+    var tagColor = $(this).data('color');
+      $(".on-new").css('background-color',tagColor);
+      $(".app-new-tag-color-input").attr('value',tagColor);
+  })
 
+}
 var changeAddonColor = function(tagId, color) {
   var targetTag = $('#tag-addon-' + tagId);
   targetTag.css('background-color', color);
