@@ -131,15 +131,15 @@ unless Rails.env.production?
 
 # --------------- Tagging Seeds ---------------------
 
-  # Tagging.create(
-  #     [
-  #         {
-  #             response_id: Response.find_by(text: 'respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Error').id
-  #         },
-  #         {
-  #             response_id: Response.find_by(text: 'respose for Person').id, tag_id: Tag.find_by(name: 'Excellence').id
-  #         }
-  #     ]
-  # )
+  Tagging.create(
+      [
+          {
+              response_id: Response.find_by(text: 'respose for Climate Changed').id, tag_id: Tag.find_by(name: 'Error').id
+          },
+          {
+              response_id: Response.find_by(text: 'respose for Person').id, tag_id: Tag.find_by(name: 'Excellence').id
+          }
+      ]
+  )
 
 end
