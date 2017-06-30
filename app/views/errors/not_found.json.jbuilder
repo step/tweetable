@@ -1,4 +1,2 @@
-{
-    error: 'Page not Found',
-    errorCode: 404
-}
+{ error: 'Page not Found',
+  errorCode: 404 }

@@ -1,4 +1,2 @@
-{
-    error: 'Something went Wrong',
-    errorCode: 500
-}
+{ error: 'Something went Wrong',
+  errorCode: 500 }

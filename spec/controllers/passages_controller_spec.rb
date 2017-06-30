@@ -212,45 +212,31 @@ describe PassagesController do
     end
 
     it 'should not allow candidate to create a passage' do
-      post :create
-      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-      should redirect_to(passages_path)
+      expect { post :create }.to raise_error(ActionController::RoutingError)
     end
 
     it 'should not allow candidate to edit a passage' do
-      post :update, params: { id: 'some_id' }
-      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-      should redirect_to(passages_path)
+      expect { post :update, params: { id: 'some_id' } }.to raise_error(ActionController::RoutingError)
     end
 
     it 'should not allow candidate to commence a passage' do
-      post :commence, params: { id: 'some_id' }
-      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-      should redirect_to(passages_path)
+      expect { post :commence, params: { id: 'some_id' } }.to raise_error(ActionController::RoutingError)
     end
 
     it 'should not allow candidate to conclude a passage' do
-      post :conclude, params: { id: 'some_id' }
-      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-      should redirect_to(passages_path)
+      expect { post :conclude, params: { id: 'some_id' } }.to raise_error(ActionController::RoutingError)
     end
 
     it 'should not have access to concluded passages' do
-      get :concluded
-      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-      should redirect_to(passages_path)
+      expect { get :concluded }.to raise_error(ActionController::RoutingError)
     end
 
     it 'should not have access to opened passages' do
-      get :ongoing
-      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-      should redirect_to(passages_path)
+      expect { get :ongoing }.to raise_error(ActionController::RoutingError)
     end
 
     it 'should not have access to drafts passages' do
-      get :drafts
-      expect(flash[:danger]).to match("Either the resource you have requested does not exist or you don't have access to them")
-      should redirect_to(passages_path)
+      expect { get :drafts }.to raise_error(ActionController::RoutingError)
     end
   end
 end

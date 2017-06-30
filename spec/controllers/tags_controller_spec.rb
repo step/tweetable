@@ -17,9 +17,7 @@ describe TagsController, type: :controller do
     context 'For Non Admin User' do
       it 'should not return all the tags' do
         stub_current_active_intern_user
-        get :index
-        expect(flash[:danger]).to match(un_authrised_message)
-        expect(response).to redirect_to(passages_path)
+        expect { get :index }.to raise_error(ActionController::RoutingError)
       end
     end
   end
@@ -35,9 +33,7 @@ describe TagsController, type: :controller do
     context 'For Non Admin User' do
       it 'should not return all the tags' do
         stub_current_active_intern_user
-        get :new
-        expect(flash[:danger]).to match(un_authrised_message)
-        expect(response).to redirect_to(passages_path)
+        expect { get :new }.to raise_error(ActionController::RoutingError)
       end
     end
   end
@@ -60,9 +56,8 @@ describe TagsController, type: :controller do
     context 'For Non Admin User' do
       it 'should not create tag' do
         stub_current_active_intern_user
-        get :create, params: { name: 'New tag', weight: 2, description: 'Discriptions for new tag' }
-        expect(flash[:danger]).to match(un_authrised_message)
-        expect(response).to redirect_to(passages_path)
+        params = { name: 'New tag', weight: 2, description: 'Discriptions for new tag' }
+        expect { get :create, params: params }.to raise_error(ActionController::RoutingError)
       end
     end
   end
