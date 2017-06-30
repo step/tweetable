@@ -23,8 +23,7 @@ class ApplicationController < ActionController::Base
 
   def verify_privileges
     return if current_user.admin
-    flash[:danger] = "Either the resource you have requested does not exist or you don't have access to them"
-    redirect_to passages_path
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   private
