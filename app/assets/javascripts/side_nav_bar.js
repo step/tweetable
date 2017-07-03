@@ -6,7 +6,7 @@ document.addEventListener("turbolinks:load", function () {
 function fixSideNavBarHeight(e) {
   var sideNavBAr = $($(e).data('target'));
 
-  let attr = sideNavBAr.attr('aria-expanded') || 'false';
+  var attr = sideNavBAr.attr('aria-expanded') || 'false';
   if(attr.match(/^true$/i)) {
     sideNavBAr.hide();
     $('.app-sidebar-links-container').css('height', 'auto');
