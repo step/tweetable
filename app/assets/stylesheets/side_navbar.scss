@@ -1,29 +1,33 @@
 div.app-sidebar-links-container {
   padding: 0;
-  .sidebar, .app-navbar-collapse,.app-navbar-options {
+  .sidebar, .app-navbar-collapse, .app-navbar-options {
     width: 100%;
     height: 100% !important;
-    padding:0;
+    padding: 0;
   }
-  .app-navbar-collapse{
+  .app-navbar-collapse {
     padding-top: 10px;
     background-color: $app-brand-name-color;
     box-shadow: 1px 1px 1px 1px lightgrey;
   }
-  .app-navbar-options{
+  .app-navbar-options {
     margin-top: 10px;
   }
-  .app-navbar-options li a{
-    cursor: pointer;
-    padding-left: 14%;
-    margin-right: 2px;
-    &:hover{
-      background-color:#c8e2de;
-      box-shadow: 1px 1px 1px 1px lightgray;
+  .app-navbar-options li {
+    &.app-active-tab a{
+      background-color: #d1d1d1;
+    }
+    a {
+      cursor: pointer;
+      padding-left: 14%;
+      margin-right: 2px;
+      &:hover {
+        background-color: #d1d1d1;
+      }
     }
   }
 
-  .app-navbar-options label{
+  .app-navbar-options label {
     padding-left: 10%;
   }
 }
@@ -33,7 +37,7 @@ div.app-sidebar-links-container {
     position: relative;
     height: $view-port-height;
 
-    .app-navbar-options li:last-child{
+    .app-navbar-options li:last-child {
       position: absolute;
       width: 100%;
       bottom: 30px;
@@ -41,12 +45,15 @@ div.app-sidebar-links-container {
 
   }
 }
+
 .icon-bar {
   background-color: white;
 }
 
 @media screen and (max-width: $responsive) {
-  ul.nav{padding-left: 40px;}
+  ul.nav {
+    padding-left: 40px;
+  }
   .app-sidebar-links-container {
     position: relative;
     margin-top: 0px;
@@ -57,13 +64,13 @@ div.app-sidebar-links-container {
     top: 0;
   }
   .navbar {
-    margin-bottom: 0!important;
-    min-height: 20px!important;
+    margin-bottom: 0 !important;
+    min-height: 20px !important;
   }
-  .app-navbar-collapse{
+  .app-navbar-collapse {
     margin-top: -30px;
   }
   .app-sidebar-links-container {
-    padding-top: 30px!important;
+    padding-top: 30px !important;
   }
 }
