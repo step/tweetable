@@ -1,4 +1,4 @@
-<div class="row" id="app-passage-container">
+<div class="row" id="app-passage-container" data-tab-name="attempted_passages" >
   <% partial_name = PassagesHelper.partial_name(:attempted) %>
   <% empty_message = PassagesHelper.empty_tab_messages(partial_name) %>
   <%= render 'passages/common/empty_message', :message => empty_message if filtered_passages.empty? %>
