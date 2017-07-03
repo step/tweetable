@@ -1,4 +1,5 @@
 <div class="row" id="app-passage-container" data-tab-name="<%= partial_name  %>">
+	<%= content_tag(:h3 , partial_name.humanize, class: 'col-sm-6 center-block visible-xs-block') unless filtered_passages.empty? %>
   <% empty_message = PassagesHelper.empty_tab_messages(partial_name) %>
   <%= render 'passages/common/empty_message', :message => empty_message if filtered_passages.empty? %>
   <% filtered_passages.each do |passage| %>
