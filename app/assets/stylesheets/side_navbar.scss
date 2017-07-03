@@ -54,10 +54,15 @@ div.app-sidebar-links-container {
   ul.nav {
     padding-left: 40px;
   }
-  .app-sidebar-links-container {
-    position: relative;
-    margin-top: 0px;
+  div.app-sidebar-links-container {
+    position: fixed;
+    width: 100%;
+    //height: 100%;
+    margin-top: 0;
     z-index: 9999;
+    .sidebar, .app-navbar-collapse, .app-navbar-options {
+      height: 87% !important;
+    }
   }
   .navbar-toggle {
     position: fixed !important;
