@@ -1,4 +1,5 @@
-### Development and Contributions
+### Contributions
+First of all thanks a lot for making this app better
 
 Contributing to Tweetable doesn’t only mean to add new features. Helping new users and improving documentation are also welcome. In fact, proposing significant feature changes usually requires understanding of the ecosystem and purpose of the product.Being familiar with the features and having sense on that why a feature is needed it helps to gain confidence with the codebase.
 
@@ -32,3 +33,47 @@ The setup information can be found in the README.md.
   In admin user management view, we don't have search and sort in the users table.Also it could be improved in other ways.
 - Introduce New Type of the Exercises  
   Right now every exercise is to give a passage and summarize it.It could be another type of question. For example short story writing, comics writing.
+
+---
+
+#### System dependencies
+  Things you need to run or develop this Rails application:
+
+  * [Ruby version 2.4.0](https://www.ruby-lang.org/en/documentation/installation/)
+  * [Bundler version 1.14.6](https://bundler.io/)
+  * [Postgres > 9.5.0](https://www.postgresql.org/download/)          
+
+
+  Once you have cloned the repo and installed the above dependencies.
+  Do a bundle install to install all the gems.
+
+          bundle install
+
+
+  Create a test and dev databases.
+
+
+          createdb tweetable_development
+          createdb tweetable_test
+
+  Alternatively you can run rake tasks
+
+          rake db:create
+          rake db:migrate
+          rake db:seed
+
+  How to run a test(using rspec framework)
+
+          rspec => will run all of your project test
+          rspec path_to_specific_test_file:[line_number]
+
+  Auth for the App
+
+  We are using Google Authentication
+  Set app specific secrets in config/auth_config.yml.
+  You can find a template file named as config/auth_config.yml.template
+  * Do not source control your app specific secrets
+
+  How to start the app server
+
+          rails server
