@@ -6,9 +6,9 @@
   <div class="panel panel-success app-clearance">
     <div class="panel-heading"><h4>Thank you, <%= current_user.name %> for signing up.</h4></div>
     <div class="panel-body">
-      <p>Your account will be activated once the admin authorizes and assigns your role.</p>
+      <p>Your account will be activated once the admin authorizes and assigns you a role.</p>
 	    <%=	content_tag(:p, class: 'logout' ) do  %>
-			    <%=	 link_to('', logout_path, class:'fa fa-2x fa-sign-out' ) %>
+			    <%=	 link_to('Logout', logout_path, class:'fa fa-sign-out' ) %>
 	    <%	 end %>
     </div>
   </div>
