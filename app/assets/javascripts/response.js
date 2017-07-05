@@ -144,7 +144,13 @@ var initializePreviousTags = function () {
     })
 };
 
+function hasResponseReviewSection() {
+  return $('.app-response-review-section').length <= 0;
+}
+
 var initializeTaggings = function () {
+    if(hasResponseReviewSection())
+      return;
     initializeTags();
     initializePreviousTags();
 };
