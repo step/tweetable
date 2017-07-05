@@ -10,12 +10,20 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jQuery
+//= require thirdparty_js/jQuery.js
 //= require turbolinks
 //= require bootstrap
 //= require jquery_ujs
 //= require editable/bootstrap-editable
 //= require editable/rails
-//= require readmore_2.1.0.min
-//= require typeahead.bundle.0.11.1
-//= require_tree .
+//= require thirdparty_js/readmore_2.1.0.min
+//= require thirdparty_js/typeahead.bundle.0.11.1
+//= require thirdparty_js/bootstrap-tagsinput
+//= require thirdparty_js/bootstrap-duration-picker
+//= require thirdparty_js/jquery.countdown.min
+//= require passages
+//= require response
+//= require side_nav_bar
+//= require tags
+//= require users
+//= require inline-edit
