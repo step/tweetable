@@ -5,7 +5,7 @@ class Passage < ApplicationRecord
 
   validates :title, presence: true
   validates :text, presence: true
-  validates_numericality_of :duration, greater_than: 0
+  validates_numericality_of :duration, greater_than_or_equal_to: 0
   validate :date_validations
 
   has_many :responses, dependent: :destroy
