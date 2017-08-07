@@ -24,7 +24,7 @@ describe ResponsesTracking do
         title: 'Program', text: 'program passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
       },
       {
-        title: 'Computer', text: 'computer passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
+        title: 'Computer', text: 'computer passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '0'
       },
       {
         title: 'Human', text: 'human passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
@@ -80,10 +80,11 @@ describe ResponsesTracking do
 
         expect(expected_remaining_time.round).to be(0)
       end
-      it 'should give remaining time 0 if the passage closing time is less than current date time' do
+      it 'should give remaining time to conclude time if the passage closing time is less than duration' do
         time = (Time.current + 1.98.day)
-        ResponsesTracking.create(passage_id: @passages.first.id, user_id: @users.first.id, created_at: time, updated_at: time)
-        expected_remaining_time = ResponsesTracking.remaining_time(@passages.first.id, @users.first.id)
+        passage = @passages.second
+        ResponsesTracking.create(passage_id: passage.id, user_id: @users.first.id, created_at: time, updated_at: time)
+        expected_remaining_time = ResponsesTracking.remaining_time(passage.id, @users.first.id)
 
         expect(expected_remaining_time.round).to be(172_800)
       end
@@ -91,6 +92,22 @@ describe ResponsesTracking do
         ResponsesTracking.create(passage_id: @passages.fifth.id, user_id: @users.first.id, created_at: (Time.current + 1.98))
         ResponsesTracking.update_end_time(@passages.fifth.id, @users.first.id)
         expected_remaining_time = ResponsesTracking.remaining_time(@passages.fifth.id, @users.first.id)
+
+        expect(expected_remaining_time.round).to be(0)
+      end
+    end
+    context 'when the duration of the passage id zero' do
+      it 'should give the remaining time as the duration till conculde time' do
+        passage = @passages.fourth
+        user = @users.first
+        expected_remaining_time = ResponsesTracking.remaining_time(passage.id, user.id)
+        expect(expected_remaining_time.round).to be(172_800)
+      end
+      it 'should give remaining time 0 if the response has been submitted' do
+        passage = @passages.fourth
+        ResponsesTracking.create(passage_id: passage.id, user_id: @users.first.id, created_at: (Time.current + 1.98))
+        ResponsesTracking.update_end_time(passage.id, @users.first.id)
+        expected_remaining_time = ResponsesTracking.remaining_time(passage.id, @users.first.id)
 
         expect(expected_remaining_time.round).to be(0)
       end

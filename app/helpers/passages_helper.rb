@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module PassagesHelper
+  DAY = 'D'.freeze
+  HOUR = 'H'.freeze
+  MINUTE = 'M'.freeze
+  SECOND = 'S'.freeze
   DRAFT_PASSAGES = 'drafts_passages'.freeze
 
   def admin_tabs
@@ -47,13 +51,16 @@ module PassagesHelper
     time.strftime('%d %b %I:%m %p')
   end
 
-  def duration_of_interval_in_words(interval)
-    interval_time = Time.at(interval).utc.strftime('%H:%M')
-    hours, minutes = interval_time.split(':').map(&:to_i)
+  def duration_of_interval_in_words(duration)
+    minutes, seconds = duration.divmod(60)
+    hours, minutes = minutes.divmod(60)
+    days, hours = hours.divmod(24)
 
     [].tap do |parts|
+      parts << "#{days} day".pluralize(days) unless days.zero?
       parts << "#{hours} hour".pluralize(hours) unless hours.zero?
       parts << "#{minutes} minute".pluralize(minutes) unless minutes.zero?
+      parts << "#{seconds} second".pluralize(seconds) unless seconds.zero?
     end.join(', ')
   end
 
@@ -62,5 +69,12 @@ module PassagesHelper
       tags = response.tags
       !(tags.nil? || tags.empty?)
     end.count(true)
+  end
+
+  private
+
+  def time_component_in_world(seconds, symbol)
+    return nil unless seconds.positive?
+    "#{seconds}#{symbol}"
   end
 end
