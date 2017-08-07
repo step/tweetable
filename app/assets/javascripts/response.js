@@ -23,7 +23,7 @@ var showRemainingTime = function () {
     remainingTimeElement
         .countdown(formatDate(date), function (event) {
             $(this).text(
-                event.strftime('%H:%M:%S')
+                event.strftime('%D:%H:%M:%S')
             );
             var remaining_time = remainingTimeElement.html();
             if (remaining_time === "00:00:00")
