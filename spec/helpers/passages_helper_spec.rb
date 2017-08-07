@@ -25,22 +25,22 @@ describe PassagesHelper, type: :helper do
 
   describe 'duration_of_interval_in_words' do
     it 'converts the seconds 613200 into 7D : 2H : 20M' do
-      expect(helper.duration_of_interval_in_words(613_200)).to eq('7D : 2H : 20M')
+      expect(helper.duration_of_interval_in_words(613_200)).to eq('7 days, 2 hours, 20 minutes')
     end
     it 'converts the seconds 86520 into 1D : 2M' do
-      expect(helper.duration_of_interval_in_words(86_520)).to eq('1D : 2M')
+      expect(helper.duration_of_interval_in_words(86_520)).to eq('1 day, 2 minutes')
     end
     it 'converts the seconds 3600 into 1 hour' do
-      expect(helper.duration_of_interval_in_words(3600)).to eq('1H')
+      expect(helper.duration_of_interval_in_words(3600)).to eq('1 hour')
     end
     it 'converts the seconds 1800 into 30 minutes' do
-      expect(helper.duration_of_interval_in_words(1800)).to eq('30M')
+      expect(helper.duration_of_interval_in_words(1800)).to eq('30 minutes')
     end
     it 'converts the seconds 5400 into 1 hour 30 minutes' do
-      expect(helper.duration_of_interval_in_words(5400)).to eq('1H : 30M')
+      expect(helper.duration_of_interval_in_words(5400)).to eq('1 hour, 30 minutes')
     end
     it 'gives null if time is less than one minute' do
-      expect(helper.duration_of_interval_in_words(10)).to eq('10S')
+      expect(helper.duration_of_interval_in_words(10)).to eq('10 seconds')
     end
   end
 

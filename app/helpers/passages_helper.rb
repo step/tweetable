@@ -51,20 +51,17 @@ module PassagesHelper
     time.strftime('%d %b %I:%m %p')
   end
 
-
-
   def duration_of_interval_in_words(duration)
-    duration_component = []
     minutes, seconds = duration.divmod(60)
     hours, minutes = minutes.divmod(60)
     days, hours = hours.divmod(24)
 
-    duration_component << time_component_in_world(days, DAY)
-    duration_component << time_component_in_world(hours, HOUR)
-    duration_component << time_component_in_world(minutes, MINUTE)
-    duration_component << time_component_in_world(seconds, SECOND)
-
-    duration_component.compact.join(' : ')
+    [].tap do |parts|
+      parts << "#{days} day".pluralize(days) unless days.zero?
+      parts << "#{hours} hour".pluralize(hours) unless hours.zero?
+      parts << "#{minutes} minute".pluralize(minutes) unless minutes.zero?
+      parts << "#{seconds} second".pluralize(seconds) unless seconds.zero?
+    end.join(', ')
   end
 
   def evaluation_count(passage_responses)
