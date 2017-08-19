@@ -23,7 +23,7 @@ class ManualController < ApplicationController
 
   def markup_content(filename)
     contents = File.read(filename)
-    renderer = Redcarpet::Render::HTML.new(no_links: true, hard_wrap: true)
+    renderer = Redcarpet::Render::HTML.new(autolink: true, hard_wrap: true)
     markdown = Redcarpet::Markdown.new(renderer)
     @text = markdown.render(contents).html_safe
   end

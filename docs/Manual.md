@@ -83,3 +83,8 @@ ____
 A Student can view all the information related to the passage which is attempted and missed by him/her.
 
 **Positions on the Leader Board** - A student can see his/her ranking on the Leader Board. The scores are calculated by the tag weights got by the student.
+
+---
+## Issues
+
+ For issues and contribution report to [Github](https://github.com/twi-step/tweetable/)
