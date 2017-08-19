@@ -3,6 +3,7 @@
 class LeaderBoard
   class << self
     def generate_list(users)
+      return [] if users.empty?
       users_score = calculate_score(users).sort_by { |user| user[:score] }.reverse
 
       users_score.first[:rank] = 1

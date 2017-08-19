@@ -36,5 +36,15 @@ describe LeaderBoard, type: :model do
 
       expect(leader_board).to match_array(expected)
     end
+
+    context 'leader board is empty if no users are in the list' do
+      it 'should return empty array if there are no users' do
+        expected = []
+        users = []
+        leader_board = LeaderBoard.generate_list(users)
+
+        expect(leader_board).to match_array(expected)
+      end
+    end
   end
 end
