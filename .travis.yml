@@ -1,0 +1,19 @@
+language: ruby
+cache: bundler
+dist: trusty
+rvm:
+  - 2.4.0
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.6" #
+
+
+before_script:
+  - "psql -c 'create database my_tweetable_test;' -U postgres"
+  - "bundle exec rake db:migrate RAILS_ENV=test"
+
+script:
+  - bin/rake spec

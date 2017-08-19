@@ -1,5 +1,6 @@
 # Tweetable
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/twi-step/tweetable.svg?branch=master)](https://travis-ci.org/twi-step/tweetable)
 
 _Helping people to be concise, Precisely._
 
