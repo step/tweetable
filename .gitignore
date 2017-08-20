@@ -28,3 +28,4 @@ config/auth_config.yml
 coverage
 dev_setup/.vagrant
 dev_setup/*.retry
+*.iml
