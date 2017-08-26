@@ -10,8 +10,9 @@
 		<div class="app-passage-options">
 			<div class="app-passage-info">
 				<%= render :partial => 'passages/admin/concludes', locals: {passage: passage, name: 'Concluded on'} %>
-				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>
-				<span class="app-passage-info-item"><i class="fa fa-check" aria-hidden="true"></i> <%= evaluation_count(passage.responses) %></span>
+				<span class="app-passage-info-item"> <i class="fa fa-check" aria-hidden="true"></i><%= evaluation_count(passage.responses) %></span>
+				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><a href= <%= filter_users_path(:passage_id=>passage.id,:status=>'done')%>><%= passage.responses.count %> </a> </span>
+				<span class="app-passage-info-item"> <i class="fa fa-exclamation-circle" aria-hidden="true"></i><a href= <%= filter_users_path(:passage_id=>passage.id,:status=>'incomplete')%>> <%= users_count-passage.responses.count %> </a></span>
 			</div>
 			<div class="app-passage-actions">
 				<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id), class: 'btn btn-info pull-right') %>

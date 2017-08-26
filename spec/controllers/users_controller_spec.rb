@@ -109,4 +109,22 @@ describe UsersController, type: :controller do
       end
     end
   end
+  describe '#filter_users' do
+    context 'filter_users on a passage responses' do
+      it 'filter_users should give a list of users by specified criteria' do
+        user_params = { admin: true, id: 1, active: true }
+        stub_current_user_with_attributes(user_params)
+
+        get :filter_users, params: { passage_id: 1, status: 'done' }
+        should render_template('users')
+      end
+
+      it 'filter_users should give error to non admin' do
+        user_params = { admin: false, id: 1, active: true }
+        stub_current_user_with_attributes(user_params)
+
+        expect { get :filter_users }.to raise_error(ActionController::RoutingError)
+      end
+    end
+  end
 end

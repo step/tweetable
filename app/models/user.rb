@@ -15,6 +15,18 @@ class User < ApplicationRecord
     self
   end
 
+  def self.filter_by_passage(passage_id, status)
+    responses = Response.where(passage_id: passage_id).map(&:user_id)
+    if status == :done
+      return User.where(id: responses, admin: false, active: true)
+    end
+    User.where.not(id: responses, admin: true, active: false, name: nil)
+  end
+
+  def self.non_admin_count
+    User.where(admin: false, active: true).count
+  end
+
   private
 
   def validate_email

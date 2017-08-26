@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :verify_privileges, only: %i[index create_users]
+  before_action :verify_privileges, only: %i[index create_users filter_users]
 
   def index
     @users = User.where.not(id: current_user.id).order('name ASC')
@@ -27,6 +27,11 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update_attributes(permit_params)
+  end
+
+  def filter_users
+    users = User.filter_by_passage(params[:passage_id].to_i, params[:status].to_sym)
+    render 'users', locals: { users: users }
   end
 
   private

@@ -64,5 +64,35 @@ describe User do
         expect(user.errors.full_messages).to match ['Email must be a valid email id...']
       end
     end
+
+    describe '#filter_by_passage' do
+      it 'should filter users who have given responses to the passage' do
+        passage1 = double('Passage', id: 11, user_id: 1)
+
+        response1 = double('Response', id: 1, passage_id: 11)
+
+        user1 = double('User', passages: [passage1], user_id: 1, responses: [response1])
+
+        expect(Response).to receive('where').with(passage_id: 11).and_return([passage1])
+        expect(User).to receive('where').with(id: [1], admin: false, active: true).and_return(user1)
+
+        user_filter_by_passage = User.filter_by_passage(11, :done)
+
+        expect(user_filter_by_passage).to eq(user1)
+      end
+
+      it 'should filter users who have not given responses to the passage' do
+        passage1 = double('Passage', id: 11, user_id: 1)
+
+        user2 = double('User', user_id: 2)
+
+        expect(Response).to receive('where').with(passage_id: 11).and_return([passage1])
+        allow(User).to receive_message_chain('where.not').with(id: [1], admin: true, active: false, name: nil).and_return(user2)
+
+        user_filter_by_passage = User.filter_by_passage(11, :incomplete)
+
+        expect(user_filter_by_passage).to eq(user2)
+      end
+    end
   end
 end

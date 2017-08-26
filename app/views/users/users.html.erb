@@ -1,0 +1,25 @@
+<div class="row" data-tab-name="users">
+  <h3 class=" col-sm-6 center-block visible-xs-block">Filters</h3>
+  <div class="col-sm-6 center-block">
+    <% users.each do |user| %>
+        <div class="app-rank-card app-md-card">
+          <div class="app-rank-card-head col-sm-2">
+            <svg>
+              <defs>
+                <clipPath id="app-circle-view">
+                  <circle cx="35" cy="35" r="25" fill="#FFFFFF"></circle>
+                </clipPath>
+              </defs>
+              <image x="10" y="10" width="60" height="60" clip-path="url(#app-circle-view)" xlink:href=<%= user[:image_url] %>></image>
+            </svg>
+          </div>
+          <div class="app-rank-card-body col-sm-10">
+            <%= content_tag(:strong, user[:name]) %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
+</div>
+
+

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       post 'create_users', to: 'users#create_users'
+      get 'passage', to: 'users#filter_users', as: :filter
     end
   end
 

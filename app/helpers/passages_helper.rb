@@ -71,6 +71,10 @@ module PassagesHelper
     end.count(true)
   end
 
+  def users_count
+    User.non_admin_count
+  end
+
   private
 
   def time_component_in_world(seconds, symbol)
