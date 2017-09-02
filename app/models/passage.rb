@@ -13,6 +13,8 @@ class Passage < ApplicationRecord
 
   DEFAULT_DURATION = 3600
 
+  scope :recently_commenced, -> { where ['(commence_time BETWEEN ? AND ?) AND (conclude_time > ?)', Time.current.ago(1.day), Time.current, Time.current] }
+
   def commence(conclude_time)
     update_attributes(commence_time: Time.current, conclude_time: conclude_time)
   end

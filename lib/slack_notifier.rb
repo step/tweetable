@@ -18,16 +18,16 @@ class SlackNotifier
         },
         {
           title: 'Duration',
-          value: passage.duration
+          value: PassagesHelper.duration_of_interval_in_words(passage.duration)
         },
         {
           title: 'Conclude Time',
-          value: Time.zone.parse(passage.conclude_time.strftime('%d/%m/%Y %H:%M'))
+          value: Time.zone.parse(passage.conclude_time.to_s).strftime('%d/%m/%Y %H:%M')
         }
       ],
       color: 'good'
     }
-    @notifier.post text: "Hey tweeters a passage have been commenced at #{Time.zone.parse(passage.commence_time.strftime('%d/%m/%Y %H:%M'))}", attachments: [a_ok_note]
+    @notifier.post text: ":loudspeaker: *Hey tweeters* a passage have been commenced at #{Time.zone.parse(passage.commence_time.to_s).strftime('%d/%m/%Y %H:%M')}", attachments: [a_ok_note]
   end
 
   def notify_for_conclude(passage)
@@ -40,16 +40,16 @@ class SlackNotifier
         },
         {
           title: 'Duration',
-          value: passage.duration
+          value: PassagesHelper.duration_of_interval_in_words(passage.duration)
         },
         {
           title: 'Concluded at',
-          value: Time.zone.parse(passage.conclude_time.strftime('%d/%m/%Y %H:%M'))
+          value: Time.zone.parse(passage.conclude_time.to_s).strftime('%d/%m/%Y %H:%M')
         }
       ],
       color: 'good'
     }
-    @notifier.post text: "Hey tweeters a passage have been concluded at #{Time.zone.parse(passage.conclude_time.strftime('%d/%m/%Y %H:%M'))}", attachments: [a_ok_note]
+    @notifier.post text: ":loudspeaker: *Hey tweeters* a passage have been concluded at #{Time.zone.parse(passage.conclude_time.to_s).strftime('%d/%m/%Y %H:%M')}", attachments: [a_ok_note]
   end
 
   private

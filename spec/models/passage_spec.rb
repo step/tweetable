@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'timecop'
 describe Passage, type: :model do
   describe 'validations ' do
     it { should validate_presence_of(:title) }
@@ -36,6 +37,25 @@ describe Passage, type: :model do
 
   describe 'associations' do
     it { should have_many(:responses).dependent(:destroy) }
+  end
+
+  describe 'scope' do
+    context 'recently_commenced' do
+      it 'get all passage commenced within one day' do
+        passage_one = Passage.create! title: 'Title 1', text: 'passage 1 text', duration: 86_400
+        passage_two = Passage.create! title: 'Title 2', text: 'passage 2 text', duration: 86_400
+        Passage.create! title: 'Title 3', text: 'passage 3 text', duration: 86_400
+
+        Timecop.scale(2.months.seconds)
+
+        passage_one.commence Time.current.advance days: 4
+        passage_two.commence Time.current.advance days: 4
+        passage_two.conclude
+
+        expect(Passage.recently_commenced.to_a).to eq([passage_one])
+        Timecop.return
+      end
+    end
   end
 
   describe 'commence' do

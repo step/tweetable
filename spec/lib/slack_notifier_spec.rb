@@ -22,17 +22,17 @@ describe SlackNotifier do
           },
           {
             title: 'Duration',
-            value: passage.duration
+            value: '1 day'
           },
           {
             title: 'Conclude Time',
-            value: Time.zone.parse(passage.conclude_time.strftime('%d/%m/%Y %H:%M'))
+            value: Time.zone.parse(passage.conclude_time.to_s).strftime('%d/%m/%Y %H:%M')
           }
         ],
         color: 'good'
       }
 
-      expect_any_instance_of(Slack::Notifier).to receive(:post).with(text: "Hey tweeters a passage have been commenced at #{Time.zone.parse(passage.commence_time.strftime('%d/%m/%Y %H:%M'))}", attachments: [attachment])
+      expect_any_instance_of(Slack::Notifier).to receive(:post).with(text: ":loudspeaker: *Hey tweeters* a passage have been commenced at #{Time.zone.parse(passage.commence_time.to_s).strftime('%d/%m/%Y %H:%M')}", attachments: [attachment])
       slack_notifier.notify_for_commence passage
     end
   end
@@ -49,17 +49,17 @@ describe SlackNotifier do
           },
           {
             title: 'Duration',
-            value: passage.duration
+            value: '1 day'
           },
           {
             title: 'Concluded at',
-            value: Time.zone.parse(passage.conclude_time.strftime('%d/%m/%Y %H:%M'))
+            value: Time.zone.parse(passage.conclude_time.to_s).strftime('%d/%m/%Y %H:%M')
           }
         ],
         color: 'good'
       }
 
-      expect_any_instance_of(Slack::Notifier).to receive(:post).with(text: "Hey tweeters a passage have been concluded at #{Time.zone.parse(passage.conclude_time.strftime('%d/%m/%Y %H:%M'))}", attachments: [attachment])
+      expect_any_instance_of(Slack::Notifier).to receive(:post).with(text: ":loudspeaker: *Hey tweeters* a passage have been concluded at #{Time.zone.parse(passage.conclude_time.to_s).strftime('%d/%m/%Y %H:%M')}", attachments: [attachment])
       slack_notifier.notify_for_conclude passage
     end
   end

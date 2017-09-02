@@ -75,6 +75,7 @@ module PassagesHelper
     User.non_admin_count
   end
 
+  module_function :duration_of_interval_in_words
   private
 
   def time_component_in_world(seconds, symbol)
