@@ -1,13 +1,5 @@
 def seed_default_data
   seed_admin_user
-  seed_roles
-end
-
-def seed_roles
-  Role.create(:title => 'ADMIN')
-  Role.create(:title => 'MENTOR')
-  Role.create(:title => 'EVALUATOR')
-  Role.create(:title => 'INTERN')
 end
 
 def seed_admin_user

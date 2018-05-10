@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509100705) do
+ActiveRecord::Schema.define(version: 20180510062650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20180509100705) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "privileges", force: :cascade do |t|
+    t.bigint "role_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_privileges_on_role_id"
   end
 
   create_table "response_queues", force: :cascade do |t|
@@ -97,17 +105,20 @@ ActiveRecord::Schema.define(version: 20180509100705) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.boolean "admin", default: false
     t.string "auth_id"
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: false
     t.string "email"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "privileges", "roles"
   add_foreign_key "responses_trackings", "passages"
   add_foreign_key "responses_trackings", "users"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
+  add_foreign_key "users", "roles"
 end
