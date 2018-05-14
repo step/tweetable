@@ -4,7 +4,15 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, :active_user?, only: %i[new create destroy]
 
   def new
-    redirect_to passages_path if logged_in?
+    if Rails.env.development?
+      user = User.find_by(id: 1)
+      session[:user_id] = user.id
+      session[:user_name] = user.name
+      session[:user_image_url] = user.image_url
+      redirect_to passages_path
+    elsif logged_in?
+      redirect_to passages_path
+    end
   end
 
   def create
