@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_privileges
-    return if current_user.admin
+    return if current_user.is_admin
     raise ActionController::RoutingError, 'Not Found'
   end
 

@@ -32,6 +32,10 @@ class User < ApplicationRecord
     User.where(admin: false, active: true).count
   end
 
+  def is_admin
+    self.role.is_admin
+  end
+
   private
 
   def validate_email

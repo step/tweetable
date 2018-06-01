@@ -16,7 +16,7 @@ class PassagesController < ApplicationController
 
   def index
     @passages = Passage.all
-    if current_user.admin
+    if current_user.is_admin
       redirect_to drafts_passages_url
     else
       redirect_to commenced_passages_url
