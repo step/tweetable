@@ -9,22 +9,27 @@ module Helpers
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
-  def stub_current_user_with_attributes(params)
-    mocked_app_controller.to receive(:current_user).and_return(stub_user_with_attributes(params))
+  def stub_current_user_with_attributes(params, is_admin)
+    user = stub_user_with_attributes(params)
+    allow(user).to receive(:is_admin).and_return(is_admin)
+    mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_user
     user = stub_user_with_attributes(active: true)
+    allow(user).to receive(:is_admin).and_return(false)
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_admin_user
-    user = stub_user_with_attributes(admin: true, active: true)
+    user = stub_user_with_attributes(active: true)
+    allow(user).to receive(:is_admin).and_return(true)
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_intern_user
-    user = stub_user_with_attributes(admin: false, active: true)
+    user = stub_user_with_attributes(active: true)
+    allow(user).to receive(:is_admin).and_return(false)
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 

@@ -10,4 +10,8 @@ class Role < ApplicationRecord
   def self.non_admin
     Role.where.not(title: 'ADMIN')
   end
+
+  def self.admin
+    Role.where(title: 'ADMIN')
+  end
 end

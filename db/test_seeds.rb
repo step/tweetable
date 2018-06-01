@@ -43,16 +43,17 @@ to human hosts is placed within a mathematical model to estimate the probabiliti
 transition within a single SIV-infected human host'.freeze
 
   # --------------- User Seeds ---------------------
+  intern_role_id = Role.find_by(title: 'INTERN').id
   User.create(
       [
           {
-              name: 'Kamal Hasan', admin: false, email: 'kamalhasan@email.com', auth_id: '132271', image_url: 'http://images.indianexpress.com/2015/02/kamal-hassan-759.jpg'
+              name: 'Kamal Hasan', role_id: intern_role_id, email: 'kamalhasan@email.com', auth_id: '132271', image_url: 'http://images.indianexpress.com/2015/02/kamal-hassan-759.jpg'
           },
           {
-              name: 'Vimal Hasan', admin: false, email: 'vimalhasan@email.com', auth_id: '132273', image_url: 'http://images.indianexpress.com/2015/02/kamal-hassan-759.jpg'
+              name: 'Vimal Hasan', role_id: intern_role_id, email: 'vimalhasan@email.com', auth_id: '132273', image_url: 'http://images.indianexpress.com/2015/02/kamal-hassan-759.jpg'
           },
           {
-              name: 'Rajanikanth', admin: false, email: 'rajinikanth@email.com', auth_id: '132272', image_url: 'http://www.tehelka.com/wp-content/uploads/2015/09/Rajnikanth-300x270.jpg'
+              name: 'Rajanikanth', role_id: intern_role_id, email: 'rajinikanth@email.com', auth_id: '132272', image_url: 'http://www.tehelka.com/wp-content/uploads/2015/09/Rajnikanth-300x270.jpg'
           }
       ]
   )

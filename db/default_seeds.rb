@@ -10,3 +10,11 @@ def seed_admin_user
   end
   User.create(email:ENV['TWEETABLE_ADMIN_EMAIL'], active: true)
 end
+
+def seed_roles_if_not_present
+  ['ADMIN', 'MENTOR', 'EVALUATOR', 'INTERN'].each { |role|
+    unless Role.find_by(title: role).present?
+      Role.create(title: role)
+    end
+  }
+end

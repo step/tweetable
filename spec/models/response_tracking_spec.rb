@@ -23,6 +23,7 @@ describe ResponsesTracking do
       {
         title: 'Program', text: 'program passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '86400'
       },
+
       {
         title: 'Computer', text: 'computer passage', commence_time: Time.current, conclude_time: (Time.current + 2.days), duration: '0'
       },
@@ -32,16 +33,18 @@ describe ResponsesTracking do
     ]
   end
 
+  intern_role_id = Role.find_by(title: 'INTERN').id
+
   let(:users) do
     [
       {
-        name: 'Kamal Hasan', admin: false, email: 'kamalhasan@email.com', auth_id: '132271', image_url: 'http://graph.facebook.com/demo1'
+        name: 'Kamal Hasan', role_id: intern_role_id, email: 'kamalhasan@email.com', auth_id: '132271', image_url: 'http://graph.facebook.com/demo1'
       },
       {
-        name: 'Vimal Hasan', admin: false, email: 'vimalhasan@email.com', auth_id: '132273', image_url: 'http://graph.facebook.com/demo1'
+        name: 'Vimal Hasan', role_id: intern_role_id, email: 'vimalhasan@email.com', auth_id: '132273', image_url: 'http://graph.facebook.com/demo1'
       },
       {
-        name: 'Rajanikanth', admin: false, email: 'rajinikanth@email.com', auth_id: '132272', image_url: 'http://graph.facebook.com/demo2'
+        name: 'Rajanikanth', role_id: intern_role_id, email: 'rajinikanth@email.com', auth_id: '132272', image_url: 'http://graph.facebook.com/demo2'
       }
     ]
   end

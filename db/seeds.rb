@@ -7,9 +7,11 @@ if Rails.env.production?
 end
 
 if Rails.env.test?
+  seed_roles_if_not_present
   seed_test_data
 end
 
 if Rails.env.development?
+  seed_roles_if_not_present
   seed_development_data
 end

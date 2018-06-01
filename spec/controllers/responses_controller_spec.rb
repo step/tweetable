@@ -6,7 +6,8 @@ describe ResponsesController, type: :controller do
 
     before(:each) do
       stub_logged_in(true)
-      stub_current_user_with_attributes(admin: false, id: 1, active: true)
+      user_params = { id: 1, active: true }
+      stub_current_user_with_attributes(user_params, false)
     end
 
     context 'When passage id exists' do
@@ -31,7 +32,7 @@ describe ResponsesController, type: :controller do
 
   describe 'Post #create' do
     let(:passage) { double('passage', id: 'passage_id', title: 'Test passage title', text: 'Test passage text', duration: 1) }
-    let(:intern) { double('intern', id: 'user_id', name: 'Intern', auth_id: 'auth_id', admin: false, active: true) }
+    let(:intern) { double('intern', id: 'user_id', name: 'Intern', auth_id: 'auth_id', active: true) }
 
     before(:each) do
       stub_logged_in(true)
