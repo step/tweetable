@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+
+  before_validation :default_values
+
   validates_uniqueness_of :auth_id, allow_nil: true
   validates :email, uniqueness: true, presence: true
   validate :validate_email, on: :create
@@ -39,4 +42,9 @@ class User < ApplicationRecord
   def valid_email?(domain, email)
     Regexp.new('\b[A-Z0-9._%a-z\-]+@' + domain).match?(email)
   end
+
+  def default_values
+    self.role_id = self.role_id != nil ? self.role_id : Role.find_by(title: 'INTERN').id
+  end
+
 end

@@ -8,5 +8,5 @@ def seed_admin_user
     puts "\t source TWEETABLE_ADMIN_EMAIL=admin_email@domain"
     exit 1
   end
-  User.create(email:ENV['TWEETABLE_ADMIN_EMAIL'],admin: true, active: true)
+  User.create(email:ENV['TWEETABLE_ADMIN_EMAIL'], active: true)
 end
