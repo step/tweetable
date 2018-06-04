@@ -10,7 +10,6 @@ class User < ApplicationRecord
 
   belongs_to :role
   has_many :responses
-  has_many :responses
   has_many :user_groups
   has_many :passages, through: :responses
   has_many :tags, through: :responses
