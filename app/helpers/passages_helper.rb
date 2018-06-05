@@ -7,12 +7,8 @@ module PassagesHelper
   SECOND = 'S'.freeze
   DRAFT_PASSAGES = 'drafts_passages'.freeze
 
-  def admin_tabs
-    { drafts: :drafts, ongoing: :ongoing, concluded: :concluded, new: :new }
-  end
-
-  def candidate_tabs
-    { commenced: :commenced, attempted: :attempted, missed: :missed }
+  def passage_tabs
+    { drafts: :drafts, ongoing: :ongoing, concluded: :concluded, new: :new, commenced: :commenced, attempted: :attempted, missed: :missed }
   end
 
   def self.partial_name(tab_name)

@@ -43,7 +43,7 @@ to human hosts is placed within a mathematical model to estimate the probabiliti
 transition within a single SIV-infected human host'.freeze
 
   # --------------- User Seeds ---------------------
-  intern_role_id = Role.find_by(title: 'INTERN').id
+  intern_role_id = Role.intern.id
   User.create(
       [
           {

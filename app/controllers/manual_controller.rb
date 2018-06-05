@@ -4,7 +4,7 @@ class ManualController < ApplicationController
   protect_from_forgery with: :exception
 
   def index
-    current_user.is_admin ? admin_help : candidate_help
+    current_user.is_intern ? candidate_help : admin_help
   end
 
   private

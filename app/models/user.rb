@@ -39,8 +39,8 @@ class User < ApplicationRecord
     User.where(active: true).joins(:role).merge(Role.non_admin).count
   end
 
-  def is_admin
-    self.role.is_admin
+  def is_intern
+    self.role.is_intern
   end
 
   private
@@ -55,7 +55,7 @@ class User < ApplicationRecord
   end
 
   def default_values
-    self.role_id = self.role_id != nil ? self.role_id : Role.find_by(title: 'INTERN').id
+    self.role_id = self.role_id != nil ? self.role_id : Role.intern.id
   end
 
 end

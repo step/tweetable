@@ -29,7 +29,8 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
     user.role.privileges.each do |privilege|
-      can privilege.action.to_sym, privilege.subject_class.constantize
+      can privilege.action.to_sym, privilege.subject_class.constantize if privilege.can_access
+      cannot privilege.action.to_sym, privilege.subject_class.constantize unless privilege.can_access
     end
   end
 end

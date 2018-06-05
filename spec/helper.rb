@@ -11,25 +11,26 @@ module Helpers
 
   def stub_current_user_with_attributes(params, is_admin)
     user = stub_user_with_attributes(params)
-    allow(user).to receive(:is_admin).and_return(is_admin)
+    role = is_admin ? Role.admin : Role.intern
+    allow(user).to receive(:role).and_return(role)
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_user
     user = stub_user_with_attributes(active: true)
-    allow(user).to receive(:is_admin).and_return(false)
+    allow(user).to receive(:role).and_return(Role.intern)
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_admin_user
     user = stub_user_with_attributes(active: true)
-    allow(user).to receive(:is_admin).and_return(true)
+    allow(user).to receive(:role).and_return(Role.admin)
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 
   def stub_current_active_intern_user
     user = stub_user_with_attributes(active: true)
-    allow(user).to receive(:is_admin).and_return(false)
+    allow(user).to receive(:role).and_return(Role.intern)
     mocked_app_controller.to receive(:current_user).and_return(user)
   end
 

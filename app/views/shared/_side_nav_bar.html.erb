@@ -11,11 +11,31 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse app-navbar-collapse" id="bs-sidebar-navbar-collapse-1">
     <ul class="nav navbar-nav app-navbar-options">
-      <% if current_user.is_admin %>
-          <%= render 'shared/admin_sidebar_options' %>
-      <% else %>
-          <%= render 'shared/intern_sidebar_options' %>
+
+      <label for="Passage">Passages</label>
+      <% passage_tabs.each do |method_name, tab_name| %>
+        <% if can? method_name.to_sym, Passage %>
+          <% class_name = (tab_name.to_s.eql? session[:current_tab]) ? 'active' : '' %>
+          <%= content_tag(:li, class: "#{class_name} app-navbar-item", data: { tab_name: "#{tab_name}_passages" }) do %>
+            <%= link_to(tab_name.to_s.humanize, "#{url_for(action: method_name, controller: :passages)}") %>
+          <% end %>
+        <% end %>
       <% end %>
+
+      <li class="divider"></li>
+
+      <% if can? :manage, User %>
+        <%= content_tag(:li, link_to('Users', users_path), class: 'app-navbar-item', data: {tab_name: :users}) %>
+      <% end %>
+
+      <%= content_tag(:li, link_to('Leader board', leader_board_index_path), class: 'app-navbar-item', data: {tab_name: :leader_board}) %>
+
+      <% if can? :manage, Tag %>
+        <%= content_tag(:li, link_to('Tags', tags_path), class: 'app-navbar-item', data: {tab_name: :tags}) %>
+      <% end %>
+
+      <%= content_tag(:li, link_to('Manual', manual_index_path), class: 'app-navbar-item', data: {tab_name: :manual}) %>
+
 	    <%=	content_tag(:li, class: 'app-navbar-item' ) do  %>
 	     <%= link_to('Logout', logout_path , class: 'fa fa-sign-out') %>
 	    <%	 end %>

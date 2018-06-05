@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :verify_privileges, only: %i[index create_users filter_users]
+
+  before_action do
+    verify_privileges(params[:action], User)
+  end
 
   def index
     @users = User.where.not(id: current_user.id).order('name ASC')

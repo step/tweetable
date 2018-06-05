@@ -2,7 +2,10 @@
 
 class TaggingsController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :verify_privileges, only: %i[create_tagging_by_tag_name delete_tagging_by_tag_name]
+
+  before_action do
+    verify_privileges(params[:action], Tagging)
+  end
 
   def create_tagging_by_tag_name
     tag = Tag.find_or_create_by(name: params[:tag_name])

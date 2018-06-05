@@ -21,9 +21,12 @@ class ApplicationController < ActionController::Base
     render 'shared/clearance', layout: false
   end
 
-  def verify_privileges
-    return if current_user.is_admin
-    raise ActionController::RoutingError, 'Not Found'
+  def verify_privileges(action, subject_class)
+    authorize! action.to_sym, subject_class
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    raise ActionController::RoutingError, "#{exception.message}"
   end
 
   private

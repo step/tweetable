@@ -3,7 +3,9 @@
 class PassagesController < ApplicationController
   helper PassagesHelper
 
-  before_action :verify_privileges, except: %i[index commenced missed attempted]
+  before_action do
+    verify_privileges(params[:action], Passage)
+  end
 
   def new
     @passage = Passage.new
@@ -16,11 +18,7 @@ class PassagesController < ApplicationController
 
   def index
     @passages = Passage.all
-    if current_user.is_admin
-      redirect_to drafts_passages_url
-    else
-      redirect_to commenced_passages_url
-    end
+    redirect_to action: get_redirect_action
   end
 
   def update
@@ -112,6 +110,12 @@ class PassagesController < ApplicationController
   end
 
   private
+
+  def get_redirect_action
+    [:drafts, :ongoing, :commenced].select { |action|
+      can? action, Passage
+    }.first
+  end
 
   def permit_params
     params.require('passage').permit(:title, :text, :duration, :commence_time, :conclude_time)

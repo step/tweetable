@@ -33,7 +33,7 @@ describe ResponsesTracking do
     ]
   end
 
-  intern_role_id = Role.find_by(title: 'INTERN').id
+  intern_role_id = Role.intern.id
 
   let(:users) do
     [
