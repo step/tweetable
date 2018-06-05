@@ -6,7 +6,7 @@
       <th>Email</th>
       <th>Name</th>
       <th>Active</th>
-      <th>Admin</th>
+      <th>Role</th>
     </tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@
           </td>
           <td>
             <%= form_for(user, :url => user_path(user.id), method: :put) do |form| %>
-                <%= form.check_box :admin, :class => 'submittable_admin', :label => "" %>
+              <%= form.select :role_id, @roles.collect { |b| [b.title, b.id] }, {}, {:class => 'submittable_role', :label => ""} %>
             <% end %>
           </td>
         </tr>

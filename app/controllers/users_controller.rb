@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where.not(id: current_user.id).order('name ASC')
+    @roles = Role.all
   end
 
   def refine_emails(emails_as_string)
@@ -45,6 +46,6 @@ class UsersController < ApplicationController
   end
 
   def permit_params
-    params.require('user').permit(:admin, :active)
+    params.require('user').permit(:role_id, :active)
   end
 end
