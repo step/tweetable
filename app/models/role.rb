@@ -18,6 +18,10 @@ class Role < ApplicationRecord
     Role.where(title: 'INTERN').first
   end
 
+  def self.interns
+    Role.where(title: 'INTERN')
+  end
+
   def self.evaluator
     Role.where(title: 'EVALUATOR').first
   end
