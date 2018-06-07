@@ -68,7 +68,7 @@ module PassagesHelper
   end
 
   def users_count
-    User.non_admin_count
+    User.interns_count
   end
 
   module_function :duration_of_interval_in_words

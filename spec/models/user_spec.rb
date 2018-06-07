@@ -74,7 +74,7 @@ describe User do
         user1 = double('User', passages: [passage1], user_id: 1, responses: [response1])
 
         expect(Response).to receive('where').with(passage_id: 11).and_return([passage1])
-        expect(User).to receive(:active_non_admins).and_return(user1)
+        expect(User).to receive(:active_interns).and_return(user1)
         expect(user1).to receive('where').with(id: [1]).and_return(user1)
 
         user_filter_by_passage = User.filter_by_passage(11, :done)
@@ -88,7 +88,7 @@ describe User do
         user2 = double('User', user_id: 2)
 
         expect(Response).to receive('where').with(passage_id: 11).and_return([passage1])
-        allow(User).to receive(:active_admins).and_return(user2)
+        allow(User).to receive(:active_interns).and_return(user2)
         allow(user2).to receive_message_chain('where.not').with(id: [1], name: nil).and_return(user2)
 
         user_filter_by_passage = User.filter_by_passage(11, :incomplete)

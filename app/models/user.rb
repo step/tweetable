@@ -22,21 +22,17 @@ class User < ApplicationRecord
   def self.filter_by_passage(passage_id, status)
     responses = Response.where(passage_id: passage_id).map(&:user_id)
     if status == :done
-      return User.active_non_admins.where(id: responses)
+      return User.active_interns.where(id: responses)
     end
-    User.active_admins.where.not(id: responses, name: nil)
+    User.active_interns.where.not(id: responses, name: nil)
   end
 
-  def self.active_admins
-    User.where(active: true).joins(:role).merge(Role.admin)
+  def self.active_interns
+    User.where(active: true).joins(:role).merge(Role.interns)
   end
 
-  def self.active_non_admins
-    User.where(active: true).joins(:role).merge(Role.non_admin)
-  end
-
-  def self.non_admin_count
-    User.where(active: true).joins(:role).merge(Role.non_admin).count
+  def self.interns_count
+    User.where(active: true).joins(:role).merge(Role.interns).count
   end
 
   def is_intern
