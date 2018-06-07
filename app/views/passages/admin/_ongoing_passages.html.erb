@@ -15,8 +15,9 @@
 				<span class="app-passage-info-item"> <i class="fa fa-users" aria-hidden="true"></i><%= passage.responses.count %> </span>
 			</div>
 			<div class="app-passage-actions">
-				<a href="#" class="btn btn-danger pull-right" data-toggle="modal" data-target="#app-conclude-confirmation-<%= passage.id %>">Conclude</a>
-				<!--<%= content_tag(:a, 'Conclude', href: conclude_passage_path(passage.id), class: 'btn btn-danger pull-right') %>-->
+				<% if can? :conclude, Passage %>
+					<a href="#" class="btn btn-danger pull-right" data-toggle="modal" data-target="#app-conclude-confirmation-<%= passage.id %>">Conclude</a>
+				<% end %>
 				<%= content_tag(:a, 'Review', href: passage_responses_path(passage.id), class: 'btn btn-info pull-right') %>
 			</div>
 		</div>
