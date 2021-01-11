@@ -37,7 +37,7 @@ gem 'coffee-script', '~> 2.4', '>= 2.4.1'
 gem 'x-editable-rails'
 
 # Require the Markdown converter gem
-gem 'redcarpet' ,'~> 3.4.0'
+gem 'redcarpet' ,'~> 3.5.1'
 
 # automatic evaluator
 gem 'after_the_deadline'
