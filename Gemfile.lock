@@ -173,7 +173,8 @@ GEM
     pry-nav (0.2.4)
       pry (>= 0.9.10, < 0.11.0)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     rack (2.0.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -322,7 +323,7 @@ DEPENDENCIES
   pg
   pry
   pry-nav
-  puma (~> 3.7)
+  puma (~> 4.3)
   rails (~> 5.1.0)
   rails-controller-testing
   rails-footnotes (~> 4.0)
